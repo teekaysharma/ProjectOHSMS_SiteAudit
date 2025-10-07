@@ -1407,11 +1407,16 @@
     function updateSiteSelector() {
         try {
             const siteSelector = document.getElementById('siteSelector');
-            if (!siteSelector) return;
+            const bottomSiteSelector = document.getElementById('bottomSiteSelector');
+            
+            if (!siteSelector && !bottomSiteSelector) return;
             
             const project = window.app ? window.app.getCurrentProject() : null;
+            const noSitesHtml = '<option value="">No sites available</option>';
+            
             if (!project || !project.sites) {
-                siteSelector.innerHTML = '<option value="">No sites available</option>';
+                if (siteSelector) siteSelector.innerHTML = noSitesHtml;
+                if (bottomSiteSelector) bottomSiteSelector.innerHTML = noSitesHtml;
                 return;
             }
             
@@ -1423,23 +1428,50 @@
                 html += `<option value="${siteName}" ${selected}>${siteName}</option>`;
             });
             
-            siteSelector.innerHTML = html;
-            
-            // Add event listener for site selection changes
-            siteSelector.onchange = (e) => {
-                if (e.target.value && window.app) {
-                    const currentProject = window.app.getCurrentProject();
-                    if (currentProject) {
-                        currentProject.currentSite = e.target.value;
-                        if (window.app.saveData) window.app.saveData();
-                        // Update dashboard and charts
-                        if (typeof updateAllDashboardComponents === 'function') {
-                            updateAllDashboardComponents();
+            // Update both site selectors
+            if (siteSelector) {
+                siteSelector.innerHTML = html;
+                
+                // Add event listener for site selection changes
+                siteSelector.onchange = (e) => {
+                    if (e.target.value && window.app) {
+                        const currentProject = window.app.getCurrentProject();
+                        if (currentProject) {
+                            currentProject.currentSite = e.target.value;
+                            // Sync with bottom selector
+                            if (bottomSiteSelector) bottomSiteSelector.value = e.target.value;
+                            if (window.app.saveData) window.app.saveData();
+                            // Update dashboard and charts
+                            if (typeof updateAllDashboardComponents === 'function') {
+                                updateAllDashboardComponents();
+                            }
+                            console.log('Switched to site:', e.target.value);
                         }
-                        console.log('Switched to site:', e.target.value);
                     }
-                }
-            };
+                };
+            }
+            
+            if (bottomSiteSelector) {
+                bottomSiteSelector.innerHTML = html;
+                
+                // Add event listener for bottom site selector changes
+                bottomSiteSelector.onchange = (e) => {
+                    if (e.target.value && window.app) {
+                        const currentProject = window.app.getCurrentProject();
+                        if (currentProject) {
+                            currentProject.currentSite = e.target.value;
+                            // Sync with main selector
+                            if (siteSelector) siteSelector.value = e.target.value;
+                            if (window.app.saveData) window.app.saveData();
+                            // Update dashboard and charts
+                            if (typeof updateAllDashboardComponents === 'function') {
+                                updateAllDashboardComponents();
+                            }
+                            console.log('Switched to site:', e.target.value);
+                        }
+                    }
+                };
+            }
             
         } catch (error) {
             console.error('Error updating site selector:', error);
