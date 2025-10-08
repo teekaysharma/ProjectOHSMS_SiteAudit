@@ -133,6 +133,7 @@ import './public/js/projectManagement.js';
 import './public/js/recommendations.js';
 import './public/js/reportGeneration.js';
 import './public/js/comparison-chart-extension.js';
+import './public/js/questionEvaluation.js';
 
 // Initialize the application after DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
