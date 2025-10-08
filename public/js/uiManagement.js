@@ -25,6 +25,9 @@
         // Initialize risk-based filters
         initializeRiskFilters();
         
+        // Initialize tab action buttons
+        initializeTabActionButtons();
+        
         // Show dashboard by default
         showTab('dashboard');
         
