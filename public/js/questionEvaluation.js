@@ -61,7 +61,6 @@
 
     // Function to handle evaluate button click
     function handleEvaluate(department, area, text) {
-        console.log('Evaluate clicked:', { department, area, text });
         // Create a simple modal for evaluation
         const modal = document.createElement('div');
         modal.className = 'modal';
