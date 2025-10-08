@@ -2075,7 +2075,8 @@
                                     score: item.score,
                                     department: 'Management',
                                     area: section,
-                                    comment: item.comment
+                                    comment: item.comment,
+                                    questionType: 'management'
                                 });
                             } else if (item.score === 4) {
                                 conformanceQuestions.push({
@@ -2083,7 +2084,8 @@
                                     score: item.score,
                                     department: 'Management',
                                     area: section,
-                                    comment: item.comment
+                                    comment: item.comment,
+                                    questionType: 'management'
                                 });
                             }
                         });
