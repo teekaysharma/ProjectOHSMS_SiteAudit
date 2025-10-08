@@ -2779,4 +2779,14 @@
     window.filterImprovementOpportunities = filterImprovementOpportunities;
     window.filterComplianceAndBestPractices = filterComplianceAndBestPractices;
     window.filterPendingEvaluation = filterPendingEvaluation;
+    
+    // Expose tab action button handlers
+    window.handleScheduleFollowUp = handleScheduleFollowUp;
+    window.handleExportPendingList = handleExportPendingList;
+    window.handleGenerateCriticalActionPlan = handleGenerateCriticalActionPlan;
+    window.handleExportCriticalList = handleExportCriticalList;
+    window.handleGenerateImprovementPlan = handleGenerateImprovementPlan;
+    window.handleExportImprovementList = handleExportImprovementList;
+    window.handleShareBestPractices = handleShareBestPractices;
+    window.handleExportComplianceList = handleExportComplianceList;
 })();
