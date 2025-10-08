@@ -114,10 +114,31 @@
             // Close the modal
             document.body.removeChild(modal);
             
-            // Refresh the current tab to show the updated question
+            // Force refresh the current tab and update all related components
             const activeTab = document.querySelector('.tab.active').dataset.tabName;
-            if (typeof showTab === 'function') {
+            
+            // Call the appropriate refresh function based on the active tab
+            if (activeTab === 'pending') {
+                if (window.uiManagement && window.uiManagement.loadPendingEvaluation) {
+                    window.uiManagement.loadPendingEvaluation();
+                } else if (typeof loadPendingEvaluation === 'function') {
+                    loadPendingEvaluation();
+                }
+            } else if (typeof showTab === 'function') {
                 showTab(activeTab);
+            }
+            
+            // Also refresh dashboard to show updated metrics
+            if (typeof showTab === 'function') {
+                // Small delay to ensure data is saved before dashboard refresh
+                setTimeout(() => {
+                    if (document.querySelector('.tab[data-tab-name="dashboard"]')) {
+                        const currentTab = activeTab;
+                        showTab('dashboard');
+                        // Return to original tab after dashboard refresh
+                        setTimeout(() => showTab(currentTab), 100);
+                    }
+                }, 100);
             }
         };
     }
