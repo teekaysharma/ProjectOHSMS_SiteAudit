@@ -2406,7 +2406,10 @@
         const typeClass = getQuestionTypeClass(question.score);
         
         return `
-            <div class="question-card ${typeClass}">
+            <div class="question-card ${typeClass}" 
+                 data-department="${question.department || 'N/A'}" 
+                 data-area="${question.area || 'N/A'}" 
+                 data-text="${question.text || ''}">
                 <div class="question-header">
                     <div class="question-title">${question.text}</div>
                     <div class="question-score ${scoreClass}">${getScoreLabel(question.score)}</div>
