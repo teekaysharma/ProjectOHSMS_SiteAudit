@@ -81,32 +81,37 @@
     <div class="container">
         <!-- Header with Project Management -->
         <div class="header">
-            <h1>OHS Management System</h1>
-            <p>Safety Management System Audit & Site Safety Audit Tool</p>
+            <div class="header-top">
+                <h1>OHS Management System</h1>
+                <p>Safety Management System Audit & Site Safety Audit Tool</p>
+            </div>
             
             <div class="header-controls">
-                <div class="project-site-row">
-                    <select id="projectSelector">
-                        <option value="">Select a project</option>
-                    </select>
-                    <select id="siteSelector" class="site-name-dropdown">
-                        <option value="">Select a site</option>
-                    </select>
+                <div class="control-group project-controls">
+                    <div class="control-group-title">Project Selection</div>
+                    <div class="project-selector">
+                        <select id="projectSelector">
+                            <option value="">Select a project</option>
+                        </select>
+                    </div>
+                    <div class="site-management">
+                        <span class="info-text">Manage projects in System Settings tab</span>
+                    </div>
                 </div>
                 
-                <div class="info-text">Manage projects in System Settings tab</div>
-                
-                <div class="project-info">
-                    <input type="date" id="inspectionDate">
-                    <input type="text" id="leadAuditor" placeholder="Lead Auditor">
-                    <input type="text" id="projectDirector" placeholder="Project Director">
-                </div>
-                
-                <div class="site-management">
-                    <select id="bottomSiteSelector" class="site-name-dropdown">
-                        <option value="">Select a site</option>
-                    </select>
-                    <span class="info-text">Manage sites in System Settings tab</span>
+                <div class="control-group audit-controls">
+                    <div class="control-group-title">Audit Details</div>
+                    <div class="audit-details">
+                        <select id="siteSelector" class="site-name-dropdown">
+                            <option value="">Select a site</option>
+                        </select>
+                        <input type="date" id="inspectionDate">
+                        <input type="text" id="leadAuditor" placeholder="Lead Auditor">
+                        <input type="text" id="projectDirector" placeholder="Project Director">
+                    </div>
+                    <div class="site-management">
+                        <span class="info-text">Manage sites in System Settings tab</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -469,7 +474,7 @@
                 </div>
                 
                 <!-- Site Management Section -->
-                <div class="site-management">
+                <div class="site-management-settings">
                     <h3>Site Management</h3>
                     <div class="info-note">
                         <strong>Note:</strong> This is the only place to manage sites. Add, edit, or remove sites from your audit system. Each new site starts with zero scores for site performance audits.
