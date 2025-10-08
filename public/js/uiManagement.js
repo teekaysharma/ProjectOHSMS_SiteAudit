@@ -2407,6 +2407,14 @@
         const scoreClass = question.score !== undefined ? `score-${question.score}` : 'score-0';
         const typeClass = getQuestionTypeClass(question.score);
         
+        // Determine the source label based on question type
+        let sourceLabel = '';
+        if (question.questionType === 'management' || question.department === 'Management') {
+            sourceLabel = `Management System / ${question.area || 'N/A'}`;
+        } else {
+            sourceLabel = `Site Performance / ${question.area || 'N/A'}`;
+        }
+        
         return `
             <div class="question-card ${typeClass}" 
                  data-department="${question.department || 'N/A'}" 
@@ -2418,7 +2426,7 @@
                 </div>
                 <div class="question-details">
                     <div><strong>Department:</strong> ${question.department || 'N/A'}</div>
-                    <div><strong>Area:</strong> ${question.area || 'N/A'}</div>
+                    <div><strong>Source:</strong> ${sourceLabel}</div>
                 </div>
                 <div class="question-actions">
                     ${getActionButtons(question.score)}
