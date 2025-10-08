@@ -4,19 +4,13 @@
     document.addEventListener('click', function(event) {
         // Check if the clicked element is an action button
         if (event.target.classList.contains('action-btn')) {
-            console.log('Action button clicked:', event.target.textContent.trim());
-            
             // Find the parent question card
             const questionCard = event.target.closest('.question-card');
             if (questionCard) {
-                console.log('Question card found:', questionCard);
-                
                 // Get the question data from data attributes
                 const department = questionCard.dataset.department;
                 const area = questionCard.dataset.area;
                 const text = questionCard.dataset.text;
-                
-                console.log('Question data:', { department, area, text });
                 
                 // Get the action type from the button text
                 const buttonText = event.target.textContent.trim();
