@@ -233,6 +233,73 @@
         }
     }
     
+    // Initialize tab action buttons
+    function initializeTabActionButtons() {
+        // Pending Evaluation tab buttons
+        const scheduleFollowUpBtn = document.getElementById('scheduleFollowUp');
+        const exportPendingListBtn = document.getElementById('exportPendingList');
+        
+        if (scheduleFollowUpBtn) {
+            scheduleFollowUpBtn.addEventListener('click', () => {
+                handleScheduleFollowUp();
+            });
+        }
+        
+        if (exportPendingListBtn) {
+            exportPendingListBtn.addEventListener('click', () => {
+                handleExportPendingList();
+            });
+        }
+        
+        // Critical Non-Conformances tab buttons
+        const generateActionPlanBtn = document.getElementById('generateCriticalActionPlan');
+        const exportCriticalListBtn = document.getElementById('exportCriticalList');
+        
+        if (generateActionPlanBtn) {
+            generateActionPlanBtn.addEventListener('click', () => {
+                handleGenerateCriticalActionPlan();
+            });
+        }
+        
+        if (exportCriticalListBtn) {
+            exportCriticalListBtn.addEventListener('click', () => {
+                handleExportCriticalList();
+            });
+        }
+        
+        // Improvement Opportunities tab buttons
+        const generateImprovementPlanBtn = document.getElementById('generateImprovementPlan');
+        const exportImprovementListBtn = document.getElementById('exportImprovementList');
+        
+        if (generateImprovementPlanBtn) {
+            generateImprovementPlanBtn.addEventListener('click', () => {
+                handleGenerateImprovementPlan();
+            });
+        }
+        
+        if (exportImprovementListBtn) {
+            exportImprovementListBtn.addEventListener('click', () => {
+                handleExportImprovementList();
+            });
+        }
+        
+        // Compliance & Best Practices tab buttons
+        const shareBestPracticesBtn = document.getElementById('shareBestPractices');
+        const exportComplianceListBtn = document.getElementById('exportComplianceList');
+        
+        if (shareBestPracticesBtn) {
+            shareBestPracticesBtn.addEventListener('click', () => {
+                handleShareBestPractices();
+            });
+        }
+        
+        if (exportComplianceListBtn) {
+            exportComplianceListBtn.addEventListener('click', () => {
+                handleExportComplianceList();
+            });
+        }
+    }
+    
     // Show tab function - Updated to handle new tabs
     function showTab(tabName) {
         try {
