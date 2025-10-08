@@ -2176,7 +2176,8 @@
                                     score: item.score,
                                     department: 'Management',
                                     area: section,
-                                    comment: item.comment
+                                    comment: item.comment,
+                                    questionType: 'management'
                                 });
                             } else {
                                 answeredQuestions++;
