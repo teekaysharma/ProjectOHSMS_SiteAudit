@@ -1898,7 +1898,8 @@
                                     score: item.score,
                                     department: project.currentSite,
                                     area: section,
-                                    comment: item.comment
+                                    comment: item.comment,
+                                    questionType: 'site'
                                 });
                             }
                         });
