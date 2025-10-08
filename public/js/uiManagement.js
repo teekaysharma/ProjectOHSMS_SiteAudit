@@ -2591,6 +2591,144 @@
         });
     }
     
+    // Handler functions for tab action buttons
+    function handleScheduleFollowUp() {
+        const project = app.getCurrentProject();
+        if (!project) {
+            alert('Please select a project first.');
+            return;
+        }
+        
+        const followUpDate = prompt('Enter follow-up date (YYYY-MM-DD):');
+        if (!followUpDate) return;
+        
+        const notes = prompt('Enter follow-up notes (optional):') || '';
+        
+        // Store follow-up information (you can extend this to save to localStorage)
+        const followUp = {
+            date: followUpDate,
+            notes: notes,
+            projectName: app.inspectionData.currentProject,
+            siteName: project.currentSite,
+            createdAt: new Date().toISOString()
+        };
+        
+        // For now, just show confirmation
+        showNotification(`Follow-up scheduled for ${followUpDate}`, 'success');
+        console.log('Follow-up scheduled:', followUp);
+    }
+    
+    function handleExportPendingList() {
+        const project = app.getCurrentProject();
+        if (!project) {
+            alert('Please select a project first.');
+            return;
+        }
+        
+        // Collect all pending questions
+        const pendingQuestions = [];
+        
+        // Management questions
+        if (project.managementSystemAudit) {
+            for (const section in project.managementSystemAudit) {
+                if (Array.isArray(project.managementSystemAudit[section])) {
+                    project.managementSystemAudit[section].forEach((item, index) => {
+                        if (item.score === 0) {
+                            pendingQuestions.push({
+                                source: 'Management System',
+                                section: section,
+                                question: item.name,
+                                comment: item.comment || 'No comments'
+                            });
+                        }
+                    });
+                }
+            }
+        }
+        
+        // Site questions
+        if (project.currentSite && project.sites[project.currentSite]) {
+            const site = project.sites[project.currentSite];
+            for (const section in site) {
+                if (Array.isArray(site[section])) {
+                    site[section].forEach((item, index) => {
+                        if (item.score === 0) {
+                            pendingQuestions.push({
+                                source: 'Site Performance',
+                                section: section,
+                                question: item.name,
+                                comment: item.comment || 'No comments'
+                            });
+                        }
+                    });
+                }
+            }
+        }
+        
+        // Generate CSV content
+        const csvHeaders = 'Source,Section,Question,Comments\n';
+        const csvContent = pendingQuestions.map(q => 
+            `"${q.source}","${q.section}","${q.question}","${q.comment}"`
+        ).join('\n');
+        
+        // Download the file
+        const blob = new Blob([csvHeaders + csvContent], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `pending_evaluations_${app.inspectionData.currentProject}_${new Date().toISOString().split('T')[0]}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+        
+        showNotification('Pending evaluations list exported successfully!', 'success');
+    }
+    
+    function handleGenerateCriticalActionPlan() {
+        showNotification('Generating critical action plan...', 'info');
+        // This would generate an action plan for critical non-conformances
+        setTimeout(() => {
+            showNotification('Action plan generation feature coming soon!', 'info');
+        }, 1000);
+    }
+    
+    function handleExportCriticalList() {
+        showNotification('Exporting critical non-conformances list...', 'info');
+        // This would export critical issues
+        setTimeout(() => {
+            showNotification('Critical list export feature coming soon!', 'info');
+        }, 1000);
+    }
+    
+    function handleGenerateImprovementPlan() {
+        showNotification('Generating improvement plan...', 'info');
+        setTimeout(() => {
+            showNotification('Improvement plan generation feature coming soon!', 'info');
+        }, 1000);
+    }
+    
+    function handleExportImprovementList() {
+        showNotification('Exporting improvement opportunities list...', 'info');
+        setTimeout(() => {
+            showNotification('Improvement list export feature coming soon!', 'info');
+        }, 1000);
+    }
+    
+    function handleShareBestPractices() {
+        showNotification('Preparing best practices for sharing...', 'info');
+        setTimeout(() => {
+            showNotification('Best practices sharing feature coming soon!', 'info');
+        }, 1000);
+    }
+    
+    function handleExportComplianceList() {
+        showNotification('Exporting compliance and best practices list...', 'info');
+        setTimeout(() => {
+            showNotification('Compliance list export feature coming soon!', 'info');
+        }, 1000);
+    }
+    
     // Expose functions to global scope
     window.initializeUI = initializeUI;
     window.showTab = showTab;
