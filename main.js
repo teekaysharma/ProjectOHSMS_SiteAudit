@@ -204,10 +204,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.log('✓ Chart Management initialized (fallback)');
                 }
                 
-                // Initial dashboard update after charts are initialized
+                // Initialize executive dashboard metrics after charts are initialized
                 setTimeout(() => {
-                    if (typeof updateAllDashboardComponents === 'function') {
-                        updateAllDashboardComponents();
+                    if (typeof updateExecutiveDashboardMetrics === 'function') {
+                        updateExecutiveDashboardMetrics();
                     }
                 }, 500);
             } else {

@@ -13,7 +13,7 @@
     <!-- Version check and force reload -->
     <script>
         (function() {
-            const currentVersion = '2.3';
+            const currentVersion = '2.4';
             const savedVersion = localStorage.getItem('appVersion');
             
             if (savedVersion !== currentVersion) {
@@ -74,6 +74,8 @@
             document.head.appendChild(fetchScript);
         }
     </script>
+	<!-- Add this line in the head section of index.html, after the other script imports -->
+	<script type="module" src="/questionEvaluation.js"></script>
     
     <!-- Chart.js will be loaded via main.js imports -->
 </head>
@@ -81,37 +83,121 @@
     <div class="container">
         <!-- Header with Project Management -->
         <div class="header">
-            <h1>OHS Management System</h1>
-            <p>Safety Management System Audit & Site Safety Audit Tool</p>
+            <div class="header-top">
+                <h1>OHS Management System</h1>
+                <p>Safety Management System Audit & Site Safety Audit Tool</p>
+            </div>
             
             <div class="header-controls">
-                <div class="project-selector">
-                    <select id="projectSelector">
-                        <option value="">Select a project</option>
-                    </select>
-                    <span class="info-text">Manage projects in System Settings tab</span>
+                <div class="control-group project-controls">
+                    <div class="control-group-title">Project Selection</div>
+                    <div class="project-selector">
+                        <select id="projectSelector">
+                            <option value="">Select a project</option>
+                        </select>
+                    </div>
+                    <div class="site-management">
+                        <span class="info-text">Manage projects in System Settings tab</span>
+                    </div>
                 </div>
                 
-                <div class="project-info">
-                    <select id="siteSelector" class="site-name-dropdown">
-                        <option value="">Select a site</option>
-                    </select>
-                    <input type="date" id="inspectionDate">
-                    <input type="text" id="leadAuditor" placeholder="Lead Auditor">
-                    <input type="text" id="projectDirector" placeholder="Project Director">
+                <div class="control-group audit-controls">
+                    <div class="control-group-title">Audit Details</div>
+                    <div class="audit-details">
+                        <select id="siteSelector" class="site-name-dropdown">
+                            <option value="">Select a site</option>
+                        </select>
+                        <input type="date" id="inspectionDate">
+                        <input type="text" id="leadAuditor" placeholder="Lead Auditor">
+                        <input type="text" id="projectDirector" placeholder="Project Director">
+                    </div>
+                    <div class="site-management">
+                        <span class="info-text">Manage sites in System Settings tab</span>
+                    </div>
                 </div>
-                
-                <div class="site-management">
-                    <span class="info-text">Manage sites in System Settings tab</span>
+            </div>
+        </div>
+        
+        <!-- Executive Summary Dashboard (Persistent) -->
+        <div class="executive-dashboard">
+            <h3>Executive Summary Dashboard</h3>
+            <div class="dashboard-metrics">
+                <div class="metric critical">
+                    <span class="metric-value" id="criticalCount">0</span>
+                    <span class="metric-label">Critical Non-Conformances</span>
                 </div>
+                <div class="metric improvement">
+                    <span class="metric-value" id="improvementCount">0</span>
+                    <span class="metric-label">Improvement Opportunities</span>
+                </div>
+                <div class="metric best-practice">
+                    <span class="metric-value" id="bestPracticeCount">0</span>
+                    <span class="metric-label">Best Practices</span>
+                </div>
+                <div class="metric completion">
+                    <span class="metric-value" id="completionPercentage">0%</span>
+                    <span class="metric-label">Completion</span>
+                </div>
+            </div>
+            <div class="trend-indicators">
+                <div class="trend up">
+                    <span>↑</span> <span id="criticalTrend">Improving</span>
+                </div>
+                <div class="trend stable">
+                    <span>→</span> <span id="improvementTrend">Stable</span>
+                </div>
+                <div class="trend up">
+                    <span>↑</span> <span id="bestPracticeTrend">Improving</span>
+                </div>
+                <div class="trend up">
+                    <span>↑</span> <span id="completionTrend">Improving</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Risk-Based Filtering -->
+        <div class="risk-filters">
+            <div class="filter-group">
+                <label>Risk Level</label>
+                <select id="riskLevelFilter">
+                    <option value="all">All Levels</option>
+                    <option value="critical">Critical</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Department/Area</label>
+                <select id="departmentFilter">
+                    <option value="all">All Departments</option>
+                    <!-- Departments will be populated dynamically -->
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Regulatory Requirement</label>
+                <select id="regulatoryFilter">
+                    <option value="all">All Requirements</option>
+                    <!-- Requirements will be populated dynamically -->
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Search</label>
+                <input type="text" id="questionSearch" placeholder="Search questions...">
+            </div>
+            <div class="filter-group">
+                <label>&nbsp;</label>
+                <button id="applyFilters" class="action-btn primary">Apply Filters</button>
             </div>
         </div>
         
         <!-- Tab Navigation -->
         <div class="tabs">
             <button class="tab active" data-tab-name="dashboard">Dashboard</button>
-            <button class="tab" data-tab-name="management">Management System <span class="audit-indicator project">Project-wide</span></button>
-            <button class="tab" data-tab-name="site-performance">Site Performance <span class="audit-indicator site">Site-specific</span></button>
+            <button class="tab" data-tab-name="critical">Critical Non-Conformances</button>
+            <button class="tab" data-tab-name="improvement">Improvement Opportunities</button>
+            <button class="tab" data-tab-name="compliance">Compliance & Best Practices</button>
+            <button class="tab" data-tab-name="pending">Pending Evaluation</button>
             <button class="tab" data-tab-name="reports">Reports</button>
             <button class="tab" data-tab-name="master">System Settings</button>
         </div>
@@ -268,25 +354,99 @@
             </div>
         </div>
         
-        <div id="management" class="tab-content">
-            <h2>Health & Safety Management System Audit <span class="audit-indicator project">Project-wide</span></h2>
-            <p style="margin-bottom: 20px; color: #666;">This audit is conducted once or twice per project and applies to all sites. The results are shared across the entire project.</p>
+        <div id="critical" class="tab-content">
+            <h2>Critical Non-Conformances <span class="tab-indicator critical">Highest Priority</span></h2>
+            <p>Questions scored as "1 - Major Non-Conformance". These require immediate corrective action.</p>
             
-            <!-- Scoring Categories Tabs -->
-            <div class="scoring-categories">
-                <div class="scoring-category-tab active" data-category="conformance">Conformance</div>
-                <div class="scoring-category-tab" data-category="best-practices">Best Practices</div>
-                <div class="scoring-category-tab" data-category="non-conformance">Non-Conformance Classification</div>
+            <div class="tab-actions">
+                <button class="action-btn primary" id="generateCriticalActionPlan">Generate Corrective Action Plan</button>
+                <button class="action-btn secondary" id="exportCriticalList">Export List</button>
             </div>
             
-            <div id="managementElements"></div>
+            <div id="criticalNonConformancesList" class="questions-list">
+                <!-- Critical non-conformances will be loaded here -->
+            </div>
+            
+            <!-- Compliance Heat Map -->
+            <div class="heat-map-section">
+                <h3>Compliance Heat Map by Department</h3>
+                <div id="criticalHeatMap" class="heat-map">
+                    <!-- Heat map items will be populated dynamically -->
+                </div>
+            </div>
         </div>
         
-        <div id="site-performance" class="tab-content">
-            <h2>Health & Safety Site Performance Audit <span class="audit-indicator site">Site-specific</span></h2>
-            <p style="margin-bottom: 20px; color: #666;">This audit is specific to the selected site. Each new site starts with zero scores.</p>
+        <div id="improvement" class="tab-content">
+            <h2>Improvement Opportunities <span class="tab-indicator improvement">Medium Priority</span></h2>
+            <p>Questions scored as "2 - Minor Non-Conformance" and "3 - Observation/Improvement Opportunity".</p>
             
-            <div id="sitePerformanceAudit"></div>
+            <div class="tab-actions">
+                <button class="action-btn primary" id="generateImprovementPlan">Generate Improvement Plan</button>
+                <button class="action-btn secondary" id="exportImprovementList">Export List</button>
+            </div>
+            
+            <div class="improvement-categories">
+                <div class="category">
+                    <h3>Minor Non-Conformances</h3>
+                    <div id="minorNonConformancesList" class="questions-list">
+                        <!-- Minor non-conformances will be loaded here -->
+                    </div>
+                </div>
+                <div class="category">
+                    <h3>Observation/Improvement Opportunities</h3>
+                    <div id="improvementOpportunitiesList" class="questions-list">
+                        <!-- Improvement opportunities will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="compliance" class="tab-content">
+            <h2>Compliance & Best Practices <span class="tab-indicator compliance">Lower Priority</span></h2>
+            <p>Questions scored as "4 - Conformance" and "5 - Best Practice".</p>
+            
+            <div class="tab-actions">
+                <button class="action-btn primary" id="shareBestPractices">Share Best Practices</button>
+                <button class="action-btn secondary" id="exportComplianceList">Export List</button>
+            </div>
+            
+            <div class="compliance-categories">
+                <div class="category">
+                    <h3>Best Practices</h3>
+                    <div id="bestPracticesList" class="questions-list">
+                        <!-- Best practices will be loaded here -->
+                    </div>
+                </div>
+                <div class="category">
+                    <h3>Conformance</h3>
+                    <div id="conformanceList" class="questions-list">
+                        <!-- Conformance items will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="pending" class="tab-content">
+            <h2>Pending Evaluation <span class="tab-indicator pending">Administrative</span></h2>
+            <p>Questions not yet evaluated (score 0 or null).</p>
+            
+            <div class="tab-actions">
+                <button class="action-btn primary" id="scheduleFollowUp">Schedule Follow-up</button>
+                <button class="action-btn secondary" id="exportPendingList">Export List</button>
+            </div>
+            
+            <div class="completion-status">
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="completionProgressBar">
+                        <div class="progress-fill" id="completionProgressFill" style="width: 0%"></div>
+                    </div>
+                    <span id="completionProgressText">0% Complete</span>
+                </div>
+            </div>
+            
+            <div id="pendingEvaluationList" class="questions-list">
+                <!-- Pending evaluations will be loaded here -->
+            </div>
         </div>
         
         <div id="reports" class="tab-content">
@@ -465,7 +625,7 @@
                 </div>
                 
                 <!-- Site Management Section -->
-                <div class="site-management">
+                <div class="site-management-settings">
                     <h3>Site Management</h3>
                     <div class="info-note">
                         <strong>Note:</strong> This is the only place to manage sites. Add, edit, or remove sites from your audit system. Each new site starts with zero scores for site performance audits.
@@ -560,5 +720,181 @@
     
     <!-- Main JavaScript entry point -->
     <script type="module" src="/main.js"></script>
+    
+    <!-- Additional JavaScript for new OHSMS functionality -->
+    <script>
+        // Prioritization algorithm for sorting questions
+        function prioritizeQuestions(questions) {
+            return questions.sort((a, b) => {
+                // Critical non-conformances first
+                if (a.score === 1 && b.score !== 1) return -1;
+                if (b.score === 1 && a.score !== 1) return 1;
+                
+                // Then minor non-conformances
+                if (a.score === 2 && b.score > 2) return -1;
+                if (b.score === 2 && a.score > 2) return 1;
+                
+                // Then improvement opportunities
+                if (a.score === 3 && b.score > 3) return -1;
+                if (b.score === 3 && a.score > 3) return 1;
+                
+                // Then conformance and best practices
+                return b.score - a.score;
+            });
+        }
+        
+        // Function to update executive dashboard metrics
+        function updateExecutiveDashboardMetrics() {
+            try {
+                const project = window.app.getCurrentProject();
+                if (!project) return;
+                
+                let criticalCount = 0;
+                let improvementCount = 0;
+                let bestPracticeCount = 0;
+                let totalQuestions = 0;
+                let answeredQuestions = 0;
+                
+                // Check management system audit
+                if (project.managementSystemAudit) {
+                    for (const section in project.managementSystemAudit) {
+                        if (Array.isArray(project.managementSystemAudit[section])) {
+                            project.managementSystemAudit[section].forEach((item, index) => {
+                                totalQuestions++;
+                                if (item.score > 0) {
+                                    answeredQuestions++;
+                                    if (item.score === 1) criticalCount++;
+                                    else if (item.score === 2 || item.score === 3) improvementCount++;
+                                    else if (item.score === 5) bestPracticeCount++;
+                                }
+                            });
+                        }
+                    }
+                }
+                
+                // Check site performance audit
+                if (project.currentSite && project.sites[project.currentSite]) {
+                    const site = project.sites[project.currentSite];
+                    for (const section in site) {
+                        if (Array.isArray(site[section])) {
+                            site[section].forEach((item, index) => {
+                                totalQuestions++;
+                                if (item.score > 0) {
+                                    answeredQuestions++;
+                                    if (item.score === 1) criticalCount++;
+                                    else if (item.score === 2 || item.score === 3) improvementCount++;
+                                    else if (item.score === 5) bestPracticeCount++;
+                                }
+                            });
+                        }
+                    }
+                }
+                
+                const completionPercentage = totalQuestions > 0 ? Math.round((answeredQuestions / totalQuestions) * 100) : 0;
+                
+                // Update dashboard metrics
+                document.getElementById('criticalCount').textContent = criticalCount;
+                document.getElementById('improvementCount').textContent = improvementCount;
+                document.getElementById('bestPracticeCount').textContent = bestPracticeCount;
+                document.getElementById('completionPercentage').textContent = completionPercentage + '%';
+                
+                // Update trend indicators (would be calculated based on historical data)
+                document.getElementById('criticalTrend').textContent = criticalCount > 0 ? 'Requires Attention' : 'Stable';
+                document.getElementById('improvementTrend').textContent = improvementCount > 0 ? 'Opportunities Available' : 'Stable';
+                document.getElementById('bestPracticeTrend').textContent = bestPracticeCount > 0 ? 'Excellent' : 'Stable';
+                document.getElementById('completionTrend').textContent = completionPercentage > 80 ? 'Excellent' : completionPercentage > 50 ? 'In Progress' : 'Needs Attention';
+                
+                console.log('Executive dashboard metrics updated');
+            } catch (error) {
+                console.error('Error updating executive dashboard metrics:', error);
+            }
+        }
+        
+        // Helper function to get question type class based on score
+        function getQuestionTypeClass(score) {
+            switch(score) {
+                case 1: return 'critical';
+                case 2: return 'minor';
+                case 3: return 'opportunity';
+                case 4: return 'conformance';
+                case 5: return 'best-practice';
+                default: return 'pending';
+            }
+        }
+        
+        // Helper function to get score label
+        function getScoreLabel(score) {
+            switch(score) {
+                case 0: return 'Not Evaluated';
+                case 1: return 'Major NC';
+                case 2: return 'Minor NC';
+                case 3: return 'Opportunity';
+                case 4: return 'Conformance';
+                case 5: return 'Best Practice';
+                default: return 'Unknown';
+            }
+        }
+        
+        // Helper function to get action buttons based on score
+        function getActionButtons(score) {
+            switch(score) {
+                case 1:
+                    return `
+                        <button class="action-btn primary">Create Action Plan</button>
+                        <button class="action-btn secondary">Assign Responsibility</button>
+                    `;
+                case 2:
+                    return `
+                        <button class="action-btn primary">Schedule Action</button>
+                        <button class="action-btn secondary">Add Comments</button>
+                    `;
+                case 3:
+                    return `
+                        <button class="action-btn primary">Create Improvement</button>
+                        <button class="action-btn secondary">Track Progress</button>
+                    `;
+                case 5:
+                    return `
+                        <button class="action-btn primary">Share Best Practice</button>
+                        <button class="action-btn secondary">Document</button>
+                    `;
+                default:
+                    return `
+                        <button class="action-btn primary">Evaluate</button>
+                        <button class="action-btn secondary">Mark N/A</button>
+                    `;
+            }
+        }
+        
+        // Helper function to render question card
+        function renderQuestionCard(question) {
+            const scoreClass = question.score !== undefined ? `score-${question.score}` : 'score-0';
+            const typeClass = getQuestionTypeClass(question.score);
+            
+            return `
+                <div class="question-card ${typeClass}">
+                    <div class="question-header">
+                        <div class="question-title">${question.text}</div>
+                        <div class="question-score ${scoreClass}">${getScoreLabel(question.score)}</div>
+                    </div>
+                    <div class="question-details">
+                        <div><strong>Department:</strong> ${question.department || 'N/A'}</div>
+                        <div><strong>Area:</strong> ${question.area || 'N/A'}</div>
+                    </div>
+                    <div class="question-actions">
+                        ${getActionButtons(question.score)}
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Expose functions to global scope
+        window.prioritizeQuestions = prioritizeQuestions;
+        window.updateExecutiveDashboardMetrics = updateExecutiveDashboardMetrics;
+        window.getQuestionTypeClass = getQuestionTypeClass;
+        window.getScoreLabel = getScoreLabel;
+        window.getActionButtons = getActionButtons;
+        window.renderQuestionCard = renderQuestionCard;
+    </script>
 </body>
 </html>
