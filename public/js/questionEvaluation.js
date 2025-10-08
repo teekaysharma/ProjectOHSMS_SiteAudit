@@ -178,8 +178,17 @@
         }
         
         // Save the data
-        if (typeof saveData === 'function') {
+        if (window.dataManagement && window.dataManagement.saveData) {
+            window.dataManagement.saveData();
+        } else if (typeof saveData === 'function') {
             saveData();
+        }
+        
+        // Update all dashboard components
+        if (window.uiManagement && window.uiManagement.updateAllDashboardComponents) {
+            window.uiManagement.updateAllDashboardComponents();
+        } else if (typeof updateAllDashboardComponents === 'function') {
+            updateAllDashboardComponents();
         }
         
         // Update the executive dashboard metrics
