@@ -47,8 +47,6 @@
                     event.preventDefault();
                     handleDocument(department, area, text);
                 }
-            } else {
-                console.warn('Question card not found for action button:', event.target);
             }
         }
     });
