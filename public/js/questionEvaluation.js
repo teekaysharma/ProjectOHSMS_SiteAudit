@@ -4,39 +4,57 @@
     document.addEventListener('click', function(event) {
         // Check if the clicked element is an action button
         if (event.target.classList.contains('action-btn')) {
+            console.log('Action button clicked:', event.target.textContent.trim());
+            
             // Find the parent question card
             const questionCard = event.target.closest('.question-card');
             if (questionCard) {
+                console.log('Question card found:', questionCard);
+                
                 // Get the question data from data attributes
                 const department = questionCard.dataset.department;
                 const area = questionCard.dataset.area;
                 const text = questionCard.dataset.text;
+                
+                console.log('Question data:', { department, area, text });
                 
                 // Get the action type from the button text
                 const buttonText = event.target.textContent.trim();
                 
                 // Handle different actions
                 if (buttonText === 'Evaluate') {
+                    event.preventDefault();
                     handleEvaluate(department, area, text);
                 } else if (buttonText === 'Mark N/A') {
+                    event.preventDefault();
                     handleMarkNA(department, area, text);
                 } else if (buttonText === 'Create Action Plan') {
+                    event.preventDefault();
                     handleCreateActionPlan(department, area, text);
                 } else if (buttonText === 'Assign Responsibility') {
+                    event.preventDefault();
                     handleAssignResponsibility(department, area, text);
                 } else if (buttonText === 'Schedule Action') {
+                    event.preventDefault();
                     handleScheduleAction(department, area, text);
                 } else if (buttonText === 'Add Comments') {
+                    event.preventDefault();
                     handleAddComments(department, area, text);
                 } else if (buttonText === 'Create Improvement') {
+                    event.preventDefault();
                     handleCreateImprovement(department, area, text);
                 } else if (buttonText === 'Track Progress') {
+                    event.preventDefault();
                     handleTrackProgress(department, area, text);
                 } else if (buttonText === 'Share Best Practice') {
+                    event.preventDefault();
                     handleShareBestPractice(department, area, text);
                 } else if (buttonText === 'Document') {
+                    event.preventDefault();
                     handleDocument(department, area, text);
                 }
+            } else {
+                console.warn('Question card not found for action button:', event.target);
             }
         }
     });
