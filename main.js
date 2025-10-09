@@ -31,12 +31,12 @@ window.addEventListener('beforeunload', function(e) {
                 
                 // Auto-trigger export dialog after preventing refresh
                 setTimeout(() => {
-                    if (typeof exportAllData === 'function') {
-                        exportAllData();
-                    } else if (typeof exportConfigurationData === 'function' && typeof exportAuditData === 'function') {
+                    if (typeof exportConfiguration === 'function' && typeof exportAllAuditData === 'function') {
                         // Export configuration and audit data
-                        exportConfigurationData();
-                        setTimeout(() => exportAuditData(), 1000);
+                        exportConfiguration();
+                        setTimeout(() => exportAllAuditData(), 1000);
+                    } else if (typeof exportAllAuditData === 'function') {
+                        exportAllAuditData();
                     }
                 }, 100);
                 
