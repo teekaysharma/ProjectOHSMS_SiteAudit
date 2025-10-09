@@ -338,7 +338,10 @@
                 sites: {
                     "Default Site": {}
                 },
-                currentSite: "Default Site"
+                currentSite: "Default Site",
+                hasEvaluationData: false,
+                createdDate: new Date().toISOString(),
+                leadAuditor: ''
             };
             
             // Initialize with current master configuration
