@@ -368,6 +368,12 @@
             // Select the new project
             selectProject(projectName);
             
+            // Update projects list immediately
+            if (typeof updateProjectsList === 'function') {
+                updateProjectsList();
+            }
+            
+            alert(`Project "${projectName}" added successfully`);
             console.log(`Project "${projectName}" added successfully`);
         } catch (error) {
             console.error('Error adding new project:', error);
