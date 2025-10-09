@@ -138,6 +138,14 @@
                 projectNameDisplay.value = app.inspectionData.currentProject || 'Default Project';
             }
             
+            // Also update report selectors
+            if (typeof updateReportSiteSelector === 'function') {
+                updateReportSiteSelector();
+            }
+            if (typeof updateComparisonSiteSelector === 'function') {
+                updateComparisonSiteSelector();
+            }
+            
             console.log('Project selector updated successfully');
         } catch (error) {
             console.error('Error updating project selector:', error);
