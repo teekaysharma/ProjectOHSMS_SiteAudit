@@ -191,6 +191,14 @@
                 siteNameDisplay.value = 'Default Site';
             }
             
+            // Also update report selectors
+            if (typeof updateReportSiteSelector === 'function') {
+                updateReportSiteSelector();
+            }
+            if (typeof updateComparisonSiteSelector === 'function') {
+                updateComparisonSiteSelector();
+            }
+            
             console.log('Site selector updated successfully');
         } catch (error) {
             console.error('Error updating site selector:', error);
