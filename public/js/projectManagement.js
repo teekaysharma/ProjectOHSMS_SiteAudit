@@ -454,6 +454,11 @@
             // Clear the input field
             newSiteNameField.value = '';
             
+            // Update sites list immediately
+            if (typeof updateSitesList === 'function') {
+                updateSitesList();
+            }
+            
             console.log(`Site "${siteName}" added successfully`);
         } catch (error) {
             console.error('Error adding site from input field:', error);
