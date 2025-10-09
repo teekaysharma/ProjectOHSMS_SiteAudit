@@ -6,6 +6,46 @@ import './public/css/styles.css';
 import Chart from 'chart.js/auto';
 window.Chart = Chart;
 
+// Initialize beforeunload event for data protection
+window.addEventListener('beforeunload', function(e) {
+    // Check if there is unsaved data
+    if (window.app && window.app.inspectionData) {
+        const hasData = Object.keys(window.app.inspectionData.projects || {}).length > 0;
+        const hasAuditData = hasData && Object.values(window.app.inspectionData.projects).some(project => {
+            return project.sites && Object.values(project.sites).some(site => {
+                return site.auditData && Object.keys(site.auditData).length > 0;
+            });
+        });
+        
+        if (hasData || hasAuditData) {
+            // Show export prompt
+            const confirmRefresh = confirm(
+                'You have unsaved data! Before refreshing, would you like to export your data?\n\n' +
+                'Click "Cancel" to stay and export your data first.\n' +
+                'Click "OK" to continue refreshing (data may be lost).'
+            );
+            
+            if (!confirmRefresh) {
+                e.preventDefault();
+                e.returnValue = '';
+                
+                // Auto-trigger export dialog after preventing refresh
+                setTimeout(() => {
+                    if (typeof exportAllData === 'function') {
+                        exportAllData();
+                    } else if (typeof exportConfigurationData === 'function' && typeof exportAuditData === 'function') {
+                        // Export configuration and audit data
+                        exportConfigurationData();
+                        setTimeout(() => exportAuditData(), 1000);
+                    }
+                }, 100);
+                
+                return '';
+            }
+        }
+    }
+});
+
 // Initialize global app object before loading any scripts
 window.app = {
     masterConfig: {
