@@ -1055,6 +1055,69 @@ function initializeLegacyReportGeneration() {
     }
 }
 
+// Update report site selector
+function updateReportSiteSelector() {
+    try {
+        const selector = document.getElementById('reportSiteSelector');
+        if (!selector) return;
+        
+        selector.innerHTML = '<option value="">Select site for report</option>';
+        selector.innerHTML += '<option value="all">All Sites</option>';
+        selector.innerHTML += '<option value="current">Current Site Only</option>';
+        
+        const project = window.app ? window.app.getCurrentProject() : null;
+        if (project && project.sites) {
+            const sites = Object.keys(project.sites);
+            sites.forEach(siteName => {
+                const option = document.createElement('option');
+                option.value = siteName;
+                option.textContent = siteName;
+                if (siteName === project.currentSite) {
+                    option.selected = true;
+                }
+                selector.appendChild(option);
+            });
+        }
+        
+        console.log('Report site selector updated successfully');
+    } catch (error) {
+        console.error('Error updating report site selector:', error);
+    }
+}
+
+// Update comparison site selector
+function updateComparisonSiteSelector() {
+    try {
+        const selector = document.getElementById('comparisonSiteSelector');
+        if (!selector) return;
+        
+        selector.innerHTML = '';
+        
+        const project = window.app ? window.app.getCurrentProject() : null;
+        if (project && project.sites) {
+            const sites = Object.keys(project.sites);
+            sites.forEach(siteName => {
+                const option = document.createElement('option');
+                option.value = siteName;
+                option.textContent = siteName;
+                selector.appendChild(option);
+            });
+        }
+        
+        if (selector.options.length === 0) {
+            const option = document.createElement('option');
+            option.value = '';
+            option.textContent = 'No sites available for comparison';
+            option.disabled = true;
+            selector.appendChild(option);
+        }
+        
+        console.log('Comparison site selector updated successfully');
+    } catch (error) {
+        console.error('Error updating comparison site selector:', error);
+    }
+}
+
 // Export functions for use in other modules
 window.reportGeneration = {
     generateAuditReport,
@@ -1068,3 +1131,7 @@ window.reportGeneration = {
     generateExecutiveReport,
     exportToHTML
 };
+
+// Export selector update functions globally
+window.updateReportSiteSelector = updateReportSiteSelector;
+window.updateComparisonSiteSelector = updateComparisonSiteSelector;
