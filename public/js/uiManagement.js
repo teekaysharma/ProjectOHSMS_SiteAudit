@@ -22,6 +22,12 @@
         // Initialize management lists
         initializeManagementLists();
         
+        // Initialize risk-based filters
+        initializeRiskFilters();
+        
+        // Initialize tab action buttons
+        initializeTabActionButtons();
+        
         // Show dashboard by default
         showTab('dashboard');
         
@@ -39,6 +45,87 @@
                 }
             });
         });
+    }
+    
+    // Initialize risk-based filters
+    function initializeRiskFilters() {
+        const applyFiltersBtn = document.getElementById('applyFilters');
+        if (applyFiltersBtn) {
+            applyFiltersBtn.addEventListener('click', () => {
+                applyRiskFilters();
+            });
+        }
+        
+        // Add event listeners for filter changes
+        const filterInputs = document.querySelectorAll('#riskLevelFilter, #departmentFilter, #regulatoryFilter, #questionSearch');
+        filterInputs.forEach(input => {
+            input.addEventListener('change', () => {
+                applyRiskFilters();
+            });
+            
+            if (input.type === 'text') {
+                input.addEventListener('input', () => {
+                    applyRiskFilters();
+                });
+            }
+        });
+    }
+    
+    // Apply risk-based filters
+    function applyRiskFilters() {
+        try {
+            const riskLevel = document.getElementById('riskLevelFilter').value;
+            const department = document.getElementById('departmentFilter').value;
+            const regulatory = document.getElementById('regulatoryFilter').value;
+            const searchTerm = document.getElementById('questionSearch').value.toLowerCase();
+            
+            console.log('Applying filters:', { riskLevel, department, regulatory, searchTerm });
+            
+            // Get current active tab
+            const activeTab = document.querySelector('.tab-content.active');
+            if (!activeTab) return;
+            
+            const tabName = activeTab.id;
+            
+            // Apply filters based on active tab
+            switch (tabName) {
+                case 'critical':
+                    filterCriticalNonConformances(riskLevel, department, regulatory, searchTerm);
+                    break;
+                case 'improvement':
+                    filterImprovementOpportunities(riskLevel, department, regulatory, searchTerm);
+                    break;
+                case 'compliance':
+                    filterComplianceAndBestPractices(riskLevel, department, regulatory, searchTerm);
+                    break;
+                case 'pending':
+                    filterPendingEvaluation(riskLevel, department, regulatory, searchTerm);
+                    break;
+            }
+        } catch (error) {
+            console.error('Error applying filters:', error);
+        }
+    }
+    
+    // Filter functions for each tab
+    function filterCriticalNonConformances(riskLevel, department, regulatory, searchTerm) {
+        // Implementation would filter critical non-conformances based on criteria
+        console.log('Filtering critical non-conformances');
+    }
+    
+    function filterImprovementOpportunities(riskLevel, department, regulatory, searchTerm) {
+        // Implementation would filter improvement opportunities based on criteria
+        console.log('Filtering improvement opportunities');
+    }
+    
+    function filterComplianceAndBestPractices(riskLevel, department, regulatory, searchTerm) {
+        // Implementation would filter compliance and best practices based on criteria
+        console.log('Filtering compliance and best practices');
+    }
+    
+    function filterPendingEvaluation(riskLevel, department, regulatory, searchTerm) {
+        // Implementation would filter pending evaluations based on criteria
+        console.log('Filtering pending evaluations');
     }
     
     // Initialize scoring category tabs
@@ -146,7 +233,74 @@
         }
     }
     
-    // Show tab function
+    // Initialize tab action buttons
+    function initializeTabActionButtons() {
+        // Pending Evaluation tab buttons
+        const scheduleFollowUpBtn = document.getElementById('scheduleFollowUp');
+        const exportPendingListBtn = document.getElementById('exportPendingList');
+        
+        if (scheduleFollowUpBtn) {
+            scheduleFollowUpBtn.addEventListener('click', () => {
+                handleScheduleFollowUp();
+            });
+        }
+        
+        if (exportPendingListBtn) {
+            exportPendingListBtn.addEventListener('click', () => {
+                handleExportPendingList();
+            });
+        }
+        
+        // Critical Non-Conformances tab buttons
+        const generateActionPlanBtn = document.getElementById('generateCriticalActionPlan');
+        const exportCriticalListBtn = document.getElementById('exportCriticalList');
+        
+        if (generateActionPlanBtn) {
+            generateActionPlanBtn.addEventListener('click', () => {
+                handleGenerateCriticalActionPlan();
+            });
+        }
+        
+        if (exportCriticalListBtn) {
+            exportCriticalListBtn.addEventListener('click', () => {
+                handleExportCriticalList();
+            });
+        }
+        
+        // Improvement Opportunities tab buttons
+        const generateImprovementPlanBtn = document.getElementById('generateImprovementPlan');
+        const exportImprovementListBtn = document.getElementById('exportImprovementList');
+        
+        if (generateImprovementPlanBtn) {
+            generateImprovementPlanBtn.addEventListener('click', () => {
+                handleGenerateImprovementPlan();
+            });
+        }
+        
+        if (exportImprovementListBtn) {
+            exportImprovementListBtn.addEventListener('click', () => {
+                handleExportImprovementList();
+            });
+        }
+        
+        // Compliance & Best Practices tab buttons
+        const shareBestPracticesBtn = document.getElementById('shareBestPractices');
+        const exportComplianceListBtn = document.getElementById('exportComplianceList');
+        
+        if (shareBestPracticesBtn) {
+            shareBestPracticesBtn.addEventListener('click', () => {
+                handleShareBestPractices();
+            });
+        }
+        
+        if (exportComplianceListBtn) {
+            exportComplianceListBtn.addEventListener('click', () => {
+                handleExportComplianceList();
+            });
+        }
+    }
+    
+    // Show tab function - Updated to handle new tabs
     function showTab(tabName) {
         try {
             console.log(`Showing tab: ${tabName}`);
@@ -188,15 +342,17 @@
                         updateDashboardExecutiveSummary();
                     }
                     break;
-                case 'management':
-                    if (typeof renderManagementTab === 'function') {
-                        renderManagementTab();
-                    }
+                case 'critical':
+                    loadCriticalNonConformances();
                     break;
-                case 'site-performance':
-                    if (typeof renderSitePerformanceTab === 'function') {
-                        renderSitePerformanceTab();
-                    }
+                case 'improvement':
+                    loadImprovementOpportunities();
+                    break;
+                case 'compliance':
+                    loadComplianceAndBestPractices();
+                    break;
+                case 'pending':
+                    loadPendingEvaluation();
                     break;
                 case 'reports':
                     if (typeof updateReportSiteSelector === 'function') {
@@ -204,6 +360,9 @@
                     }
                     if (typeof updateComparisonSiteSelector === 'function') {
                         updateComparisonSiteSelector();
+                    }
+                    if (window.comparisonCharts && window.comparisonCharts.updateComparisonCharts) {
+                        window.comparisonCharts.updateComparisonCharts();
                     }
                     break;
                 case 'master':
@@ -1251,6 +1410,9 @@
                 updateDashboardExecutiveSummary();
             }
             
+            // Update executive dashboard metrics
+            updateExecutiveDashboardMetrics();
+            
             console.log('All dashboard components updated successfully');
         } catch (error) {
             console.error('Error updating dashboard components:', error);
@@ -1759,6 +1921,833 @@
         }
     }
     
+    // NEW FUNCTIONS FOR RISK-BASED TAB SYSTEM
+    
+    // Load critical non-conformances
+    function loadCriticalNonConformances() {
+        try {
+            console.log('Loading critical non-conformances...');
+            const container = document.getElementById('criticalNonConformancesList');
+            if (!container) return;
+            
+            const project = app.getCurrentProject();
+            if (!project) {
+                container.innerHTML = '<p>No project selected.</p>';
+                return;
+            }
+            
+            // Get all questions with score 1 (Major Non-Conformance)
+            const criticalQuestions = [];
+            
+            // Check management system audit
+            if (project.managementSystemAudit) {
+                for (const section in project.managementSystemAudit) {
+                    if (Array.isArray(project.managementSystemAudit[section])) {
+                        project.managementSystemAudit[section].forEach((item, index) => {
+                            if (item.score === 1) {
+                                criticalQuestions.push({
+                                    text: item.name,
+                                    score: item.score,
+                                    department: 'Management',
+                                    area: section,
+                                    comment: item.comment,
+                                    questionType: 'management'
+                                });
+                            }
+                        });
+                    }
+                }
+            }
+            
+            // Check site performance audit
+            if (project.currentSite && project.sites[project.currentSite]) {
+                const site = project.sites[project.currentSite];
+                for (const section in site) {
+                    if (Array.isArray(site[section])) {
+                        site[section].forEach((item, index) => {
+                            if (item.score === 1) {
+                                criticalQuestions.push({
+                                    text: item.name,
+                                    score: item.score,
+                                    department: project.currentSite,
+                                    area: section,
+                                    comment: item.comment,
+                                    questionType: 'site'
+                                });
+                            }
+                        });
+                    }
+                }
+            }
+            
+            // Sort questions using prioritization algorithm
+            const sortedQuestions = prioritizeQuestions(criticalQuestions);
+            
+            // Render questions
+            container.innerHTML = '';
+            if (sortedQuestions.length === 0) {
+                container.innerHTML = '<p>No critical non-conformances found.</p>';
+            } else {
+                sortedQuestions.forEach(question => {
+                    container.innerHTML += renderQuestionCard(question);
+                });
+            }
+            
+            // Update heat map
+            updateHeatMap('critical');
+            
+            // Update executive dashboard
+            updateExecutiveDashboardMetrics();
+            
+            console.log('Critical non-conformances loaded successfully');
+        } catch (error) {
+            console.error('Error loading critical non-conformances:', error);
+        }
+    }
+    
+    // Load improvement opportunities
+    function loadImprovementOpportunities() {
+        try {
+            console.log('Loading improvement opportunities...');
+            const minorContainer = document.getElementById('minorNonConformancesList');
+            const opportunityContainer = document.getElementById('improvementOpportunitiesList');
+            if (!minorContainer || !opportunityContainer) return;
+            
+            const project = app.getCurrentProject();
+            if (!project) {
+                minorContainer.innerHTML = '<p>No project selected.</p>';
+                opportunityContainer.innerHTML = '<p>No project selected.</p>';
+                return;
+            }
+            
+            // Get questions with score 2 (Minor Non-Conformance)
+            const minorQuestions = [];
+            // Get questions with score 3 (Observation/Improvement Opportunity)
+            const opportunityQuestions = [];
+            
+            // Check management system audit
+            if (project.managementSystemAudit) {
+                for (const section in project.managementSystemAudit) {
+                    if (Array.isArray(project.managementSystemAudit[section])) {
+                        project.managementSystemAudit[section].forEach((item, index) => {
+                            if (item.score === 2) {
+                                minorQuestions.push({
+                                    text: item.name,
+                                    score: item.score,
+                                    department: 'Management',
+                                    area: section,
+                                    comment: item.comment,
+                                    questionType: 'management'
+                                });
+                            } else if (item.score === 3) {
+                                opportunityQuestions.push({
+                                    text: item.name,
+                                    score: item.score,
+                                    department: 'Management',
+                                    area: section,
+                                    comment: item.comment,
+                                    questionType: 'management'
+                                });
+                            }
+                        });
+                    }
+                }
+            }
+            
+            // Check site performance audit
+            if (project.currentSite && project.sites[project.currentSite]) {
+                const site = project.sites[project.currentSite];
+                for (const section in site) {
+                    if (Array.isArray(site[section])) {
+                        site[section].forEach((item, index) => {
+                            if (item.score === 2) {
+                                minorQuestions.push({
+                                    text: item.name,
+                                    score: item.score,
+                                    department: project.currentSite,
+                                    area: section,
+                                    comment: item.comment,
+                                    questionType: 'site'
+                                });
+                            } else if (item.score === 3) {
+                                opportunityQuestions.push({
+                                    text: item.name,
+                                    score: item.score,
+                                    department: project.currentSite,
+                                    area: section,
+                                    comment: item.comment,
+                                    questionType: 'site'
+                                });
+                            }
+                        });
+                    }
+                }
+            }
+            
+            // Sort questions using prioritization algorithm
+            const sortedMinorQuestions = prioritizeQuestions(minorQuestions);
+            const sortedOpportunityQuestions = prioritizeQuestions(opportunityQuestions);
+            
+            // Render minor non-conformances
+            minorContainer.innerHTML = '';
+            if (sortedMinorQuestions.length === 0) {
+                minorContainer.innerHTML = '<p>No minor non-conformances found.</p>';
+            } else {
+                sortedMinorQuestions.forEach(question => {
+                    minorContainer.innerHTML += renderQuestionCard(question);
+                });
+            }
+            
+            // Render improvement opportunities
+            opportunityContainer.innerHTML = '';
+            if (sortedOpportunityQuestions.length === 0) {
+                opportunityContainer.innerHTML = '<p>No improvement opportunities found.</p>';
+            } else {
+                sortedOpportunityQuestions.forEach(question => {
+                    opportunityContainer.innerHTML += renderQuestionCard(question);
+                });
+            }
+            
+            // Update executive dashboard
+            updateExecutiveDashboardMetrics();
+            
+            console.log('Improvement opportunities loaded successfully');
+        } catch (error) {
+            console.error('Error loading improvement opportunities:', error);
+        }
+    }
+    
+    // Load compliance and best practices
+    function loadComplianceAndBestPractices() {
+        try {
+            console.log('Loading compliance and best practices...');
+            const bestPracticeContainer = document.getElementById('bestPracticesList');
+            const conformanceContainer = document.getElementById('conformanceList');
+            if (!bestPracticeContainer || !conformanceContainer) return;
+            
+            const project = app.getCurrentProject();
+            if (!project) {
+                bestPracticeContainer.innerHTML = '<p>No project selected.</p>';
+                conformanceContainer.innerHTML = '<p>No project selected.</p>';
+                return;
+            }
+            
+            // Get questions with score 5 (Best Practice)
+            const bestPracticeQuestions = [];
+            // Get questions with score 4 (Conformance)
+            const conformanceQuestions = [];
+            
+            // Check management system audit
+            if (project.managementSystemAudit) {
+                for (const section in project.managementSystemAudit) {
+                    if (Array.isArray(project.managementSystemAudit[section])) {
+                        project.managementSystemAudit[section].forEach((item, index) => {
+                            if (item.score === 5) {
+                                bestPracticeQuestions.push({
+                                    text: item.name,
+                                    score: item.score,
+                                    department: 'Management',
+                                    area: section,
+                                    comment: item.comment,
+                                    questionType: 'management'
+                                });
+                            } else if (item.score === 4) {
+                                conformanceQuestions.push({
+                                    text: item.name,
+                                    score: item.score,
+                                    department: 'Management',
+                                    area: section,
+                                    comment: item.comment,
+                                    questionType: 'management'
+                                });
+                            }
+                        });
+                    }
+                }
+            }
+            
+            // Check site performance audit
+            if (project.currentSite && project.sites[project.currentSite]) {
+                const site = project.sites[project.currentSite];
+                for (const section in site) {
+                    if (Array.isArray(site[section])) {
+                        site[section].forEach((item, index) => {
+                            if (item.score === 5) {
+                                bestPracticeQuestions.push({
+                                    text: item.name,
+                                    score: item.score,
+                                    department: project.currentSite,
+                                    area: section,
+                                    comment: item.comment,
+                                    questionType: 'site'
+                                });
+                            } else if (item.score === 4) {
+                                conformanceQuestions.push({
+                                    text: item.name,
+                                    score: item.score,
+                                    department: project.currentSite,
+                                    area: section,
+                                    comment: item.comment,
+                                    questionType: 'site'
+                                });
+                            }
+                        });
+                    }
+                }
+            }
+            
+            // Sort questions using prioritization algorithm
+            const sortedBestPracticeQuestions = prioritizeQuestions(bestPracticeQuestions);
+            const sortedConformanceQuestions = prioritizeQuestions(conformanceQuestions);
+            
+            // Render best practices
+            bestPracticeContainer.innerHTML = '';
+            if (sortedBestPracticeQuestions.length === 0) {
+                bestPracticeContainer.innerHTML = '<p>No best practices found.</p>';
+            } else {
+                sortedBestPracticeQuestions.forEach(question => {
+                    bestPracticeContainer.innerHTML += renderQuestionCard(question);
+                });
+            }
+            
+            // Render conformance items
+            conformanceContainer.innerHTML = '';
+            if (sortedConformanceQuestions.length === 0) {
+                conformanceContainer.innerHTML = '<p>No conformance items found.</p>';
+            } else {
+                sortedConformanceQuestions.forEach(question => {
+                    conformanceContainer.innerHTML += renderQuestionCard(question);
+                });
+            }
+            
+            // Update executive dashboard
+            updateExecutiveDashboardMetrics();
+            
+            console.log('Compliance and best practices loaded successfully');
+        } catch (error) {
+            console.error('Error loading compliance and best practices:', error);
+        }
+    }
+    
+    // Load pending evaluation
+    function loadPendingEvaluation() {
+        try {
+            console.log('Loading pending evaluation...');
+            const container = document.getElementById('pendingEvaluationList');
+            if (!container) return;
+            
+            const project = app.getCurrentProject();
+            if (!project) {
+                container.innerHTML = '<p>No project selected.</p>';
+                return;
+            }
+            
+            // Get questions with score 0 (Not Applicable/Not Observed)
+            const pendingQuestions = [];
+            let totalQuestions = 0;
+            let answeredQuestions = 0;
+            
+            // Check management system audit
+            if (project.managementSystemAudit) {
+                for (const section in project.managementSystemAudit) {
+                    if (Array.isArray(project.managementSystemAudit[section])) {
+                        project.managementSystemAudit[section].forEach((item, index) => {
+                            totalQuestions++;
+                            if (item.score === 0) {
+                                pendingQuestions.push({
+                                    text: item.name,
+                                    score: item.score,
+                                    department: 'Management',
+                                    area: section,
+                                    comment: item.comment,
+                                    questionType: 'management'
+                                });
+                            } else {
+                                answeredQuestions++;
+                            }
+                        });
+                    }
+                }
+            }
+            
+            // Check site performance audit
+            if (project.currentSite && project.sites[project.currentSite]) {
+                const site = project.sites[project.currentSite];
+                for (const section in site) {
+                    if (Array.isArray(site[section])) {
+                        site[section].forEach((item, index) => {
+                            totalQuestions++;
+                            if (item.score === 0) {
+                                pendingQuestions.push({
+                                    text: item.name,
+                                    score: item.score,
+                                    department: project.currentSite,
+                                    area: section,
+                                    comment: item.comment,
+                                    questionType: 'site'
+                                });
+                            } else {
+                                answeredQuestions++;
+                            }
+                        });
+                    }
+                }
+            }
+            
+            // Sort questions using prioritization algorithm
+            const sortedPendingQuestions = prioritizeQuestions(pendingQuestions);
+            
+            // Render pending questions
+            container.innerHTML = '';
+            if (sortedPendingQuestions.length === 0) {
+                container.innerHTML = '<p>No pending evaluations found.</p>';
+            } else {
+                sortedPendingQuestions.forEach(question => {
+                    container.innerHTML += renderQuestionCard(question);
+                });
+            }
+            
+            // Update completion progress
+            const completionPercentage = totalQuestions > 0 ? Math.round((answeredQuestions / totalQuestions) * 100) : 0;
+            document.getElementById('completionProgressFill').style.width = completionPercentage + '%';
+            document.getElementById('completionProgressText').textContent = completionPercentage + '% Complete';
+            
+            // Update executive dashboard
+            updateExecutiveDashboardMetrics();
+            
+            console.log('Pending evaluation loaded successfully');
+        } catch (error) {
+            console.error('Error loading pending evaluation:', error);
+        }
+    }
+    
+    // Helper function to update executive dashboard metrics
+    function updateExecutiveDashboardMetrics() {
+        try {
+            const project = app.getCurrentProject();
+            if (!project) return;
+            
+            let criticalCount = 0;
+            let improvementCount = 0;
+            let bestPracticeCount = 0;
+            let totalQuestions = 0;
+            let answeredQuestions = 0;
+            
+            // Check management system audit
+            if (project.managementSystemAudit) {
+                for (const section in project.managementSystemAudit) {
+                    if (Array.isArray(project.managementSystemAudit[section])) {
+                        project.managementSystemAudit[section].forEach((item, index) => {
+                            totalQuestions++;
+                            if (item.score > 0) {
+                                answeredQuestions++;
+                                if (item.score === 1) criticalCount++;
+                                else if (item.score === 2 || item.score === 3) improvementCount++;
+                                else if (item.score === 5) bestPracticeCount++;
+                            }
+                        });
+                    }
+                }
+            }
+            
+            // Check site performance audit
+            if (project.currentSite && project.sites[project.currentSite]) {
+                const site = project.sites[project.currentSite];
+                for (const section in site) {
+                    if (Array.isArray(site[section])) {
+                        site[section].forEach((item, index) => {
+                            totalQuestions++;
+                            if (item.score > 0) {
+                                answeredQuestions++;
+                                if (item.score === 1) criticalCount++;
+                                else if (item.score === 2 || item.score === 3) improvementCount++;
+                                else if (item.score === 5) bestPracticeCount++;
+                            }
+                        });
+                    }
+                }
+            }
+            
+            const completionPercentage = totalQuestions > 0 ? Math.round((answeredQuestions / totalQuestions) * 100) : 0;
+            
+            // Update dashboard metrics
+            document.getElementById('criticalCount').textContent = criticalCount;
+            document.getElementById('improvementCount').textContent = improvementCount;
+            document.getElementById('bestPracticeCount').textContent = bestPracticeCount;
+            document.getElementById('completionPercentage').textContent = completionPercentage + '%';
+            
+            // Update trend indicators (would be calculated based on historical data)
+            document.getElementById('criticalTrend').textContent = criticalCount > 0 ? 'Requires Attention' : 'Stable';
+            document.getElementById('improvementTrend').textContent = improvementCount > 0 ? 'Opportunities Available' : 'Stable';
+            document.getElementById('bestPracticeTrend').textContent = bestPracticeCount > 0 ? 'Excellent' : 'Stable';
+            document.getElementById('completionTrend').textContent = completionPercentage > 80 ? 'Excellent' : completionPercentage > 50 ? 'In Progress' : 'Needs Attention';
+            
+            console.log('Executive dashboard metrics updated');
+        } catch (error) {
+            console.error('Error updating executive dashboard metrics:', error);
+        }
+    }
+    
+    // Helper function to update heat map
+    function updateHeatMap(tabName) {
+        try {
+            const heatMapContainer = document.getElementById(`${tabName}HeatMap`);
+            if (!heatMapContainer) return;
+            
+            const project = app.getCurrentProject();
+            if (!project) {
+                heatMapContainer.innerHTML = '<p>No project selected.</p>';
+                return;
+            }
+            
+            // Get department compliance data
+            const departmentData = {};
+            
+            // Check management system audit
+            if (project.managementSystemAudit) {
+                let managementTotal = 0;
+                let managementScored = 0;
+                let managementTotalScore = 0;
+                
+                for (const section in project.managementSystemAudit) {
+                    if (Array.isArray(project.managementSystemAudit[section])) {
+                        project.managementSystemAudit[section].forEach((item, index) => {
+                            managementTotal++;
+                            if (item.score > 0) {
+                                managementScored++;
+                                managementTotalScore += item.score;
+                            }
+                        });
+                    }
+                }
+                
+                const managementAverage = managementScored > 0 ? (managementTotalScore / managementScored) : 0;
+                departmentData['Management'] = {
+                    score: managementAverage,
+                    total: managementTotal,
+                    answered: managementScored
+                };
+            }
+            
+            // Check site performance audit
+            if (project.currentSite && project.sites[project.currentSite]) {
+                const site = project.sites[project.currentSite];
+                let siteTotal = 0;
+                let siteScored = 0;
+                let siteTotalScore = 0;
+                
+                for (const section in site) {
+                    if (Array.isArray(site[section])) {
+                        site[section].forEach((item, index) => {
+                            siteTotal++;
+                            if (item.score > 0) {
+                                siteScored++;
+                                siteTotalScore += item.score;
+                            }
+                        });
+                    }
+                }
+                
+                const siteAverage = siteScored > 0 ? (siteTotalScore / siteScored) : 0;
+                departmentData[project.currentSite] = {
+                    score: siteAverage,
+                    total: siteTotal,
+                    answered: siteScored
+                };
+            }
+            
+            // Generate heat map items
+            let heatMapHTML = '';
+            for (const department in departmentData) {
+                const data = departmentData[department];
+                const percentage = data.answered > 0 ? Math.round((data.score / 5) * 100) : 0;
+                
+                let heatMapClass = '';
+                if (percentage >= 90) heatMapClass = 'excellent';
+                else if (percentage >= 70) heatMapClass = 'low';
+                else if (percentage >= 50) heatMapClass = 'medium';
+                else if (percentage >= 30) heatMapClass = 'high';
+                else heatMapClass = 'critical';
+                
+                heatMapHTML += `
+                    <div class="heat-map-item ${heatMapClass}">
+                        <div>${department}</div>
+                        <div>${percentage}%</div>
+                    </div>
+                `;
+            }
+            
+            heatMapContainer.innerHTML = heatMapHTML || '<p>No data available for heat map.</p>';
+            
+            console.log('Heat map updated');
+        } catch (error) {
+            console.error('Error updating heat map:', error);
+        }
+    }
+    
+    // Helper function to render question card
+    function renderQuestionCard(question) {
+        const scoreClass = question.score !== undefined ? `score-${question.score}` : 'score-0';
+        const typeClass = getQuestionTypeClass(question.score);
+        
+        // Determine the source label based on question type
+        let sourceLabel = '';
+        if (question.questionType === 'management' || question.department === 'Management') {
+            sourceLabel = `Management System / ${question.area || 'N/A'}`;
+        } else {
+            sourceLabel = `Site Performance / ${question.area || 'N/A'}`;
+        }
+        
+        return `
+            <div class="question-card ${typeClass}" 
+                 data-department="${question.department || 'N/A'}" 
+                 data-area="${question.area || 'N/A'}" 
+                 data-text="${question.text || ''}">
+                <div class="question-header">
+                    <div class="question-title">${question.text}</div>
+                    <div class="question-score ${scoreClass}">${getScoreLabel(question.score)}</div>
+                </div>
+                <div class="question-details">
+                    <div><strong>Department:</strong> ${question.department || 'N/A'}</div>
+                    <div><strong>Source:</strong> ${sourceLabel}</div>
+                </div>
+                <div class="question-actions">
+                    ${getActionButtons(question.score)}
+                </div>
+            </div>
+        `;
+    }
+    
+    // Helper function to get question type class based on score
+    function getQuestionTypeClass(score) {
+        switch(score) {
+            case 1: return 'critical';
+            case 2: return 'minor';
+            case 3: return 'opportunity';
+            case 4: return 'conformance';
+            case 5: return 'best-practice';
+            default: return 'pending';
+        }
+    }
+    
+    // Helper function to get score label
+    function getScoreLabel(score) {
+        switch(score) {
+            case 0: return 'Not Evaluated';
+            case 1: return 'Major NC';
+            case 2: return 'Minor NC';
+            case 3: return 'Opportunity';
+            case 4: return 'Conformance';
+            case 5: return 'Best Practice';
+            default: return 'Unknown';
+        }
+    }
+    
+    // Helper function to get action buttons based on score
+    function getActionButtons(score) {
+        switch(score) {
+            case 1:
+                return `
+                    <button class="action-btn primary">Create Action Plan</button>
+                    <button class="action-btn secondary">Assign Responsibility</button>
+                `;
+            case 2:
+                return `
+                    <button class="action-btn primary">Schedule Action</button>
+                    <button class="action-btn secondary">Add Comments</button>
+                `;
+            case 3:
+                return `
+                    <button class="action-btn primary">Create Improvement</button>
+                    <button class="action-btn secondary">Track Progress</button>
+                `;
+            case 5:
+                return `
+                    <button class="action-btn primary">Share Best Practice</button>
+                    <button class="action-btn secondary">Document</button>
+                `;
+            default:
+                return `
+                    <button class="action-btn primary">Evaluate</button>
+                    <button class="action-btn secondary">Mark N/A</button>
+                `;
+        }
+    }
+    
+    // Prioritization algorithm for sorting questions
+    function prioritizeQuestions(questions) {
+        return questions.sort((a, b) => {
+            // Critical non-conformances first
+            if (a.score === 1 && b.score !== 1) return -1;
+            if (b.score === 1 && a.score !== 1) return 1;
+            
+            // Then minor non-conformances
+            if (a.score === 2 && b.score > 2) return -1;
+            if (b.score === 2 && a.score > 2) return 1;
+            
+            // Then improvement opportunities
+            if (a.score === 3 && b.score > 3) return -1;
+            if (b.score === 3 && a.score > 3) return 1;
+            
+            // Then conformance and best practices
+            return b.score - a.score;
+        });
+    }
+    
+    // Handler functions for tab action buttons
+    function handleScheduleFollowUp() {
+        const project = app.getCurrentProject();
+        if (!project) {
+            alert('Please select a project first.');
+            return;
+        }
+        
+        const followUpDate = prompt('Enter follow-up date (YYYY-MM-DD):');
+        if (!followUpDate) return;
+        
+        const notes = prompt('Enter follow-up notes (optional):') || '';
+        
+        // Store follow-up information (you can extend this to save to localStorage)
+        const followUp = {
+            date: followUpDate,
+            notes: notes,
+            projectName: app.inspectionData.currentProject,
+            siteName: project.currentSite,
+            createdAt: new Date().toISOString()
+        };
+        
+        // For now, just show confirmation
+        showNotification(`Follow-up scheduled for ${followUpDate}`, 'success');
+        console.log('Follow-up scheduled:', followUp);
+    }
+    
+    function handleExportPendingList() {
+        const project = app.getCurrentProject();
+        if (!project) {
+            alert('Please select a project first.');
+            return;
+        }
+        
+        // Collect all pending questions
+        const pendingQuestions = [];
+        
+        // Management questions
+        if (project.managementSystemAudit) {
+            for (const section in project.managementSystemAudit) {
+                if (Array.isArray(project.managementSystemAudit[section])) {
+                    project.managementSystemAudit[section].forEach((item, index) => {
+                        if (item.score === 0) {
+                            pendingQuestions.push({
+                                source: 'Management System',
+                                section: section,
+                                question: item.name,
+                                comment: item.comment || 'No comments'
+                            });
+                        }
+                    });
+                }
+            }
+        }
+        
+        // Site questions
+        if (project.currentSite && project.sites[project.currentSite]) {
+            const site = project.sites[project.currentSite];
+            for (const section in site) {
+                if (Array.isArray(site[section])) {
+                    site[section].forEach((item, index) => {
+                        if (item.score === 0) {
+                            pendingQuestions.push({
+                                source: 'Site Performance',
+                                section: section,
+                                question: item.name,
+                                comment: item.comment || 'No comments'
+                            });
+                        }
+                    });
+                }
+            }
+        }
+        
+        // Generate CSV content
+        const csvHeaders = 'Source,Section,Question,Comments\n';
+        const csvContent = pendingQuestions.map(q => 
+            `"${q.source}","${q.section}","${q.question}","${q.comment}"`
+        ).join('\n');
+        
+        // Download the file
+        const blob = new Blob([csvHeaders + csvContent], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `pending_evaluations_${app.inspectionData.currentProject}_${new Date().toISOString().split('T')[0]}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+        
+        showNotification('Pending evaluations list exported successfully!', 'success');
+    }
+    
+    function handleGenerateCriticalActionPlan() {
+        showNotification('Generating critical action plan...', 'info');
+        // This would generate an action plan for critical non-conformances
+        setTimeout(() => {
+            showNotification('Action plan generation feature coming soon!', 'info');
+        }, 1000);
+    }
+    
+    function handleExportCriticalList() {
+        showNotification('Exporting critical non-conformances list...', 'info');
+        // This would export critical issues
+        setTimeout(() => {
+            showNotification('Critical list export feature coming soon!', 'info');
+        }, 1000);
+    }
+    
+    function handleGenerateImprovementPlan() {
+        showNotification('Generating improvement plan...', 'info');
+        setTimeout(() => {
+            showNotification('Improvement plan generation feature coming soon!', 'info');
+        }, 1000);
+    }
+    
+    function handleExportImprovementList() {
+        showNotification('Exporting improvement opportunities list...', 'info');
+        setTimeout(() => {
+            showNotification('Improvement list export feature coming soon!', 'info');
+        }, 1000);
+    }
+    
+    function handleShareBestPractices() {
+        showNotification('Preparing best practices for sharing...', 'info');
+        setTimeout(() => {
+            showNotification('Best practices sharing feature coming soon!', 'info');
+        }, 1000);
+    }
+    
+    function handleExportComplianceList() {
+        showNotification('Exporting compliance and best practices list...', 'info');
+        setTimeout(() => {
+            showNotification('Compliance list export feature coming soon!', 'info');
+        }, 1000);
+    }
+    
+    // Helper function to show notifications
+    function showNotification(message, type = 'info') {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+        
+        // Add to page
+        document.body.appendChild(notification);
+        
+        // Auto-remove after 3 seconds
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+    
     // Expose functions to global scope
     window.initializeUI = initializeUI;
     window.showTab = showTab;
@@ -1791,4 +2780,32 @@
     window.moveQuestion = moveQuestion;
     window.initializeQuestionsTabSwitching = initializeQuestionsTabSwitching;
     window.updateQuestionCounts = updateQuestionCounts;
+    
+    // Expose new functions for risk-based tab system
+    window.loadCriticalNonConformances = loadCriticalNonConformances;
+    window.loadImprovementOpportunities = loadImprovementOpportunities;
+    window.loadComplianceAndBestPractices = loadComplianceAndBestPractices;
+    window.loadPendingEvaluation = loadPendingEvaluation;
+    window.updateExecutiveDashboardMetrics = updateExecutiveDashboardMetrics;
+    window.updateHeatMap = updateHeatMap;
+    window.renderQuestionCard = renderQuestionCard;
+    window.getQuestionTypeClass = getQuestionTypeClass;
+    window.getScoreLabel = getScoreLabel;
+    window.getActionButtons = getActionButtons;
+    window.prioritizeQuestions = prioritizeQuestions;
+    window.applyRiskFilters = applyRiskFilters;
+    window.filterCriticalNonConformances = filterCriticalNonConformances;
+    window.filterImprovementOpportunities = filterImprovementOpportunities;
+    window.filterComplianceAndBestPractices = filterComplianceAndBestPractices;
+    window.filterPendingEvaluation = filterPendingEvaluation;
+    
+    // Expose tab action button handlers
+    window.handleScheduleFollowUp = handleScheduleFollowUp;
+    window.handleExportPendingList = handleExportPendingList;
+    window.handleGenerateCriticalActionPlan = handleGenerateCriticalActionPlan;
+    window.handleExportCriticalList = handleExportCriticalList;
+    window.handleGenerateImprovementPlan = handleGenerateImprovementPlan;
+    window.handleExportImprovementList = handleExportImprovementList;
+    window.handleShareBestPractices = handleShareBestPractices;
+    window.handleExportComplianceList = handleExportComplianceList;
 })();

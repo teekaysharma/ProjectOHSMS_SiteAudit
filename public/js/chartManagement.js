@@ -1097,4 +1097,20 @@
     window.renderDistributionChart = renderDistributionChart;
     window.renderManagementChart = renderManagementChart;
     window.calculateOverallScore = calculateOverallScore;
+	// Add this function to chartManagement.js
+function updateExecutiveDashboardCharts() {
+    try {
+        // Update any charts that should appear in the executive dashboard
+        // This is a placeholder for any specific chart updates needed
+        
+        console.log('Executive dashboard charts updated');
+    } catch (error) {
+        console.error('Error updating executive dashboard charts:', error);
+    }
+}
+
+// Expose the function
+window.chartManagement = window.chartManagement || {};
+window.chartManagement.updateExecutiveDashboardCharts = updateExecutiveDashboardCharts;
+	
 })();

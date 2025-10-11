@@ -111,17 +111,26 @@
     // Update project selector
     function updateProjectSelector() {
         try {
+            console.log('Updating project selector...');
+            console.log('Available projects:', Object.keys(app.inspectionData.projects || {}));
+            console.log('Current project:', app.inspectionData.currentProject);
+            
             const selector = document.getElementById('projectSelector');
-            if (!selector) return;
+            if (!selector) {
+                console.error('Project selector element not found');
+                return;
+            }
             
             selector.innerHTML = '<option value="">Select a project</option>';
             
-            for (const projectName in app.inspectionData.projects) {
+            const projects = app.inspectionData.projects || {};
+            for (const projectName in projects) {
                 const option = document.createElement('option');
                 option.value = projectName;
                 option.textContent = projectName;
                 if (projectName === app.inspectionData.currentProject) {
                     option.selected = true;
+                    console.log(`Setting project "${projectName}" as selected`);
                 }
                 selector.appendChild(option);
             }
@@ -132,10 +141,18 @@
                 projectNameField.value = app.inspectionData.currentProject || '';
             }
             
-            // Update project name display field
-            const projectNameDisplay = document.getElementById('projectNameDisplay');
-            if (projectNameDisplay) {
-                projectNameDisplay.value = app.inspectionData.currentProject || 'Default Project';
+            // Update project display
+            const projectDisplay = document.getElementById('currentProjectDisplay');
+            if (projectDisplay) {
+                projectDisplay.textContent = app.inspectionData.currentProject || 'Default Project';
+            }
+            
+            // Also update report selectors
+            if (typeof updateReportSiteSelector === 'function') {
+                updateReportSiteSelector();
+            }
+            if (typeof updateComparisonSiteSelector === 'function') {
+                updateComparisonSiteSelector();
             }
             
             console.log('Project selector updated successfully');
@@ -175,12 +192,20 @@
                 siteNameField.disabled = true;
             }
             
-            // Update site name display field
-            const siteNameDisplay = document.getElementById('siteNameDisplay');
-            if (siteNameDisplay && project && project.currentSite) {
-                siteNameDisplay.value = project.currentSite;
-            } else if (siteNameDisplay) {
-                siteNameDisplay.value = 'Default Site';
+            // Update site display
+            const siteDisplay = document.getElementById('currentSiteDisplay');
+            if (siteDisplay && project && project.currentSite) {
+                siteDisplay.textContent = project.currentSite;
+            } else if (siteDisplay) {
+                siteDisplay.textContent = 'Default Site';
+            }
+            
+            // Also update report selectors
+            if (typeof updateReportSiteSelector === 'function') {
+                updateReportSiteSelector();
+            }
+            if (typeof updateComparisonSiteSelector === 'function') {
+                updateComparisonSiteSelector();
             }
             
             console.log('Site selector updated successfully');
@@ -192,17 +217,19 @@
     // Select project
     function selectProject(projectName) {
         try {
+            console.log(`Selecting project: ${projectName}`);
+            
             if (!projectName) {
                 app.inspectionData.currentProject = '';
                 const projectNameField = document.getElementById('projectName');
                 const siteNameField = document.getElementById('siteName');
-                const projectNameDisplay = document.getElementById('projectNameDisplay');
-                const siteNameDisplay = document.getElementById('siteNameDisplay');
+                const projectDisplay = document.getElementById('currentProjectDisplay');
+                const siteDisplay = document.getElementById('currentSiteDisplay');
                 
                 if (projectNameField) projectNameField.value = '';
                 if (siteNameField) siteNameField.value = '';
-                if (projectNameDisplay) projectNameDisplay.value = 'Default Project';
-                if (siteNameDisplay) siteNameDisplay.value = 'Default Site';
+                if (projectDisplay) projectDisplay.textContent = 'Default Project';
+                if (siteDisplay) siteDisplay.textContent = 'Default Site';
                 
                 updateProjectSelector();
                 updateSiteSelector();
@@ -214,6 +241,7 @@
             
             // Create project if it doesn't exist
             if (!app.inspectionData.projects[projectName]) {
+                console.log(`Creating new project: ${projectName}`);
                 app.inspectionData.projects[projectName] = {
                     managementSystemAudit: {},
                     sites: {
@@ -245,12 +273,18 @@
             }
             
             app.inspectionData.currentProject = projectName;
-            document.getElementById('projectName').value = projectName;
+            const projectNameField = document.getElementById('projectName');
+            if (projectNameField) {
+                projectNameField.value = projectName;
+            }
             
             // Update site selector and select current site
             const project = app.getCurrentProject();
             if (project && project.currentSite) {
-                document.getElementById('siteName').value = project.currentSite;
+                const siteNameField = document.getElementById('siteName');
+                if (siteNameField) {
+                    siteNameField.value = project.currentSite;
+                }
             }
             
             updateProjectSelector();
@@ -279,7 +313,10 @@
             
             if (!siteName) {
                 project.currentSite = '';
-                document.getElementById('siteName').value = '';
+                const siteNameField = document.getElementById('siteName');
+                if (siteNameField) {
+                    siteNameField.value = '';
+                }
                 updateSiteSelector();
                 if (typeof saveData === 'function') {
                     saveData();
@@ -302,7 +339,10 @@
             }
             
             project.currentSite = siteName;
-            document.getElementById('siteName').value = siteName;
+            const siteNameField = document.getElementById('siteName');
+            if (siteNameField) {
+                siteNameField.value = siteName;
+            }
             
             updateSiteSelector();
             if (typeof saveData === 'function') {
@@ -324,6 +364,7 @@
     // Add new project
     function addNewProject() {
         try {
+            console.log('Adding new project...');
             const projectName = prompt('Enter project name:');
             if (!projectName) return;
             
@@ -333,12 +374,16 @@
             }
             
             // Create new project
+            console.log(`Creating project: ${projectName}`);
             app.inspectionData.projects[projectName] = {
                 managementSystemAudit: {},
                 sites: {
                     "Default Site": {}
                 },
-                currentSite: "Default Site"
+                currentSite: "Default Site",
+                hasEvaluationData: false,
+                createdDate: new Date().toISOString(),
+                leadAuditor: ''
             };
             
             // Initialize with current master configuration
@@ -362,12 +407,28 @@
                 }));
             }
             
-            // Select the new project
-            selectProject(projectName);
+            // Set as current project
+            app.inspectionData.currentProject = projectName;
             
+            // Save data first
+            if (typeof saveData === 'function') {
+                saveData();
+            }
+            
+            // Update UI components
+            updateProjectSelector();
+            updateSiteSelector();
+            
+            // Update projects list immediately
+            if (typeof updateProjectsList === 'function') {
+                updateProjectsList();
+            }
+            
+            alert(`Project "${projectName}" added successfully`);
             console.log(`Project "${projectName}" added successfully`);
         } catch (error) {
             console.error('Error adding new project:', error);
+            alert('Error adding project. Please check the console for details.');
         }
     }
     
@@ -444,6 +505,11 @@
             
             // Clear the input field
             newSiteNameField.value = '';
+            
+            // Update sites list immediately
+            if (typeof updateSitesList === 'function') {
+                updateSitesList();
+            }
             
             console.log(`Site "${siteName}" added successfully`);
         } catch (error) {
@@ -759,6 +825,217 @@
         }
     }
     
+    // Rename project function (only if no evaluation data)
+    function renameProject(oldName, newName) {
+        try {
+            if (!oldName || !newName || oldName === newName) return false;
+            
+            if (!app.inspectionData.projects[oldName]) {
+                alert('Project not found');
+                return false;
+            }
+            
+            if (app.inspectionData.projects[newName]) {
+                alert('A project with this name already exists');
+                return false;
+            }
+            
+            const project = app.inspectionData.projects[oldName];
+            
+            // Check if project has evaluation data
+            if (project.hasEvaluationData || hasProjectEvaluationData(project)) {
+                alert('Cannot rename project: This project contains evaluation data. Please create a new project instead.');
+                return false;
+            }
+            
+            // Rename the project
+            app.inspectionData.projects[newName] = project;
+            delete app.inspectionData.projects[oldName];
+            
+            // Update current project reference if needed
+            if (app.inspectionData.currentProject === oldName) {
+                app.inspectionData.currentProject = newName;
+            }
+            
+            // Update UI
+            updateProjectSelector();
+            if (typeof updateProjectsList === 'function') {
+                updateProjectsList();
+            }
+            
+            if (typeof saveData === 'function') {
+                saveData();
+            }
+            
+            console.log(`Project renamed from "${oldName}" to "${newName}"`);
+            return true;
+        } catch (error) {
+            console.error('Error renaming project:', error);
+            return false;
+        }
+    }
+    
+    // Check if project has evaluation data
+    function hasProjectEvaluationData(project) {
+        try {
+            // Check management system audit data
+            for (const section in project.managementSystemAudit) {
+                if (Array.isArray(project.managementSystemAudit[section])) {
+                    for (const item of project.managementSystemAudit[section]) {
+                        if (item.score && item.score > 0) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            
+            // Check site audit data
+            for (const siteName in project.sites) {
+                const site = project.sites[siteName];
+                for (const section in site) {
+                    if (Array.isArray(site[section])) {
+                        for (const item of site[section]) {
+                            if (item.score && item.score > 0) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            return false;
+        } catch (error) {
+            console.error('Error checking project evaluation data:', error);
+            return false;
+        }
+    }
+    
+    // Edit project name function  
+    function editProjectName(projectName) {
+        try {
+            const newName = prompt('Enter new project name:', projectName);
+            if (newName && newName !== projectName) {
+                if (renameProject(projectName, newName)) {
+                    alert(`Project renamed to "${newName}"`);
+                }
+            }
+        } catch (error) {
+            console.error('Error editing project name:', error);
+        }
+    }
+    
+    // Switch to project function
+    function switchToProject(projectName) {
+        try {
+            selectProject(projectName);
+            alert(`Switched to project: ${projectName}`);
+        } catch (error) {
+            console.error('Error switching to project:', error);
+        }
+    }
+    
+    // Delete project function
+    function deleteProject(projectName) {
+        try {
+            if (!confirm(`Are you sure you want to delete project "${projectName}"? This cannot be undone.`)) {
+                return;
+            }
+            
+            delete app.inspectionData.projects[projectName];
+            
+            // If this was the current project, clear selection
+            if (app.inspectionData.currentProject === projectName) {
+                app.inspectionData.currentProject = '';
+            }
+            
+            // Update UI
+            updateProjectSelector();
+            if (typeof updateProjectsList === 'function') {
+                updateProjectsList();
+            }
+            
+            if (typeof saveData === 'function') {
+                saveData();
+            }
+            
+            alert(`Project "${projectName}" deleted successfully`);
+        } catch (error) {
+            console.error('Error deleting project:', error);
+        }
+    }
+    
+    // Switch to site function
+    function switchToSite(siteName) {
+        try {
+            selectSite(siteName);
+            alert(`Switched to site: ${siteName}`);
+        } catch (error) {
+            console.error('Error switching to site:', error);
+        }
+    }
+    
+    // Edit site name function
+    function editSiteName(siteName) {
+        try {
+            const project = app.getCurrentProject();
+            if (!project) return;
+            
+            const newName = prompt('Enter new site name:', siteName);
+            if (newName && newName !== siteName && !project.sites[newName]) {
+                project.sites[newName] = project.sites[siteName];
+                delete project.sites[siteName];
+                
+                if (project.currentSite === siteName) {
+                    project.currentSite = newName;
+                }
+                
+                updateSiteSelector();
+                if (typeof updateSitesList === 'function') {
+                    updateSitesList();
+                }
+                
+                if (typeof saveData === 'function') {
+                    saveData();
+                }
+                
+                alert(`Site renamed to "${newName}"`);
+            }
+        } catch (error) {
+            console.error('Error editing site name:', error);
+        }
+    }
+    
+    // Delete site function
+    function deleteSite(siteName) {
+        try {
+            const project = app.getCurrentProject();
+            if (!project) return;
+            
+            if (!confirm(`Are you sure you want to delete site "${siteName}"? This cannot be undone.`)) {
+                return;
+            }
+            
+            delete project.sites[siteName];
+            
+            if (project.currentSite === siteName) {
+                project.currentSite = '';
+            }
+            
+            updateSiteSelector();
+            if (typeof updateSitesList === 'function') {
+                updateSitesList();
+            }
+            
+            if (typeof saveData === 'function') {
+                saveData();
+            }
+            
+            alert(`Site "${siteName}" deleted successfully`);
+        } catch (error) {
+            console.error('Error deleting site:', error);
+        }
+    }
+
     // Expose functions to global scope
     window.initializeProjectManagement = initializeProjectManagement;
     window.updateProjectSelector = updateProjectSelector;
@@ -773,4 +1050,11 @@
     window.getReportSummaryData = getReportSummaryData;
     window.generateExecutiveSummary = generateExecutiveSummary;
     window.updateDashboardExecutiveSummary = updateDashboardExecutiveSummary;
+    window.renameProject = renameProject;
+    window.editProjectName = editProjectName;
+    window.switchToProject = switchToProject;
+    window.deleteProject = deleteProject;
+    window.switchToSite = switchToSite;
+    window.editSiteName = editSiteName;
+    window.deleteSite = deleteSite;
 })();
