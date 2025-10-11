@@ -6,6 +6,46 @@ import './public/css/styles.css';
 import Chart from 'chart.js/auto';
 window.Chart = Chart;
 
+// Initialize beforeunload event for data protection
+window.addEventListener('beforeunload', function(e) {
+    // Check if there is unsaved data
+    if (window.app && window.app.inspectionData) {
+        const hasData = Object.keys(window.app.inspectionData.projects || {}).length > 0;
+        const hasAuditData = hasData && Object.values(window.app.inspectionData.projects).some(project => {
+            return project.sites && Object.values(project.sites).some(site => {
+                return site.auditData && Object.keys(site.auditData).length > 0;
+            });
+        });
+        
+        if (hasData || hasAuditData) {
+            // Show export prompt
+            const confirmRefresh = confirm(
+                'You have unsaved data! Before refreshing, would you like to export your data?\n\n' +
+                'Click "Cancel" to stay and export your data first.\n' +
+                'Click "OK" to continue refreshing (data may be lost).'
+            );
+            
+            if (!confirmRefresh) {
+                e.preventDefault();
+                e.returnValue = '';
+                
+                // Auto-trigger export dialog after preventing refresh
+                setTimeout(() => {
+                    if (typeof exportConfiguration === 'function' && typeof exportAllAuditData === 'function') {
+                        // Export configuration and audit data
+                        exportConfiguration();
+                        setTimeout(() => exportAllAuditData(), 1000);
+                    } else if (typeof exportAllAuditData === 'function') {
+                        exportAllAuditData();
+                    }
+                }, 100);
+                
+                return '';
+            }
+        }
+    }
+});
+
 // Initialize global app object before loading any scripts
 window.app = {
     masterConfig: {
@@ -133,6 +173,7 @@ import './public/js/projectManagement.js';
 import './public/js/recommendations.js';
 import './public/js/reportGeneration.js';
 import './public/js/comparison-chart-extension.js';
+import './public/js/questionEvaluation.js';
 
 // Initialize the application after DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -204,10 +245,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.log('✓ Chart Management initialized (fallback)');
                 }
                 
-                // Initial dashboard update after charts are initialized
+                // Initialize executive dashboard metrics after charts are initialized
                 setTimeout(() => {
-                    if (typeof updateAllDashboardComponents === 'function') {
-                        updateAllDashboardComponents();
+                    if (typeof updateExecutiveDashboardMetrics === 'function') {
+                        updateExecutiveDashboardMetrics();
                     }
                 }, 500);
             } else {
@@ -217,6 +258,15 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         
         setTimeout(initCharts, 500); // Give Chart.js time to load
+        
+        // Initialize comparison charts
+        if (window.comparisonCharts && window.comparisonCharts.initializeComparisonCharts) {
+            window.comparisonCharts.initializeComparisonCharts();
+            console.log('✓ Comparison Charts initialized');
+        } else if (typeof initializeComparisonCharts === 'function') {
+            initializeComparisonCharts();
+            console.log('✓ Comparison Charts initialized (fallback)');
+        }
         
         // Load default template if no questions exist (check immediately)
         console.log('Checking if template needs to be loaded...');

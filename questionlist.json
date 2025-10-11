@@ -1,0 +1,268 @@
+{
+  "management": {
+    "1.0 Health and Safety Policy": [
+      "1.1 HS Policy Issued and Displayed",
+      "1.2 Health and Safety Policy communicated and understood",
+      "1.3 Health and safety Policy applicable to all persons on site",
+      "1.4 Demonstrated Senior Management commitment",
+      "1.5 Recognise the right for individuals to stop the work if unsafe",
+      "1.6 Project HS Objectives defined",
+      "1.7 Project HS KPI's defined",
+      "1.8 Project HS Policy reviewed as per need and/or requirements"
+    ],
+    "2.0 Project Health and Safety responsibilities, authorities and accountability": [
+      "2.1 HS Responsibilities and Duties defined, understood & followed",
+      "2.2 Project H&S staff/department appointed",
+      "2.3 H&S Staff Competency",
+      "2.4 Senior H&S representative reporting to Project Manager/Director",
+      "2.5 H&S Appointments made for Fire, First Aid",
+      "2.6 Competent person appointed for key risk activities",
+      "2.7 Fitness to work",
+      "2.8 Disciplinary programme in place & implemented"
+    ],
+    "3.0 Project Health and Safety Plans and documentation": [
+      "3.1 Health and Safety Plans and documentation approved by PM/PD",
+      "3.2 Health and Safety Plans reviewed by regional HS prior approval",
+      "3.3 Plans up to Date with project internal & external requirements",
+      "3.4 Issued to all concerned parties and persons as per plan",
+      "3.5 Project HS documentation reviewed as per need and/or requirements"
+    ],
+    "4.0 Health and Safety Meetings": [
+      "4.1 HS Meetings in line with H&S internal & External Requirements",
+      "4.2 Actions identified, action parties, close out dates",
+      "4.3 Agenda in line with project risk and site progress",
+      "4.4 Meetings communicated down to workforce",
+      "4.5 Subcontractors HS meeting in place",
+      "4.6 Meetings chaired by senior management",
+      "4.7 Includes Performance HS review"
+    ],
+    "5.0 Health and Safety Communication": [
+      "5.1 Toolbox talks completed as per schedule / Requirements",
+      "5.2 Toolbox talks relevant to operations being conducted",
+      "5.3 HS lesson learned/alerts communicated to Workers / Supervisors",
+      "5.4 Health and Safety Notice Boards Posted / Up to Date",
+      "5.5 Pre-task briefings undertaken by front line supervision",
+      "5.6 All HS communication understood by all persons on site",
+      "5.7 Behavioural Based Safety and awareness programme"
+    ],
+    "6.0 Project Health and Safety Training": [
+      "6.1 Health and Safety Training Needs Identified",
+      "6.2 In line with project requirements and risk areas",
+      "6.3 Reviews / follow-up of training completed",
+      "6.4 Task /Trade Training Conducted",
+      "6.5 Records /Registers Maintained",
+      "6.6 Health and Safety Induction Specific to Project",
+      "6.7 Employees Inducted on first Day of Work",
+      "6.8 Subcontractors included in Induction",
+      "6.9 Delivered in the Language of the workforce",
+      "6.10 Induction Records and Registers Maintained",
+      "6.11 HS training needs & content reviewed as required"
+    ],
+    "7.0 Emergency response Management": [
+      "7.1 Emergency response plan in place and implemented",
+      "7.2 Emergency response plan address all forseen emergencies",
+      "7.3 Emergency response resources adequate",
+      "7.4 Emergency drills conducted as per plan",
+      "7.5 Personnel trained in emergency response",
+      "7.6 Safe Control zones/muster identified and protected",
+      "7.7 Emergency response equipment checked",
+      "7.8 Emergency response arrangements reviewed as required"
+    ],
+    "8.0 Project Hazard & Risk Management": [
+      "8.1 General Hazard and Risk Assessment completed (project)",
+      "8.2 All activities covered by RA or JSA",
+      "8.3 High risk activites covered by a permit system",
+      "8.4 Communicated to workforce",
+      "8.5 Control Measures identified and implemented",
+      "8.6 Personnel Trained/Competent to conduct risk assessments",
+      "8.7 HS RA reviewed as required"
+    ],
+    "9.0 Method Statements": [
+      "9.1 Project Method statements format / procedure in place",
+      "9.2 Persons identified for review and approval before use",
+      "9.3 Method statements correctly signed off for work activities",
+      "9.4 Risk assessments included",
+      "9.5 Method statements communicated and complied with",
+      "9.6 Method statements reviewed as required"
+    ],
+    "10.0 Health & Safety Reporting & Incident Management": [
+      "10.1 Procedure developed for the project and implemented",
+      "10.2 Investigation completed, actions identified & close out",
+      "10.3 Investigation Reports issued to senior management",
+      "10.4 Notification process in place and effective",
+      "10.5 Senior Management Involved in Investigation Process",
+      "10.6 HS Complaints investigated, corrected & closed out",
+      "10.7 Injury management and restricted work"
+    ],
+    "11.0 Subcontractors Health & Safety Management": [
+      "11.1 Subcontractor HS prequalification & selection",
+      "11.2 Contractual HS requirements",
+      "11.3 Kick off/coordination HS meeting",
+      "11.4 Subcontractors work covered by approved HS plan",
+      "11.5 Subcontractors activities covered by approved method statement",
+      "11.6 Subcontractors HS representative (resources & competence)",
+      "11.7 Subcontractors HS reporting and incident notification",
+      "11.8 Subcontractors staff competence assurance",
+      "11.9 Hired staff HS Management"
+    ],
+    "12.0 Health and Safety Inspections": [
+      "12.1 HS Inspections planned and undertaken",
+      "12.2 HS Inspection scope include external and internal requirements",
+      "12.3 Plant & equipment examination planned and undertaken",
+      "12.4 Reports identify actions, action parties, close out dates",
+      "12.5 Analysis of inspection reports to highlight trend areas",
+      "12.6 Persons appointed / qualified for statutory inspections",
+      "12.7 Reports / Records maintained and distributed",
+      "12.8 Project Management HSE walkabouts"
+    ],
+    "13.0 Other Operational Controls": [
+      "13.1 Traffic Management",
+      "13.2 Site access and security",
+      "13.3 Third party communication (activities impacting external parties)",
+      "13.4 Plant, equipment and materials procurement HS requirement",
+      "13.5 Logistics (Loading & Unloading of materials, Storage of Materials)",
+      "13.6 Waste Management",
+      "13.7 Audit conducted by contractor",
+      "13.8 Audit closeout from previous audit(s)",
+      "13.9 CEMP Audit conducted by WKC",
+      "13.10 Audit closeout from previous CEMP audit(s)",
+      "13.11 CEMP Audit forwarded to EAD",
+      "13.12 Audit conducted by OSHAD",
+      "13.13 Audit closeout from previous OSHAD audit(s)"
+    ]
+  },
+  "site": {
+    "1. PERMITS & REGULATORY COMPLIANCE (UAE/ADOSH)": [
+      "1.1 Abu Dhabi Municipality Building Permit current and displayed",
+      "1.2 ADOSH Safety Registration and Compliance Certificate",
+      "1.3 EAD Environmental Impact Assessment and NOC",
+      "1.4 ADWEA Electrical Connection and Grid Integration Approval",
+      "1.5 Power Plant Coordination and Interface Permits",
+      "1.6 SCAD Utilities Coordination (Water, Telecom, Roads)",
+      "1.7 Civil Defense Fire Safety and Emergency Access Approval"
+    ],
+    "2. SITE PREPARATION & TEMPORARY WORKS SAFETY": [
+      "2.1 Site survey and soil investigation completed with competent person approval",
+      "2.2 Underground utility mapping and clearances verified",
+      "2.3 Site perimeter fencing (min 2.4m) with controlled access gates",
+      "2.4 Temporary site facilities (offices, welfare, storage) with safety compliance",
+      "2.5 Temporary electrical supplies with RCD protection and earthing",
+      "2.6 Site drainage and dewatering systems with environmental controls",
+      "2.7 Environmental monitoring undertaken and/or stations (dust, noise, water quality) installed"
+    ],
+    "3. EXCAVATION & CIVIL WORKS SAFETY": [
+      "3.1 Excavation permit for depths >1.5m with competent person oversight",
+      "3.2 Foundation excavations properly shored with engineered support systems",
+      "3.3 Cable trench excavations with proper benching/sloping (1.5:1 minimum)",
+      "3.4 Excavation atmosphere testing (O2, H2S, LEL) before entry",
+      "3.5 Spoil pile management with minimum 2m setback from excavation edge",
+      "3.6 Concrete works quality control (slump tests, cube testing, placement)",
+      "3.7 Reinforcement steel work audit and certification before pour",
+      "3.8 Underground conduit and duct bank installation with proper marking",
+      "3.9 Grounding grid installation with soil resistivity testing"
+    ],
+    "4. CONSTRUCTION EQUIPMENT & MOBILE PLANT SAFETY": [
+      "4.1 Mobile cranes with electrical insulation certification for HV work",
+      "4.2 Crane operators with valid UAE licenses and HV training certificates",
+      "4.3 Daily pre-operation safety checks logged and signed by competent person",
+      "4.4 Excavators and earthmoving equipment with ROPS/FOPS protection",
+      "4.5 Concrete pumps and mixers with proper positioning and stabilization",
+      "4.6 Telehandlers and forklifts with load charts and certified operators",
+      "4.7 MEWPs/Boom lifts with fall protection and ground stability assessment",
+      "4.8 Equipment exclusion zones marked with rigid barriers (not tape)",
+      "4.9 Trained machine banksmen with communication equipment and high-vis",
+      "4.10 Equipment maintenance schedules current with service records"
+    ],
+    "5. ACCESS, EGRESS & TRAFFIC MANAGEMENT": [
+      "5.1 Vehicle access routes minimum 6m wide for emergency access",
+      "5.2 Pedestrian walkways separated from vehicle routes with barriers",
+      "5.3 Vehicle speed limits posted (i.e., max 20km/h) and enforced",
+      "5.4 Traffic marshals with certified training for vehicle movements",
+      "5.5 Site entrance/exit control with security logging system",
+      "5.6 Heavy equipment transport routes with clearance verification",
+      "5.7 Emergency vehicle access routes kept clear at all times",
+      "5.8 Site perimeter security with CCTV and 24/7 monitoring"
+    ],
+    "6. SAFETY SIGNAGE & COMMUNICATION SYSTEMS": [
+      "6.1 Electrical hazard warning signs in Arabic and English at HV areas",
+      "6.2 Mandatory PPE signs posted at all entry points with pictograms",
+      "6.3 Emergency assembly point signage clearly visible and illuminated",
+      "6.4 Equipment operation exclusion zone markings with reflective materials",
+      "6.5 Fire equipment location signs with access route markings",
+      "6.6 Two-way radio communication system for supervisors and operators",
+      "6.7 Emergency communication hotline to power plant control room"
+    ],
+    "7. HIGH VOLTAGE EQUIPMENT INSTALLATION SAFETY": [
+      "7.1 Transformer installation with oil spill containment systems",
+      "7.2 Circuit breaker installation with SF6 gas handling protocols",
+      "7.3 Busbar installation with proper clearances and support structures",
+      "7.4 Lightning protection system installation and grounding verification",
+      "7.5 Control and protection panel installation with proper ventilation",
+      "7.6 Equipment earthing and bonding system continuity verified"
+    ],
+    "8. ELECTRICAL INSTALLATION & CONNECTIONS": [
+      "8.1 HV cable installation with proper pulling tensions and bend radius",
+      "8.2 Cable terminations and joints executed by certified technicians",
+      "8.3 Control wiring installation with proper identification and documentation",
+      "8.4 Instrument and protection system wiring with loop testing",
+      "8.5 SCADA and communication system installation and testing",
+      "8.6 Electrical Safe System of Work (ESSW) procedures implemented",
+      "8.7 Lockout-Tagout (LOTO) procedures with visible locks and tags"
+    ],
+    "9. TESTING & COMMISSIONING SAFETY PROCEDURES": [
+      "9.1 Pre-energization safety checklist completed and approved",
+      "9.2 HV testing equipment calibrated and insulation tested",
+      "9.3 Power plant coordination for first energization sequence",
+      "9.4 Hi-Pot testing procedures with proper safety distances",
+      "9.5 Insulation resistance testing with safety protocols",
+      "9.6 Protection relay testing and coordination studies verification",
+      "9.7 Emergency shutdown testing with stakeholder coordination"
+    ],
+    "10. ADOSH HEAT STRESS MANAGEMENT (UAE MANDATORY)": [
+      "10.1 Heat Stress Management Program per ADOSH SF implemented",
+      "10.2 Heat Index monitoring with hourly readings during summer months",
+      "10.3 Work-rest cycles adjusted based on heat index (ADOSH Table)",
+      "10.4 Shaded rest areas with cooling systems (min 1 per 25 workers)",
+      "10.5 Cold water and electrolyte drinks available within 200m of work",
+      "10.6 Heat illness emergency response plan with cooling equipment",
+      "10.7 Worker heat stress training with competency records maintained"
+    ],
+    "11. OPERATOR COMPETENCY & TRAINING VERIFICATION": [
+      "11.1 Electrical supervisors with valid UAE electrical licenses",
+      "11.2 Safety officers with NEBOSH/IOSH certification and UAE recognition",
+      "11.3 Equipment operators with manufacturer-specific training records",
+      "11.4 First aid personnel with current certification (min 1 per 25 workers)",
+      "11.5 Scaffolders with competent person certification and training records",
+      "11.6 General construction workers with site-specific safety induction",
+      "11.7 Emergency response team training with quarterly drills recorded"
+    ],
+    "12. SPECIALIZED PPE & ELECTRICAL SAFETY EQUIPMENT": [
+      "12.1 Arc flash rated PPE (Cat 2-4) based on hazard analysis",
+      "12.2 Electrical safety helmets (Class E) rated for voltage level",
+      "12.3 Insulated gloves with leather protectors and periodic testing",
+      "12.4 Electrical hazard rated safety boots (EH marking)",
+      "12.5 Flame resistant clothing suitable for desert climate",
+      "12.6 Full face shields and safety glasses for arc flash protection",
+      "12.7 Respiratory protection for SF6 gas exposure",
+      "12.8 Fall protection equipment for elevated electrical work"
+    ],
+    "13. EMERGENCY RESPONSE & MEDICAL FACILITIES": [
+      "13.1 On-site medical facility with electrical burn treatment capability",
+      "13.2 Emergency eye wash/shower stations within 100m of HV work areas",
+      "13.3 AED units with trained operators (max 3-minute response time)",
+      "13.4 Fire suppression systems suitable for electrical fires (CO2/FM-200)",
+      "13.5 Emergency communication system with power plant control room",
+      "13.6 Ambulance service coordination with local hospitals",
+      "13.7 Emergency evacuation procedures with regular drills",
+      "13.8 Spill response kits for transformer oil and chemical materials"
+    ],
+    "14. FINAL HANDOVER & DOCUMENTATION": [
+      "14.1 Final audit and acceptance testing documentation complete",
+      "14.2 As-built drawings and technical documentation delivered",
+      "14.3 Operation and maintenance manuals provided with training records",
+      "14.4 Safety systems demonstration and operator training completed",
+      "14.5 Warranty and maintenance agreements finalized",
+      "14.6 Final regulatory approvals and certificates obtained"
+    ]
+  }
+}
