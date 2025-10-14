@@ -847,7 +847,7 @@
                 totalItemsElement.textContent = `${overallScore.totalItems} of ${overallScore.totalQuestions} (${scopeLabel})`;
             }
             
-            // Wait for Chart.js to be available before rendering charts
+              // Wait for Chart.js to be available before rendering charts
             if (typeof Chart !== 'undefined') {
                 renderRatingChart(scope);
                 renderDistributionChart(scope);
@@ -855,13 +855,23 @@
                 
                 // Update audit status indicators
                 updateAuditStatusIndicators();
-                
-                // Update recommendations
-                if (window.recommendations && window.recommendations.updateRecommendations) {
-                    window.recommendations.updateRecommendations();
-                }
             } else {
                 console.warn('Chart.js not loaded yet, skipping chart rendering');
+            }
+            
+            // Update executive dashboard metrics (always update, even without charts)
+            if (typeof updateExecutiveDashboardMetrics === 'function') {
+                updateExecutiveDashboardMetrics();
+            }
+            
+            // Update dashboard executive summary (always update, even without charts)
+            if (typeof updateDashboardExecutiveSummary === 'function') {
+                updateDashboardExecutiveSummary();
+            }
+            
+            // Update recommendations (always update, even without charts)
+            if (window.recommendations && window.recommendations.updateRecommendations) {
+                window.recommendations.updateRecommendations();
             }
             
             console.log('Dashboard updated successfully');
@@ -1097,7 +1107,7 @@
     window.renderDistributionChart = renderDistributionChart;
     window.renderManagementChart = renderManagementChart;
     window.calculateOverallScore = calculateOverallScore;
-	// Add this function to chartManagement.js
+        // Add this function to chartManagement.js
 function updateExecutiveDashboardCharts() {
     try {
         // Update any charts that should appear in the executive dashboard
@@ -1112,5 +1122,5 @@ function updateExecutiveDashboardCharts() {
 // Expose the function
 window.chartManagement = window.chartManagement || {};
 window.chartManagement.updateExecutiveDashboardCharts = updateExecutiveDashboardCharts;
-	
+        
 })();
