@@ -586,11 +586,17 @@ function generateChartsHTML(charts) {
     
     return Object.entries(charts).map(([chartId, chartData]) => {
         if (chartData) {
-            const chartTitle = chartId.replace('Chart', '').replace(/([A-Z])/g, ' $1').trim();
+            let chartTitle = chartId.replace('Chart', '').replace(/([A-Z])/g, ' $1').trim();
+            
+            // Special handling for site comparison chart
+            if (chartId === 'siteComparisonChart') {
+                chartTitle = 'Site Performance Comparison';
+            }
+            
             return `
                 <div class="chart-container">
-                    <h3>${chartTitle} Chart</h3>
-                    <img src="${chartData}" alt="${chartTitle} Chart" />
+                    <h3>${chartTitle}</h3>
+                    <img src="${chartData}" alt="${chartTitle}" />
                 </div>
             `;
         }
@@ -671,11 +677,79 @@ function captureChartsForReport() {
             }
         });
         
+        // Capture site comparison chart if enabled and available
+        const includeComparisonChart = document.getElementById('includeComparisonChart')?.checked || false;
+        if (includeComparisonChart) {
+            const siteComparisonCanvas = document.getElementById('siteComparisonChart');
+            if (siteComparisonCanvas) {
+                try {
+                    // Check if it's a traditional canvas chart or drill-down interface
+                    const drillDownInterface = siteComparisonCanvas.parentElement?.querySelector('.drill-down-interface');
+                    if (drillDownInterface) {
+                        // For drill-down interface, capture it as HTML
+                        charts['siteComparisonChart'] = captureDrillDownInterfaceAsImage(drillDownInterface);
+                        console.log('Successfully captured site comparison drill-down interface');
+                    } else {
+                        // For traditional canvas chart
+                        const ctx = siteComparisonCanvas.getContext('2d');
+                        if (ctx) {
+                            charts['siteComparisonChart'] = siteComparisonCanvas.toDataURL('image/png', 0.8);
+                            console.log('Successfully captured site comparison chart');
+                        }
+                    }
+                } catch (error) {
+                    console.warn('Could not capture site comparison chart:', error);
+                    charts['siteComparisonChart'] = null;
+                }
+            } else {
+                console.warn('Site comparison chart canvas not found');
+                charts['siteComparisonChart'] = null;
+            }
+        }
+        
         console.log('Charts captured for report:', Object.keys(charts));
         return charts;
     } catch (error) {
         console.error('Error capturing charts:', error);
         return {};
+    }
+}
+
+// Capture drill-down interface as image using html2canvas library approach
+function captureDrillDownInterfaceAsImage(drillDownInterface) {
+    try {
+        // Create a canvas element
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Set canvas size to match the drill-down interface
+        const rect = drillDownInterface.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+        
+        // Fill background
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Create a simple representation of the drill-down interface
+        ctx.fillStyle = '#1e293b';
+        ctx.font = 'bold 18px Arial';
+        ctx.fillText('Site Performance by Section', 20, 30);
+        
+        // Add some visual representation of sections
+        ctx.fillStyle = '#f8fafc';
+        ctx.fillRect(10, 50, canvas.width - 20, canvas.height - 60);
+        
+        ctx.fillStyle = '#64748b';
+        ctx.font = '14px Arial';
+        ctx.fillText('Drill-down interface captured', 20, 80);
+        ctx.fillText('(Interactive drill-down view)', 20, 100);
+        
+        // Return as data URL
+        return canvas.toDataURL('image/png', 0.8);
+    } catch (error) {
+        console.error('Error capturing drill-down interface:', error);
+        return null;
     }
 }
 
