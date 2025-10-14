@@ -277,6 +277,20 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Questions already exist, skipping template load');
         }
         
+        // Initial dashboard update after everything is loaded
+        setTimeout(() => {
+            if (typeof updateDashboard === 'function') {
+                console.log('Performing initial dashboard update...');
+                updateDashboard();
+            }
+            
+            // Also ensure executive summary is updated specifically
+            if (typeof updateDashboardExecutiveSummary === 'function') {
+                console.log('Performing initial executive summary update...');
+                updateDashboardExecutiveSummary();
+            }
+        }, 1000);
+        
         console.log('🎉 OHS Management System Audit Tool fully initialized!');
         
     } catch (error) {
