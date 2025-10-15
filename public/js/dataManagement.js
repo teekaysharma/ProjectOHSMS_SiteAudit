@@ -315,6 +315,13 @@
                         showTab(currentTab);
                     }
                     
+                    // Update executive summary after template load
+                    setTimeout(() => {
+                        if (typeof updateDashboardExecutiveSummary === 'function') {
+                            updateDashboardExecutiveSummary();
+                        }
+                    }, 500);
+                    
                     console.log('Default template loaded successfully');
                     alert('Default template loaded successfully!');
                 }, 300);
