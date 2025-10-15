@@ -709,49 +709,120 @@
             const summary = getReportSummaryData(siteName || 'all');
             const ratingInfo = app.getRatingDetails(parseFloat(summary.overallPercentage));
             
-            let executiveSummary = `This report presents the findings of the Occupational Health & Safety audit conducted for ${document.getElementById('projectName').value || 'the project'}.\n\n`;
+            // Get detailed audit data for analysis
+            let criticalCount = 0;
+            let improvementCount = 0;
+            let bestPracticeCount = 0;
+            let managementIssues = [];
+            let siteIssues = [];
             
-            executiveSummary += `OVERALL PERFORMANCE:\n`;
-            executiveSummary += `• Overall Score: ${summary.overallScore} out of 5.0\n`;
-            executiveSummary += `• Performance Rating: ${ratingInfo.text} (${summary.overallPercentage}%)\n`;
-            executiveSummary += `• Items Inspected: ${summary.ratedItemsCount} of ${summary.totalItemsCount} total items\n\n`;
-            
-            // Add scope-specific information
-            if (siteName === 'all') {
-                executiveSummary += `AUDIT SCOPE:\n`;
-                executiveSummary += `This comprehensive audit covers both the management system (project-wide) and all site performance audits.\n\n`;
-            } else if (siteName === 'management') {
-                executiveSummary += `AUDIT SCOPE:\n`;
-                executiveSummary += `This audit focuses exclusively on the management system components that apply project-wide.\n\n`;
-            } else {
-                executiveSummary += `AUDIT SCOPE:\n`;
-                executiveSummary += `This audit covers the management system (project-wide) and site-specific performance for ${siteName || project.currentSite}.\n\n`;
+            // Analyze management data
+            if (project.managementSystemAudit) {
+                for (const section in project.managementSystemAudit) {
+                    project.managementSystemAudit[section].forEach(item => {
+                        if (item.score > 0) {
+                            if (item.score === 1) {
+                                criticalCount++;
+                                managementIssues.push(`${section}: ${item.name}`);
+                            } else if (item.score === 2 || item.score === 3) {
+                                improvementCount++;
+                            } else if (item.score === 5) {
+                                bestPracticeCount++;
+                            }
+                        }
+                    });
+                }
             }
             
-            // Add performance analysis
+            // Analyze site data
+            if (project.sites) {
+                for (const siteName in project.sites) {
+                    const site = project.sites[siteName];
+                    for (const section in site) {
+                        site[section].forEach(item => {
+                            if (item.score > 0) {
+                                if (item.score === 1) {
+                                    criticalCount++;
+                                    siteIssues.push(`${siteName} - ${section}: ${item.name}`);
+                                } else if (item.score === 2 || item.score === 3) {
+                                    improvementCount++;
+                                } else if (item.score === 5) {
+                                    bestPracticeCount++;
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+            
+            const completionRate = summary.totalItemsCount > 0 ? Math.round((summary.ratedItemsCount / summary.totalItemsCount) * 100) : 0;
             const percentage = parseFloat(summary.overallPercentage);
+            
+            let executiveSummary = `EXECUTIVE SUMMARY - ${new Date().toLocaleDateString()}\n\n`;
+            
+            executiveSummary += `OVERALL PERFORMANCE STATUS:\n`;
+            executiveSummary += `• Overall Rating: ${ratingInfo.text} (${summary.overallPercentage}%)\n`;
+            executiveSummary += `• Average Score: ${summary.overallScore} out of 5.0\n`;
+            executiveSummary += `• Audit Completion: ${summary.ratedItemsCount} of ${summary.totalItemsCount} items (${completionRate}%)\n`;
+            executiveSummary += `• Critical Issues: ${criticalCount} | Improvement Areas: ${improvementCount} | Best Practices: ${bestPracticeCount}\n\n`;
+            
+            // Performance analysis based on rating
+            executiveSummary += `PERFORMANCE ASSESSMENT:\n`;
             if (percentage > 90) {
-                executiveSummary += `PERFORMANCE ANALYSIS:\n`;
-                executiveSummary += `The audit results demonstrate excellent performance with minimal areas for improvement. The organization shows strong commitment to health and safety excellence.\n\n`;
+                executiveSummary += `Excellent performance demonstrating strong health and safety leadership. The organization shows exceptional commitment to safety standards and continuous improvement.\n`;
             } else if (percentage > 80) {
-                executiveSummary += `PERFORMANCE ANALYSIS:\n`;
-                executiveSummary += `The audit results show good overall performance with some opportunities for enhancement. The organization maintains effective health and safety practices.\n\n`;
+                executiveSummary += `Good performance with effective health and safety management systems in place. Minor improvements would enhance the already solid safety culture.\n`;
             } else if (percentage > 70) {
-                executiveSummary += `PERFORMANCE ANALYSIS:\n`;
-                executiveSummary += `The audit results indicate satisfactory performance with several areas requiring attention. Focused improvements are recommended.\n\n`;
+                executiveSummary += `Satisfactory performance with room for improvement. Key areas require attention to achieve consistent safety excellence.\n`;
             } else if (percentage > 50) {
-                executiveSummary += `PERFORMANCE ANALYSIS:\n`;
-                executiveSummary += `The audit results show low performance with significant improvements needed. Priority should be given to addressing identified deficiencies.\n\n`;
+                executiveSummary += `Low performance indicating significant gaps in health and safety management. Immediate action is required to address critical deficiencies.\n`;
             } else {
-                executiveSummary += `PERFORMANCE ANALYSIS:\n`;
-                executiveSummary += `The audit results indicate unacceptable performance requiring immediate and comprehensive corrective action.\n\n`;
+                executiveSummary += `Unacceptable performance requiring urgent intervention. Major non-conformances must be addressed immediately to ensure compliance and worker safety.\n`;
             }
             
-            executiveSummary += `RECOMMENDATIONS:\n`;
-            executiveSummary += `Detailed recommendations for improvement are provided in Section 3 of this report. Priority should be given to addressing any major non-conformances identified during the audit.\n\n`;
+            // Key findings
+            if (criticalCount > 0 || improvementCount > 0) {
+                executiveSummary += `\nKEY FINDINGS:\n`;
+                if (criticalCount > 0) {
+                    executiveSummary += `• ${criticalCount} critical non-conformance(s) identified requiring immediate corrective action\n`;
+                }
+                if (improvementCount > 0) {
+                    executiveSummary += `• ${improvementCount} improvement opportunity(ies) that should be addressed\n`;
+                }
+                if (bestPracticeCount > 0) {
+                    executiveSummary += `• ${bestPracticeCount} best practice(s) demonstrating excellence in specific areas\n`;
+                }
+                
+                // Top critical issues
+                if (managementIssues.length > 0 || siteIssues.length > 0) {
+                    executiveSummary += `\nPRIORITY AREAS:\n`;
+                    const topIssues = [...managementIssues.slice(0, 2), ...siteIssues.slice(0, 2)].slice(0, 3);
+                    topIssues.forEach(issue => {
+                        executiveSummary += `• ${issue}\n`;
+                    });
+                }
+            }
             
-            executiveSummary += `CONCLUSION:\n`;
-            executiveSummary += `This audit provides a comprehensive assessment of the current health and safety performance. Regular follow-up audits are recommended to ensure continuous improvement and compliance.`;
+            // Completion status
+            if (completionRate < 100) {
+                executiveSummary += `\nAUDIT STATUS:\n`;
+                executiveSummary += `Audit is ${completionRate}% complete. ${summary.totalItemsCount - summary.ratedItemsCount} items remain to be evaluated.\n`;
+            }
+            
+            // Dynamic recommendations based on performance
+            executiveSummary += `\nIMMEDIATE ACTIONS:\n`;
+            if (criticalCount > 0) {
+                executiveSummary += `• Address all critical non-conformances within specified timeframes\n`;
+                executiveSummary += `• Implement corrective actions and verify effectiveness\n`;
+            }
+            if (percentage < 70) {
+                executiveSummary += `• Review and enhance health and safety management systems\n`;
+                executiveSummary += `• Increase management commitment and resource allocation\n`;
+            }
+            if (completionRate < 100) {
+                executiveSummary += `• Complete remaining audit evaluations to ensure comprehensive assessment\n`;
+            }
+            executiveSummary += `• Schedule follow-up audit to verify improvements\n`;
             
             return executiveSummary;
         } catch (error) {
@@ -765,27 +836,37 @@
         try {
             console.log('Updating dashboard executive summary...');
             const summaryElement = document.getElementById('dashboardExecutiveSummary');
-            if (!summaryElement) return;
+            if (!summaryElement) {
+                console.error('Dashboard executive summary element not found');
+                return;
+            }
             
             const project = app.getCurrentProject();
             if (!project) {
                 summaryElement.innerHTML = 'No project selected. Please select or create a project to begin.';
+                console.log('No project found for executive summary');
                 return;
             }
             
-            const summary = getSummaryData();
-            const ratingInfo = app.getRatingDetails(parseFloat(summary.overallPercentage));
+            // Use the comprehensive executive summary generator
+            const executiveSummary = generateExecutiveSummary();
+            console.log('Generated executive summary:', executiveSummary);
             
-            summaryElement.innerHTML = `
-                <p><strong>Current Status:</strong> ${summary.ratedItemsCount} of ${summary.totalItemsCount} items have been inspected and scored.</p>
-                <p><strong>Overall Performance:</strong> ${summary.overallScore}/5.0 (${summary.overallPercentage}%) - <span style="color: ${ratingInfo.color}; font-weight: bold;">${ratingInfo.text}</span></p>
-                <p><strong>Project:</strong> ${document.getElementById('projectName').value || 'Not specified'}</p>
-                <p><strong>Current Site:</strong> ${project.currentSite || 'No site selected'}</p>
-                <p><strong>Last Updated:</strong> ${new Date().toLocaleDateString()}</p>
-            `;
+            // Format the executive summary for HTML display
+            const formattedSummary = executiveSummary
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/\n/g, '<br>')
+                .replace(/^/, '<p>')
+                .replace(/$/, '</p>');
+            
+            summaryElement.innerHTML = formattedSummary;
             console.log('Dashboard executive summary updated successfully');
         } catch (error) {
             console.error('Error updating dashboard executive summary:', error);
+            const summaryElement = document.getElementById('dashboardExecutiveSummary');
+            if (summaryElement) {
+                summaryElement.innerHTML = 'Error generating executive summary. Please check the console for details.';
+            }
         }
     }
     
