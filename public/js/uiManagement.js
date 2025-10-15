@@ -361,6 +361,9 @@
                     if (typeof updateComparisonSiteSelector === 'function') {
                         updateComparisonSiteSelector();
                     }
+                    if (typeof initializeReportsTabCharts === 'function') {
+                        initializeReportsTabCharts();
+                    }
                     break;
                 case 'master':
                     if (typeof renderMasterConfigTab === 'function') {
@@ -590,8 +593,8 @@
                         }
                         
                         // Update recommendations when comments change
-                        if (typeof renderDashboardRecommendations === 'function') {
-                            renderDashboardRecommendations();
+                        if (window.recommendations && window.recommendations.updateRecommendations) {
+                            window.recommendations.updateRecommendations();
                         }
                     });
                     
@@ -753,8 +756,8 @@
                         }
                         
                         // Update recommendations when comments change
-                        if (typeof renderDashboardRecommendations === 'function') {
-                            renderDashboardRecommendations();
+                        if (window.recommendations && window.recommendations.updateRecommendations) {
+                            window.recommendations.updateRecommendations();
                         }
                     });
                     
@@ -1398,8 +1401,8 @@
             }
             
             // Update recommendations
-            if (typeof renderDashboardRecommendations === 'function') {
-                renderDashboardRecommendations();
+            if (window.recommendations && window.recommendations.updateRecommendations) {
+                window.recommendations.updateRecommendations();
             }
             
             // Update executive summary
