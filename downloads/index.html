@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OHS Management System v2.5 - Download Center</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+        
+        .version-badge {
+            display: inline-block;
+            background: #27ae60;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        
+        .packages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .package {
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .package:hover {
+            border-color: #3498db;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .package.recommended {
+            border-color: #27ae60;
+            background: linear-gradient(135deg, #f8fff8 0%, #e8f8e8 100%);
+        }
+        
+        .package-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .package h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .package-size {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .package-description {
+            color: #34495e;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            background: #2980b9;
+            transform: scale(1.05);
+        }
+        
+        .package.recommended .download-btn {
+            background: #27ae60;
+        }
+        
+        .package.recommended .download-btn:hover {
+            background: #229954;
+        }
+        
+        .features {
+            text-align: left;
+            margin: 20px 0;
+        }
+        
+        .features ul {
+            list-style: none;
+        }
+        
+        .features li {
+            padding: 5px 0;
+            color: #34495e;
+        }
+        
+        .features li:before {
+            content: "✅ ";
+            margin-right: 8px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+            color: #7f8c8d;
+        }
+        
+        .status {
+            background: #e8f6f3;
+            border: 1px solid #27ae60;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 20px 0;
+            color: #27ae60;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏗️ OHS Management System</h1>
+            <p>Occupational Health & Safety Audit Tool</p>
+            <div class="version-badge">Version 2.5 - Production Ready</div>
+        </div>
+        
+        <div class="status">
+            ✅ All Chart.js issues resolved • ✅ Production optimized • ✅ Ready for deployment
+        </div>
+        
+        <div class="packages">
+            <div class="package recommended">
+                <div class="package-icon">📦</div>
+                <h3>Complete Package</h3>
+                <div class="package-size">6.5 MB</div>
+                <div class="package-description">
+                    Everything you need - source code, documentation, tools, and development archives.
+                </div>
+                <div class="features">
+                    <ul>
+                        <li>Production build ready to deploy</li>
+                        <li>Complete source code</li>
+                        <li>Comprehensive documentation</li>
+                        <li>Development tools & scripts</li>
+                        <li>Full development history</li>
+                        <li>Automated deployment</li>
+                    </ul>
+                </div>
+                <a href="ohs-management-system-v2.5-complete.tar.gz" class="download-btn" download>
+                    📥 Download Complete
+                </a>
+            </div>
+            
+            <div class="package">
+                <div class="package-icon">🚀</div>
+                <h3>Production Package</h3>
+                <div class="package-size">198 KB</div>
+                <div class="package-description">
+                    Essential files only - production build and core documentation for immediate deployment.
+                </div>
+                <div class="features">
+                    <ul>
+                        <li>Production build ready to deploy</li>
+                        <li>Essential documentation</li>
+                        <li>Deployment scripts</li>
+                        <li>Minimal download size</li>
+                        <li>Ready for immediate use</li>
+                    </ul>
+                </div>
+                <a href="ohs-management-system-v2.5-production.tar.gz" class="download-btn" download>
+                    📥 Download Production
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Application Features:</strong> Chart.js Integration • Site Performance Comparison • Executive Dashboard • Report Generation • Mobile Responsive • No Database Required</p>
+            <p><strong>Technical Specs:</strong> Vite 5.4.20 • Chart.js 3.7.1 • ES6+ • Optimized Production Build</p>
+        </div>
+    </div>
+</body>
+</html>
