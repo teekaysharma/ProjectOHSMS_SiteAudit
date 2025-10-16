@@ -1,225 +1,82 @@
-<<<<<<< HEAD
-# 🚀 Welcome to Z.ai Code Scaffold
-
-A modern, production-ready web application scaffold powered by cutting-edge technologies, designed to accelerate your development with [Z.ai](https://chat.z.ai)'s AI-powered coding assistance.
-
-## ✨ Technology Stack
-
-This scaffold provides a robust foundation built with:
-
-### 🎯 Core Framework
-- **⚡ Next.js 15** - The React framework for production with App Router
-- **📘 TypeScript 5** - Type-safe JavaScript for better developer experience
-- **🎨 Tailwind CSS 4** - Utility-first CSS framework for rapid UI development
-
-### 🧩 UI Components & Styling
-- **🧩 shadcn/ui** - High-quality, accessible components built on Radix UI
-- **🎯 Lucide React** - Beautiful & consistent icon library
-- **🌈 Framer Motion** - Production-ready motion library for React
-- **🎨 Next Themes** - Perfect dark mode in 2 lines of code
-
-### 📋 Forms & Validation
-- **🎣 React Hook Form** - Performant forms with easy validation
-- **✅ Zod** - TypeScript-first schema validation
-
-### 🔄 State Management & Data Fetching
-- **🐻 Zustand** - Simple, scalable state management
-- **🔄 TanStack Query** - Powerful data synchronization for React
-- **🌐 Axios** - Promise-based HTTP client
-
-### 🗄️ Database & Backend
-- **🗄️ Prisma** - Next-generation Node.js and TypeScript ORM
-- **🔐 NextAuth.js** - Complete open-source authentication solution
-
-### 🎨 Advanced UI Features
-- **📊 TanStack Table** - Headless UI for building tables and datagrids
-- **🖱️ DND Kit** - Modern drag and drop toolkit for React
-- **📊 Recharts** - Redefined chart library built with React and D3
-- **🖼️ Sharp** - High performance image processing
-
-### 🌍 Internationalization & Utilities
-- **🌍 Next Intl** - Internationalization library for Next.js
-- **📅 Date-fns** - Modern JavaScript date utility library
-- **🪝 ReactUse** - Collection of essential React hooks for modern development
-
-## 🎯 Why This Scaffold?
-
-- **🏎️ Fast Development** - Pre-configured tooling and best practices
-- **🎨 Beautiful UI** - Complete shadcn/ui component library with advanced interactions
-- **🔒 Type Safety** - Full TypeScript configuration with Zod validation
-- **📱 Responsive** - Mobile-first design principles with smooth animations
-- **🗄️ Database Ready** - Prisma ORM configured for rapid backend development
-- **🔐 Auth Included** - NextAuth.js for secure authentication flows
-- **📊 Data Visualization** - Charts, tables, and drag-and-drop functionality
-- **🌍 i18n Ready** - Multi-language support with Next Intl
-- **🚀 Production Ready** - Optimized build and deployment settings
-- **🤖 AI-Friendly** - Structured codebase perfect for AI assistance
-
-## 🚀 Quick Start
-
-```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
-```
-
-Open [http://localhost:3000](http://localhost:3000) to see your application running.
-
-## 🤖 Powered by Z.ai
-
-This scaffold is optimized for use with [Z.ai](https://chat.z.ai) - your AI assistant for:
-
-- **💻 Code Generation** - Generate components, pages, and features instantly
-- **🎨 UI Development** - Create beautiful interfaces with AI assistance  
-- **🔧 Bug Fixing** - Identify and resolve issues with intelligent suggestions
-- **📝 Documentation** - Auto-generate comprehensive documentation
-- **🚀 Optimization** - Performance improvements and best practices
-
-Ready to build something amazing? Start chatting with Z.ai at [chat.z.ai](https://chat.z.ai) and experience the future of AI-powered development!
-
-## 📁 Project Structure
-
-```
-src/
-├── app/                 # Next.js App Router pages
-├── components/          # Reusable React components
-│   └── ui/             # shadcn/ui components
-├── hooks/              # Custom React hooks
-└── lib/                # Utility functions and configurations
-```
-
-## 🎨 Available Features & Components
-
-This scaffold includes a comprehensive set of modern web development tools:
-
-### 🧩 UI Components (shadcn/ui)
-- **Layout**: Card, Separator, Aspect Ratio, Resizable Panels
-- **Forms**: Input, Textarea, Select, Checkbox, Radio Group, Switch
-- **Feedback**: Alert, Toast (Sonner), Progress, Skeleton
-- **Navigation**: Breadcrumb, Menubar, Navigation Menu, Pagination
-- **Overlay**: Dialog, Sheet, Popover, Tooltip, Hover Card
-- **Data Display**: Badge, Avatar, Calendar
-
-### 📊 Advanced Data Features
-- **Tables**: Powerful data tables with sorting, filtering, pagination (TanStack Table)
-- **Charts**: Beautiful visualizations with Recharts
-- **Forms**: Type-safe forms with React Hook Form + Zod validation
-
-### 🎨 Interactive Features
-- **Animations**: Smooth micro-interactions with Framer Motion
-- **Drag & Drop**: Modern drag-and-drop functionality with DND Kit
-- **Theme Switching**: Built-in dark/light mode support
-
-### 🔐 Backend Integration
-- **Authentication**: Ready-to-use auth flows with NextAuth.js
-- **Database**: Type-safe database operations with Prisma
-- **API Client**: HTTP requests with Axios + TanStack Query
-- **State Management**: Simple and scalable with Zustand
-
-### 🌍 Production Features
-- **Internationalization**: Multi-language support with Next Intl
-- **Image Optimization**: Automatic image processing with Sharp
-- **Type Safety**: End-to-end TypeScript with Zod validation
-- **Essential Hooks**: 100+ useful React hooks with ReactUse for common patterns
-
-## 🤝 Get Started with Z.ai
-
-1. **Clone this scaffold** to jumpstart your project
-2. **Visit [chat.z.ai](https://chat.z.ai)** to access your AI coding assistant
-3. **Start building** with intelligent code generation and assistance
-4. **Deploy with confidence** using the production-ready setup
-
----
-
-Built with ❤️ for the developer community. Supercharged by [Z.ai](https://chat.z.ai) 🚀
-=======
 # OHS Management System & Site Audit Tool
 
 A comprehensive web-based Occupational Health & Safety (OHS) audit application designed for construction and industrial projects. This tool enables organizations to conduct systematic safety audits, track performance metrics, and generate professional reports for compliance and continuous improvement.
 
-## 🏗️ Overview
+## Overview
 
-The OHS Audit Tool provides a dual-audit approach combining **Management System Audits** (project-wide) and **Site Performance Audits** (site-specific) with real-time analytics, automated recommendations, and comprehensive reporting capabilities.
+The OHS Audit Tool provides a dual-audit approach combining Management System Audits (project-wide) and Site Performance Audits (site-specific) with real-time analytics, automated recommendations, and comprehensive reporting capabilities.
 
-### ✨ Key Features
+### Key Features
 
-#### 📊 Dashboard & Analytics
-- **Real-time Performance Dashboard** with interactive charts
-- **Multi-scope Analytics** (Current Site, Management Only, All Sites, Project Overview)
-- **Performance Rating System** (Excellent, Good, Satisfactory, Low, Unacceptable)
-- **Executive Summary** with automated insights
-- **Audit Status Indicators** for progress tracking
+#### Dashboard & Analytics
+- Real-time Performance Dashboard with interactive charts
+- Multi-scope Analytics (Current Site, Management Only, All Sites, Project Overview)
+- Performance Rating System (Excellent, Good, Satisfactory, Low, Unacceptable)
+- Executive Summary with automated insights
+- Audit Status Indicators for progress tracking
 
-#### 🏢 Management System Audit (Project-wide)
+#### Management System Audit (Project-wide)
 - Health & Safety Policy compliance tracking
 - Project responsibilities and accountability assessment
 - Health & Safety Plans and documentation review
 - Scoring system with detailed comments
 - Best practices and non-conformance classification
 
-#### 🏭 Site Performance Audit (Site-specific)
+#### Site Performance Audit (Site-specific)
 - Permits & regulatory compliance (UAE/ADOSH)
 - Site preparation & temporary works safety
 - Excavation & civil works safety
 - Individual site scoring and tracking
 - Site-specific recommendations
 
-#### 📈 Advanced Reporting
-- **Customizable Report Generation** with multiple output formats
-- **Professional PDF Reports** with company branding
-- **Site Comparison Analytics** with multiple chart types
-- **Data Export/Import** functionality
-- **Template Management** for audit configurations
+#### Advanced Reporting
+- Customizable Report Generation with multiple output formats
+- Professional PDF Reports with company branding
+- Site Comparison Analytics with multiple chart types
+- Data Export/Import functionality
+- Template Management for audit configurations
 
-#### 🔧 Project & Site Management
-- **Multi-project Support** with project cloning capabilities
-- **Dynamic Site Management** with CSV import
-- **Template System** for audit questions
-- **Configuration Export/Import** for standardization
+#### Project & Site Management
+- Multi-project Support with project cloning capabilities
+- Dynamic Site Management with CSV import
+- Template System for audit questions
+- Configuration Export/Import for standardization
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
-- **Node.js** (v16 or higher)
-- **npm** or **yarn** package manager
+- Node.js (v16 or higher)
+- npm or yarn package manager
 - Modern web browser (Chrome, Firefox, Safari, Edge)
 
 ### Installation
 
-1. **Clone the repository**
+1. Clone the repository
    ```bash
    git clone <repository-url>
    cd ohs-audit-tool
    ```
 
-2. **Install dependencies**
+2. Install dependencies
    ```bash
    npm install
    # or
    yarn install
    ```
 
-3. **Start development server**
+3. Start development server
    ```bash
    npm run dev
    # or
    yarn dev
    ```
 
-4. **Open in browser**
+4. Open in browser
    - Navigate to `http://localhost:5173`
    - The application will automatically load with default templates
 
-## 🛠️ Development Setup
+## Development Setup
 
 ### Project Structure
 
@@ -247,26 +104,26 @@ The OHS Audit Tool provides a dual-audit approach combining **Management System 
 
 ### Technology Stack
 
-- **Build Tool**: Vite 5.4.2
-- **Frontend**: Vanilla JavaScript (ES6 Modules)
-- **Charts**: Chart.js 3.7.1
-- **Styling**: CSS3 with CSS Grid & Flexbox
-- **Data Storage**: Browser localStorage
-- **Module System**: ES6 imports/exports
+- Build Tool: Vite 5.4.2
+- Frontend: Vanilla JavaScript (ES6 Modules)
+- Charts: Chart.js 3.7.1
+- Styling: CSS3 with CSS Grid & Flexbox
+- Data Storage: Browser localStorage
+- Module System: ES6 imports/exports
 
 ### Development Workflow
 
-1. **Start development server**
+1. Start development server
    ```bash
    npm run dev
    ```
 
-2. **Build for production**
+2. Build for production
    ```bash
    npm run build
    ```
 
-3. **Preview production build**
+3. Preview production build
    ```bash
    npm run preview
    ```
@@ -274,13 +131,13 @@ The OHS Audit Tool provides a dual-audit approach combining **Management System 
 ### Code Architecture
 
 #### Modular Design
-- **main.js**: Entry point that imports all modules and initializes the application
-- **dataManagement.js**: Handles data persistence, templates, import/export
-- **uiManagement.js**: Manages tab navigation, form rendering, and user interactions  
-- **chartManagement.js**: Chart.js integration with scope-based filtering
-- **projectManagement.js**: Project/site CRUD operations and data calculations
-- **recommendations.js**: Automated recommendation generation
-- **reportGeneration.js**: PDF report creation and formatting
+- main.js: Entry point that imports all modules and initializes the application
+- dataManagement.js: Handles data persistence, templates, import/export
+- uiManagement.js: Manages tab navigation, form rendering, and user interactions  
+- chartManagement.js: Chart.js integration with scope-based filtering
+- projectManagement.js: Project/site CRUD operations and data calculations
+- recommendations.js: Automated recommendation generation
+- reportGeneration.js: PDF report creation and formatting
 
 #### Data Structure
 ```javascript
@@ -319,12 +176,12 @@ app = {
 ### Scoring System API
 
 #### Score Values
-- **0**: Not Applicable/Not Observed
-- **1**: Major Non-Conformance (Critical issues)
-- **2**: Minor Non-Conformance (Requires corrective action)
-- **3**: Observation/Improvement Opportunity
-- **4**: Conformance (Meets requirements)
-- **5**: Best Practice (Exceeds requirements)
+- 0: Not Applicable/Not Observed
+- 1: Major Non-Conformance (Critical issues)
+- 2: Minor Non-Conformance (Requires corrective action)
+- 3: Observation/Improvement Opportunity
+- 4: Conformance (Meets requirements)
+- 5: Best Practice (Exceeds requirements)
 
 #### Rating Calculation
 ```javascript
@@ -340,20 +197,20 @@ averageScore = totalScore / ratedItemsCount
 percentage = (averageScore / 5) * 100
 ```
 
-## 📚 User Guide
+## User Guide
 
 ### Getting Started
 
 #### 1. Initial Setup
-1. **Access the application** in your web browser
-2. **Load Default Template**: Click "System Settings" → "Load Default Template"
-3. **Create Project**: Use the project selector to create your first project
-4. **Add Sites**: Navigate to "System Settings" → "Site Management" to add sites
+1. Access the application in your web browser
+2. Load Default Template: Click "System Settings" → "Load Default Template"
+3. Create Project: Use the project selector to create your first project
+4. Add Sites: Navigate to "System Settings" → "Site Management" to add sites
 
 #### 2. Conducting Audits
 
 ##### Management System Audit
-1. Navigate to **"Management System"** tab
+1. Navigate to "Management System" tab
 2. Complete scoring for each audit element:
    - Select appropriate score (0-5) from dropdown
    - Add detailed comments for observations
@@ -361,7 +218,7 @@ percentage = (averageScore / 5) * 100
 3. Scores are automatically saved and calculated
 
 ##### Site Performance Audit  
-1. Navigate to **"Site Performance"** tab
+1. Navigate to "Site Performance" tab
 2. Ensure correct site is selected in header
 3. Complete scoring for each site element:
    - Permits & regulatory compliance
@@ -372,28 +229,28 @@ percentage = (averageScore / 5) * 100
 #### 3. Dashboard Analytics
 
 ##### Performance Overview
-- **Overall Score**: Weighted average across all rated items
-- **Performance Rating**: Automatic classification based on percentage
-- **Items Inspected**: Count of completed vs. total audit items
-- **Audit Status**: Visual indicators for audit completion
+- Overall Score: Weighted average across all rated items
+- Performance Rating: Automatic classification based on percentage
+- Items Inspected: Count of completed vs. total audit items
+- Audit Status: Visual indicators for audit completion
 
 ##### Chart Scopes
-- **Current Site**: Shows selected site + management data
-- **Management Only**: Management system audit results
-- **All Sites**: Aggregated data from all project sites  
-- **Project Overview**: Complete project performance (management + all sites)
+- Current Site: Shows selected site + management data
+- Management Only: Management system audit results
+- All Sites: Aggregated data from all project sites  
+- Project Overview: Complete project performance (management + all sites)
 
 ##### Chart Types
-- **Performance by Rating**: Pie chart showing distribution of ratings
-- **Score Distribution**: Bar chart of score frequencies
-- **Performance by Type/Sections**: Comparative analysis
+- Performance by Rating: Pie chart showing distribution of ratings
+- Score Distribution: Bar chart of score frequencies
+- Performance by Type/Sections: Comparative analysis
 
 ### Advanced Features
 
 #### 4. Report Generation
 
 ##### Customization Options
-1. Navigate to **"Reports"** tab
+1. Navigate to "Reports" tab
 2. Configure report sections:
    - Include/exclude best practices
    - Include/exclude non-conformances  
@@ -405,68 +262,68 @@ percentage = (averageScore / 5) * 100
    - Project details
 
 ##### Report Types
-- **Executive Report**: Summary with key metrics and recommendations
-- **Detailed Report**: Comprehensive analysis with all sections
-- **Site Comparison**: Multi-site performance analysis
+- Executive Report: Summary with key metrics and recommendations
+- Detailed Report: Comprehensive analysis with all sections
+- Site Comparison: Multi-site performance analysis
 
 ##### Output Formats
-- **HTML Export**: For web viewing and sharing
-- **PDF Print**: Professional print-ready format
-- **Data Export**: JSON format for backup/transfer
+- HTML Export: For web viewing and sharing
+- PDF Print: Professional print-ready format
+- Data Export: JSON format for backup/transfer
 
 #### 5. Data Management
 
 ##### Templates
-- **Default Template**: Pre-configured audit questions for common scenarios
-- **Custom Templates**: Save and load organization-specific configurations
-- **Template Import/Export**: Share configurations across teams
+- Default Template: Pre-configured audit questions for common scenarios
+- Custom Templates: Save and load organization-specific configurations
+- Template Import/Export: Share configurations across teams
 
 ##### Project Management
-- **Project Creation**: Set up new audit projects
-- **Project Cloning**: Duplicate existing project structures  
-- **Site Management**: Add individual or bulk sites via CSV
-- **Data Import/Export**: Complete audit data backup and restore
+- Project Creation: Set up new audit projects
+- Project Cloning: Duplicate existing project structures  
+- Site Management: Add individual or bulk sites via CSV
+- Data Import/Export: Complete audit data backup and restore
 
 ##### Configuration Management
-- **Question Management**: Add, edit, delete audit questions
-- **Section Management**: Organize questions into logical groups
-- **Master Configuration**: Control audit structure and content
+- Question Management: Add, edit, delete audit questions
+- Section Management: Organize questions into logical groups
+- Master Configuration: Control audit structure and content
 
 ### Best Practices
 
 #### 6. Audit Workflow Recommendations
 
-1. **Preparation Phase**
+1. Preparation Phase
    - Load appropriate template for your industry/region
    - Configure project and site details
    - Review audit questions for applicability
 
-2. **Execution Phase**
+2. Execution Phase
    - Conduct management audit first (project-wide baseline)
    - Complete site audits systematically
    - Use detailed comments for all non-conformances
    - Take photos/evidence (store externally, reference in comments)
 
-3. **Analysis Phase**
+3. Analysis Phase
    - Review dashboard analytics for trends
    - Use site comparison features for benchmarking
    - Generate executive reports for management review
 
-4. **Follow-up Phase**
+4. Follow-up Phase
    - Export audit data for records management
    - Use recommendations for corrective action planning
    - Schedule follow-up audits using project cloning
 
-## 🌐 Deployment
+## Deployment
 
 ### Production Build
 
-1. **Create production build**
+1. Create production build
    ```bash
    npm run build
    ```
 
-2. **Deploy files**
+2. Deploy files
    - Upload `dist/` folder contents to web server
    - Ensure proper MIME types for `.js` and `.css` files
    - Configure server for SPA routing (optional)
@@ -474,15 +331,15 @@ percentage = (averageScore / 5) * 100
 ### Deployment Options
 
 #### Static Hosting (Recommended)
-- **Netlify**: Drag and drop `dist/` folder
-- **Vercel**: Connect GitHub repository for auto-deployment
-- **GitHub Pages**: Deploy from `gh-pages` branch
-- **AWS S3 + CloudFront**: Static website hosting
+- Netlify: Drag and drop `dist/` folder
+- Vercel: Connect GitHub repository for auto-deployment
+- GitHub Pages: Deploy from `gh-pages` branch
+- AWS S3 + CloudFront: Static website hosting
 
 #### Self-Hosted
-- **Apache/Nginx**: Standard web server deployment
-- **Docker**: Containerized deployment with nginx
-- **Node.js Server**: Express.js static file serving
+- Apache/Nginx: Standard web server deployment
+- Docker: Containerized deployment with nginx
+- Node.js Server: Express.js static file serving
 
 #### Docker Deployment
 ```dockerfile
@@ -500,10 +357,10 @@ docker run -p 80:80 ohs-audit-tool
 ### Environment Configuration
 
 #### Production Considerations
-- **Browser Compatibility**: Modern browsers with ES6 support required
-- **Local Storage**: ~5-10MB storage per project (browser-dependent)
-- **Performance**: Client-side only, no server requirements
-- **Security**: No sensitive data transmission (local storage only)
+- Browser Compatibility: Modern browsers with ES6 support required
+- Local Storage: ~5-10MB storage per project (browser-dependent)
+- Performance: Client-side only, no server requirements
+- Security: No sensitive data transmission (local storage only)
 
 #### URL Configuration
 ```javascript
@@ -517,21 +374,21 @@ export default {
 }
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### Default Template Structure
 
 The application includes a comprehensive default template covering:
 
 #### Management System Sections
-- **Health and Safety Policy**
-- **Project Health and Safety Responsibilities** 
-- **Project Health and Safety Plans and Documentation**
+- Health and Safety Policy
+- Project Health and Safety Responsibilities 
+- Project Health and Safety Plans and Documentation
 
 #### Site Performance Sections  
-- **Permits & Regulatory Compliance (UAE/ADOSH)**
-- **Site Preparation & Temporary Works Safety**
-- **Excavation & Civil Works Safety**
+- Permits & Regulatory Compliance (UAE/ADOSH)
+- Site Preparation & Temporary Works Safety
+- Excavation & Civil Works Safety
 
 ### Customization Options
 
@@ -548,12 +405,12 @@ The application includes a comprehensive default template covering:
 4. Export for sharing across teams/projects
 
 #### Branding Customization
-- **Logo Upload**: Support for PNG, JPG, SVG formats
-- **Company Information**: Custom headers and footers
-- **Color Schemes**: Modify CSS variables for brand colors
-- **Report Templates**: Customize report layout and styling
+- Logo Upload: Support for PNG, JPG, SVG formats
+- Company Information: Custom headers and footers
+- Color Schemes: Modify CSS variables for brand colors
+- Report Templates: Customize report layout and styling
 
-## 📊 Data Schema
+## Data Schema
 
 ### Storage Format
 ```javascript
@@ -600,23 +457,23 @@ The application includes a comprehensive default template covering:
 }
 ```
 
-## 🤝 Contributing
+## Contributing
 
 ### Development Guidelines
 
-1. **Code Style**
+1. Code Style
    - Use ES6+ features and modules
    - Follow consistent naming conventions
    - Add comprehensive comments for complex functions
    - Maintain modular architecture
 
-2. **Testing**
+2. Testing
    - Test across multiple browsers
    - Verify localStorage functionality
    - Validate chart rendering with various data sets
    - Test import/export functionality
 
-3. **Documentation**
+3. Documentation
    - Update README for new features
    - Document API changes
    - Provide usage examples
@@ -633,11 +490,11 @@ Priority areas for enhancement:
 - User authentication
 - Cloud storage integration
 
-## 📄 License
+## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 📞 Support
+## Support
 
 For technical support or questions:
 - Create an issue in the repository
@@ -647,8 +504,7 @@ For technical support or questions:
 
 ---
 
-**Version**: 2.3  
-**Last Updated**: 2025  
+**Version**: 2.5  
+**Last Updated**: 2024  
 **Compatibility**: Modern browsers with ES6 support  
 **Dependencies**: Vite ^5.4.2, Chart.js ^3.7.1
->>>>>>> 7cc9671b51c9ba6d5fd0519b2967e968bc7096ab
