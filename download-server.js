@@ -11,7 +11,7 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const PORT = 8888;
+const PORT = 8889;
 const DOWNLOAD_DIR = path.join(__dirname, 'downloads');
 
 // MIME types
