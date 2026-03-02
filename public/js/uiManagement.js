@@ -12,6 +12,9 @@
         
         // Initialize question type tabs
         initializeQuestionTabs();
+
+        // Initialize delegated actions for dynamic UI controls
+        initializeDynamicActionDelegation();
         
         // Initialize modal functionality
         initializeModal();
@@ -65,6 +68,61 @@
                 }
             }
         });
+    }
+
+    function handleDynamicAction(action, dataset) {
+        switch (action) {
+            case 'show-tab':
+                if (dataset.tabName) showTab(dataset.tabName);
+                break;
+            case 'load-default-template':
+                if (typeof loadDefaultTemplate === 'function') loadDefaultTemplate();
+                break;
+            case 'import-configuration':
+                if (typeof importConfiguration === 'function') importConfiguration();
+                break;
+            case 'add-question':
+                if (typeof addQuestion === 'function') addQuestion(dataset.type, dataset.section);
+                break;
+            case 'edit-question':
+                if (typeof editQuestion === 'function') editQuestion(dataset.type, dataset.section, Number(dataset.index));
+                break;
+            case 'delete-question':
+                if (typeof deleteQuestion === 'function') deleteQuestion(dataset.type, dataset.section, Number(dataset.index));
+                break;
+            case 'move-question':
+                if (typeof moveQuestion === 'function') moveQuestion(dataset.type, dataset.section, Number(dataset.index));
+                break;
+            case 'add-section':
+                if (typeof addSection === 'function') addSection(dataset.type);
+                break;
+            case 'add-section-with-options':
+                if (typeof addSectionWithOptions === 'function') addSectionWithOptions(dataset.type);
+                break;
+            case 'add-question-to-section':
+                if (typeof addQuestionToSection === 'function') addQuestionToSection(dataset.type, dataset.section);
+                break;
+            case 'edit-section-name':
+                if (typeof editSectionName === 'function') editSectionName(dataset.type, dataset.section);
+                break;
+            case 'delete-section':
+                if (typeof deleteSection === 'function') deleteSection(dataset.type, dataset.section);
+                break;
+            default:
+                break;
+        }
+    }
+
+    function initializeDynamicActionDelegation() {
+        if (document.body.dataset.dynamicActionsBound) return;
+
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('[data-ui-action]');
+            if (!target) return;
+            handleDynamicAction(target.dataset.uiAction, target.dataset);
+        });
+
+        document.body.dataset.dynamicActionsBound = 'true';
     }
     
     // Initialize modal functionality
@@ -335,7 +393,7 @@
                             <li>Import a custom configuration</li>
                             <li>Add questions manually</li>
                         </ul>
-                        <button class="btn btn-green" onclick="showTab('master')">Go to System Settings</button>
+                        <button class="btn btn-green" data-ui-action="show-tab" data-tab-name="master">Go to System Settings</button>
                     </div>
                 `;
                 return;
@@ -492,7 +550,7 @@
                             <li>Import a custom configuration</li>
                             <li>Add questions manually</li>
                         </ul>
-                        <button class="btn btn-green" onclick="showTab('master')">Go to System Settings</button>
+                        <button class="btn btn-green" data-ui-action="show-tab" data-tab-name="master">Go to System Settings</button>
                     </div>
                 `;
                 return;
@@ -646,8 +704,8 @@
                         <h4>No Questions Available</h4>
                         <p>To get started with your audit system, you need to load questions. You can:</p>
                         <div style="margin: 20px 0;">
-                            <button class="btn btn-green" onclick="loadDefaultTemplate()">Load Default Template</button>
-                            <button class="btn btn-secondary" onclick="importConfiguration()">Import Custom Configuration</button>
+                            <button class="btn btn-green" data-ui-action="load-default-template">Load Default Template</button>
+                            <button class="btn btn-secondary" data-ui-action="import-configuration">Import Custom Configuration</button>
                         </div>
                         <p style="font-size: 0.9rem; color: #888;">
                             The default template includes sample questions for both Management System and Site Performance audits.
@@ -706,7 +764,7 @@
                     <div class="question-section">
                         <h4>
                             ${section}
-                            <button class="btn btn-green" onclick="addQuestion('${type}', '${section}')">Add Question</button>
+                            <button class="btn btn-green" data-ui-action="add-question" data-type="${type}" data-section="${section}">Add Question</button>
                         </h4>
                         <div class="question-list">
                 `;
@@ -716,8 +774,8 @@
                         <div class="question-item">
                             <span class="question-text">${question}</span>
                             <div class="question-actions">
-                                <button class="btn btn-secondary" onclick="editQuestion('${type}', '${section}', ${index})">Edit</button>
-                                <button class="btn btn-danger" onclick="deleteQuestion('${type}', '${section}', ${index})">Delete</button>
+                                <button class="btn btn-secondary" data-ui-action="edit-question" data-type="${type}" data-section="${section}" data-index="${index}">Edit</button>
+                                <button class="btn btn-danger" data-ui-action="delete-question" data-type="${type}" data-section="${section}" data-index="${index}">Delete</button>
                             </div>
                         </div>
                     `;
@@ -735,7 +793,7 @@
                     <h4>Add New Section</h4>
                     <div style="display: flex; gap: 10px; margin-top: 10px;">
                         <input type="text" id="new${type}Section" placeholder="Enter section name" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
-                        <button class="btn btn-green" onclick="addSection('${type}')">Add Section</button>
+                        <button class="btn btn-green" data-ui-action="add-section" data-type="${type}">Add Section</button>
                     </div>
                 </div>
             `;
@@ -1673,9 +1731,9 @@
                             <span class="section-count">(${questions.length} questions)</span>
                         </div>
                         <div class="section-actions">
-                            <button class="btn btn-sm btn-green" onclick="addQuestionToSection('${type}', '${section}')">Add Question</button>
-                            <button class="btn btn-sm btn-secondary" onclick="editSectionName('${type}', '${section}')">Edit Section</button>
-                            <button class="btn btn-sm btn-danger" onclick="deleteSection('${type}', '${section}')">Delete Section</button>
+                            <button class="btn btn-sm btn-green" data-ui-action="add-question-to-section" data-type="${type}" data-section="${section}">Add Question</button>
+                            <button class="btn btn-sm btn-secondary" data-ui-action="edit-section-name" data-type="${type}" data-section="${section}">Edit Section</button>
+                            <button class="btn btn-sm btn-danger" data-ui-action="delete-section" data-type="${type}" data-section="${section}">Delete Section</button>
                         </div>
                     </div>
                     
@@ -1698,13 +1756,13 @@
                                 </div>
                             </div>
                             <div class="question-actions-full">
-                                <button class="btn btn-sm btn-secondary" onclick="editQuestion('${type}', '${section}', ${index})">
+                                <button class="btn btn-sm btn-secondary" data-ui-action="edit-question" data-type="${type}" data-section="${section}" data-index="${index}">
                                     <span>✏️</span> Edit
                                 </button>
-                                <button class="btn btn-sm btn-orange" onclick="moveQuestion('${type}', '${section}', ${index})">
+                                <button class="btn btn-sm btn-orange" data-ui-action="move-question" data-type="${type}" data-section="${section}" data-index="${index}">
                                     <span>↕️</span> Move
                                 </button>
-                                <button class="btn btn-sm btn-danger" onclick="deleteQuestion('${type}', '${section}', ${index})">
+                                <button class="btn btn-sm btn-danger" data-ui-action="delete-question" data-type="${type}" data-section="${section}" data-index="${index}">
                                     <span>🗑️</span> Delete
                                 </button>
                             </div>
@@ -1738,7 +1796,7 @@
                             </select>
                         </div>
                     ` : ''}
-                    <button class="btn btn-green" onclick="addSectionWithOptions('${type}')">Add Section</button>
+                    <button class="btn btn-green" data-ui-action="add-section-with-options" data-type="${type}">Add Section</button>
                     ${type === 'management' ? '<p class="help-text">Management sections will be added based on project selection during creation.</p>' : ''}
                 </div>
             </div>
