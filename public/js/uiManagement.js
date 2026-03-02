@@ -12,6 +12,9 @@
         
         // Initialize question type tabs
         initializeQuestionTabs();
+
+        // Initialize delegated actions for dynamic UI controls
+        initializeDynamicActionDelegation();
         
         // Initialize modal functionality
         initializeModal();
@@ -65,6 +68,61 @@
                 }
             }
         });
+    }
+
+    function handleDynamicAction(action, dataset) {
+        switch (action) {
+            case 'show-tab':
+                if (dataset.tabName) showTab(dataset.tabName);
+                break;
+            case 'load-default-template':
+                if (typeof loadDefaultTemplate === 'function') loadDefaultTemplate();
+                break;
+            case 'import-configuration':
+                if (typeof importConfiguration === 'function') importConfiguration();
+                break;
+            case 'add-question':
+                if (typeof addQuestion === 'function') addQuestion(dataset.type, dataset.section);
+                break;
+            case 'edit-question':
+                if (typeof editQuestion === 'function') editQuestion(dataset.type, dataset.section, Number(dataset.index));
+                break;
+            case 'delete-question':
+                if (typeof deleteQuestion === 'function') deleteQuestion(dataset.type, dataset.section, Number(dataset.index));
+                break;
+            case 'move-question':
+                if (typeof moveQuestion === 'function') moveQuestion(dataset.type, dataset.section, Number(dataset.index));
+                break;
+            case 'add-section':
+                if (typeof addSection === 'function') addSection(dataset.type);
+                break;
+            case 'add-section-with-options':
+                if (typeof addSectionWithOptions === 'function') addSectionWithOptions(dataset.type);
+                break;
+            case 'add-question-to-section':
+                if (typeof addQuestionToSection === 'function') addQuestionToSection(dataset.type, dataset.section);
+                break;
+            case 'edit-section-name':
+                if (typeof editSectionName === 'function') editSectionName(dataset.type, dataset.section);
+                break;
+            case 'delete-section':
+                if (typeof deleteSection === 'function') deleteSection(dataset.type, dataset.section);
+                break;
+            default:
+                break;
+        }
+    }
+
+    function initializeDynamicActionDelegation() {
+        if (document.body.dataset.dynamicActionsBound) return;
+
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('[data-ui-action]');
+            if (!target) return;
+            handleDynamicAction(target.dataset.uiAction, target.dataset);
+        });
+
+        document.body.dataset.dynamicActionsBound = 'true';
     }
     
     // Initialize modal functionality
@@ -335,7 +393,7 @@
                             <li>Import a custom configuration</li>
                             <li>Add questions manually</li>
                         </ul>
-                        <button class="btn btn-green" onclick="showTab('master')">Go to System Settings</button>
+                        <button class="btn btn-green" data-ui-action="show-tab" data-tab-name="master">Go to System Settings</button>
                     </div>
                 `;
                 return;
@@ -492,7 +550,7 @@
                             <li>Import a custom configuration</li>
                             <li>Add questions manually</li>
                         </ul>
-                        <button class="btn btn-green" onclick="showTab('master')">Go to System Settings</button>
+                        <button class="btn btn-green" data-ui-action="show-tab" data-tab-name="master">Go to System Settings</button>
                     </div>
                 `;
                 return;
@@ -646,8 +704,8 @@
                         <h4>No Questions Available</h4>
                         <p>To get started with your audit system, you need to load questions. You can:</p>
                         <div style="margin: 20px 0;">
-                            <button class="btn btn-green" onclick="loadDefaultTemplate()">Load Default Template</button>
-                            <button class="btn btn-secondary" onclick="importConfiguration()">Import Custom Configuration</button>
+                            <button class="btn btn-green" data-ui-action="load-default-template">Load Default Template</button>
+                            <button class="btn btn-secondary" data-ui-action="import-configuration">Import Custom Configuration</button>
                         </div>
                         <p style="font-size: 0.9rem; color: #888;">
                             The default template includes sample questions for both Management System and Site Performance audits.
@@ -706,7 +764,7 @@
                     <div class="question-section">
                         <h4>
                             ${section}
-                            <button class="btn btn-green" onclick="addQuestion('${type}', '${section}')">Add Question</button>
+                            <button class="btn btn-green" data-ui-action="add-question" data-type="${type}" data-section="${section}">Add Question</button>
                         </h4>
                         <div class="question-list">
                 `;
@@ -716,8 +774,8 @@
                         <div class="question-item">
                             <span class="question-text">${question}</span>
                             <div class="question-actions">
-                                <button class="btn btn-secondary" onclick="editQuestion('${type}', '${section}', ${index})">Edit</button>
-                                <button class="btn btn-danger" onclick="deleteQuestion('${type}', '${section}', ${index})">Delete</button>
+                                <button class="btn btn-secondary" data-ui-action="edit-question" data-type="${type}" data-section="${section}" data-index="${index}">Edit</button>
+                                <button class="btn btn-danger" data-ui-action="delete-question" data-type="${type}" data-section="${section}" data-index="${index}">Delete</button>
                             </div>
                         </div>
                     `;
@@ -735,7 +793,7 @@
                     <h4>Add New Section</h4>
                     <div style="display: flex; gap: 10px; margin-top: 10px;">
                         <input type="text" id="new${type}Section" placeholder="Enter section name" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
-                        <button class="btn btn-green" onclick="addSection('${type}')">Add Section</button>
+                        <button class="btn btn-green" data-ui-action="add-section" data-type="${type}">Add Section</button>
                     </div>
                 </div>
             `;
@@ -1283,6 +1341,7 @@
             
             // Initialize questions tab switching
             initializeQuestionsTabSwitching();
+            initializeSecureManagementActionHandlers();
             
             // Update lists when tab is shown
             setTimeout(() => {
@@ -1313,6 +1372,24 @@
         }
     }
     
+    function resetSelectOptions(selectElement, placeholderText) {
+        selectElement.replaceChildren();
+        const placeholder = document.createElement('option');
+        placeholder.value = '';
+        placeholder.textContent = placeholderText;
+        selectElement.appendChild(placeholder);
+    }
+
+    function createActionButton(label, className, action, targetName) {
+        const button = document.createElement('button');
+        button.className = className;
+        button.type = 'button';
+        button.textContent = label;
+        button.dataset.action = action;
+        button.dataset.targetName = targetName;
+        return button;
+    }
+
     // Update header project selector dropdown
     function updateProjectSelector() {
         try {
@@ -1320,20 +1397,22 @@
             if (!projectSelector) return;
             
             const projects = getCurrentProjects();
+            projectSelector.replaceChildren();
             if (projects.length === 0) {
-                projectSelector.innerHTML = '<option value="">No projects available</option>';
+                resetSelectOptions(projectSelector, 'No projects available');
                 return;
             }
-            
-            let html = '<option value="">Select a project</option>';
+
+            resetSelectOptions(projectSelector, 'Select a project');
             const currentProjectName = window.app && window.app.currentProject ? window.app.currentProject : '';
             
             projects.forEach(projectName => {
-                const selected = currentProjectName === projectName ? 'selected' : '';
-                html += `<option value="${projectName}" ${selected}>${projectName}</option>`;
+                const option = document.createElement('option');
+                option.value = projectName;
+                option.textContent = projectName;
+                option.selected = currentProjectName === projectName;
+                projectSelector.appendChild(option);
             });
-            
-            projectSelector.innerHTML = html;
             
             // Add event listener for project selection changes
             projectSelector.onchange = (e) => {
@@ -1372,32 +1451,47 @@
                             Object.keys(window.app.inspectionData.projects) : [];
             
             if (projects.length === 0) {
-                container.innerHTML = '<div style="text-align: center; color: #666; padding: 20px;">No projects created yet. Use the "Add New Project" button to create your first project.</div>';
+                container.replaceChildren();
+                const emptyState = document.createElement('div');
+                emptyState.style.cssText = 'text-align: center; color: #666; padding: 20px;';
+                emptyState.textContent = 'No projects created yet. Use the "Add New Project" button to create your first project.';
+                container.appendChild(emptyState);
                 return;
             }
             
-            let html = '';
+            container.replaceChildren();
             projects.forEach(projectName => {
                 const project = window.app.inspectionData.projects[projectName];
                 const sitesCount = project.sites ? Object.keys(project.sites).length : 0;
                 const currentProject = window.app.currentProject === projectName;
-                
-                html += `
-                    <div class="project-item ${currentProject ? 'current' : ''}">
-                        <div class="project-info">
-                            <div class="project-name">${projectName} ${currentProject ? '(Current)' : ''}</div>
-                            <div class="project-details">${sitesCount} site(s) • Lead Auditor: ${project.leadAuditor || 'Not set'}</div>
-                        </div>
-                        <div class="project-actions">
-                            ${!currentProject ? `<button class="btn btn-sm btn-secondary" onclick="switchToProject('${projectName}')">Switch To</button>` : ''}
-                            <button class="btn btn-sm btn-secondary" onclick="editProjectName('${projectName}')">Edit</button>
-                            <button class="btn btn-sm btn-danger" onclick="deleteProject('${projectName}')">Delete</button>
-                        </div>
-                    </div>
-                `;
+
+                const projectItem = document.createElement('div');
+                projectItem.className = `project-item ${currentProject ? 'current' : ''}`;
+
+                const projectInfo = document.createElement('div');
+                projectInfo.className = 'project-info';
+
+                const projectNameElement = document.createElement('div');
+                projectNameElement.className = 'project-name';
+                projectNameElement.textContent = `${projectName}${currentProject ? ' (Current)' : ''}`;
+
+                const projectDetails = document.createElement('div');
+                projectDetails.className = 'project-details';
+                projectDetails.textContent = `${sitesCount} site(s) • Lead Auditor: ${project.leadAuditor || 'Not set'}`;
+
+                projectInfo.append(projectNameElement, projectDetails);
+
+                const actions = document.createElement('div');
+                actions.className = 'project-actions';
+                if (!currentProject) {
+                    actions.appendChild(createActionButton('Switch To', 'btn btn-sm btn-secondary', 'switch-project', projectName));
+                }
+                actions.appendChild(createActionButton('Edit', 'btn btn-sm btn-secondary', 'edit-project', projectName));
+                actions.appendChild(createActionButton('Delete', 'btn btn-sm btn-danger', 'delete-project', projectName));
+
+                projectItem.append(projectInfo, actions);
+                container.appendChild(projectItem);
             });
-            
-            container.innerHTML = html;
         } catch (error) {
             console.error('Error updating projects list:', error);
         }
@@ -1411,19 +1505,20 @@
             
             const project = window.app ? window.app.getCurrentProject() : null;
             if (!project || !project.sites) {
-                siteSelector.innerHTML = '<option value="">No sites available</option>';
+                resetSelectOptions(siteSelector, 'No sites available');
                 return;
             }
             
             const sites = Object.keys(project.sites);
-            let html = '<option value="">Select a site</option>';
+            resetSelectOptions(siteSelector, 'Select a site');
             
             sites.forEach(siteName => {
-                const selected = project.currentSite === siteName ? 'selected' : '';
-                html += `<option value="${siteName}" ${selected}>${siteName}</option>`;
+                const option = document.createElement('option');
+                option.value = siteName;
+                option.textContent = siteName;
+                option.selected = project.currentSite === siteName;
+                siteSelector.appendChild(option);
             });
-            
-            siteSelector.innerHTML = html;
             
             // Add event listener for site selection changes
             siteSelector.onchange = (e) => {
@@ -1454,35 +1549,76 @@
             
             const project = window.app ? window.app.getCurrentProject() : null;
             if (!project || !project.sites) {
-                container.innerHTML = '<div style="text-align: center; color: #666; padding: 20px;">No sites found. Add a site using the form above.</div>';
+                container.replaceChildren();
+                const emptyState = document.createElement('div');
+                emptyState.style.cssText = 'text-align: center; color: #666; padding: 20px;';
+                emptyState.textContent = 'No sites found. Add a site using the form above.';
+                container.appendChild(emptyState);
                 return;
             }
             
             const sites = Object.keys(project.sites);
             if (sites.length === 0) {
-                container.innerHTML = '<div style="text-align: center; color: #666; padding: 20px;">No sites created yet. Add a site using the form above.</div>';
+                container.replaceChildren();
+                const emptyState = document.createElement('div');
+                emptyState.style.cssText = 'text-align: center; color: #666; padding: 20px;';
+                emptyState.textContent = 'No sites created yet. Add a site using the form above.';
+                container.appendChild(emptyState);
                 return;
             }
             
-            let html = '';
+            container.replaceChildren();
             sites.forEach(siteName => {
                 const currentSite = project.currentSite === siteName;
-                
-                html += `
-                    <div class="site-item ${currentSite ? 'current' : ''}">
-                        <div class="site-name">${siteName} ${currentSite ? '(Current)' : ''}</div>
-                        <div class="site-actions">
-                            ${!currentSite ? `<button class="btn btn-sm btn-secondary" onclick="switchToSite('${siteName}')">Switch To</button>` : ''}
-                            <button class="btn btn-sm btn-secondary" onclick="editSiteName('${siteName}')">Edit</button>
-                            <button class="btn btn-sm btn-danger" onclick="deleteSite('${siteName}')">Delete</button>
-                        </div>
-                    </div>
-                `;
+
+                const siteItem = document.createElement('div');
+                siteItem.className = `site-item ${currentSite ? 'current' : ''}`;
+
+                const siteNameElement = document.createElement('div');
+                siteNameElement.className = 'site-name';
+                siteNameElement.textContent = `${siteName}${currentSite ? ' (Current)' : ''}`;
+
+                const actions = document.createElement('div');
+                actions.className = 'site-actions';
+                if (!currentSite) {
+                    actions.appendChild(createActionButton('Switch To', 'btn btn-sm btn-secondary', 'switch-site', siteName));
+                }
+                actions.appendChild(createActionButton('Edit', 'btn btn-sm btn-secondary', 'edit-site', siteName));
+                actions.appendChild(createActionButton('Delete', 'btn btn-sm btn-danger', 'delete-site', siteName));
+
+                siteItem.append(siteNameElement, actions);
+                container.appendChild(siteItem);
             });
-            
-            container.innerHTML = html;
         } catch (error) {
             console.error('Error updating sites list:', error);
+        }
+    }
+
+    function initializeSecureManagementActionHandlers() {
+        const projectContainer = document.getElementById('projectListContainer');
+        if (projectContainer && !projectContainer.dataset.handlersBound) {
+            projectContainer.addEventListener('click', (event) => {
+                const button = event.target.closest('button[data-action][data-target-name]');
+                if (!button) return;
+                const { action, targetName } = button.dataset;
+                if (action === 'switch-project' && typeof switchToProject === 'function') switchToProject(targetName);
+                if (action === 'edit-project' && typeof editProjectName === 'function') editProjectName(targetName);
+                if (action === 'delete-project' && typeof deleteProject === 'function') deleteProject(targetName);
+            });
+            projectContainer.dataset.handlersBound = 'true';
+        }
+
+        const siteContainer = document.getElementById('siteListContainer');
+        if (siteContainer && !siteContainer.dataset.handlersBound) {
+            siteContainer.addEventListener('click', (event) => {
+                const button = event.target.closest('button[data-action][data-target-name]');
+                if (!button) return;
+                const { action, targetName } = button.dataset;
+                if (action === 'switch-site' && typeof switchToSite === 'function') switchToSite(targetName);
+                if (action === 'edit-site' && typeof editSiteName === 'function') editSiteName(targetName);
+                if (action === 'delete-site' && typeof deleteSite === 'function') deleteSite(targetName);
+            });
+            siteContainer.dataset.handlersBound = 'true';
         }
     }
     
@@ -1595,9 +1731,9 @@
                             <span class="section-count">(${questions.length} questions)</span>
                         </div>
                         <div class="section-actions">
-                            <button class="btn btn-sm btn-green" onclick="addQuestionToSection('${type}', '${section}')">Add Question</button>
-                            <button class="btn btn-sm btn-secondary" onclick="editSectionName('${type}', '${section}')">Edit Section</button>
-                            <button class="btn btn-sm btn-danger" onclick="deleteSection('${type}', '${section}')">Delete Section</button>
+                            <button class="btn btn-sm btn-green" data-ui-action="add-question-to-section" data-type="${type}" data-section="${section}">Add Question</button>
+                            <button class="btn btn-sm btn-secondary" data-ui-action="edit-section-name" data-type="${type}" data-section="${section}">Edit Section</button>
+                            <button class="btn btn-sm btn-danger" data-ui-action="delete-section" data-type="${type}" data-section="${section}">Delete Section</button>
                         </div>
                     </div>
                     
@@ -1620,13 +1756,13 @@
                                 </div>
                             </div>
                             <div class="question-actions-full">
-                                <button class="btn btn-sm btn-secondary" onclick="editQuestion('${type}', '${section}', ${index})">
+                                <button class="btn btn-sm btn-secondary" data-ui-action="edit-question" data-type="${type}" data-section="${section}" data-index="${index}">
                                     <span>✏️</span> Edit
                                 </button>
-                                <button class="btn btn-sm btn-orange" onclick="moveQuestion('${type}', '${section}', ${index})">
+                                <button class="btn btn-sm btn-orange" data-ui-action="move-question" data-type="${type}" data-section="${section}" data-index="${index}">
                                     <span>↕️</span> Move
                                 </button>
-                                <button class="btn btn-sm btn-danger" onclick="deleteQuestion('${type}', '${section}', ${index})">
+                                <button class="btn btn-sm btn-danger" data-ui-action="delete-question" data-type="${type}" data-section="${section}" data-index="${index}">
                                     <span>🗑️</span> Delete
                                 </button>
                             </div>
@@ -1660,7 +1796,7 @@
                             </select>
                         </div>
                     ` : ''}
-                    <button class="btn btn-green" onclick="addSectionWithOptions('${type}')">Add Section</button>
+                    <button class="btn btn-green" data-ui-action="add-section-with-options" data-type="${type}">Add Section</button>
                     ${type === 'management' ? '<p class="help-text">Management sections will be added based on project selection during creation.</p>' : ''}
                 </div>
             </div>
