@@ -1283,6 +1283,7 @@
             
             // Initialize questions tab switching
             initializeQuestionsTabSwitching();
+            initializeSecureManagementActionHandlers();
             
             // Update lists when tab is shown
             setTimeout(() => {
@@ -1313,6 +1314,24 @@
         }
     }
     
+    function resetSelectOptions(selectElement, placeholderText) {
+        selectElement.replaceChildren();
+        const placeholder = document.createElement('option');
+        placeholder.value = '';
+        placeholder.textContent = placeholderText;
+        selectElement.appendChild(placeholder);
+    }
+
+    function createActionButton(label, className, action, targetName) {
+        const button = document.createElement('button');
+        button.className = className;
+        button.type = 'button';
+        button.textContent = label;
+        button.dataset.action = action;
+        button.dataset.targetName = targetName;
+        return button;
+    }
+
     // Update header project selector dropdown
     function updateProjectSelector() {
         try {
@@ -1320,20 +1339,22 @@
             if (!projectSelector) return;
             
             const projects = getCurrentProjects();
+            projectSelector.replaceChildren();
             if (projects.length === 0) {
-                projectSelector.innerHTML = '<option value="">No projects available</option>';
+                resetSelectOptions(projectSelector, 'No projects available');
                 return;
             }
-            
-            let html = '<option value="">Select a project</option>';
+
+            resetSelectOptions(projectSelector, 'Select a project');
             const currentProjectName = window.app && window.app.currentProject ? window.app.currentProject : '';
             
             projects.forEach(projectName => {
-                const selected = currentProjectName === projectName ? 'selected' : '';
-                html += `<option value="${projectName}" ${selected}>${projectName}</option>`;
+                const option = document.createElement('option');
+                option.value = projectName;
+                option.textContent = projectName;
+                option.selected = currentProjectName === projectName;
+                projectSelector.appendChild(option);
             });
-            
-            projectSelector.innerHTML = html;
             
             // Add event listener for project selection changes
             projectSelector.onchange = (e) => {
@@ -1372,32 +1393,47 @@
                             Object.keys(window.app.inspectionData.projects) : [];
             
             if (projects.length === 0) {
-                container.innerHTML = '<div style="text-align: center; color: #666; padding: 20px;">No projects created yet. Use the "Add New Project" button to create your first project.</div>';
+                container.replaceChildren();
+                const emptyState = document.createElement('div');
+                emptyState.style.cssText = 'text-align: center; color: #666; padding: 20px;';
+                emptyState.textContent = 'No projects created yet. Use the "Add New Project" button to create your first project.';
+                container.appendChild(emptyState);
                 return;
             }
             
-            let html = '';
+            container.replaceChildren();
             projects.forEach(projectName => {
                 const project = window.app.inspectionData.projects[projectName];
                 const sitesCount = project.sites ? Object.keys(project.sites).length : 0;
                 const currentProject = window.app.currentProject === projectName;
-                
-                html += `
-                    <div class="project-item ${currentProject ? 'current' : ''}">
-                        <div class="project-info">
-                            <div class="project-name">${projectName} ${currentProject ? '(Current)' : ''}</div>
-                            <div class="project-details">${sitesCount} site(s) • Lead Auditor: ${project.leadAuditor || 'Not set'}</div>
-                        </div>
-                        <div class="project-actions">
-                            ${!currentProject ? `<button class="btn btn-sm btn-secondary" onclick="switchToProject('${projectName}')">Switch To</button>` : ''}
-                            <button class="btn btn-sm btn-secondary" onclick="editProjectName('${projectName}')">Edit</button>
-                            <button class="btn btn-sm btn-danger" onclick="deleteProject('${projectName}')">Delete</button>
-                        </div>
-                    </div>
-                `;
+
+                const projectItem = document.createElement('div');
+                projectItem.className = `project-item ${currentProject ? 'current' : ''}`;
+
+                const projectInfo = document.createElement('div');
+                projectInfo.className = 'project-info';
+
+                const projectNameElement = document.createElement('div');
+                projectNameElement.className = 'project-name';
+                projectNameElement.textContent = `${projectName}${currentProject ? ' (Current)' : ''}`;
+
+                const projectDetails = document.createElement('div');
+                projectDetails.className = 'project-details';
+                projectDetails.textContent = `${sitesCount} site(s) • Lead Auditor: ${project.leadAuditor || 'Not set'}`;
+
+                projectInfo.append(projectNameElement, projectDetails);
+
+                const actions = document.createElement('div');
+                actions.className = 'project-actions';
+                if (!currentProject) {
+                    actions.appendChild(createActionButton('Switch To', 'btn btn-sm btn-secondary', 'switch-project', projectName));
+                }
+                actions.appendChild(createActionButton('Edit', 'btn btn-sm btn-secondary', 'edit-project', projectName));
+                actions.appendChild(createActionButton('Delete', 'btn btn-sm btn-danger', 'delete-project', projectName));
+
+                projectItem.append(projectInfo, actions);
+                container.appendChild(projectItem);
             });
-            
-            container.innerHTML = html;
         } catch (error) {
             console.error('Error updating projects list:', error);
         }
@@ -1411,19 +1447,20 @@
             
             const project = window.app ? window.app.getCurrentProject() : null;
             if (!project || !project.sites) {
-                siteSelector.innerHTML = '<option value="">No sites available</option>';
+                resetSelectOptions(siteSelector, 'No sites available');
                 return;
             }
             
             const sites = Object.keys(project.sites);
-            let html = '<option value="">Select a site</option>';
+            resetSelectOptions(siteSelector, 'Select a site');
             
             sites.forEach(siteName => {
-                const selected = project.currentSite === siteName ? 'selected' : '';
-                html += `<option value="${siteName}" ${selected}>${siteName}</option>`;
+                const option = document.createElement('option');
+                option.value = siteName;
+                option.textContent = siteName;
+                option.selected = project.currentSite === siteName;
+                siteSelector.appendChild(option);
             });
-            
-            siteSelector.innerHTML = html;
             
             // Add event listener for site selection changes
             siteSelector.onchange = (e) => {
@@ -1454,35 +1491,76 @@
             
             const project = window.app ? window.app.getCurrentProject() : null;
             if (!project || !project.sites) {
-                container.innerHTML = '<div style="text-align: center; color: #666; padding: 20px;">No sites found. Add a site using the form above.</div>';
+                container.replaceChildren();
+                const emptyState = document.createElement('div');
+                emptyState.style.cssText = 'text-align: center; color: #666; padding: 20px;';
+                emptyState.textContent = 'No sites found. Add a site using the form above.';
+                container.appendChild(emptyState);
                 return;
             }
             
             const sites = Object.keys(project.sites);
             if (sites.length === 0) {
-                container.innerHTML = '<div style="text-align: center; color: #666; padding: 20px;">No sites created yet. Add a site using the form above.</div>';
+                container.replaceChildren();
+                const emptyState = document.createElement('div');
+                emptyState.style.cssText = 'text-align: center; color: #666; padding: 20px;';
+                emptyState.textContent = 'No sites created yet. Add a site using the form above.';
+                container.appendChild(emptyState);
                 return;
             }
             
-            let html = '';
+            container.replaceChildren();
             sites.forEach(siteName => {
                 const currentSite = project.currentSite === siteName;
-                
-                html += `
-                    <div class="site-item ${currentSite ? 'current' : ''}">
-                        <div class="site-name">${siteName} ${currentSite ? '(Current)' : ''}</div>
-                        <div class="site-actions">
-                            ${!currentSite ? `<button class="btn btn-sm btn-secondary" onclick="switchToSite('${siteName}')">Switch To</button>` : ''}
-                            <button class="btn btn-sm btn-secondary" onclick="editSiteName('${siteName}')">Edit</button>
-                            <button class="btn btn-sm btn-danger" onclick="deleteSite('${siteName}')">Delete</button>
-                        </div>
-                    </div>
-                `;
+
+                const siteItem = document.createElement('div');
+                siteItem.className = `site-item ${currentSite ? 'current' : ''}`;
+
+                const siteNameElement = document.createElement('div');
+                siteNameElement.className = 'site-name';
+                siteNameElement.textContent = `${siteName}${currentSite ? ' (Current)' : ''}`;
+
+                const actions = document.createElement('div');
+                actions.className = 'site-actions';
+                if (!currentSite) {
+                    actions.appendChild(createActionButton('Switch To', 'btn btn-sm btn-secondary', 'switch-site', siteName));
+                }
+                actions.appendChild(createActionButton('Edit', 'btn btn-sm btn-secondary', 'edit-site', siteName));
+                actions.appendChild(createActionButton('Delete', 'btn btn-sm btn-danger', 'delete-site', siteName));
+
+                siteItem.append(siteNameElement, actions);
+                container.appendChild(siteItem);
             });
-            
-            container.innerHTML = html;
         } catch (error) {
             console.error('Error updating sites list:', error);
+        }
+    }
+
+    function initializeSecureManagementActionHandlers() {
+        const projectContainer = document.getElementById('projectListContainer');
+        if (projectContainer && !projectContainer.dataset.handlersBound) {
+            projectContainer.addEventListener('click', (event) => {
+                const button = event.target.closest('button[data-action][data-target-name]');
+                if (!button) return;
+                const { action, targetName } = button.dataset;
+                if (action === 'switch-project' && typeof switchToProject === 'function') switchToProject(targetName);
+                if (action === 'edit-project' && typeof editProjectName === 'function') editProjectName(targetName);
+                if (action === 'delete-project' && typeof deleteProject === 'function') deleteProject(targetName);
+            });
+            projectContainer.dataset.handlersBound = 'true';
+        }
+
+        const siteContainer = document.getElementById('siteListContainer');
+        if (siteContainer && !siteContainer.dataset.handlersBound) {
+            siteContainer.addEventListener('click', (event) => {
+                const button = event.target.closest('button[data-action][data-target-name]');
+                if (!button) return;
+                const { action, targetName } = button.dataset;
+                if (action === 'switch-site' && typeof switchToSite === 'function') switchToSite(targetName);
+                if (action === 'edit-site' && typeof editSiteName === 'function') editSiteName(targetName);
+                if (action === 'delete-site' && typeof deleteSite === 'function') deleteSite(targetName);
+            });
+            siteContainer.dataset.handlersBound = 'true';
         }
     }
     

@@ -1,6 +1,17 @@
 // Report Generation Module
 // Handles generation of audit reports in various formats
 
+// Escape untrusted text before inserting into report HTML
+function escapeHtml(value) {
+    if (value === null || value === undefined) return '';
+    return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 // Generate comprehensive audit report
 function generateAuditReport() {
     try {
@@ -16,10 +27,10 @@ function generateAuditReport() {
                 generatedDate: new Date().toISOString(),
                 generatedBy: 'OHS Management System Audit Tool',
                 version: '2.3',
-                reportTitle: document.getElementById('reportTitle')?.value || 'OCCUPATIONAL HEALTH & SAFETY AUDIT REPORT',
-                reportSubtitle: document.getElementById('reportSubtitle')?.value || 'Management System & Site Performance Audit',
-                companyName: document.getElementById('companyName')?.value || '',
-                reportDescription: document.getElementById('reportDescription')?.value || ''
+                reportTitle: escapeHtml(document.getElementById('reportTitle')?.value || 'OCCUPATIONAL HEALTH & SAFETY AUDIT REPORT'),
+                reportSubtitle: escapeHtml(document.getElementById('reportSubtitle')?.value || 'Management System & Site Performance Audit'),
+                companyName: escapeHtml(document.getElementById('companyName')?.value || ''),
+                reportDescription: escapeHtml(document.getElementById('reportDescription')?.value || '')
             },
             project: project,
             summary: generateReportSummary(project),
@@ -249,7 +260,7 @@ function createFullHTMLReport(report) {
 
 // Display report in new window with fallback for popup blockers
 function displayReportInNewWindow(htmlContent, title) {
-    const newWindow = window.open('', '_blank');
+    const newWindow = window.open('', '_blank', 'noopener,noreferrer');
     if (newWindow) {
         newWindow.document.write(htmlContent);
         newWindow.document.close();
@@ -1029,7 +1040,12 @@ function printReport() {
     const html = generateHTMLReport();
     if (!html) return;
     
-    const printWindow = window.open('', '_blank');
+    const printWindow = window.open('', '_blank', 'noopener,noreferrer');
+    if (!printWindow) {
+        alert('Popup blocked. Please allow popups to print report.');
+        return;
+    }
+
     printWindow.document.write(html);
     printWindow.document.close();
     printWindow.print();
