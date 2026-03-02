@@ -10,15 +10,28 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     
-    <!-- Version check and force reload -->
+    <!-- Version check (non-disruptive) -->
     <script>
         (function() {
             const currentVersion = '2.3';
-            const savedVersion = localStorage.getItem('appVersion');
-            
-            if (savedVersion !== currentVersion) {
-                localStorage.setItem('appVersion', currentVersion);
-                window.location.reload(true);
+            const sessionKey = 'appVersionSeenInSession';
+
+            try {
+                const savedVersion = localStorage.getItem('appVersion');
+                const seenInSession = sessionStorage.getItem(sessionKey);
+
+                // Update version markers without forcing a hard reload loop.
+                if (savedVersion !== currentVersion) {
+                    localStorage.setItem('appVersion', currentVersion);
+                }
+
+                // Keep a one-time marker so future migrations can key off this safely.
+                if (seenInSession !== currentVersion) {
+                    sessionStorage.setItem(sessionKey, currentVersion);
+                }
+            } catch (error) {
+                // If storage is blocked (privacy mode), continue without reload behavior.
+                console.warn('Version marker check skipped:', error);
             }
         })();
     </script>
@@ -78,7 +91,7 @@
     <!-- Chart.js will be loaded via main.js imports -->
 </head>
 <body>
-    <div class="container">
+    <div id="appShell" class="container">
         <!-- Header with Project Management -->
         <div class="header">
             <h1>OHS Management System</h1>
@@ -367,9 +380,6 @@
                         </div>
                     </div>
                     <div class="logo-upload-section">
-                        <div id="logoPreview" style="display: none;">
-                            <img id="logoImage" class="logo-preview" alt="Company Logo">
-                        </div>
                         <div id="logoUploadArea">
                             <p style="margin-bottom: 10px; color: #666;">Company Logo</p>
                             <input type="file" id="logoFileInput" accept="image/*" style="display: none;">
@@ -378,9 +388,7 @@
                             <div id="logoPreview" class="logo-preview" style="display: none;">
                                 <img id="logoImage" alt="Company Logo Preview" class="logo-preview-img">
                             </div>
-                            <input type="file" id="logoFileInput" accept="image/*" style="display: none;">
                         </div>
-                        <button type="button" class="logo-remove-btn" id="removeLogoBtn" style="display: none;">Remove Logo</button>
                     </div>
                 </div>
             </div>
@@ -558,6 +566,19 @@
     
     <div class="report-footer" id="print-footer"></div>
     
+
+    <div id="authModal" class="auth-modal" style="display:none;">
+        <div class="auth-card">
+            <h2 id="authTitle">Sign In</h2>
+            <p>Authenticate to access the OHS MVP workspace.</p>
+            <input id="authEmail" type="email" placeholder="email@example.com" />
+            <input id="authPassword" type="password" placeholder="Password (min 8 chars)" />
+            <div id="authMessage" class="auth-message"></div>
+            <button id="authSubmitBtn" class="btn btn-green">Sign In</button>
+            <button id="authSwitchBtn" class="btn btn-secondary" type="button">No account? Register</button>
+        </div>
+    </div>
+
     <!-- Main JavaScript entry point -->
     <script type="module" src="/main.js"></script>
 </body>
