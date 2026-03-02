@@ -157,34 +157,60 @@ function displayRecommendations(recommendations) {
         return;
     }
     
+    container.textContent = '';
+
     if (recommendations.length === 0) {
-        container.innerHTML = '<p>No specific recommendations at this time. Continue monitoring and maintaining current standards.</p>';
+        const emptyMessage = document.createElement('p');
+        emptyMessage.textContent = 'No specific recommendations at this time. Continue monitoring and maintaining current standards.';
+        container.appendChild(emptyMessage);
         return;
     }
-    
-    let html = '<div class="recommendations-list">';
-    
-    recommendations.forEach((rec, index) => {
-        const priorityClass = rec.priority.toLowerCase();
-        html += `
-            <div class="recommendation-item priority-${priorityClass}">
-                <div class="recommendation-header">
-                    <span class="recommendation-type">${rec.type}</span>
-                    ${rec.site ? `<span class="recommendation-site">${rec.site}</span>` : ''}
-                    <span class="recommendation-priority priority-${priorityClass}">${rec.priority} Priority</span>
-                </div>
-                <div class="recommendation-issue">
-                    <strong>Issue:</strong> ${rec.issue}
-                </div>
-                <div class="recommendation-action">
-                    <strong>Recommendation:</strong> ${rec.recommendation}
-                </div>
-            </div>
-        `;
+
+    const list = document.createElement('div');
+    list.className = 'recommendations-list';
+
+    recommendations.forEach(rec => {
+        const priorityClass = (rec.priority || '').toLowerCase();
+        const item = document.createElement('div');
+        item.className = `recommendation-item priority-${priorityClass}`;
+
+        const header = document.createElement('div');
+        header.className = 'recommendation-header';
+
+        const type = document.createElement('span');
+        type.className = 'recommendation-type';
+        type.textContent = rec.type || '';
+        header.appendChild(type);
+
+        if (rec.site) {
+            const site = document.createElement('span');
+            site.className = 'recommendation-site';
+            site.textContent = rec.site;
+            header.appendChild(site);
+        }
+
+        const priority = document.createElement('span');
+        priority.className = `recommendation-priority priority-${priorityClass}`;
+        priority.textContent = `${rec.priority || 'Medium'} Priority`;
+        header.appendChild(priority);
+
+        const issue = document.createElement('div');
+        issue.className = 'recommendation-issue';
+        issue.innerHTML = '<strong>Issue:</strong> ';
+        issue.appendChild(document.createTextNode(rec.issue || ''));
+
+        const action = document.createElement('div');
+        action.className = 'recommendation-action';
+        action.innerHTML = '<strong>Recommendation:</strong> ';
+        action.appendChild(document.createTextNode(rec.recommendation || ''));
+
+        item.appendChild(header);
+        item.appendChild(issue);
+        item.appendChild(action);
+        list.appendChild(item);
     });
-    
-    html += '</div>';
-    container.innerHTML = html;
+
+    container.appendChild(list);
 }
 
 // Generate action plan based on recommendations
