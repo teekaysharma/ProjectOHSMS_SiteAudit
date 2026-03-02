@@ -735,12 +735,309 @@ function initializeReportGeneration() {
             exportHtmlBtn.addEventListener('click', exportToHTML);
         }
         
+        // Initialize site comparison functionality
+        initializeSiteComparison();
+        
         // Initialize legacy report generation
         initializeLegacyReportGeneration();
         
         console.log('Report generation initialized successfully');
     } catch (error) {
         console.error('Error initializing report generation:', error);
+    }
+}
+
+// Initialize site comparison functionality
+function initializeSiteComparison() {
+    try {
+        console.log('Initializing site comparison...');
+        
+        // Update comparison site selector
+        updateComparisonSiteSelector();
+        
+        // Initialize comparison chart buttons
+        const selectAllBtn = document.getElementById('selectAllSitesBtn');
+        if (selectAllBtn) {
+            selectAllBtn.addEventListener('click', selectAllComparisonSites);
+        }
+        
+        const clearBtn = document.getElementById('clearSiteSelectionBtn');
+        if (clearBtn) {
+            clearBtn.addEventListener('click', clearComparisonSites);
+        }
+        
+        // Initialize chart type buttons
+        const chartTypeBtns = document.querySelectorAll('.chart-type-selector button');
+        chartTypeBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                chartTypeBtns.forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                updateSiteComparisonChart(e.target.dataset.chartType);
+            });
+        });
+        
+        console.log('Site comparison initialized successfully');
+    } catch (error) {
+        console.error('Error initializing site comparison:', error);
+    }
+}
+
+// Update comparison site selector dropdown
+function updateComparisonSiteSelector() {
+    try {
+        const selector = document.getElementById('comparisonSiteSelector');
+        if (!selector) return;
+        
+        selector.innerHTML = '';
+        
+        const project = window.app ? window.app.getCurrentProject() : null;
+        if (!project || !project.sites) {
+            return;
+        }
+        
+        for (const siteName in project.sites) {
+            const option = document.createElement('option');
+            option.value = siteName;
+            option.textContent = siteName;
+            selector.appendChild(option);
+        }
+        
+        // Add event listener for selection changes
+        selector.addEventListener('change', updateSiteComparisonChartFromSelection);
+        
+        console.log('Comparison site selector updated');
+    } catch (error) {
+        console.error('Error updating comparison site selector:', error);
+    }
+}
+
+// Update site comparison chart based on selection
+function updateSiteComparisonChartFromSelection() {
+    const selector = document.getElementById('comparisonSiteSelector');
+    if (!selector) return;
+    
+    const selectedOptions = Array.from(selector.selectedOptions);
+    const selectedSites = selectedOptions.map(opt => opt.value);
+    
+    // Get chart type
+    const chartTypeBtn = document.querySelector('.chart-type-selector button.active');
+    const chartType = chartTypeBtn ? chartTypeBtn.dataset.chartType : 'stacked';
+    
+    updateSiteComparisonChart(chartType, selectedSites);
+}
+
+// Update the site comparison chart
+function updateSiteComparisonChart(chartType = 'stacked', selectedSites = null) {
+    try {
+        const canvas = document.getElementById('siteComparisonChart');
+        if (!canvas) return;
+        
+        // Get selected sites if not provided
+        if (!selectedSites) {
+            const selector = document.getElementById('comparisonSiteSelector');
+            if (selector) {
+                selectedSites = Array.from(selector.selectedOptions).map(opt => opt.value);
+            }
+        }
+        
+        // If no sites selected, try to use first few sites
+        if (!selectedSites || selectedSites.length === 0) {
+            const project = window.app ? window.app.getCurrentProject() : null;
+            if (project && project.sites) {
+                selectedSites = Object.keys(project.sites).slice(0, 4);
+            }
+        }
+        
+        if (!selectedSites || selectedSites.length === 0) {
+            const noDataMsg = document.getElementById('noSiteComparisonData');
+            if (noDataMsg) noDataMsg.style.display = 'block';
+            return;
+        }
+        
+        const noDataMsg = document.getElementById('noSiteComparisonData');
+        if (noDataMsg) noDataMsg.style.display = 'none';
+        
+        const project = window.app.getCurrentProject();
+        if (!project) return;
+        
+        // Get data for selected sites
+        const siteData = selectedSites.map(siteName => {
+            const site = project.sites[siteName];
+            let totalScore = 0;
+            let scoredCount = 0;
+            let totalQuestions = 0;
+            
+            for (const section in site) {
+                if (Array.isArray(site[section])) {
+                    totalQuestions += site[section].length;
+                    site[section].forEach(item => {
+                        if (item.score > 0) {
+                            totalScore += item.score;
+                            scoredCount++;
+                        }
+                    });
+                }
+            }
+            
+            const avgScore = scoredCount > 0 ? totalScore / scoredCount : 0;
+            const percentage = Math.round((avgScore / 5) * 100);
+            
+            return {
+                name: siteName,
+                score: percentage,
+                avgScore: avgScore
+            };
+        });
+        
+        // Destroy existing chart
+        if (window.app && window.app.charts && window.app.charts.siteComparisonChart) {
+            window.app.charts.siteComparisonChart.destroy();
+        }
+        
+        if (!window.app) window.app = {};
+        if (!window.app.charts) window.app.charts = {};
+        
+        const ctx = canvas.getContext('2d');
+        
+        // Create chart based on type
+        if (chartType === 'radar') {
+            window.app.charts.siteComparisonChart = createRadarComparisonChart(ctx, siteData);
+        } else if (chartType === 'grouped') {
+            window.app.charts.siteComparisonChart = createGroupedBarComparisonChart(ctx, siteData);
+        } else {
+            window.app.charts.siteComparisonChart = createStackedBarComparisonChart(ctx, siteData);
+        }
+        
+        console.log('Site comparison chart updated');
+    } catch (error) {
+        console.error('Error updating site comparison chart:', error);
+    }
+}
+
+// Create stacked bar comparison chart
+function createStackedBarComparisonChart(ctx, data) {
+    return new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: data.map(d => d.name),
+            datasets: [{
+                label: 'Performance Score (%)',
+                data: data.map(d => d.score),
+                backgroundColor: data.map(d => getScoreColor(d.score)),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: { beginAtZero: true, max: 100, title: { display: true, text: 'Score (%)' } }
+            },
+            plugins: {
+                legend: { display: false },
+                title: { display: true, text: 'Site Performance Comparison' }
+            }
+        }
+    });
+}
+
+// Create grouped bar comparison chart
+function createGroupedBarComparisonChart(ctx, data) {
+    return new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: data.map(d => d.name),
+            datasets: [{
+                label: 'Performance Score (%)',
+                data: data.map(d => d.score),
+                backgroundColor: '#667eea',
+                borderWidth: 1
+            }, {
+                label: 'Average Score (0-5)',
+                data: data.map(d => d.avgScore * 20),
+                backgroundColor: '#48bb78',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: { beginAtZero: true, max: 100, title: { display: true, text: 'Score' } }
+            },
+            plugins: {
+                legend: { position: 'top' },
+                title: { display: true, text: 'Site Performance Comparison' }
+            }
+        }
+    });
+}
+
+// Create radar comparison chart
+function createRadarComparisonChart(ctx, data) {
+    return new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: data.map(d => d.name),
+            datasets: [{
+                label: 'Performance Score (%)',
+                data: data.map(d => d.score),
+                backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                borderColor: '#667eea',
+                pointBackgroundColor: '#667eea'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                r: { beginAtZero: true, max: 100 }
+            },
+            plugins: {
+                legend: { position: 'top' },
+                title: { display: true, text: 'Site Performance Comparison' }
+            }
+        }
+    });
+}
+
+// Get color based on score
+function getScoreColor(score) {
+    if (score >= 80) return '#48bb78';
+    if (score >= 70) return '#38a169';
+    if (score >= 50) return '#ed8936';
+    return '#e53e3e';
+}
+
+// Select all sites for comparison
+function selectAllComparisonSites() {
+    const selector = document.getElementById('comparisonSiteSelector');
+    if (!selector) return;
+    
+    Array.from(selector.options).forEach(option => {
+        option.selected = true;
+    });
+    
+    updateSiteComparisonChartFromSelection();
+}
+
+// Clear site selection for comparison
+function clearComparisonSites() {
+    const selector = document.getElementById('comparisonSiteSelector');
+    if (!selector) return;
+    
+    Array.from(selector.options).forEach(option => {
+        option.selected = false;
+    });
+    
+    // Show message
+    const noDataMsg = document.getElementById('noSiteComparisonData');
+    if (noDataMsg) noDataMsg.style.display = 'block';
+    
+    // Destroy chart if exists
+    if (window.app && window.app.charts && window.app.charts.siteComparisonChart) {
+        window.app.charts.siteComparisonChart.destroy();
+        window.app.charts.siteComparisonChart = null;
     }
 }
 
