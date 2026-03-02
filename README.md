@@ -364,25 +364,6 @@ Use this flow to run the app locally in production mode with a deterministic hos
 
 This setup uses `vite.config.js` defaults for localhost-only binding and strict ports.
 
-
-### Deploy Online (VPS/Cloud)
-
-1. Copy env template and set a strong secret:
-   ```bash
-   cp .env.example .env
-   # edit JWT_SECRET
-   ```
-
-2. Build and run with Docker:
-   ```bash
-   docker compose up --build -d
-   ```
-
-3. Open the app:
-   - `http://<your-server-ip>:3000`
-
-This serves the built frontend and API from one Node process, with persistent state in `server-data/`.
-
 ### Deployment Options
 
 #### Static Hosting (Recommended)

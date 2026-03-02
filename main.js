@@ -321,11 +321,10 @@ document.addEventListener('DOMContentLoaded', async function() {
             z-index: 10000;
             max-width: 300px;
         `;
-        const errorTitle = document.createElement('strong');
-        errorTitle.textContent = 'Initialization Error';
-        const errorBody = document.createElement('div');
-        errorBody.textContent = 'Some features may not work properly. Please refresh the page.';
-        errorDiv.append(errorTitle, document.createElement('br'), errorBody);
+        errorDiv.innerHTML = `
+            <strong>Initialization Error</strong><br>
+            Some features may not work properly. Please refresh the page.
+        `;
         const dismissBtn = document.createElement('button');
         dismissBtn.textContent = '×';
         dismissBtn.style.cssText = 'float: right; margin-left: 10px;';
