@@ -2356,3 +2356,30 @@ body {
   min-height: 18px;
   font-size: 0.9rem;
 }
+
+/* Toast notifications from questionEvaluation module */
+@keyframes slideIn {
+  from { transform: translateX(120%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+@keyframes slideOut {
+  from { transform: translateX(0);    opacity: 1; }
+  to   { transform: translateX(120%); opacity: 0; }
+}
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 20px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.9rem;
+  z-index: 15000;
+  max-width: 320px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  animation: slideIn 0.3s ease;
+}
+.notification.success { background: #38a169; }
+.notification.error   { background: #c53030; }
+.notification.info    { background: #3182ce; }
+.notification.warning { background: #dd6b20; }

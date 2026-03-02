@@ -1109,5 +1109,9 @@ window.reportGeneration = {
     captureChartsForReport,
     initializeLogoUpload,
     generateExecutiveReport,
-    exportToHTML
+    exportToHTML,
+    createExecutiveReportHTML
 };
+
+window.createExecutiveReportHTML = createExecutiveReportHTML;
+window.generateExecutiveReport = generateExecutiveReport;
