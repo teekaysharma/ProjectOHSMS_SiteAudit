@@ -1833,16 +1833,67 @@
     
     function editProjectName(projectName) {
         const newName = prompt('Enter new project name:', projectName);
-        if (newName && newName !== projectName && window.app) {
-            // Implementation would depend on the app's project management system
-            alert('Project renaming functionality to be implemented');
+        if (newName && newName !== projectName && window.app && window.app.inspectionData) {
+            const projects = window.app.inspectionData.projects;
+            if (projects[newName]) {
+                alert('A project with this name already exists');
+                return;
+            }
+            
+            // Rename the project
+            projects[newName] = projects[projectName];
+            delete projects[projectName];
+            
+            // Update current project if needed
+            if (window.app.inspectionData.currentProject === projectName) {
+                window.app.inspectionData.currentProject = newName;
+            }
+            
+            // Refresh the UI
+            if (typeof saveData === 'function') {
+                saveData();
+            }
+            updateProjectsList();
+            updateProjectSelector();
+            updateAllDashboardComponents();
+            
+            console.log(`Project renamed from "${projectName}" to "${newName}"`);
         }
     }
     
     function deleteProject(projectName) {
-        if (confirm(`Are you sure you want to delete project "${projectName}"? This action cannot be undone.`)) {
-            // Implementation would depend on the app's project management system
-            alert('Project deletion functionality to be implemented');
+        if (!window.app || !window.app.inspectionData || !window.app.inspectionData.projects) {
+            return;
+        }
+        
+        const projects = window.app.inspectionData.projects;
+        const projectNames = Object.keys(projects);
+        
+        if (projectNames.length <= 1) {
+            alert('Cannot delete the last project. At least one project must remain.');
+            return;
+        }
+        
+        if (confirm(`Are you sure you want to delete project "${projectName}"?\n\nThis will permanently remove all audit data, sites, and scores for this project.\n\nThis action cannot be undone.`)) {
+            // Delete the project
+            delete projects[projectName];
+            
+            // If we deleted the current project, switch to another one
+            if (window.app.inspectionData.currentProject === projectName) {
+                const remainingProjects = Object.keys(projects);
+                window.app.inspectionData.currentProject = remainingProjects[0] || '';
+            }
+            
+            if (typeof saveData === 'function') {
+                saveData();
+            }
+            updateProjectsList();
+            updateProjectSelector();
+            updateSitesList();
+            updateSiteSelector();
+            updateAllDashboardComponents();
+            
+            console.log(`Project "${projectName}" deleted successfully`);
         }
     }
     
