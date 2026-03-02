@@ -330,7 +330,7 @@ percentage = (averageScore / 5) * 100
    - Use recommendations for corrective action planning
    - Schedule follow-up audits using project cloning
 
-## 🌐 Deployment
+## 🌐 Static Deployment (Client-Side Only)
 
 ### Production Build
 
@@ -492,6 +492,94 @@ The application includes a comprehensive default template covering:
   }
 }
 ```
+
+## 🚀 Full-Stack Deployment (With Backend)
+
+### Quick Deployment Options
+
+The OHS Management System can be deployed to various platforms. Choose based on your needs:
+
+| Platform | Cost | Difficulty | Persistence | Best For |
+|----------|------|------------|-------------|----------|
+| **Render** | Free (forever) | ⭐ Easy | ⚠️ Ephemeral | Testing, demos, low-traffic |
+| **Railway** | $5/month | ⭐ Very Easy | ⚠️ Ephemeral | Production with better performance |
+| **Docker** | Varies | ⭐ Easy | ✅ Persistent | Self-hosting, enterprise |
+| **Vercel** | Free | ⚠️ Hard | ❌ Requires DB | Static-only deployment |
+
+### 📚 Deployment Guides
+
+**For Render.com (Recommended):**
+- 📘 **[Complete Render Deployment Guide](./RENDER_DEPLOYMENT.md)** - Comprehensive step-by-step instructions
+- ⚡ **[Quick Deploy Guide](./QUICK_DEPLOY_RENDER.md)** - Deploy in 5 minutes
+
+**For Other Platforms:**
+- 📖 **[General Deployment Guide](./DEPLOYMENT_GUIDE.md)** - All platforms including Docker, Railway, Vercel
+
+### 🎯 Recommended: Render.com
+
+**Why Render?**
+- ✅ Forever free tier
+- ✅ Full Express.js backend support
+- ✅ Automatic HTTPS
+- ✅ Easy GitHub integration
+- ✅ No code changes required
+
+**Quick Start:**
+```bash
+# 1. Push to GitHub
+git add .
+git commit -m "Ready for Render"
+git push origin main
+
+# 2. Deploy via render.yaml (already included)
+# Go to Render.com → New Blueprint → Connect repo → Apply
+
+# 3. Set JWT_SECRET in environment variables
+openssl rand -base64 64
+# Copy output to JWT_SECRET
+
+# 4. Wait 2-3 minutes, then visit your URL!
+```
+
+**Important Notes:**
+- First user registration becomes **Admin**
+- Free tier has ephemeral storage (data resets on redeploy)
+- Add Render Disk ($5/mo) or external DB for production
+- Service spins down after 15min inactivity (cold start ~30s)
+
+### 🐳 Docker Deployment
+
+```bash
+# Build image
+docker build -t ohs-audit-tool .
+
+# Run locally
+docker run -p 3000:3000 -e JWT_SECRET=your-secret ohs-audit-tool
+
+# Deploy to cloud (Google Cloud Run, AWS ECS, Azure)
+```
+
+### 🔧 Production Considerations
+
+For production deployments, consider:
+
+1. **Persistent Storage**
+   - Add Render Disk ($5/month for 1GB)
+   - Or use external database (PostgreSQL, MongoDB)
+
+2. **Custom Domain**
+   - Free on Render
+   - Automatic SSL certificate
+
+3. **Monitoring**
+   - Render provides built-in metrics
+   - Check logs in dashboard
+
+4. **Backups**
+   - For file-based storage: Export data regularly
+   - For database: Enable automatic backups
+
+---
 
 ## 🤝 Contributing
 
