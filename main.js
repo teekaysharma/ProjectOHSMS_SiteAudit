@@ -126,6 +126,7 @@ window.app = {
 
 // Import all JavaScript modules
 import './public/js/utils.js';
+import './public/js/apiClient.js';
 import './public/js/dataManagement.js';
 import './public/js/uiManagement.js';
 import './public/js/chartManagement.js';
@@ -134,11 +135,76 @@ import './public/js/recommendations.js';
 import './public/js/reportGeneration.js';
 import './public/js/comparison-chart-extension.js';
 
+
+async function requireAuthenticationIfAvailable() {
+    if (!window.apiClient) return;
+    const backendUp = await window.apiClient.health();
+    if (!backendUp) {
+        console.warn('Backend not available, running in local-only mode');
+        return;
+    }
+
+    const appShell = document.getElementById('appShell');
+    const authModal = document.getElementById('authModal');
+    const authMessage = document.getElementById('authMessage');
+    const authTitle = document.getElementById('authTitle');
+    const authSubmitBtn = document.getElementById('authSubmitBtn');
+    const authSwitchBtn = document.getElementById('authSwitchBtn');
+    const emailInput = document.getElementById('authEmail');
+    const passwordInput = document.getElementById('authPassword');
+
+    if (!authModal || !emailInput || !passwordInput) return;
+
+    let isRegisterMode = false;
+    const setMode = (registerMode) => {
+        isRegisterMode = registerMode;
+        authTitle.textContent = registerMode ? 'Create Admin Account' : 'Sign In';
+        authSubmitBtn.textContent = registerMode ? 'Register & Continue' : 'Sign In';
+        authSwitchBtn.textContent = registerMode ? 'Have an account? Sign in' : 'No account? Register';
+        authMessage.textContent = '';
+    };
+
+    authSwitchBtn.onclick = () => setMode(!isRegisterMode);
+
+    const hasToken = !!window.apiClient.getToken();
+    if (hasToken) {
+        if (appShell) appShell.style.display = 'block';
+        return;
+    }
+
+    if (appShell) appShell.style.display = 'none';
+    authModal.style.display = 'flex';
+    setMode(false);
+
+    await new Promise((resolve) => {
+        authSubmitBtn.onclick = async () => {
+            try {
+                const email = emailInput.value.trim();
+                const password = passwordInput.value;
+                if (!email || password.length < 8) {
+                    authMessage.textContent = 'Enter a valid email and password (min 8 chars).';
+                    return;
+                }
+                if (isRegisterMode) {
+                    await window.apiClient.register(email, password);
+                }
+                await window.apiClient.login(email, password);
+                authModal.style.display = 'none';
+                if (appShell) appShell.style.display = 'block';
+                resolve();
+            } catch (err) {
+                authMessage.textContent = err.message || 'Authentication failed';
+            }
+        };
+    });
+}
+
 // Initialize the application after DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     console.log('Main entry point - DOM loaded, initializing application...');
     
     try {
+        await requireAuthenticationIfAvailable();
         // Initialize data management first
         if (window.dataManagement && window.dataManagement.initializeDataManagement) {
             window.dataManagement.initializeDataManagement();
@@ -255,11 +321,16 @@ document.addEventListener('DOMContentLoaded', function() {
             z-index: 10000;
             max-width: 300px;
         `;
-        errorDiv.innerHTML = `
-            <strong>Initialization Error</strong><br>
-            Some features may not work properly. Please refresh the page.
-            <button onclick="this.parentElement.remove()" style="float: right; margin-left: 10px;">×</button>
-        `;
+        const errorTitle = document.createElement('strong');
+        errorTitle.textContent = 'Initialization Error';
+        const errorBody = document.createElement('div');
+        errorBody.textContent = 'Some features may not work properly. Please refresh the page.';
+        errorDiv.append(errorTitle, document.createElement('br'), errorBody);
+        const dismissBtn = document.createElement('button');
+        dismissBtn.textContent = '×';
+        dismissBtn.style.cssText = 'float: right; margin-left: 10px;';
+        dismissBtn.addEventListener('click', () => errorDiv.remove());
+        errorDiv.appendChild(dismissBtn);
         document.body.appendChild(errorDiv);
         
         // Auto-remove after 10 seconds
