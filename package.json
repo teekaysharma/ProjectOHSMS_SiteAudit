@@ -9,9 +9,7 @@
     "preview": "vite preview",
     "dev:localhost": "vite --host 127.0.0.1 --port 5173 --strictPort",
     "preview:localhost": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
-    "deploy:localhost": "npm run build && npm run preview:localhost",
-    "start:api": "node server.js",
-    "start:mvp": "npm run build && npm run start:api"
+    "deploy:localhost": "npm run build && npm run preview:localhost"
   },
   "devDependencies": {
     "vite": "^7.3.1"
