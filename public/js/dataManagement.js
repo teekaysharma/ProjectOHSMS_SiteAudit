@@ -1,7 +1,35 @@
 // Data management functions
 (function() {
     // Version for data structure migration
-    const DATA_VERSION = "1.0.1";
+    
+
+    async function syncFromServerIfAvailable() {
+        try {
+            if (!window.apiClient || !window.apiClient.getToken || !window.apiClient.getToken()) return;
+            const remoteState = await window.apiClient.loadState();
+            if (remoteState && remoteState.masterConfig && remoteState.inspectionData) {
+                app.masterConfig = remoteState.masterConfig;
+                app.inspectionData = remoteState.inspectionData;
+                if (typeof renderManagementTab === 'function') renderManagementTab();
+                if (typeof renderSitePerformanceTab === 'function') renderSitePerformanceTab();
+                if (typeof updateProjectSelector === 'function') updateProjectSelector();
+                if (typeof updateSiteSelector === 'function') updateSiteSelector();
+            }
+        } catch (error) {
+            console.warn('Remote sync skipped:', error.message);
+        }
+    }
+
+    function syncToServerIfAvailable(dataToSave) {
+        try {
+            if (!window.apiClient || !window.apiClient.getToken || !window.apiClient.getToken()) return;
+            window.apiClient.saveState(dataToSave).catch(err => console.warn('Remote save failed:', err.message));
+        } catch (error) {
+            console.warn('Remote save skipped:', error.message);
+        }
+    }
+
+const DATA_VERSION = "1.0.1";
     const STORAGE_KEY = 'ohsAuditToolData';
     
     // Initialize data management
@@ -89,9 +117,11 @@
                     masterConfig: app.masterConfig,
                     inspectionData: app.inspectionData
                 });
+                syncFromServerIfAvailable();
             } else {
                 console.log('No saved data found, initializing default data');
                 initializeDefaultData();
+                syncFromServerIfAvailable();
             }
         } catch (error) {
             console.error('Error loading data:', error);
@@ -207,6 +237,7 @@
             };
             
             localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
+            syncToServerIfAvailable(dataToSave);
             
             if (typeof updateDashboard === 'function') {
                 updateDashboard();

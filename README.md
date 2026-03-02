@@ -75,6 +75,23 @@ The OHS Audit Tool provides a dual-audit approach combining **Management System 
    - Navigate to `http://127.0.0.1:5173`
    - The application will automatically load with default templates
 
+
+### MVP Full-Stack Local Run
+
+To run the MVP with authentication + API persistence:
+
+```bash
+npm install
+npm run build
+npm run start:api
+```
+
+Then open `http://localhost:3000`.
+
+- First user registration becomes **Admin** automatically.
+- Audit data is persisted in `server-data/state.json`.
+- Audit events are recorded in `server-data/audit.log.json`.
+
 ## 🛠️ Development Setup
 
 ### Project Structure
