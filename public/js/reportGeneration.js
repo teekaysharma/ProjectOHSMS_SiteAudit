@@ -260,10 +260,7 @@ function createFullHTMLReport(report) {
 
 // Display report in new window with fallback for popup blockers
 function displayReportInNewWindow(htmlContent, title) {
-    const blob = new Blob([htmlContent], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
-    const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
-
+    const newWindow = window.open('', '_blank', 'noopener,noreferrer');
     if (newWindow) {
         newWindow.focus();
         setTimeout(() => URL.revokeObjectURL(url), 30000);
@@ -1039,24 +1036,16 @@ function downloadJSONReport() {
 function printReport() {
     const html = generateHTMLReport();
     if (!html) return;
-
-    const blob = new Blob([html], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
-    const printWindow = window.open(url, '_blank', 'noopener,noreferrer');
+    
+    const printWindow = window.open('', '_blank', 'noopener,noreferrer');
     if (!printWindow) {
-        URL.revokeObjectURL(url);
         alert('Popup blocked. Please allow popups to print report.');
         return;
     }
 
-    setTimeout(() => {
-        try {
-            printWindow.print();
-        } catch (error) {
-            console.warn('Print failed:', error);
-        }
-        URL.revokeObjectURL(url);
-    }, 700);
+    printWindow.document.write(html);
+    printWindow.document.close();
+    printWindow.print();
 }
 
 // Initialize legacy report generation (keeping for backward compatibility)
