@@ -262,14 +262,11 @@ function createFullHTMLReport(report) {
 function displayReportInNewWindow(htmlContent, title) {
     const newWindow = window.open('', '_blank', 'noopener,noreferrer');
     if (newWindow) {
-        newWindow.document.write(htmlContent);
-        newWindow.document.close();
         newWindow.focus();
+        setTimeout(() => URL.revokeObjectURL(url), 30000);
     } else {
         // Fallback for popup blockers - create downloadable HTML file
         console.log('Popup blocked, creating downloadable HTML file instead');
-        const blob = new Blob([htmlContent], { type: 'text/html' });
-        const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
         a.download = `${title.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.html`;
