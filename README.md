@@ -67,13 +67,12 @@ The OHS Audit Tool provides a dual-audit approach combining **Management System 
 
 3. **Start development server**
    ```bash
-   npm run dev
-   # or
-   yarn dev
+   npm run dev:localhost
+   # or npm run dev
    ```
 
 4. **Open in browser**
-   - Navigate to `http://localhost:5173`
+   - Navigate to `http://127.0.0.1:5173`
    - The application will automatically load with default templates
 
 ## 🛠️ Development Setup
@@ -327,6 +326,26 @@ percentage = (averageScore / 5) * 100
    - Upload `dist/` folder contents to web server
    - Ensure proper MIME types for `.js` and `.css` files
    - Configure server for SPA routing (optional)
+
+### Localhost MVP Deployment (Production-like)
+
+Use this flow to run the app locally in production mode with a deterministic host/port setup:
+
+1. **Build and serve for localhost**
+   ```bash
+   npm run deploy:localhost
+   ```
+
+2. **Open preview URL**
+   - `http://127.0.0.1:4173`
+
+3. **Manual equivalent**
+   ```bash
+   npm run build
+   npm run preview:localhost
+   ```
+
+This setup uses `vite.config.js` defaults for localhost-only binding and strict ports.
 
 ### Deployment Options
 
