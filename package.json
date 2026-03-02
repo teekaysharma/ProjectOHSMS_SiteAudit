@@ -6,12 +6,23 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev:localhost": "vite --host 127.0.0.1 --port 5173 --strictPort",
+    "preview:localhost": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
+    "deploy:localhost": "npm run build && npm run preview:localhost",
+    "start:api": "node server.js",
+    "start:mvp": "npm run build && npm run start:api"
   },
   "devDependencies": {
-    "vite": "^5.4.2"
+    "vite": "^7.3.1"
   },
   "dependencies": {
-    "chart.js": "^3.7.1"
+    "chart.js": "^3.7.1",
+    "express": "^4.21.2",
+    "helmet": "^8.0.0",
+    "cors": "^2.8.5",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "express-rate-limit": "^7.5.0"
   }
 }

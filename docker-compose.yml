@@ -1,0 +1,11 @@
+version: '3.9'
+services:
+  ohs-mvp:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - JWT_SECRET=${JWT_SECRET:-change-me-in-production}
+      - NODE_ENV=production
+    volumes:
+      - ./server-data:/app/server-data
