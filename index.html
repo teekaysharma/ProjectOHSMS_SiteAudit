@@ -10,15 +10,28 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     
-    <!-- Version check and force reload -->
+    <!-- Version check (non-disruptive) -->
     <script>
         (function() {
             const currentVersion = '2.3';
-            const savedVersion = localStorage.getItem('appVersion');
-            
-            if (savedVersion !== currentVersion) {
-                localStorage.setItem('appVersion', currentVersion);
-                window.location.reload(true);
+            const sessionKey = 'appVersionSeenInSession';
+
+            try {
+                const savedVersion = localStorage.getItem('appVersion');
+                const seenInSession = sessionStorage.getItem(sessionKey);
+
+                // Update version markers without forcing a hard reload loop.
+                if (savedVersion !== currentVersion) {
+                    localStorage.setItem('appVersion', currentVersion);
+                }
+
+                // Keep a one-time marker so future migrations can key off this safely.
+                if (seenInSession !== currentVersion) {
+                    sessionStorage.setItem(sessionKey, currentVersion);
+                }
+            } catch (error) {
+                // If storage is blocked (privacy mode), continue without reload behavior.
+                console.warn('Version marker check skipped:', error);
             }
         })();
     </script>
