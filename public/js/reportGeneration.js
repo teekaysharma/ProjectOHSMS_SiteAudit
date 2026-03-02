@@ -50,7 +50,7 @@ function generateAuditReport() {
 function generateReportSummary(project) {
     try {
         const summary = {
-            projectName: project.projectName || 'Default Project',
+            projectName: app?.inspectionData?.currentProject || project.projectName || 'Default Project',
             currentSite: project.currentSite || 'Default Site',
             totalSites: project.sites ? Object.keys(project.sites).length : 0,
             inspectionDate: document.getElementById('inspectionDate')?.value || new Date().toISOString().split('T')[0],
@@ -59,6 +59,10 @@ function generateReportSummary(project) {
             overallScores: {},
             siteScores: {},
             managementScore: 0,
+            overallCompliance: 0,
+            projectScore: 0,
+            averageSiteScore: 0,
+            completedSites: 0,
             criticalIssues: [],
             recommendations: 0
         };
@@ -92,13 +96,18 @@ function generateReportSummary(project) {
         
         // Calculate site scores
         if (project.sites) {
+            let siteScoreTotal = 0;
+            let scoredSiteCount = 0;
+
             for (const siteName in project.sites) {
                 const site = project.sites[siteName];
                 let totalSiteScore = 0;
                 let totalSiteQuestions = 0;
+                let totalQuestions = 0;
                 
                 for (const section in site) {
                     if (Array.isArray(site[section])) {
+                        totalQuestions += site[section].length;
                         site[section].forEach(item => {
                             if (item.score > 0) {
                                 totalSiteScore += item.score;
@@ -115,10 +124,20 @@ function generateReportSummary(project) {
                         });
                     }
                 }
-                
-                summary.siteScores[siteName] = totalSiteQuestions > 0 ? 
-                    Math.round((totalSiteScore / totalSiteQuestions) * 100) / 100 : 0;
+
+                const siteAverage = totalSiteQuestions > 0 ? totalSiteScore / totalSiteQuestions : 0;
+                const sitePercentage = Math.round((siteAverage / 5) * 100);
+                summary.siteScores[siteName] = sitePercentage;
+                if (totalSiteQuestions > 0) {
+                    siteScoreTotal += sitePercentage;
+                    scoredSiteCount++;
+                }
+                if (totalQuestions > 0 && totalSiteQuestions === totalQuestions) {
+                    summary.completedSites += 1;
+                }
             }
+
+            summary.averageSiteScore = scoredSiteCount > 0 ? Math.round(siteScoreTotal / scoredSiteCount) : 0;
         }
         
         // Calculate overall scores using chart management functions
@@ -138,6 +157,11 @@ function generateReportSummary(project) {
                 projectOverview: { score: 0, rating: 'N/A', percentage: 0 }
             };
         }
+
+        summary.overallCompliance = summary.overallScores.projectOverview?.percentage || 0;
+        summary.projectScore = summary.overallScores.management?.percentage || 0;
+        summary.averageSiteScore = summary.averageSiteScore || summary.overallScores.allSites?.percentage || 0;
+        summary.recommendations = summary.criticalIssues.length;
         
         return summary;
     } catch (error) {
@@ -150,6 +174,10 @@ function generateReportSummary(project) {
             leadAuditor: 'Not specified',
             projectDirector: 'Not specified',
             managementScore: 0,
+            overallCompliance: 0,
+            projectScore: 0,
+            averageSiteScore: 0,
+            completedSites: 0,
             siteScores: {},
             criticalIssues: [],
             overallScores: {
@@ -197,12 +225,12 @@ function createExecutiveReportHTML(report) {
                 </div>
                 <div class="report-meta">
                     <div class="meta-row">
-                        <span><strong>Project:</strong> ${report.summary.projectName}</span>
+                        <span><strong>Project:</strong> ${escapeHtml(report.summary.projectName)}</span>
                         <span><strong>Date:</strong> ${new Date(report.metadata.generatedDate).toLocaleDateString()}</span>
                     </div>
                     <div class="meta-row">
-                        <span><strong>Lead Auditor:</strong> ${report.summary.leadAuditor}</span>
-                        <span><strong>Project Director:</strong> ${report.summary.projectDirector}</span>
+                        <span><strong>Lead Auditor:</strong> ${escapeHtml(report.summary.leadAuditor)}</span>
+                        <span><strong>Project Director:</strong> ${escapeHtml(report.summary.projectDirector)}</span>
                     </div>
                 </div>
             </header>
@@ -260,12 +288,13 @@ function createFullHTMLReport(report) {
 
 // Display report in new window with fallback for popup blockers
 function displayReportInNewWindow(htmlContent, title) {
-    const newWindow = window.open('', '_blank', 'noopener,noreferrer');
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
     if (newWindow) {
         newWindow.focus();
         setTimeout(() => URL.revokeObjectURL(url), 30000);
     } else {
-        // Fallback for popup blockers - create downloadable HTML file
         console.log('Popup blocked, creating downloadable HTML file instead');
         const a = document.createElement('a');
         a.href = url;
@@ -563,7 +592,7 @@ function generateSummaryHTML(summary) {
         </div>
         <div class="summary-card">
             <h3>Current Site</h3>
-            <div class="value">${summary.currentSite}</div>
+            <div class="value">${escapeHtml(summary.currentSite)}</div>
             <div class="label">Primary Location</div>
         </div>
     `;
@@ -617,11 +646,11 @@ function generateCriticalIssuesHTML(criticalIssues) {
             <h3>Critical Issues Identified</h3>
             ${criticalIssues.map(issue => `
                 <div class="issue-item">
-                    <strong>${issue.type}</strong>
-                    ${issue.site ? ` - ${issue.site}` : ''}
-                    ${issue.section ? ` (${issue.section})` : ''}
+                    <strong>${escapeHtml(issue.type)}</strong>
+                    ${issue.site ? ` - ${escapeHtml(issue.site)}` : ''}
+                    ${issue.section ? ` (${escapeHtml(issue.section)})` : ''}
                     <br>
-                    <span>${issue.issue}</span>
+                    <span>${escapeHtml(issue.issue)}</span>
                 </div>
             `).join('')}
         </section>
@@ -639,12 +668,12 @@ function generateRecommendationsHTML(recommendations) {
             <h2>Recommendations</h2>
             ${recommendations.map(rec => `
                 <div class="recommendation-item">
-                    <strong>${rec.priority} Priority - ${rec.type}</strong>
-                    ${rec.site ? ` (${rec.site})` : ''}
+                    <strong>${escapeHtml(rec.priority)} Priority - ${escapeHtml(rec.type)}</strong>
+                    ${rec.site ? ` (${escapeHtml(rec.site)})` : ''}
                     <br>
-                    <strong>Issue:</strong> ${rec.issue}
+                    <strong>Issue:</strong> ${escapeHtml(rec.issue)}
                     <br>
-                    <strong>Recommendation:</strong> ${rec.recommendation}
+                    <strong>Recommendation:</strong> ${escapeHtml(rec.recommendation)}
                 </div>
             `).join('')}
         </section>
@@ -850,6 +879,9 @@ function exportToHTML() {
 function generateHTMLReport() {
     const report = generateAuditReport();
     if (!report) return;
+
+    const project = report.project || {};
+    const summary = report.summary || {};
     
     let html = `
         <!DOCTYPE html>
@@ -886,91 +918,84 @@ function generateHTMLReport() {
             <div class="summary">
                 <h2>Executive Summary</h2>
                 <table>
-                    <tr><td><strong>Overall Compliance Score</strong></td><td class="score ${getScoreClass(report.summary.overallCompliance)}">${report.summary.overallCompliance}%</td></tr>
-                    <tr><td><strong>Management System Score</strong></td><td class="score ${getScoreClass(report.summary.projectScore)}">${report.summary.projectScore}%</td></tr>
-                    <tr><td><strong>Average Site Score</strong></td><td class="score ${getScoreClass(report.summary.averageSiteScore)}">${report.summary.averageSiteScore}%</td></tr>
-                    <tr><td><strong>Total Sites Audited</strong></td><td>${report.summary.completedSites} / ${report.summary.totalSites}</td></tr>
-                    <tr><td><strong>Critical Issues Identified</strong></td><td>${report.summary.criticalIssues}</td></tr>
+                    <tr><td><strong>Overall Compliance Score</strong></td><td class="score ${getScoreClass(summary.overallCompliance || 0)}">${summary.overallCompliance || 0}%</td></tr>
+                    <tr><td><strong>Management System Score</strong></td><td class="score ${getScoreClass(summary.projectScore || 0)}">${summary.projectScore || 0}%</td></tr>
+                    <tr><td><strong>Average Site Score</strong></td><td class="score ${getScoreClass(summary.averageSiteScore || 0)}">${summary.averageSiteScore || 0}%</td></tr>
+                    <tr><td><strong>Total Sites Audited</strong></td><td>${summary.completedSites || 0} / ${summary.totalSites || 0}</td></tr>
+                    <tr><td><strong>Critical Issues Identified</strong></td><td>${summary.criticalIssues ? summary.criticalIssues.length : 0}</td></tr>
                 </table>
             </div>
     `;
-    
-    // Management System Section
-    if (report.project) {
+
+    if (project.managementSystemAudit) {
         html += `
             <div class="section">
                 <h2>Management System Audit Results</h2>
-                <p><strong>Overall Score:</strong> <span class="score ${getScoreClass(report.project.score)}">${report.project.score}%</span></p>
-                <p><strong>Completion Status:</strong> ${report.project.completed ? 'Completed' : 'In Progress'}</p>
+                <p><strong>Overall Score:</strong> <span class="score ${getScoreClass(summary.projectScore || 0)}">${summary.projectScore || 0}%</span></p>
         `;
-        
-        if (report.project.questions && report.project.questions.length > 0) {
-            html += '<h3>Question Responses</h3>';
-            const template = window.dataManagement?.getCurrentTemplate();
-            
-            report.project.questions.forEach(q => {
-                if (template && template.managementQuestions[q.index]) {
-                    const questionText = template.managementQuestions[q.index].text;
-                    html += `
-                        <div class="question-item">
-                            <strong>${questionText}</strong><br>
-                            Score: <span class="score ${getScoreClass(q.score * 25)}">${q.score}/4</span>
-                            ${q.comment ? `<br>Comment: ${q.comment}` : ''}
-                        </div>
-                    `;
-                }
+
+        Object.entries(project.managementSystemAudit).forEach(([section, items]) => {
+            if (!Array.isArray(items) || items.length === 0) return;
+            html += `<h3>${escapeHtml(section)}</h3>`;
+
+            items.forEach(item => {
+                const scorePercent = Math.round((item.score / 5) * 100);
+                html += `
+                    <div class="question-item">
+                        <strong>${escapeHtml(item.name || 'Audit item')}</strong><br>
+                        Score: <span class="score ${getScoreClass(scorePercent)}">${item.score}/5 (${scorePercent}%)</span>
+                        ${item.comment ? `<br>Comment: ${escapeHtml(item.comment)}` : ''}
+                    </div>
+                `;
             });
-        }
-        
+        });
+
         html += '</div>';
     }
-    
-    // Sites Section
-    if (report.sites && report.sites.length > 0) {
+
+    if (project.sites) {
         html += '<div class="section"><h2>Site Performance Audit Results</h2>';
         
-        report.sites.forEach(site => {
+        Object.entries(project.sites).forEach(([siteName, site]) => {
+            const siteScore = summary.siteScores ? summary.siteScores[siteName] || 0 : 0;
             html += `
                 <div class="site-section">
-                    <h3>${site.name}</h3>
-                    <p><strong>Score:</strong> <span class="score ${getScoreClass(site.score)}">${site.score}%</span></p>
-                    <p><strong>Status:</strong> ${site.completed ? 'Completed' : 'In Progress'}</p>
+                    <h3>${escapeHtml(siteName)}</h3>
+                    <p><strong>Score:</strong> <span class="score ${getScoreClass(siteScore)}">${siteScore}%</span></p>
             `;
-            
-            if (site.questions && site.questions.length > 0) {
-                const template = window.dataManagement?.getCurrentTemplate();
-                
-                site.questions.forEach(q => {
-                    if (template && template.siteQuestions[q.index]) {
-                        const questionText = template.siteQuestions[q.index].text;
-                        html += `
-                            <div class="question-item">
-                                <strong>${questionText}</strong><br>
-                                Score: <span class="score ${getScoreClass(q.score * 25)}">${q.score}/4</span>
-                                ${q.comment ? `<br>Comment: ${q.comment}` : ''}
-                            </div>
-                        `;
-                    }
+
+            Object.entries(site || {}).forEach(([section, items]) => {
+                if (!Array.isArray(items) || items.length === 0) return;
+                html += `<h4>${escapeHtml(section)}</h4>`;
+
+                items.forEach(item => {
+                    const scorePercent = Math.round((item.score / 5) * 100);
+                    html += `
+                        <div class="question-item">
+                            <strong>${escapeHtml(item.name || 'Audit item')}</strong><br>
+                            Score: <span class="score ${getScoreClass(scorePercent)}">${item.score}/5 (${scorePercent}%)</span>
+                            ${item.comment ? `<br>Comment: ${escapeHtml(item.comment)}` : ''}
+                        </div>
+                    `;
                 });
-            }
+            });
             
             html += '</div>';
         });
         
         html += '</div>';
     }
-    
-    // Recommendations Section
+
     if (report.recommendations && report.recommendations.length > 0) {
         html += '<div class="section"><h2>Recommendations</h2>';
         
         report.recommendations.forEach(rec => {
             html += `
-                <div class="recommendation ${rec.priority.toLowerCase()}">
-                    <strong>${rec.priority} Priority - ${rec.type}</strong>
-                    ${rec.site ? ` (${rec.site})` : ''}<br>
-                    <strong>Issue:</strong> ${rec.issue}<br>
-                    <strong>Recommendation:</strong> ${rec.recommendation}
+                <div class="recommendation ${escapeHtml(rec.priority || '').toLowerCase()}">
+                    <strong>${escapeHtml(rec.priority)} Priority - ${escapeHtml(rec.type)}</strong>
+                    ${rec.site ? ` (${escapeHtml(rec.site)})` : ''}<br>
+                    <strong>Issue:</strong> ${escapeHtml(rec.issue)}<br>
+                    <strong>Recommendation:</strong> ${escapeHtml(rec.recommendation)}
                 </div>
             `;
         });
@@ -981,8 +1006,8 @@ function generateHTMLReport() {
     html += `
             <div class="section">
                 <h2>Report Information</h2>
-                <p><strong>Generated by:</strong> ${report.metadata.generatedBy}</p>
-                <p><strong>Version:</strong> ${report.metadata.version}</p>
+                <p><strong>Generated by:</strong> ${escapeHtml(report.metadata.generatedBy)}</p>
+                <p><strong>Version:</strong> ${escapeHtml(report.metadata.version)}</p>
                 <p><strong>Generated on:</strong> ${new Date(report.metadata.generatedDate).toLocaleString()}</p>
             </div>
         </body>
@@ -1036,16 +1061,21 @@ function downloadJSONReport() {
 function printReport() {
     const html = generateHTMLReport();
     if (!html) return;
-    
-    const printWindow = window.open('', '_blank', 'noopener,noreferrer');
+
+    const blob = new Blob([html], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const printWindow = window.open(url, '_blank', 'noopener,noreferrer');
     if (!printWindow) {
         alert('Popup blocked. Please allow popups to print report.');
+        URL.revokeObjectURL(url);
         return;
     }
 
-    printWindow.document.write(html);
-    printWindow.document.close();
-    printWindow.print();
+    setTimeout(() => {
+        printWindow.focus();
+        printWindow.print();
+        setTimeout(() => URL.revokeObjectURL(url), 30000);
+    }, 500);
 }
 
 // Initialize legacy report generation (keeping for backward compatibility)

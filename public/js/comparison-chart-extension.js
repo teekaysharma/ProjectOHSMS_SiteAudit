@@ -8,22 +8,57 @@ function initializeComparisonCharts() {
     createPerformanceBreakdownChart();
 }
 
+function getCurrentProjectData() {
+    if (window.app?.getCurrentProject) return window.app.getCurrentProject();
+    return null;
+}
+
+function getSitesForComparison(project) {
+    if (!project?.sites) return [];
+    return Object.entries(project.sites).map(([name, site]) => {
+        let totalScore = 0;
+        let scoredQuestions = 0;
+        let totalQuestions = 0;
+
+        Object.values(site || {}).forEach(section => {
+            if (!Array.isArray(section)) return;
+            totalQuestions += section.length;
+            section.forEach(item => {
+                if (item.score > 0) {
+                    totalScore += item.score;
+                    scoredQuestions += 1;
+                }
+            });
+        });
+
+        const averageScore = scoredQuestions > 0 ? totalScore / scoredQuestions : 0;
+        const scorePercentage = Math.round((averageScore / 5) * 100);
+
+        return {
+            name,
+            score: scorePercentage,
+            completed: totalQuestions > 0 && scoredQuestions === totalQuestions
+        };
+    });
+}
+
 // Create site comparison chart
 function createSiteComparisonChart() {
     const ctx = document.getElementById('siteComparisonChart');
     if (!ctx) return;
-    
-    const sitesData = window.siteManagement?.getCurrentSites() || [];
-    const completedSites = sitesData.filter(site => site.completed);
-    
+
+    const project = getCurrentProjectData();
+    const sitesData = getSitesForComparison(project);
+    const completedSites = sitesData.filter(site => site.score > 0);
+
     if (completedSites.length === 0) {
         ctx.parentElement.innerHTML = '<p>No completed sites available for comparison.</p>';
         return;
     }
-    
+
     const labels = completedSites.map(site => site.name);
     const scores = completedSites.map(site => site.score);
-    
+
     new Chart(ctx, {
         type: 'bar',
         data: {
@@ -137,18 +172,18 @@ function createTrendAnalysisChart() {
 function createPerformanceBreakdownChart() {
     const ctx = document.getElementById('performanceBreakdownChart');
     if (!ctx) return;
-    
-    const projectData = window.projectManagement?.getCurrentProject();
-    const sitesData = window.siteManagement?.getCurrentSites() || [];
-    
+
+    const projectData = getCurrentProjectData();
+    const sitesData = getSitesForComparison(projectData);
+
     // Calculate category scores
     const categoryScores = calculateCategoryScores(projectData, sitesData);
-    
+
     if (Object.keys(categoryScores).length === 0) {
         ctx.parentElement.innerHTML = '<p>No data available for performance breakdown.</p>';
         return;
     }
-    
+
     new Chart(ctx, {
         type: 'radar',
         data: {
@@ -190,15 +225,30 @@ function createPerformanceBreakdownChart() {
 function getHistoricalData() {
     // In a real application, this would come from a database
     // For now, we'll create some sample historical data
-    const currentProject = window.projectManagement?.getCurrentProject();
-    const currentSites = window.siteManagement?.getCurrentSites() || [];
+    const currentProject = getCurrentProjectData();
+    const currentSites = getSitesForComparison(currentProject);
     
     if (!currentProject && currentSites.length === 0) {
         return [];
     }
-    
-    const currentManagementScore = currentProject ? currentProject.score : 0;
-    const currentSiteScore = currentSites.length > 0 ? 
+
+    let currentManagementScore = 0;
+    if (currentProject?.managementSystemAudit) {
+        let totalScore = 0;
+        let scoredItems = 0;
+        Object.values(currentProject.managementSystemAudit).forEach(section => {
+            if (!Array.isArray(section)) return;
+            section.forEach(item => {
+                if (item.score > 0) {
+                    totalScore += item.score;
+                    scoredItems += 1;
+                }
+            });
+        });
+        currentManagementScore = scoredItems > 0 ? Math.round((totalScore / scoredItems / 5) * 100) : 0;
+    }
+
+    const currentSiteScore = currentSites.length > 0 ?
         Math.round(currentSites.reduce((sum, site) => sum + site.score, 0) / currentSites.length) : 0;
     
     // Generate sample historical data showing improvement over time
@@ -227,63 +277,55 @@ function calculateCategoryScores(projectData, sitesData) {
         'Emergency Preparedness': [],
         'Monitoring & Review': []
     };
-    
-    // Categorize questions based on keywords
-    const template = window.dataManagement?.getCurrentTemplate();
-    if (!template) return {};
-    
-    // Process management system questions
-    if (projectData && projectData.questions && template.managementQuestions) {
-        projectData.questions.forEach(q => {
-            const questionText = template.managementQuestions[q.index]?.text.toLowerCase() || '';
-            
-            if (questionText.includes('policy') || questionText.includes('planning')) {
-                categories['Policy & Planning'].push(q.score);
-            } else if (questionText.includes('training') || questionText.includes('competency')) {
-                categories['Training & Competency'].push(q.score);
-            } else if (questionText.includes('risk') || questionText.includes('hazard')) {
-                categories['Risk Management'].push(q.score);
-            } else if (questionText.includes('incident') || questionText.includes('accident')) {
-                categories['Incident Management'].push(q.score);
-            } else if (questionText.includes('emergency') || questionText.includes('evacuation')) {
-                categories['Emergency Preparedness'].push(q.score);
-            } else {
-                categories['Monitoring & Review'].push(q.score);
-            }
+
+    const classifyQuestion = (text) => {
+        const questionText = (text || '').toLowerCase();
+        if (questionText.includes('policy') || questionText.includes('planning')) {
+            return 'Policy & Planning';
+        }
+        if (questionText.includes('training') || questionText.includes('competency')) {
+            return 'Training & Competency';
+        }
+        if (questionText.includes('risk') || questionText.includes('hazard')) {
+            return 'Risk Management';
+        }
+        if (questionText.includes('incident') || questionText.includes('accident')) {
+            return 'Incident Management';
+        }
+        if (questionText.includes('emergency') || questionText.includes('evacuation')) {
+            return 'Emergency Preparedness';
+        }
+        return 'Monitoring & Review';
+    };
+
+    if (projectData?.managementSystemAudit) {
+        Object.values(projectData.managementSystemAudit).forEach(section => {
+            if (!Array.isArray(section)) return;
+            section.forEach(item => {
+                const category = classifyQuestion(item.name);
+                categories[category].push(item.score);
+            });
         });
     }
-    
-    // Process site questions
-    if (sitesData && template.siteQuestions) {
-        sitesData.forEach(site => {
-            if (site.questions) {
-                site.questions.forEach(q => {
-                    const questionText = template.siteQuestions[q.index]?.text.toLowerCase() || '';
-                    
-                    if (questionText.includes('policy') || questionText.includes('planning')) {
-                        categories['Policy & Planning'].push(q.score);
-                    } else if (questionText.includes('training') || questionText.includes('competency')) {
-                        categories['Training & Competency'].push(q.score);
-                    } else if (questionText.includes('risk') || questionText.includes('hazard')) {
-                        categories['Risk Management'].push(q.score);
-                    } else if (questionText.includes('incident') || questionText.includes('accident')) {
-                        categories['Incident Management'].push(q.score);
-                    } else if (questionText.includes('emergency') || questionText.includes('evacuation')) {
-                        categories['Emergency Preparedness'].push(q.score);
-                    } else {
-                        categories['Monitoring & Review'].push(q.score);
-                    }
+
+    if (projectData?.sites) {
+        Object.values(projectData.sites).forEach(site => {
+            Object.values(site || {}).forEach(section => {
+                if (!Array.isArray(section)) return;
+                section.forEach(item => {
+                    const category = classifyQuestion(item.name);
+                    categories[category].push(item.score);
                 });
-            }
+            });
         });
     }
-    
+
     // Calculate average scores for each category
     const categoryScores = {};
     Object.keys(categories).forEach(category => {
         const scores = categories[category].filter(score => score > 0); // Exclude N/A scores
         if (scores.length > 0) {
-            categoryScores[category] = Math.round((scores.reduce((sum, score) => sum + score, 0) / scores.length) * 25);
+            categoryScores[category] = Math.round((scores.reduce((sum, score) => sum + score, 0) / scores.length) * 20);
         }
     });
     
