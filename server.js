@@ -123,8 +123,9 @@ export function createApp({ dataDir, staticDir, jwtSecret } = {}) {
 
 if (process.argv[1] === __filename) {
   const PORT = process.env.PORT || 3000;
+  const HOST = '0.0.0.0';
   const app = createApp();
-  app.listen(PORT, () => {
-    console.log(`OHS MVP API/server running on http://localhost:${PORT}`);
+  app.listen(PORT, HOST, () => {
+    console.log(`OHS MVP API/server running on http://${HOST}:${PORT}`);
   });
 }
