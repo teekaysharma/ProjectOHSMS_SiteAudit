@@ -1,5 +1,10 @@
 (function() {
-  const BASE_URL = window.__API_BASE_URL__ || 'http://localhost:3000';
+  // API Base URL configuration
+  // - Production: defaults to same origin (empty string)
+  // - Development: uses localhost:3000 or value from VITE_API_BASE_URL env var
+  const isDev = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  const BASE_URL = window.__API_BASE_URL__ ||
+    (isDev ? 'http://localhost:3000' : '');
   const TOKEN_KEY = 'ohs_auth_token';
 
   function getToken() { return localStorage.getItem(TOKEN_KEY); }
