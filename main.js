@@ -1,6 +1,6 @@
 // Main entry point for the OHS Audit Tool
 import './style.css';
-import './public/css/styles.css';
+import './css/styles.css';
 
 // Import Chart.js
 import Chart from 'chart.js/auto';
@@ -156,16 +156,16 @@ window.app = {
 };
 
 // Import all JavaScript modules
-import './public/js/utils.js';
-import './public/js/apiClient.js';
-import './public/js/dataManagement.js';
-import './public/js/uiManagement.js';
-import './public/js/chartManagement.js';
-import './public/js/projectManagement.js';
-import './public/js/recommendations.js';
-import './public/js/reportGeneration.js';
-import './public/js/comparison-chart-extension.js';
-import './public/js/questionEvaluation.js';
+import './js/utils.js';
+import './js/apiClient.js';
+import './js/dataManagement.js';
+import './js/uiManagement.js';
+import './js/chartManagement.js';
+import './js/projectManagement.js';
+import './js/recommendations.js';
+import './js/reportGeneration.js';
+import './js/comparison-chart-extension.js';
+import './js/questionEvaluation.js';
 
 
 async function requireAuthenticationIfAvailable() {
