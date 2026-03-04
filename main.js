@@ -76,6 +76,37 @@ window.app = {
         }
     },
     
+    // Function to get question counts
+    getQuestionCounts() {
+        try {
+            let managementCount = 0;
+            let siteCount = 0;
+            
+            if (app.masterConfig && app.masterConfig.management) {
+                for (const section in app.masterConfig.management) {
+                    const questions = app.masterConfig.management[section];
+                    if (Array.isArray(questions)) {
+                        managementCount += questions.length;
+                    }
+                }
+            }
+            
+            if (app.masterConfig && app.masterConfig.site) {
+                for (const section in app.masterConfig.site) {
+                    const questions = app.masterConfig.site[section];
+                    if (Array.isArray(questions)) {
+                        siteCount += questions.length;
+                    }
+                }
+            }
+            
+            return { management: managementCount, site: siteCount };
+        } catch (error) {
+            console.error('Error getting question counts:', error);
+            return { management: 0, site: 0 };
+        }
+    },
+    
     // Function to check if questions have been imported
     hasQuestions() {
         try {

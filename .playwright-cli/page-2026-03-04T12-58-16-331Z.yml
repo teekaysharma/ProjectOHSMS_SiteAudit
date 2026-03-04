@@ -1,0 +1,363 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - heading "OHS Management System" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Safety Management System Audit & Site Safety Audit Tool
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - combobox [ref=e8]:
+          - option "Select a project" [selected]
+          - option "Default Project"
+        - generic [ref=e9]: Manage projects in System Settings tab
+      - generic [ref=e10]:
+        - combobox [ref=e11]:
+          - option "Select a site"
+          - option "Default Site" [selected]
+        - textbox [ref=e12]
+        - textbox "Lead Auditor" [ref=e13]
+        - textbox "Project Director" [ref=e14]
+      - generic [ref=e16]: Manage sites in System Settings tab
+  - generic [ref=e17]:
+    - button "Dashboard" [ref=e18] [cursor=pointer]
+    - button "Management System Project-wide" [ref=e19] [cursor=pointer]:
+      - text: Management System
+      - generic [ref=e20]: Project-wide
+    - button "Site Performance Site-specific" [ref=e21] [cursor=pointer]:
+      - text: Site Performance
+      - generic [ref=e22]: Site-specific
+    - button "Reports" [ref=e23] [cursor=pointer]
+    - button "System Settings" [active] [ref=e24] [cursor=pointer]
+  - generic [ref=e136]:
+    - generic [ref=e137]:
+      - heading "System Settings" [level=3] [ref=e138]
+      - paragraph [ref=e139]: Configure audit elements and audit items. Changes here will update all tabs.
+      - generic [ref=e140]:
+        - button "Load Default Template" [ref=e141] [cursor=pointer]
+        - button "Save Custom Template" [ref=e142] [cursor=pointer]
+        - button "Load Custom Template" [ref=e143] [cursor=pointer]
+        - button "Export Configuration" [ref=e144] [cursor=pointer]
+        - button "Import Configuration" [ref=e145] [cursor=pointer]
+        - button "Export All Audit Data" [ref=e146] [cursor=pointer]
+        - button "Import Audit Data" [ref=e147] [cursor=pointer]
+        - button "Reset All Data" [ref=e148] [cursor=pointer]
+    - generic [ref=e149]:
+      - generic [ref=e150]:
+        - heading "Project Management" [level=3] [ref=e151]
+        - generic [ref=e152]:
+          - strong [ref=e153]: "Note:"
+          - text: Manage your audit projects here. Create new projects, clone existing ones, or manage project-wide settings.
+        - generic [ref=e154]:
+          - button "Add New Project" [ref=e155] [cursor=pointer]
+          - button "Clone Current Project" [ref=e156] [cursor=pointer]
+          - button "Refresh Projects List" [ref=e157] [cursor=pointer]
+        - generic [ref=e158]:
+          - heading "Existing Projects" [level=4] [ref=e159]
+          - generic [ref=e161]:
+            - generic [ref=e162]:
+              - generic [ref=e163]: Default Project
+              - generic [ref=e164]: "1 site(s) • Lead Auditor: Not set"
+            - generic [ref=e165]:
+              - button "Switch To" [ref=e166] [cursor=pointer]
+              - button "Edit" [ref=e167] [cursor=pointer]
+              - button "Delete" [ref=e168] [cursor=pointer]
+      - generic [ref=e169]:
+        - heading "Site Management" [level=3] [ref=e170]
+        - generic [ref=e171]:
+          - strong [ref=e172]: "Note:"
+          - text: This is the only place to manage sites. Add, edit, or remove sites from your audit system. Each new site starts with zero scores for site performance audits.
+        - generic [ref=e173]:
+          - button "Add Multiple Sites" [ref=e174] [cursor=pointer]
+          - button "Export Sites List" [ref=e175] [cursor=pointer]
+        - generic [ref=e176]:
+          - textbox "Enter new site name" [ref=e177]
+          - button "Add Site" [ref=e178] [cursor=pointer]
+        - generic [ref=e179]:
+          - heading "Existing Sites" [level=4] [ref=e180]
+          - generic [ref=e182]:
+            - generic [ref=e183]: Default Site (Current)
+            - generic [ref=e184]:
+              - button "Edit" [ref=e185] [cursor=pointer]
+              - button "Delete" [ref=e186] [cursor=pointer]
+      - generic [ref=e187]:
+        - heading "Question Management" [level=3] [ref=e188]
+        - generic [ref=e189]:
+          - strong [ref=e190]: "Note:"
+          - text: View and manage all audit questions loaded from templates. Questions are organized by Management System and Site Performance categories.
+        - generic [ref=e191]:
+          - button "Load Default Template" [ref=e192] [cursor=pointer]
+          - button "Refresh Questions List" [ref=e193] [cursor=pointer]
+        - generic [ref=e194]:
+          - generic [ref=e195]:
+            - button "🏢 Management System Questions (15)" [ref=e196] [cursor=pointer]:
+              - generic [ref=e197]: 🏢
+              - text: Management System Questions
+              - generic [ref=e198]: (15)
+            - button "🏭 Site Performance Questions (15)" [ref=e199] [cursor=pointer]:
+              - generic [ref=e200]: 🏭
+              - text: Site Performance Questions
+              - generic [ref=e201]: (15)
+          - generic [ref=e204]:
+            - generic [ref=e205]:
+              - generic [ref=e206]:
+                - generic [ref=e207]:
+                  - generic [ref=e208]: "1."
+                  - generic [ref=e209]: 1.0 Health and Safety Policy
+                  - generic [ref=e210]: (5 questions)
+                - generic [ref=e211]:
+                  - button "Add Question" [ref=e212] [cursor=pointer]
+                  - button "Edit Section" [ref=e213] [cursor=pointer]
+                  - button "Delete Section" [ref=e214] [cursor=pointer]
+              - generic [ref=e215]:
+                - generic [ref=e216]:
+                  - generic [ref=e217]: "1.1"
+                  - generic [ref=e218]:
+                    - generic [ref=e219]: Is there a documented Health and Safety Policy that is communicated to all employees?
+                    - generic [ref=e220]: "Section: 1.0 Health and Safety Policy • Position: 1 of 5"
+                  - generic [ref=e221]:
+                    - button "✏️ Edit" [ref=e222] [cursor=pointer]:
+                      - generic [ref=e223]: ✏️
+                      - text: Edit
+                    - button "↕️ Move" [ref=e224] [cursor=pointer]:
+                      - generic [ref=e225]: ↕️
+                      - text: Move
+                    - button "🗑️ Delete" [ref=e226] [cursor=pointer]:
+                      - generic [ref=e227]: 🗑️
+                      - text: Delete
+                - generic [ref=e228]:
+                  - generic [ref=e229]: "1.2"
+                  - generic [ref=e230]:
+                    - generic [ref=e231]: Does the policy clearly state management commitment to health and safety?
+                    - generic [ref=e232]: "Section: 1.0 Health and Safety Policy • Position: 2 of 5"
+                  - generic [ref=e233]:
+                    - button "✏️ Edit" [ref=e234] [cursor=pointer]:
+                      - generic [ref=e235]: ✏️
+                      - text: Edit
+                    - button "↕️ Move" [ref=e236] [cursor=pointer]:
+                      - generic [ref=e237]: ↕️
+                      - text: Move
+                    - button "🗑️ Delete" [ref=e238] [cursor=pointer]:
+                      - generic [ref=e239]: 🗑️
+                      - text: Delete
+                - generic [ref=e240]:
+                  - generic [ref=e241]: "1.3"
+                  - generic [ref=e242]:
+                    - generic [ref=e243]: Is the policy reviewed and updated regularly?
+                    - generic [ref=e244]: "Section: 1.0 Health and Safety Policy • Position: 3 of 5"
+                  - generic [ref=e245]:
+                    - button "✏️ Edit" [ref=e246] [cursor=pointer]:
+                      - generic [ref=e247]: ✏️
+                      - text: Edit
+                    - button "↕️ Move" [ref=e248] [cursor=pointer]:
+                      - generic [ref=e249]: ↕️
+                      - text: Move
+                    - button "🗑️ Delete" [ref=e250] [cursor=pointer]:
+                      - generic [ref=e251]: 🗑️
+                      - text: Delete
+                - generic [ref=e252]:
+                  - generic [ref=e253]: "1.4"
+                  - generic [ref=e254]:
+                    - generic [ref=e255]: Are health and safety responsibilities clearly defined and assigned?
+                    - generic [ref=e256]: "Section: 1.0 Health and Safety Policy • Position: 4 of 5"
+                  - generic [ref=e257]:
+                    - button "✏️ Edit" [ref=e258] [cursor=pointer]:
+                      - generic [ref=e259]: ✏️
+                      - text: Edit
+                    - button "↕️ Move" [ref=e260] [cursor=pointer]:
+                      - generic [ref=e261]: ↕️
+                      - text: Move
+                    - button "🗑️ Delete" [ref=e262] [cursor=pointer]:
+                      - generic [ref=e263]: 🗑️
+                      - text: Delete
+                - generic [ref=e264]:
+                  - generic [ref=e265]: "1.5"
+                  - generic [ref=e266]:
+                    - generic [ref=e267]: Is the policy signed and dated by senior management?
+                    - generic [ref=e268]: "Section: 1.0 Health and Safety Policy • Position: 5 of 5"
+                  - generic [ref=e269]:
+                    - button "✏️ Edit" [ref=e270] [cursor=pointer]:
+                      - generic [ref=e271]: ✏️
+                      - text: Edit
+                    - button "↕️ Move" [ref=e272] [cursor=pointer]:
+                      - generic [ref=e273]: ↕️
+                      - text: Move
+                    - button "🗑️ Delete" [ref=e274] [cursor=pointer]:
+                      - generic [ref=e275]: 🗑️
+                      - text: Delete
+            - generic [ref=e276]:
+              - generic [ref=e277]:
+                - generic [ref=e278]:
+                  - generic [ref=e279]: "2."
+                  - generic [ref=e280]: 2.0 Project Health and Safety responsibilities, authorities and accountability
+                  - generic [ref=e281]: (5 questions)
+                - generic [ref=e282]:
+                  - button "Add Question" [ref=e283] [cursor=pointer]
+                  - button "Edit Section" [ref=e284] [cursor=pointer]
+                  - button "Delete Section" [ref=e285] [cursor=pointer]
+              - generic [ref=e286]:
+                - generic [ref=e287]:
+                  - generic [ref=e288]: "2.1"
+                  - generic [ref=e289]:
+                    - generic [ref=e290]: Are health and safety responsibilities clearly defined for all levels?
+                    - generic [ref=e291]: "Section: 2.0 Project Health and Safety responsibilities, authorities and accountability • Position: 1 of 5"
+                  - generic [ref=e292]:
+                    - button "✏️ Edit" [ref=e293] [cursor=pointer]:
+                      - generic [ref=e294]: ✏️
+                      - text: Edit
+                    - button "↕️ Move" [ref=e295] [cursor=pointer]:
+                      - generic [ref=e296]: ↕️
+                      - text: Move
+                    - button "🗑️ Delete" [ref=e297] [cursor=pointer]:
+                      - generic [ref=e298]: 🗑️
+                      - text: Delete
+                - generic [ref=e299]:
+                  - generic [ref=e300]: "2.2"
+                  - generic [ref=e301]:
+                    - generic [ref=e302]: Is there a clear chain of command for health and safety matters?
+                    - generic [ref=e303]: "Section: 2.0 Project Health and Safety responsibilities, authorities and accountability • Position: 2 of 5"
+                  - generic [ref=e304]:
+                    - button "✏️ Edit" [ref=e305] [cursor=pointer]:
+                      - generic [ref=e306]: ✏️
+                      - text: Edit
+                    - button "↕️ Move" [ref=e307] [cursor=pointer]:
+                      - generic [ref=e308]: ↕️
+                      - text: Move
+                    - button "🗑️ Delete" [ref=e309] [cursor=pointer]:
+                      - generic [ref=e310]: 🗑️
+                      - text: Delete
+                - generic [ref=e311]:
+                  - generic [ref=e312]: "2.3"
+                  - generic [ref=e313]:
+                    - generic [ref=e314]: Are resources adequate for implementing health and safety programs?
+                    - generic [ref=e315]: "Section: 2.0 Project Health and Safety responsibilities, authorities and accountability • Position: 3 of 5"
+                  - generic [ref=e316]:
+                    - button "✏️ Edit" [ref=e317] [cursor=pointer]:
+                      - generic [ref=e318]: ✏️
+                      - text: Edit
+                    - button "↕️ Move" [ref=e319] [cursor=pointer]:
+                      - generic [ref=e320]: ↕️
+                      - text: Move
+                    - button "🗑️ Delete" [ref=e321] [cursor=pointer]:
+                      - generic [ref=e322]: 🗑️
+                      - text: Delete
+                - generic [ref=e323]:
+                  - generic [ref=e324]: "2.4"
+                  - generic [ref=e325]:
+                    - generic [ref=e326]: Are health and safety performance indicators monitored and reviewed?
+                    - generic [ref=e327]: "Section: 2.0 Project Health and Safety responsibilities, authorities and accountability • Position: 4 of 5"
+                  - generic [ref=e328]:
+                    - button "✏️ Edit" [ref=e329] [cursor=pointer]:
+                      - generic [ref=e330]: ✏️
+                      - text: Edit
+                    - button "↕️ Move" [ref=e331] [cursor=pointer]:
+                      - generic [ref=e332]: ↕️
+                      - text: Move
+                    - button "🗑️ Delete" [ref=e333] [cursor=pointer]:
+                      - generic [ref=e334]: 🗑️
+                      - text: Delete
+                - generic [ref=e335]:
+                  - generic [ref=e336]: "2.5"
+                  - generic [ref=e337]:
+                    - generic [ref=e338]: Is there a process for reviewing health and safety responsibilities?
+                    - generic [ref=e339]: "Section: 2.0 Project Health and Safety responsibilities, authorities and accountability • Position: 5 of 5"
+                  - generic [ref=e340]:
+                    - button "✏️ Edit" [ref=e341] [cursor=pointer]:
+                      - generic [ref=e342]: ✏️
+                      - text: Edit
+                    - button "↕️ Move" [ref=e343] [cursor=pointer]:
+                      - generic [ref=e344]: ↕️
+                      - text: Move
+                    - button "🗑️ Delete" [ref=e345] [cursor=pointer]:
+                      - generic [ref=e346]: 🗑️
+                      - text: Delete
+            - generic [ref=e347]:
+              - generic [ref=e348]:
+                - generic [ref=e349]:
+                  - generic [ref=e350]: "3."
+                  - generic [ref=e351]: 3.0 Project Health and Safety Plans and documentation
+                  - generic [ref=e352]: (5 questions)
+                - generic [ref=e353]:
+                  - button "Add Question" [ref=e354] [cursor=pointer]
+                  - button "Edit Section" [ref=e355] [cursor=pointer]
+                  - button "Delete Section" [ref=e356] [cursor=pointer]
+              - generic [ref=e357]:
+                - generic [ref=e358]:
+                  - generic [ref=e359]: "3.1"
+                  - generic [ref=e360]:
+                    - generic [ref=e361]: Is there a comprehensive Project Health and Safety Plan?
+                    - generic [ref=e362]: "Section: 3.0 Project Health and Safety Plans and documentation • Position: 1 of 5"
+                  - generic [ref=e363]:
+                    - button "✏️ Edit" [ref=e364] [cursor=pointer]:
+                      - generic [ref=e365]: ✏️
+                      - text: Edit
+                    - button "↕️ Move" [ref=e366] [cursor=pointer]:
+                      - generic [ref=e367]: ↕️
+                      - text: Move
+                    - button "🗑️ Delete" [ref=e368] [cursor=pointer]:
+                      - generic [ref=e369]: 🗑️
+                      - text: Delete
+                - generic [ref=e370]:
+                  - generic [ref=e371]: "3.2"
+                  - generic [ref=e372]:
+                    - generic [ref=e373]: Are risk assessments conducted and documented?
+                    - generic [ref=e374]: "Section: 3.0 Project Health and Safety Plans and documentation • Position: 2 of 5"
+                  - generic [ref=e375]:
+                    - button "✏️ Edit" [ref=e376] [cursor=pointer]:
+                      - generic [ref=e377]: ✏️
+                      - text: Edit
+                    - button "↕️ Move" [ref=e378] [cursor=pointer]:
+                      - generic [ref=e379]: ↕️
+                      - text: Move
+                    - button "🗑️ Delete" [ref=e380] [cursor=pointer]:
+                      - generic [ref=e381]: 🗑️
+                      - text: Delete
+                - generic [ref=e382]:
+                  - generic [ref=e383]: "3.3"
+                  - generic [ref=e384]:
+                    - generic [ref=e385]: Are emergency response plans in place and communicated?
+                    - generic [ref=e386]: "Section: 3.0 Project Health and Safety Plans and documentation • Position: 3 of 5"
+                  - generic [ref=e387]:
+                    - button "✏️ Edit" [ref=e388] [cursor=pointer]:
+                      - generic [ref=e389]: ✏️
+                      - text: Edit
+                    - button "↕️ Move" [ref=e390] [cursor=pointer]:
+                      - generic [ref=e391]: ↕️
+                      - text: Move
+                    - button "🗑️ Delete" [ref=e392] [cursor=pointer]:
+                      - generic [ref=e393]: 🗑️
+                      - text: Delete
+                - generic [ref=e394]:
+                  - generic [ref=e395]: "3.4"
+                  - generic [ref=e396]:
+                    - generic [ref=e397]: Is health and safety documentation readily available?
+                    - generic [ref=e398]: "Section: 3.0 Project Health and Safety Plans and documentation • Position: 4 of 5"
+                  - generic [ref=e399]:
+                    - button "✏️ Edit" [ref=e400] [cursor=pointer]:
+                      - generic [ref=e401]: ✏️
+                      - text: Edit
+                    - button "↕️ Move" [ref=e402] [cursor=pointer]:
+                      - generic [ref=e403]: ↕️
+                      - text: Move
+                    - button "🗑️ Delete" [ref=e404] [cursor=pointer]:
+                      - generic [ref=e405]: 🗑️
+                      - text: Delete
+                - generic [ref=e406]:
+                  - generic [ref=e407]: "3.5"
+                  - generic [ref=e408]:
+                    - generic [ref=e409]: Are plans reviewed and updated as necessary?
+                    - generic [ref=e410]: "Section: 3.0 Project Health and Safety Plans and documentation • Position: 5 of 5"
+                  - generic [ref=e411]:
+                    - button "✏️ Edit" [ref=e412] [cursor=pointer]:
+                      - generic [ref=e413]: ✏️
+                      - text: Edit
+                    - button "↕️ Move" [ref=e414] [cursor=pointer]:
+                      - generic [ref=e415]: ↕️
+                      - text: Move
+                    - button "🗑️ Delete" [ref=e416] [cursor=pointer]:
+                      - generic [ref=e417]: 🗑️
+                      - text: Delete
+            - generic [ref=e418]:
+              - heading "Add New Section" [level=4] [ref=e419]
+              - generic [ref=e420]:
+                - textbox "Enter section name" [ref=e421]
+                - button "Add Section" [ref=e422] [cursor=pointer]
+                - paragraph [ref=e423]: Management sections will be added based on project selection during creation.
+            - strong [ref=e425]: "Total: 3 sections, 15 questions"
