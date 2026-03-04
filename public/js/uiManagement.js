@@ -1404,7 +1404,7 @@
             }
 
             resetSelectOptions(projectSelector, 'Select a project');
-            const currentProjectName = window.app && window.app.currentProject ? window.app.currentProject : '';
+            const currentProjectName = window.app && window.app.inspectionData.currentProject ? window.app.inspectionData.currentProject : '';
             
             projects.forEach(projectName => {
                 const option = document.createElement('option');
@@ -1417,7 +1417,7 @@
             // Add event listener for project selection changes
             projectSelector.onchange = (e) => {
                 if (e.target.value && window.app) {
-                    window.app.currentProject = e.target.value;
+                    window.app.inspectionData.currentProject = e.target.value;
                     if (window.app.saveData) window.app.saveData();
                     
                     // Update site selector for new project
@@ -1463,7 +1463,7 @@
             projects.forEach(projectName => {
                 const project = window.app.inspectionData.projects[projectName];
                 const sitesCount = project.sites ? Object.keys(project.sites).length : 0;
-                const currentProject = window.app.currentProject === projectName;
+                const currentProject = window.app.inspectionData.currentProject === projectName;
 
                 const projectItem = document.createElement('div');
                 projectItem.className = `project-item ${currentProject ? 'current' : ''}`;

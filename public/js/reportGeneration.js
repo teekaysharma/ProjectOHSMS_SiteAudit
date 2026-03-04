@@ -1395,6 +1395,45 @@ function initializeLegacyReportGeneration() {
     }
 }
 
+// Update report site selector dropdown
+function updateReportSiteSelector() {
+    try {
+        const selector = document.getElementById('reportSiteSelector');
+        if (!selector) return;
+        
+        selector.innerHTML = '';
+        
+        const project = window.app ? window.app.getCurrentProject() : null;
+        if (!project || !project.sites) {
+            return;
+        }
+        
+        // Add management system option
+        const managementOption = document.createElement('option');
+        managementOption.value = 'management';
+        managementOption.textContent = 'Management System Only';
+        selector.appendChild(managementOption);
+        
+        // Add all sites option
+        const allSitesOption = document.createElement('option');
+        allSitesOption.value = 'all';
+        allSitesOption.textContent = 'All Sites';
+        selector.appendChild(allSitesOption);
+        
+        // Add individual sites
+        for (const siteName in project.sites) {
+            const option = document.createElement('option');
+            option.value = siteName;
+            option.textContent = siteName;
+            selector.appendChild(option);
+        }
+        
+        console.log('Report site selector updated');
+    } catch (error) {
+        console.error('Error updating report site selector:', error);
+    }
+}
+
 // Export functions for use in other modules
 window.reportGeneration = {
     generateAuditReport,
@@ -1407,8 +1446,12 @@ window.reportGeneration = {
     initializeLogoUpload,
     generateExecutiveReport,
     exportToHTML,
-    createExecutiveReportHTML
+    createExecutiveReportHTML,
+    updateReportSiteSelector,
+    updateComparisonSiteSelector
 };
 
 window.createExecutiveReportHTML = createExecutiveReportHTML;
 window.generateExecutiveReport = generateExecutiveReport;
+window.updateReportSiteSelector = updateReportSiteSelector;
+window.updateComparisonSiteSelector = updateComparisonSiteSelector;

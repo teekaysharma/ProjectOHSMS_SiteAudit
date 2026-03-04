@@ -27,7 +27,7 @@ function generateRecommendations() {
                             issue: item.name || 'Audit item requires attention',
                             recommendation: getRecommendationForQuestion(item.name || '', item.score),
                             score: item.score,
-                            comments: item.comments || ''
+                            comments: item.comment || ''
                         });
                     });
                 }
@@ -52,7 +52,7 @@ function generateRecommendations() {
                             issue: item.name || 'Site audit item requires attention',
                             recommendation: getRecommendationForQuestion(item.name || '', item.score),
                             score: item.score,
-                            comments: item.comments || ''
+                            comments: item.comment || ''
                         });
                     });
                 }
