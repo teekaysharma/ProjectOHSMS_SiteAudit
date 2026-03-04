@@ -245,12 +245,20 @@
             }
             
             app.inspectionData.currentProject = projectName;
-            document.getElementById('projectName').value = projectName;
+            
+            // Update project name field if it exists
+            const projectNameField = document.getElementById('projectName');
+            if (projectNameField) {
+                projectNameField.value = projectName;
+            }
             
             // Update site selector and select current site
             const project = app.getCurrentProject();
             if (project && project.currentSite) {
-                document.getElementById('siteName').value = project.currentSite;
+                const siteNameField = document.getElementById('siteName');
+                if (siteNameField) {
+                    siteNameField.value = project.currentSite;
+                }
             }
             
             updateProjectSelector();
@@ -279,7 +287,10 @@
             
             if (!siteName) {
                 project.currentSite = '';
-                document.getElementById('siteName').value = '';
+                const siteNameField = document.getElementById('siteName');
+                if (siteNameField) {
+                    siteNameField.value = '';
+                }
                 updateSiteSelector();
                 if (typeof saveData === 'function') {
                     saveData();
@@ -302,7 +313,10 @@
             }
             
             project.currentSite = siteName;
-            document.getElementById('siteName').value = siteName;
+            const siteNameField2 = document.getElementById('siteName');
+            if (siteNameField2) {
+                siteNameField2.value = siteName;
+            }
             
             updateSiteSelector();
             if (typeof saveData === 'function') {
@@ -679,7 +693,9 @@
             const summary = getReportSummaryData(siteName || 'all');
             const ratingInfo = app.getRatingDetails(parseFloat(summary.overallPercentage));
             
-            let executiveSummary = `This report presents the findings of the Occupational Health & Safety audit conducted for ${document.getElementById('projectName').value || 'the project'}.\n\n`;
+            const projectNameField = document.getElementById('projectName');
+            const projectNameValue = projectNameField ? projectNameField.value : app.inspectionData.currentProject;
+            let executiveSummary = `This report presents the findings of the Occupational Health & Safety audit conducted for ${projectNameValue || 'the project'}.\n\n`;
             
             executiveSummary += `OVERALL PERFORMANCE:\n`;
             executiveSummary += `• Overall Score: ${summary.overallScore} out of 5.0\n`;
@@ -746,10 +762,13 @@
             const summary = getSummaryData();
             const ratingInfo = app.getRatingDetails(parseFloat(summary.overallPercentage));
             
+            const projectNameField = document.getElementById('projectName');
+            const projectNameValue = projectNameField ? projectNameField.value : app.inspectionData.currentProject;
+            
             summaryElement.innerHTML = `
                 <p><strong>Current Status:</strong> ${summary.ratedItemsCount} of ${summary.totalItemsCount} items have been inspected and scored.</p>
                 <p><strong>Overall Performance:</strong> ${summary.overallScore}/5.0 (${summary.overallPercentage}%) - <span style="color: ${ratingInfo.color}; font-weight: bold;">${ratingInfo.text}</span></p>
-                <p><strong>Project:</strong> ${document.getElementById('projectName').value || 'Not specified'}</p>
+                <p><strong>Project:</strong> ${projectNameValue || 'Not specified'}</p>
                 <p><strong>Current Site:</strong> ${project.currentSite || 'No site selected'}</p>
                 <p><strong>Last Updated:</strong> ${new Date().toLocaleDateString()}</p>
             `;
