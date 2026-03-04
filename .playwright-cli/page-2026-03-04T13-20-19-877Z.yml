@@ -1,0 +1,111 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - heading "OHS Management System" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Safety Management System Audit & Site Safety Audit Tool
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - combobox [ref=e8]:
+          - option "Select a project" [selected]
+          - option "Default Project"
+        - generic [ref=e9]: Manage projects in System Settings tab
+      - generic [ref=e10]:
+        - combobox [ref=e11]:
+          - option "Select a site"
+          - option "Default Site" [selected]
+        - textbox [ref=e12]
+        - textbox "Lead Auditor" [ref=e13]
+        - textbox "Project Director" [ref=e14]
+      - generic [ref=e16]: Manage sites in System Settings tab
+  - generic [ref=e17]:
+    - button "Dashboard" [ref=e18] [cursor=pointer]
+    - button "Management System Project-wide" [ref=e19] [cursor=pointer]:
+      - text: Management System
+      - generic [ref=e20]: Project-wide
+    - button "Site Performance Site-specific" [ref=e21] [cursor=pointer]:
+      - text: Site Performance
+      - generic [ref=e22]: Site-specific
+    - button "Reports" [active] [ref=e23] [cursor=pointer]
+    - button "System Settings" [ref=e24] [cursor=pointer]
+  - generic [ref=e261]:
+    - heading "Audit Reports" [level=2] [ref=e262]
+    - generic [ref=e263]:
+      - heading "Report Customization" [level=3] [ref=e264]
+      - generic [ref=e265]:
+        - generic [ref=e266]:
+          - heading "Report Sections" [level=4] [ref=e267]
+          - generic [ref=e268]:
+            - checkbox "Include Best Practices" [checked] [ref=e269]
+            - generic [ref=e270] [cursor=pointer]: Include Best Practices
+          - generic [ref=e271]:
+            - checkbox "Include Non-Conformances" [checked] [ref=e272]
+            - generic [ref=e273] [cursor=pointer]: Include Non-Conformances
+          - generic [ref=e274]:
+            - checkbox "Include Recommendations" [checked] [ref=e275]
+            - generic [ref=e276] [cursor=pointer]: Include Recommendations
+          - generic [ref=e277]:
+            - checkbox "Include Signature Section" [checked] [ref=e278]
+            - generic [ref=e279] [cursor=pointer]: Include Signature Section
+        - generic [ref=e280]:
+          - heading "Chart Selection" [level=4] [ref=e281]
+          - generic [ref=e282]:
+            - checkbox "Performance by Rating Chart" [checked] [ref=e283]
+            - generic [ref=e284] [cursor=pointer]: Performance by Rating Chart
+          - generic [ref=e285]:
+            - checkbox "Score Distribution Chart" [checked] [ref=e286]
+            - generic [ref=e287] [cursor=pointer]: Score Distribution Chart
+          - generic [ref=e288]:
+            - checkbox "Performance by Audit Type Chart" [checked] [ref=e289]
+            - generic [ref=e290] [cursor=pointer]: Performance by Audit Type Chart
+          - generic [ref=e291]:
+            - checkbox "Site Comparison Chart" [ref=e292]
+            - generic [ref=e293] [cursor=pointer]: Site Comparison Chart
+    - generic [ref=e294]:
+      - generic [ref=e295]: "Generate report for:"
+      - combobox "Generate report for:" [ref=e296]:
+        - option "Management System Only" [selected]
+        - option "All Sites"
+    - generic [ref=e297]:
+      - heading "Report Header Configuration" [level=3] [ref=e298]
+      - generic [ref=e299]:
+        - generic [ref=e300]:
+          - generic [ref=e301]:
+            - generic [ref=e302]: Report Title
+            - textbox "Report Title" [ref=e303]:
+              - /placeholder: Enter report title
+              - text: OCCUPATIONAL HEALTH & SAFETY AUDIT REPORT
+          - generic [ref=e304]:
+            - generic [ref=e305]: Subtitle
+            - textbox "Subtitle" [ref=e306]:
+              - /placeholder: Enter subtitle
+              - text: Management System & Site Performance Audit
+          - generic [ref=e307]:
+            - generic [ref=e308]: Company/Organization
+            - textbox "Company/Organization" [ref=e309]:
+              - /placeholder: Company name
+          - generic [ref=e310]:
+            - generic [ref=e311]: Description
+            - textbox "Description" [ref=e312]:
+              - /placeholder: Brief description or additional details
+        - generic [ref=e314]:
+          - paragraph [ref=e315]: Company Logo
+          - button "Upload Logo" [ref=e316] [cursor=pointer]
+    - generic [ref=e317]:
+      - button "Generate Executive Report" [ref=e318] [cursor=pointer]
+      - button "Export as HTML" [ref=e319] [cursor=pointer]
+    - generic [ref=e320]:
+      - heading "Site Performance Comparison" [level=3] [ref=e321]
+      - generic [ref=e322]:
+        - generic [ref=e323]:
+          - generic [ref=e324]: "Select sites to compare:"
+          - listbox "Select sites to compare:" [ref=e325]:
+            - option "Default Site" [ref=e326]
+          - button "Select All" [ref=e327] [cursor=pointer]
+          - button "Clear" [ref=e328] [cursor=pointer]
+        - generic [ref=e329]:
+          - button "Stacked Bar" [ref=e330] [cursor=pointer]
+          - button "Grouped Bar" [ref=e331] [cursor=pointer]
+          - button "Radar" [ref=e332] [cursor=pointer]
+      - generic [ref=e334] [cursor=pointer]:
+        - checkbox "Include Management Audit Scores" [ref=e335]
+        - text: Include Management Audit Scores
+      - paragraph [ref=e338]: No completed sites available for comparison.

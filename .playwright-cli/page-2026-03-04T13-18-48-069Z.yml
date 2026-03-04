@@ -1,0 +1,149 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - heading "OHS Management System" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Safety Management System Audit & Site Safety Audit Tool
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - combobox [ref=e8]:
+          - option "Select a project"
+          - option "Default Project" [selected]
+        - generic [ref=e9]: Manage projects in System Settings tab
+      - generic [ref=e10]:
+        - combobox [ref=e11]:
+          - option "Select a site"
+          - option "Default Site" [selected]
+        - textbox [ref=e12]
+        - textbox "Lead Auditor" [ref=e13]
+        - textbox "Project Director" [ref=e14]
+      - generic [ref=e16]: Manage sites in System Settings tab
+  - generic [ref=e17]:
+    - button "Dashboard" [ref=e18] [cursor=pointer]
+    - button "Management System Project-wide" [ref=e19] [cursor=pointer]:
+      - text: Management System
+      - generic [ref=e20]: Project-wide
+    - button "Site Performance Site-specific" [ref=e21] [cursor=pointer]:
+      - text: Site Performance
+      - generic [ref=e22]: Site-specific
+    - button "Reports" [ref=e23] [cursor=pointer]
+    - button "System Settings" [ref=e24] [cursor=pointer]
+  - generic [ref=e25]:
+    - generic [ref=e26]:
+      - heading "Overall Performance Summary" [level=3] [ref=e27]
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - generic "Management audit not started" [ref=e30]
+          - generic [ref=e31]: Management System Audit
+        - generic [ref=e32]:
+          - generic "Site audit not started" [ref=e33]
+          - generic [ref=e34]: Site Performance Audit
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - generic [ref=e37]: "0"
+          - text: Overall Score
+        - generic [ref=e38]:
+          - generic [ref=e39]: 0%
+          - text: Percentage
+        - generic [ref=e40]:
+          - generic [ref=e41]: Unacceptable
+          - text: Rating
+        - generic [ref=e42]:
+          - generic [ref=e43]: 0 of 0 (Current Site Only)
+          - text: Items Inspected
+    - generic [ref=e44]:
+      - generic [ref=e45]:
+        - heading "Performance by Rating" [level=3] [ref=e46]
+        - generic [ref=e47]:
+          - button "Current Site" [ref=e48] [cursor=pointer]
+          - button "Management" [ref=e49] [cursor=pointer]
+          - button "All Sites" [ref=e50] [cursor=pointer]
+          - button "Project Overview" [ref=e51] [cursor=pointer]
+      - generic [ref=e54]:
+        - heading "Score Distribution" [level=3] [ref=e55]
+        - generic [ref=e56]:
+          - button "Current Site" [ref=e57] [cursor=pointer]
+          - button "Management" [ref=e58] [cursor=pointer]
+          - button "All Sites" [ref=e59] [cursor=pointer]
+          - button "Project Overview" [ref=e60] [cursor=pointer]
+    - generic [ref=e64]:
+      - heading "Performance by Audit Type" [level=3] [ref=e65]
+      - generic [ref=e66]:
+        - button "Current Site" [ref=e67] [cursor=pointer]
+        - button "Management" [ref=e68] [cursor=pointer]
+        - button "All Sites" [ref=e69] [cursor=pointer]
+        - button "Project Overview" [ref=e70] [cursor=pointer]
+      - generic [ref=e71]:
+        - button "By Audit Type" [ref=e72] [cursor=pointer]
+        - button "By Sections" [ref=e73] [cursor=pointer]
+    - generic [ref=e76]:
+      - heading "Automatic Recommendations ✏️" [level=3] [ref=e77]:
+        - text: Automatic Recommendations
+        - generic "Click to edit recommendations" [ref=e78] [cursor=pointer]: ✏️
+      - paragraph [ref=e80]: No specific recommendations at this time. Continue monitoring and maintaining current standards.
+      - generic [ref=e81]:
+        - button "Regenerate Recommendations" [ref=e82] [cursor=pointer]
+        - button "Show Sample Data" [ref=e83] [cursor=pointer]
+    - generic [ref=e84]:
+      - heading "Performance Scoring Criteria" [level=4] [ref=e85]
+      - generic [ref=e86]:
+        - generic [ref=e87]: E
+        - generic [ref=e88]:
+          - strong [ref=e89]: "Excellent:"
+          - text: "> 90% - Exceeding requirements"
+      - generic [ref=e90]:
+        - generic [ref=e91]: G
+        - generic [ref=e92]:
+          - strong [ref=e93]: "Good:"
+          - text: 90% > G > 80% - Good compliance
+      - generic [ref=e94]:
+        - generic [ref=e95]: S
+        - generic [ref=e96]:
+          - strong [ref=e97]: "Satisfactory:"
+          - text: 80% > S > 70% - Occasional non-conformance
+      - generic [ref=e98]:
+        - generic [ref=e99]: L
+        - generic [ref=e100]:
+          - strong [ref=e101]: "Low:"
+          - text: 70% > L > 50% - Significant improvements needed
+      - generic [ref=e102]:
+        - generic [ref=e103]: U
+        - generic [ref=e104]:
+          - strong [ref=e105]: "Unacceptable:"
+          - text: < 50% - Critical issues
+    - generic [ref=e106]:
+      - heading "Score Allocation System" [level=4] [ref=e107]
+      - generic [ref=e110]:
+        - strong [ref=e111]: "0 - Not Applicable/Not Observed:"
+        - text: Item does not apply or was not observed during audit
+      - generic [ref=e114]:
+        - strong [ref=e115]: "1 - Major Non-Conformance:"
+        - text: Serious deficiency requiring immediate corrective action
+      - generic [ref=e118]:
+        - strong [ref=e119]: "2 - Minor Non-Conformance:"
+        - text: Deficiency requiring corrective action in specified timeframe
+      - generic [ref=e122]:
+        - strong [ref=e123]: "3 - Observation/Improvement Opportunity:"
+        - text: Area for improvement but not a non-conformance
+      - generic [ref=e126]:
+        - strong [ref=e127]: "4 - Conformance:"
+        - text: Meets requirements
+      - generic [ref=e130]:
+        - strong [ref=e131]: "5 - Best Practice:"
+        - text: Exceeds requirements and demonstrates excellence
+    - generic [ref=e132]:
+      - heading "Executive Summary" [level=3] [ref=e133]
+      - generic [ref=e134]:
+        - paragraph [ref=e135]:
+          - strong [ref=e136]: "Current Status:"
+          - text: 0 of 0 items have been inspected and scored.
+        - paragraph [ref=e137]:
+          - strong [ref=e138]: "Overall Performance:"
+          - text: 0.0/5.0 (0%) - Unacceptable
+        - paragraph [ref=e139]:
+          - strong [ref=e140]: "Project:"
+          - text: Default Project
+        - paragraph [ref=e141]:
+          - strong [ref=e142]: "Current Site:"
+          - text: Default Site
+        - paragraph [ref=e143]:
+          - strong [ref=e144]: "Last Updated:"
+          - text: 3/4/2026
