@@ -254,6 +254,42 @@ test('unicode strings round-trip identically', () => {
   const s = canonicalJson({ note: 'Ünïcödé — 日本語' });
   assert.equal(JSON.parse(s).note, 'Ünïcödé — 日本語');
 });
+
+test('rejects non-plain objects that would collide', () => {
+  // Object.keys() sees only own enumerable string properties, so a naive
+  // implementation serialises every Date/Map/Set/class instance to "{}" —
+  // two different Dates would then hash identically. Reject them instead.
+  assert.throws(() => canonicalJson(new Date('2020-01-01')), /plain object/);
+  assert.throws(() => canonicalJson({ when: new Date('2020-01-01') }), /plain object/);
+  assert.throws(() => canonicalJson(new Map([['a', 1]])), /plain object/);
+  assert.throws(() => canonicalJson(new Set([1])), /plain object/);
+  class Thing { constructor() { this.a = 1; } }
+  assert.throws(() => canonicalJson(new Thing()), /plain object/);
+});
+
+test('objects with a null prototype are still plain', () => {
+  const o = Object.create(null);
+  o.b = 1;
+  o.a = 2;
+  assert.equal(canonicalJson(o), '{"a":2,"b":1}');
+});
+
+test('throws a clean error on circular references', () => {
+  const a = { name: 'a' };
+  a.self = a;
+  assert.throws(() => canonicalJson(a), /circular reference/);
+  const x = { k: 1 };
+  const cyclicArray = [x];
+  cyclicArray.push(cyclicArray);
+  assert.throws(() => canonicalJson(cyclicArray), /circular reference/);
+});
+
+test('repeated non-cyclic references are fine', () => {
+  // A naive "seen" set that never removes entries would wrongly reject this —
+  // the same object referenced twice as siblings is legitimate, acyclic data.
+  const shared = { v: 1 };
+  assert.equal(canonicalJson({ a: shared, b: shared }), '{"a":{"v":1},"b":{"v":1}}');
+});
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -271,16 +307,20 @@ Create `src/core/canonicalJson.js`:
  * Object keys are sorted; array order is preserved. Values that cannot be
  * hashed reproducibly are rejected loudly rather than silently dropped —
  * JSON.stringify turns `undefined` into nothing at all, which would let two
- * different objects produce the same hash.
+ * different objects produce the same hash. For the same reason, only plain
+ * objects are accepted: Object.keys() sees only own enumerable string
+ * properties, so a Date/Map/Set/class instance would otherwise serialise to
+ * "{}" and two different Dates would hash identically. Circular references
+ * are rejected with a clean error rather than overflowing the call stack.
  *
  * @param {unknown} value
  * @returns {string}
  */
 export function canonicalJson(value) {
-  return serialise(value, '$');
+  return serialise(value, '$', new Set());
 }
 
-function serialise(value, path) {
+function serialise(value, path, seen) {
   if (value === null) return 'null';
 
   const t = typeof value;
@@ -300,15 +340,31 @@ function serialise(value, path) {
   if (t === 'boolean' || t === 'string') return JSON.stringify(value);
 
   if (Array.isArray(value)) {
-    const parts = value.map((v, i) => serialise(v, `${path}[${i}]`));
+    if (seen.has(value)) {
+      throw new TypeError(`canonicalJson: circular reference at ${path}`);
+    }
+    seen.add(value);
+    const parts = value.map((v, i) => serialise(v, `${path}[${i}]`, seen));
+    seen.delete(value);
     return `[${parts.join(',')}]`;
   }
 
   if (t === 'object') {
+    const proto = Object.getPrototypeOf(value);
+    if (proto !== Object.prototype && proto !== null) {
+      throw new TypeError(
+        `canonicalJson: only plain objects are serialisable at ${path} (got ${value.constructor?.name ?? 'unknown'})`
+      );
+    }
+    if (seen.has(value)) {
+      throw new TypeError(`canonicalJson: circular reference at ${path}`);
+    }
+    seen.add(value);
     const keys = Object.keys(value).sort();
     const parts = keys.map(
-      (k) => `${JSON.stringify(k)}:${serialise(value[k], `${path}.${k}`)}`
+      (k) => `${JSON.stringify(k)}:${serialise(value[k], `${path}.${k}`, seen)}`
     );
+    seen.delete(value);
     return `{${parts.join(',')}}`;
   }
 
@@ -319,7 +375,7 @@ function serialise(value, path) {
 - [ ] **Step 4: Run test to verify it passes**
 
 Run: `node --test tests/core/canonicalJson.test.js`
-Expected: PASS, 6 tests.
+Expected: PASS, 10 tests.
 
 - [ ] **Step 5: Point the test script at the whole test directory**
 
