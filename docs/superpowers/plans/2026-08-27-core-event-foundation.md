@@ -789,9 +789,11 @@ git commit -m "feat(core): add hashed immutable event envelope"
 - Test: `tests/core/eventLog.test.js`
 
 **Interfaces:**
-- Consumes: `createEvent`, `verifyEventHash` (Task 4).
+- Consumes: `createEvent`, `verifyEventHash`, `computeEventHash` (Task 4).
 - Produces:
-  - `createLog(deviceId): EventLog`
+  - `createLog(deviceId): EventLog` — a fresh, empty log. There is deliberately
+    no way to construct a log pre-seeded with existing events; see the note
+    after Step 3.
   - `EventLog#append({ type, actor, payload, ts }): Event` — assigns `seq` and `prevHash` automatically
   - `EventLog#all(): Event[]`
   - `verifyChains(events): { ok: boolean, problems: Problem[] }` where `Problem` is `{ kind, deviceId, seq?, eventId? }` and `kind` is one of `'bad_hash' | 'broken_link' | 'seq_gap' | 'duplicate_seq'`
@@ -805,6 +807,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createLog, verifyChains } from '../../src/core/eventLog.js';
 import { newId, ID_PREFIXES } from '../../src/core/ids.js';
+import { computeEventHash } from '../../src/core/events.js';
 
 function seed(n = 3) {
   const log = createLog(newId(ID_PREFIXES.device));
@@ -883,6 +886,29 @@ test('duplicate seq on one device is detected', () => {
   assert.equal(ok, false);
   assert.ok(problems.some((p) => p.kind === 'duplicate_seq'));
 });
+
+test('a forged duplicate seq does not misattribute broken_link to a later legitimate event', () => {
+  const a = createLog(newId(ID_PREFIXES.device));
+  const genuine1 = a.append({ type: 'site_created', actor: 'a@b.com', payload: { v: 1 }, ts: '2026-02-01T00:00:00.000Z' });
+  const genuine2 = a.append({ type: 'site_created', actor: 'a@b.com', payload: { v: 2 }, ts: '2026-02-02T00:00:00.000Z' });
+  const genuine3 = a.append({ type: 'site_created', actor: 'a@b.com', payload: { v: 3 }, ts: '2026-02-03T00:00:00.000Z' });
+
+  // A forged event: same device, same seq as genuine2, but genuinely different
+  // content (not an identical clone) — simulates corruption, not a re-import.
+  const forged2 = { ...genuine2, eventId: newId(ID_PREFIXES.event), payload: { v: 'FORGED' } };
+  // Reseal its hash so it's internally self-consistent (a real forger controls
+  // their own event's fields), but it still collides on seq with genuine2.
+  const { hash, ...rest } = forged2;
+  const resealed = { ...rest, hash: computeEventHash(rest) };
+
+  const mixed = [genuine1, genuine2, resealed, genuine3];
+  const { ok, problems } = verifyChains(mixed);
+
+  assert.equal(ok, false);
+  assert.ok(problems.some((p) => p.kind === 'duplicate_seq' && p.eventId === resealed.eventId));
+  // The key assertion: genuine3 must NOT be blamed for a broken_link it doesn't have.
+  assert.ok(!problems.some((p) => p.eventId === genuine3.eventId));
+});
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -900,11 +926,27 @@ import { createEvent, verifyEventHash } from './events.js';
 /**
  * An append-only log for a single device. Each device maintains its own chain,
  * so devices working offline never invalidate one another (spec §6).
+ *
+ * Deliberately takes only `deviceId`: an earlier version of this function
+ * accepted a second `existingEvents` parameter to let a log resume from a
+ * previously-saved set, but `head` was derived from the array's last
+ * element rather than its highest `seq` — passing events out of order (e.g.
+ * loaded from storage without an explicit sort) silently set `head` to the
+ * wrong predecessor, and every event appended afterwards then chained off
+ * it. `verifyChains` correctly reported the resulting chain as broken even
+ * though the underlying data was never tampered with — a false positive on
+ * an auditor's own legitimate work, which is close to the worst failure
+ * mode an evidentiary tool can produce. Nothing in this plan uses that
+ * parameter (Task 6's merge operates on raw event arrays directly), so it
+ * is removed rather than patched: "resume a device's log across app
+ * restarts" is a real need, but it belongs to whichever later plan
+ * implements persistence, where it can be designed and tested against
+ * actual storage behaviour instead of bolted on speculatively here.
  */
-export function createLog(deviceId, existingEvents = []) {
-  const events = [...existingEvents];
-  let seq = events.reduce((m, e) => Math.max(m, e.seq), 0);
-  let head = events.length ? events[events.length - 1].hash : null;
+export function createLog(deviceId) {
+  const events = [];
+  let seq = 0;
+  let head = null;
 
   return {
     deviceId,
@@ -953,27 +995,34 @@ export function verifyChains(events) {
 
   for (const [deviceId, list] of byDevice) {
     const sorted = [...list].sort((a, b) => a.seq - b.seq);
+    // The last event confirmed NOT to be a duplicate — the actual reference
+    // point for the next event's expected seq/prevHash. Deliberately not
+    // "the previous array element": if that element was itself flagged
+    // duplicate_seq, using it anyway would misattribute a broken_link to
+    // the event that comes after a forged duplicate, even though that event
+    // is perfectly legitimate.
+    let lastGood = null;
 
-    for (let i = 0; i < sorted.length; i++) {
-      const e = sorted[i];
-
-      if (i > 0 && sorted[i - 1].seq === e.seq) {
+    for (const e of sorted) {
+      if (lastGood !== null && lastGood.seq === e.seq) {
         problems.push({ kind: 'duplicate_seq', deviceId, seq: e.seq, eventId: e.eventId });
         continue;
       }
 
-      const expectedSeq = i === 0 ? sorted[0].seq : sorted[i - 1].seq + 1;
+      // The first event we hold for a device need not be seq 1 — an auditor
+      // may have imported a partial file — so lastGood === null skips the
+      // seq/prevHash checks rather than assuming seq 1 or prevHash null.
+      const expectedSeq = lastGood === null ? e.seq : lastGood.seq + 1;
       if (e.seq !== expectedSeq) {
         problems.push({ kind: 'seq_gap', deviceId, seq: e.seq, eventId: e.eventId });
       }
 
-      const expectedPrev = i === 0 ? null : sorted[i - 1].hash;
-      // The first event we hold for a device need not be seq 1 — an auditor may
-      // have imported a partial file — so only check links between adjacent
-      // events we actually have.
-      if (i > 0 && e.prevHash !== expectedPrev) {
+      const expectedPrev = lastGood === null ? null : lastGood.hash;
+      if (lastGood !== null && e.prevHash !== expectedPrev) {
         problems.push({ kind: 'broken_link', deviceId, seq: e.seq, eventId: e.eventId });
       }
+
+      lastGood = e;
     }
   }
 
@@ -984,7 +1033,7 @@ export function verifyChains(events) {
 - [ ] **Step 4: Run test to verify it passes**
 
 Run: `node --test tests/core/eventLog.test.js`
-Expected: PASS, 9 tests.
+Expected: PASS, 10 tests.
 
 - [ ] **Step 5: Commit**
 
