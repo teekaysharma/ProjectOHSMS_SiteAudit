@@ -639,6 +639,24 @@ test('every event type named in the spec is declared', () => {
     assert.ok(EVENT_TYPES.includes(t), `missing event type ${t}`);
   }
 });
+
+test('the payload is deep-frozen, not just the top-level event', () => {
+  const e = createEvent({ ...base, payload: { siteId: 'site_1', nested: { name: 'Original' } } });
+  assert.ok(Object.isFrozen(e.payload));
+  assert.ok(Object.isFrozen(e.payload.nested));
+  assert.throws(() => { e.payload.nested.name = 'MUTATED'; }, /Cannot assign to read only property|not extensible/);
+  // In non-strict mode a frozen-property assignment fails silently rather than throwing.
+  // Confirm the value genuinely didn't change either way, since 'use strict' isn't
+  // guaranteed inside node:test's module context:
+  assert.equal(e.payload.nested.name, 'Original');
+});
+
+test('mutating the callers original payload object after createEvent does not affect the sealed event', () => {
+  const original = { siteId: 'site_1', name: 'Original' };
+  const e = createEvent({ ...base, payload: original });
+  original.name = 'CHANGED BY CALLER';
+  assert.equal(e.payload.name, 'Original');
+});
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -671,6 +689,23 @@ export const EVENT_TYPES = Object.freeze([
 const HASHED_FIELDS = ['eventId', 'type', 'ts', 'deviceId', 'actor', 'seq', 'prevHash', 'payload'];
 
 /**
+ * Recursively clone and freeze a value. `Object.freeze` alone is shallow: a
+ * frozen event whose `payload` is a plain (unfrozen) object can still have
+ * that payload mutated in place after the event is "sealed" — silently, with
+ * no exception. Cloning rather than freezing the caller's own reference also
+ * stops the caller mutating their own object out from under the sealed event
+ * later.
+ */
+function deepFreeze(value) {
+  if (value === null || typeof value !== 'object') return value;
+  const clone = Array.isArray(value) ? [] : {};
+  for (const key of Object.keys(value)) {
+    clone[key] = deepFreeze(value[key]);
+  }
+  return Object.freeze(clone);
+}
+
+/**
  * @param {object} event
  * @returns {string} hex digest over every field except `hash`
  */
@@ -690,8 +725,9 @@ export function verifyEventHash(event) {
 }
 
 /**
- * Seal a new event. The returned object is frozen: events are immutable
- * (spec §6.2) and corrections are new events, never edits.
+ * Seal a new event. The returned object — and its payload, recursively — is
+ * frozen: events are immutable (spec §6.2) and corrections are new events,
+ * never edits.
  */
 export function createEvent({ type, deviceId, actor, payload, seq, prevHash = null, ts }) {
   if (!EVENT_TYPES.includes(type)) {
@@ -719,17 +755,23 @@ export function createEvent({ type, deviceId, actor, payload, seq, prevHash = nu
   const event = {
     eventId: newId(ID_PREFIXES.event),
     type, ts, deviceId, actor, seq, prevHash,
-    payload
+    payload: deepFreeze(payload)
   };
   event.hash = computeEventHash(event);
   return Object.freeze(event);
 }
 ```
 
+`payload` is already validated as a plain, non-array object above, so
+`deepFreeze` only needs to branch on nested values, not re-validate the top
+level. It runs before `computeEventHash`, so the stored hash covers the
+frozen clone that actually ends up on the event — not the caller's original,
+now-detached object.
+
 - [ ] **Step 4: Run test to verify it passes**
 
 Run: `node --test tests/core/events.test.js`
-Expected: PASS, 8 tests.
+Expected: PASS, 10 tests.
 
 - [ ] **Step 5: Commit**
 
