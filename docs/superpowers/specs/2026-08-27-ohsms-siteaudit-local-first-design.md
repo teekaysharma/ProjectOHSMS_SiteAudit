@@ -175,22 +175,41 @@ produces every required behavior:
 
 Setting a status directly on a parent that has children is rejected by the UI.
 
-### 5.4 Score calculation
-
-Preserved from current behavior to keep historical comparisons valid:
+### 5.4 Score calculation and banding
 
 - Score 0 ("Not Applicable / Not Observed") is excluded from all averages.
 - `averageScore = totalScore / ratedItemsCount`; `percentage = (averageScore / 5) * 100`.
 - Ratings: `> 90` Excellent, `> 80` Good, `> 70` Satisfactory, `> 50` Low, `≤ 50`
   Unacceptable.
 
-Note: the boundaries are strict, so exactly 90.0% rates Good rather than Excellent — and an
-average of 4.5 (five 4s and five 5s, say) lands precisely there, so this is not a rare edge
-case. With no legacy data to preserve (§11.1), changing it would break nothing.
+**These bands are not to be altered.** They were set on expert advice and carry HSE
+consequences — a band understates or overstates risk to human life and limb, so the
+boundaries are a professional judgement, not an implementation detail. The strict `>`
+comparison is part of that judgement and is retained exactly: exactly 90.0% rates Good, not
+Excellent. No band boundary may be "corrected", rounded, or made inclusive during
+implementation.
 
-It is nonetheless kept as-is, because the banding is the user's professional scoring rubric
-rather than an implementation detail, and it matches the published README. Switching any
-boundary to inclusive is a one-line change in a single function if desired.
+**Consultants may define their own banding**, and doing so is their professional
+responsibility, not a defect in the defaults. Banding is therefore a configurable workspace
+setting shipped with the above as its default — but it is deliberately placed behind a
+warning in Settings rather than presented as a routine preference.
+
+### 5.4.1 Banding changes must not rewrite history
+
+Because banding is configurable, it carries a trap worth closing explicitly: if a consultant
+changes the bands, every previously finalized audit would silently re-render under the new
+thresholds, retroactively changing what a past audit "said". For a record intended to
+withstand dispute, that is unacceptable.
+
+Therefore banding is **versioned and event-sourced**, exactly like the question catalogue:
+
+- Changing it emits a `banding_updated` event creating a new banding version.
+- Every `audit_visit` records the `bandingVersionId` in force when it was finalized.
+- Reports render each visit under **the banding that applied at the time it was signed**,
+  never under current settings.
+- Where a report spans visits under different banding versions, it says so.
+
+The percentage and raw scores are invariant; only the band label depends on the version.
 
 ---
 
@@ -224,6 +243,7 @@ working tablets each maintain their own verifiable chain and merging never inval
 | `adhoc_question_promoted` | `questionId, catalogueVersionId` |
 | `catalogue_updated` | `catalogueVersionId, changes` |
 | `status_vocabulary_updated` | `statuses[]` |
+| `banding_updated` | `bandingVersionId, bands[]` (see §5.4.1) |
 | `audit_visit` | see §6.1 |
 | `audit_correction` | `correctionId, correctsVisitId, reason, items[]` |
 
@@ -236,6 +256,7 @@ working tablets each maintain their own verifiable chain and merging never inval
   date, auditorName,
   phasesCovered: [phaseId],
   catalogueVersionId,
+  bandingVersionId,        // §5.4.1 — bands are rendered as they stood at signing
   items: [
     { questionId, sectionId,
       textAsShown,           // fidelity: what the auditor actually read
@@ -510,6 +531,38 @@ escaped DOM construction, closing the injection hole flagged in the superseded s
 **Verification block:** each report embeds event count, chain head hashes, and generation
 timestamp, so a printed report can be checked back against the file it came from.
 
+### 10.1 Disclaimer
+
+Every generated report carries a disclaimer, and it is not suppressible. It also appears in
+the application's About screen.
+
+Final wording is the user's to set, and **must be reconciled with the disclaimer used by
+`VisualRiskAssessor`** so the two tools do not make inconsistent claims when their outputs
+are presented together (this tool's report plus the AI hazard-detection addendum). That
+wording was not available to this session; the following is a draft to be replaced, not
+approved text:
+
+> This report records observations made by the named auditor at the stated site on the
+> stated date. It supports, and does not replace, the judgement of a competent person.
+>
+> Scores reflect only what was observed at the time of the audit. The absence of a finding
+> is not evidence of the absence of a hazard. Items scored 0 were not applicable or not
+> observed, and are excluded from all averages.
+>
+> This report is not a certification, and is not a determination of statutory or regulatory
+> compliance.
+>
+> Performance bands are a professional judgement. Where an organisation has configured its
+> own banding, responsibility for the appropriateness of those thresholds rests with that
+> organisation.
+>
+> Records in this tool are tamper-evident, not tamper-proof: alteration after signing is
+> detectable, but the tool does not provide cryptographic proof of authorship.
+
+The last two paragraphs are load-bearing rather than boilerplate — the first because §5.4
+permits consultants to override expert-set HSE thresholds, the second because §7.3 sets a
+deliberate limit that must never be overstated to a client.
+
 ---
 
 ## 11. Migration
@@ -595,7 +648,11 @@ The valuable logic is pure functions, testable without a browser using `node --t
   children yield the lowest-ordered terminal status.
 - Forward-only closure — closing a question leaves past visits unaltered.
 - Trend like-for-like — composition change is detected and marked.
-- Score calculation — score 0 excluded; band boundaries behave as specified in §5.4.
+- Score calculation — score 0 excluded; band boundaries behave **exactly** as specified in
+  §5.4, including that 90.0% rates Good. This test exists specifically to catch a
+  well-meaning "fix" to the comparison operators.
+- Banding versioning — a visit finalized under banding v1 still renders its v1 band after
+  banding v2 is created (§5.4.1).
 - Signature binding — altering any score in a signed visit invalidates the chain, so the
   signature can never appear to cover findings it did not.
 - Catalogue import — a legacy `exportConfiguration()` fixture yields the expected sections
