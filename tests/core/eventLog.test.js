@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createLog, verifyChains } from '../../src/core/eventLog.js';
 import { newId, ID_PREFIXES } from '../../src/core/ids.js';
+import { computeEventHash } from '../../src/core/events.js';
 
 function seed(n = 3) {
   const log = createLog(newId(ID_PREFIXES.device));
@@ -79,4 +80,27 @@ test('duplicate seq on one device is detected', () => {
   const { ok, problems } = verifyChains([...events, clone]);
   assert.equal(ok, false);
   assert.ok(problems.some((p) => p.kind === 'duplicate_seq'));
+});
+
+test('a forged duplicate seq does not misattribute broken_link to a later legitimate event', () => {
+  const a = createLog(newId(ID_PREFIXES.device));
+  const genuine1 = a.append({ type: 'site_created', actor: 'a@b.com', payload: { v: 1 }, ts: '2026-02-01T00:00:00.000Z' });
+  const genuine2 = a.append({ type: 'site_created', actor: 'a@b.com', payload: { v: 2 }, ts: '2026-02-02T00:00:00.000Z' });
+  const genuine3 = a.append({ type: 'site_created', actor: 'a@b.com', payload: { v: 3 }, ts: '2026-02-03T00:00:00.000Z' });
+
+  // A forged event: same device, same seq as genuine2, but genuinely different
+  // content (not an identical clone) — simulates corruption, not a re-import.
+  const forged2 = { ...genuine2, eventId: newId(ID_PREFIXES.event), payload: { v: 'FORGED' } };
+  // Reseal its hash so it's internally self-consistent (a real forger controls
+  // their own event's fields), but it still collides on seq with genuine2.
+  const { hash, ...rest } = forged2;
+  const resealed = { ...rest, hash: computeEventHash(rest) };
+
+  const mixed = [genuine1, genuine2, resealed, genuine3];
+  const { ok, problems } = verifyChains(mixed);
+
+  assert.equal(ok, false);
+  assert.ok(problems.some((p) => p.kind === 'duplicate_seq' && p.eventId === resealed.eventId));
+  // The key assertion: genuine3 must NOT be blamed for a broken_link it doesn't have.
+  assert.ok(!problems.some((p) => p.eventId === genuine3.eventId));
 });
