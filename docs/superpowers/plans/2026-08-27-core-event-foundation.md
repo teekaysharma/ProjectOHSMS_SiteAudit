@@ -336,8 +336,16 @@ In `package.json`, change:
 to:
 
 ```json
-"test": "node --test tests/"
+"test": "node --test"
 ```
+
+With no path argument, Node's test runner discovers test files itself from the
+working directory (excluding `node_modules`). Do **not** pass `tests/` — on
+Node 22+ a path argument is treated as a module to load, not a directory to
+search, and `node --test tests/` fails with "Cannot find module …/tests"
+(verified on Node 24). Do not use a shell glob such as `tests/**/*.test.js`
+either: `**` needs `globstar` to recurse in `sh`, so it would silently stop
+matching once tests nest deeper than one level.
 
 `tests/api.test.js` still passes and keeps running; it is removed later, when
 `server.js` goes.
