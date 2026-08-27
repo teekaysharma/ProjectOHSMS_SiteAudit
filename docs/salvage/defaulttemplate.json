@@ -1,0 +1,22 @@
+{
+  "management": {
+    "Health and Safety Policy": [
+      "HS Policy Issued and Displayed",
+      "Health and Safety Policy communicated and understood"
+    ],
+    "Project Health and Safety responsibilities": [
+      "HS Responsibilities defined",
+      "Project H&S staff appointed"
+    ]
+  },
+  "site": {
+    "Permits & Regulatory Compliance": [
+      "Building Permit displayed",
+      "Safety Certificate valid"
+    ],
+    "Housekeeping & Access Control": [
+      "Site is clean",
+      "Vehicle segregation implemented"
+    ]
+  }
+}
