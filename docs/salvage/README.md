@@ -60,6 +60,11 @@ the spec requires.
 **So the section-to-phase binding does not need to be invented.** It is derivable from these
 two salvaged artefacts, and should be confirmed with the user rather than assumed.
 
+**`hse-ai-db` is being kept**, not deleted (decided 2026-08-27). It is becoming a searchable
+repository of HSE reference information — a separate project from this tool. The copy here
+is still a useful local record of where the phase model came from, but it is no longer the
+only surviving copy.
+
 **Licence note:** `hse-ai-db` is GPLv3; this repository is MIT. The file is kept here as
 `.reference` and is *not* compiled into the build. Only the phase *names* — facts, not code —
 are carried forward. The user authored both repositories and can relicense his own work, but
