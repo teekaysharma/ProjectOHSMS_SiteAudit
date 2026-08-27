@@ -45,7 +45,9 @@ System Access API (unsupported on Safari/iOS and Firefox).
   identify hazards themselves. `VisualRiskAssessor` remains a separate standalone tool
   producing an addendum report. This tool needs only manual photo attachment.
 - **Multi-user server, authentication, RBAC.** Deleted, not hardened.
-- **Live sync.** Reconciliation is by file hand-off (email, USB, AirDrop).
+- **Live sync.** Reconciliation is by file exchange — a shared cloud folder where one is
+  available (§7.2.1), or USB/email/AirDrop hand-off where it is not. The tool itself never
+  talks to a network.
 - **Cryptographic non-repudiation.** See §7 for the honest limits of what is provided.
 
 ---
@@ -182,9 +184,13 @@ Preserved from current behavior to keep historical comparisons valid:
 - Ratings: `> 90` Excellent, `> 80` Good, `> 70` Satisfactory, `> 50` Low, `≤ 50`
   Unacceptable.
 
-Note: boundaries are strict, so exactly 90.0% rates Good, not Excellent. This is existing
-behavior and is preserved deliberately rather than corrected, so that migrated historical
-scores do not shift band.
+Note: the boundaries are strict, so exactly 90.0% rates Good rather than Excellent — and an
+average of 4.5 (five 4s and five 5s, say) lands precisely there, so this is not a rare edge
+case. With no legacy data to preserve (§11.1), changing it would break nothing.
+
+It is nonetheless kept as-is, because the banding is the user's professional scoring rubric
+rather than an implementation detail, and it matches the published README. Switching any
+boundary to inclusive is a one-line change in a single function if desired.
 
 ---
 
@@ -235,13 +241,33 @@ working tablets each maintain their own verifiable chain and merging never inval
       textAsShown,           // fidelity: what the auditor actually read
       score, comment,
       photos: [ { photoId, contentHash, caption } ] }
-  ]
+  ],
+  signature: { photoId, contentHash, signedName, signedAt } | null
 }
 ```
 
 `textAsShown` is stored alongside `questionId` deliberately. The ID links a question across
 time for trend analysis; the stored text proves what was actually put to the auditee even
 if the catalogue is reworded years later.
+
+### 6.1.1 Signature binding
+
+The auditor's signature is captured **inside the app at Finalize** — drawn with finger or
+stylus on the tablet, or an uploaded scan — stored like any other image, and included in the
+event's hashed payload via its `contentHash`.
+
+This matters because a signature pasted onto a finished PDF proves nothing about the scores
+beneath it; the same image can be lifted onto any document. Binding it into the hashed event
+ties the signature to *those specific findings at that moment*. If a score is altered
+afterwards, the chain breaks and the signature demonstrably no longer covers what is being
+displayed.
+
+Combined with `auditorName` and `date`, the record supports a clear claim: this named
+auditor signed off on exactly these findings, and nothing has been altered since.
+
+A signature is not required to finalize — some visits are recorded before sign-off is
+obtained — so the field is nullable, and reports state plainly when a visit is unsigned
+rather than leaving the absence unexplained.
 
 ### 6.2 Drafts versus events
 
@@ -312,7 +338,43 @@ Because auditors work on different assignments, merge is overwhelmingly union ra
 conflict resolution. The conflict path exists to detect corruption and tampering, not as a
 routine workflow.
 
+### 7.2.1 Reconciliation via a shared folder
+
+The default reconciliation workflow is a **shared cloud folder** — OneDrive, Dropbox, Google
+Drive, iCloud, whichever the consultancy already uses — rather than emailing files around.
+
+Each device writes only its **own** file, named `events-<deviceId>.json`. The folder
+accumulates one file per auditor. Any device reads all files present and unions their events
+into a complete picture.
+
+The property that makes this work without any server is that **no two devices ever write the
+same file**, so there are no write conflicts to resolve — the sync provider is only moving
+whole files, never merging their contents. The event-union model in §7.2 does the rest.
+
+Work continues fully offline against IndexedDB regardless of connectivity; the export simply
+lands in the folder the next time the device is online. On desktop browsers exposing the File
+System Access API this can be automated as a progressive enhancement; on iPad the auditor
+uses the same Export button and picks the synced folder in the Files app.
+
+This deliberately introduces **no dependency on any particular provider**. The artefacts are
+ordinary JSON files, so switching providers, or dropping back to USB hand-off entirely, works
+without any change to the tool.
+
+Note also what this does *not* provide: a folder under the consultancy's own control is not a
+trusted third party, and gains no evidentiary weight over a USB stick. It is a workflow
+convenience only. See §7.3.
+
 ### 7.3 Tamper-evidence, and its limits
+
+**Threat model (decided 2026-08-27).** The record must be defensible against **outsiders** —
+a contractor or third party disputing what an audit found. The consultancy and its own
+auditors are trusted. Defending against an insider altering findings after the fact is
+explicitly **not** a requirement, because it cannot be met without a trusted third party,
+and every option for that either reintroduces the client-server architecture the project
+exists to avoid or imposes key management on non-technical users in the field.
+
+This decision is what makes the limits below acceptable. It should be revisited if the tool
+is ever used where the consultancy's own impartiality is the thing in question.
 
 Each event carries `hash = SHA-256(canonicalJSON(envelope-without-hash))`, where photo bytes
 are represented by their `contentHash` rather than included directly — so verifying a chain
@@ -411,6 +473,10 @@ control — dropdowns are poor on a tablet and worse with gloves. Each question 
 camera button capturing straight to the item. Every change autosaves to IndexedDB; there is
 no save button to forget under field pressure.
 
+**Finalize.** Finalizing presents a summary, an optional signature pad (finger, stylus, or
+uploaded scan, per §6.1.1), and a clear warning that the visit becomes part of the permanent
+record and can afterwards only be amended by a visible correction — never a silent edit.
+
 **Auditor-facing surface** is Export and Import only. Log, merge, and hash mechanics are
 never surfaced.
 
@@ -434,6 +500,10 @@ All reports are computed by replaying and filtering the event log. None are stor
 so the record explains its own gaps rather than appearing to have holes. Trend sections
 carry the §8.1 composition markers.
 
+**Signatures** are rendered against the visits they belong to, with the auditor's name and
+date. Where a visit was finalized without one, the report says so explicitly — an unexplained
+blank signature block invites exactly the challenge the record exists to withstand.
+
 **Output:** HTML export and print-to-PDF, as today. `document.write` is replaced with
 escaped DOM construction, closing the injection hole flagged in the superseded security plan.
 
@@ -446,25 +516,30 @@ timestamp, so a printed report can be checked back against the file it came from
 
 ### 11.1 Data
 
-On first load, if legacy `ohsAuditToolData` is present in localStorage, offer a one-time
-import:
+**There is no field data to migrate.** The tool has not been used on a live engagement, so
+no audit records exist that need preserving (confirmed with the user, 2026-08-27).
 
-- Each project name becomes a Project with a generated ID.
-- Each site name becomes a Site — **deduplicated by name across projects**. Where the same
-  site name appears under two projects, it collapses into one Site with two Assignments.
-  This is where the many-to-many relationship appears retroactively.
-- Each project/site pair becomes an Assignment with `scopeName` defaulted to the project
-  name, editable afterwards.
-- `masterConfig` becomes catalogue version 1, with generated stable question IDs.
-- Current scores become one `audit_visit` per assignment, flagged `migrated: true` with
-  `dateApproximate: true`, dated from the legacy `lastSaved` timestamp.
+This removes audit-data migration from scope entirely, and with it the `migrated` and
+`dateApproximate` flags. No record will ever need to be marked second-class in reports, and
+the evidence chain starts clean from first real field use.
 
-The approximate-date flag is required. Asserting a precise audit date that was never
-recorded would poison the evidence record from day one, and migrated visits must be
-visibly distinguishable from genuine field records in every report.
+What *is* worth carrying forward is the **question catalogue**:
 
-Legacy localStorage data is left in place after migration, not cleared, until the user
-confirms the result.
+- The built-in default template (currently hardcoded in `loadDefaultTemplate()`) becomes
+  catalogue version 1, with stable question IDs generated once at build time so that they
+  are identical across every install. This matters: if IDs were generated per-install,
+  two auditors' files could not be compared question-for-question after merging.
+- Custom template files previously exported from the old tool — `exportConfiguration()`
+  emits `{ management: {...}, site: {...} }` — can be imported as a new catalogue version.
+  A small self-contained importer: section and question text in, stable IDs generated on
+  arrival, re-import of the same file idempotent.
+
+Legacy `ohsAuditToolData` in localStorage is ignored and left untouched. It is not read, not
+migrated, and not cleared.
+
+**This does not affect consolidating auditors' data.** Consolidation is the event-union
+merge in §7.2, operating on files produced by the new tool. It has no relationship to
+legacy migration.
 
 ### 11.2 Code
 
@@ -521,8 +596,10 @@ The valuable logic is pure functions, testable without a browser using `node --t
 - Forward-only closure — closing a question leaves past visits unaltered.
 - Trend like-for-like — composition change is detected and marked.
 - Score calculation — score 0 excluded; band boundaries behave as specified in §5.4.
-- Migration — legacy fixture produces the expected entities, with same-named sites across
-  projects collapsing to one Site with two Assignments.
+- Signature binding — altering any score in a signed visit invalidates the chain, so the
+  signature can never appear to cover findings it did not.
+- Catalogue import — a legacy `exportConfiguration()` fixture yields the expected sections
+  and questions with stable IDs; re-importing the same file does not duplicate them.
 
 **Manual checklist** (not worth automating at this size): photo capture on each target
 device, export/import round-trip between two devices, print output fidelity, and opening the
@@ -535,7 +612,12 @@ built file from `file://` on iPad Safari, Android Chrome, Windows, and Mac.
 These are decisions to exclude, not open questions:
 
 - Per-auditor cryptographic signing keys (§7.3 upgrade path).
-- Live sync or any networked reconciliation.
+- Third-party timestamping of chain heads (RFC 3161). This is the cheapest route to genuine
+  independent proof if the §7.3 threat model ever widens to insiders — one HTTP call when
+  online, no server of your own, no lock-in — but it is unnecessary under the current
+  threat model and adds a network dependency to a deliberately offline tool.
+- Legacy audit-data migration — there is nothing to migrate (§11.1).
+- Live sync or any networked reconciliation beyond the shared-folder workflow in §7.2.1.
 - Playwright end-to-end suite — the manual checklist covers v1.
 - Promotion of the tool to multi-tenant or hosted use.
 - Integration with `VisualRiskAssessor`, which stays a separate addendum tool.
@@ -551,8 +633,8 @@ This design is too large for a single implementation pass. The plan should seque
 
 1. **Core** — event store, hash chain, projections, merge. Pure logic, fully unit-tested,
    no UI. Nothing else is trustworthy until this is.
-2. **Migration** — legacy import onto the core, verified against a real exported fixture
-   from the current tool.
+2. **Catalogue** — default catalogue v1 with build-time stable IDs, plus the legacy config
+   importer (§11.1). Small, and everything downstream depends on question identity.
 3. **Audit capture** — assignment/phase management, the audit screen, photos, finalize.
 4. **Reports and dashboards** — ported onto projections.
 5. **Single-file build and cross-device acceptance** — including the `file://` test on all
