@@ -321,10 +321,37 @@ function serialise(value, path) {
 Run: `node --test tests/core/canonicalJson.test.js`
 Expected: PASS, 6 tests.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 5: Point the test script at the whole test directory**
+
+The `test` script names a single file, so nothing under `tests/core/` runs in CI —
+`npm test` reports 2 tests while the core suite grows unwatched. Fixed here rather
+than at the end of the plan so every later task is actually covered.
+
+In `package.json`, change:
+
+```json
+"test": "node --test tests/api.test.js"
+```
+
+to:
+
+```json
+"test": "node --test tests/"
+```
+
+`tests/api.test.js` still passes and keeps running; it is removed later, when
+`server.js` goes.
+
+- [ ] **Step 6: Confirm the whole suite runs**
+
+Run: `npm test`
+Expected: PASS, and the reported count now includes `tests/core/sha256.test.js`
+and `tests/core/canonicalJson.test.js` — not just the two API tests.
+
+- [ ] **Step 7: Commit**
 
 ```bash
-git add src/core/canonicalJson.js tests/core/canonicalJson.test.js
+git add src/core/canonicalJson.js tests/core/canonicalJson.test.js package.json
 git commit -m "feat(core): add canonical JSON serialisation for hashing"
 ```
 
@@ -1034,28 +1061,14 @@ export function mergeEvents(...eventSets) {
 Run: `node --test tests/core/merge.test.js`
 Expected: PASS, 7 tests.
 
-- [ ] **Step 5: Point the test script at the whole test directory**
-
-The `test` script currently names one file, so new core tests would never run in CI. In `package.json`, change:
-
-```json
-"test": "node --test tests/api.test.js"
-```
-
-to:
-
-```json
-"test": "node --test tests/"
-```
-
-`tests/api.test.js` still passes and keeps running; it is removed later, when `server.js` goes.
-
-- [ ] **Step 6: Run the whole suite**
+- [ ] **Step 5: Run the whole suite**
 
 Run: `npm test`
-Expected: PASS — all core tests plus the two existing API tests.
+Expected: PASS — all core tests plus the two existing API tests. (The `test`
+script was pointed at the whole `tests/` directory back in Task 2, so every
+core test written since then runs here.)
 
-- [ ] **Step 7: Verify the CI gates still pass**
+- [ ] **Step 6: Verify the CI gates still pass**
 
 Run each exactly as `.github/workflows/ci.yml` does:
 
@@ -1065,10 +1078,10 @@ npm run build && npm test && npm audit --audit-level=high
 
 Expected: build succeeds, all tests pass, audit exits 0.
 
-- [ ] **Step 8: Commit**
+- [ ] **Step 7: Commit**
 
 ```bash
-git add src/core/merge.js tests/core/merge.test.js package.json
+git add src/core/merge.js tests/core/merge.test.js
 git commit -m "feat(core): add idempotent event merge with conflict detection"
 ```
 
