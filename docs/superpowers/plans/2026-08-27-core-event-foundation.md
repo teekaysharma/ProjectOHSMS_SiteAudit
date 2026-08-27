@@ -1048,6 +1048,21 @@ git commit -m "feat(core): add append-only event log with chain verification"
 
 This is what makes multi-auditor reconciliation work (spec §7.2): a union by event ID that is idempotent and order-independent, so importing the same file twice changes nothing and importing in any order gives the same result.
 
+**A design correction made before this task was implemented.** An earlier
+version of this section's reference code kept whichever event it encountered
+*first* when two events shared an `eventId` but differed in content (a
+genuine conflict — corruption, or a forgery attempting to overwrite a real
+record under its ID). That is order-dependent: `mergeEvents(genuine, forged)`
+and `mergeEvents(forged, genuine)` produced different "winners" depending
+purely on argument order. That directly contradicts spec §7.2's own stated
+guarantees — "commutative" and "the import is rejected and reported; it is
+never silently resolved" — and was confirmed with a concrete genuine-vs-forged
+repro before any code was written. The design below excludes **both** sides
+of a genuine conflict from the merged set instead: nothing is silently
+chosen, the result is truly order-independent (there is no "first" to be
+order-dependent about), and the disputed content surfaces for a human to
+resolve via `conflicts`, not by algorithm.
+
 **Files:**
 - Create: `src/core/merge.js`
 - Test: `tests/core/merge.test.js`
@@ -1055,7 +1070,10 @@ This is what makes multi-auditor reconciliation work (spec §7.2): a union by ev
 
 **Interfaces:**
 - Consumes: `verifyChains` (Task 5).
-- Produces: `mergeEvents(...eventSets): { events, added, duplicates, conflicts, verification }`
+- Produces: `mergeEvents(...eventSets): { events, added, duplicates, conflicts, verification }` —
+  `conflicts` is `{ eventId, hashes: string[] }[]`, one entry per `eventId`
+  that had more than one distinct hash across the merged sets, listing every
+  distinct hash seen (sorted, so the shape itself is order-independent).
 
 - [ ] **Step 1: Write the failing test**
 
@@ -1112,7 +1130,7 @@ test('merge is order-independent', () => {
   assert.deepEqual(ab, ba);
 });
 
-test('same eventId with different content is a conflict, not a silent overwrite', () => {
+test('same eventId with different content excludes both sides, not a silent pick', () => {
   const a = auditor(1, 2);
   // Reseal the forgery so its hash genuinely differs. Spreading alone would
   // copy the original hash, which merge would (correctly) treat as a duplicate.
@@ -1121,9 +1139,33 @@ test('same eventId with different content is a conflict, not a silent overwrite'
   const r = mergeEvents(a, [forged]);
   assert.equal(r.conflicts.length, 1);
   assert.equal(r.conflicts[0].eventId, a[1].eventId);
-  // The original is kept; the forgery does not replace it.
-  const kept = r.events.find((e) => e.eventId === a[1].eventId);
-  assert.equal(kept.payload.name, a[1].payload.name);
+  assert.deepEqual(r.conflicts[0].hashes, [a[1].hash, forged.hash].sort());
+  // Neither version enters the merged set — a human resolves this, not an algorithm.
+  assert.ok(!r.events.some((e) => e.eventId === a[1].eventId));
+  // The non-conflicting sibling is unaffected.
+  assert.ok(r.events.some((e) => e.eventId === a[0].eventId));
+});
+
+test('a conflict is genuinely order-independent, not just reported both ways', () => {
+  const a = auditor(1, 2);
+  const forged = { ...a[1], payload: { ...a[1].payload, name: 'FORGED' } };
+  forged.hash = computeEventHash(forged);
+  const r1 = mergeEvents(a, [forged]);
+  const r2 = mergeEvents([forged], a);
+  assert.deepEqual(
+    r1.events.map((e) => e.eventId).sort(),
+    r2.events.map((e) => e.eventId).sort()
+  );
+  assert.equal(r1.conflicts.length, r2.conflicts.length);
+});
+
+test('excluding a conflicted event surfaces as a seq_gap for its device', () => {
+  const a = auditor(1, 3);
+  const forged2 = { ...a[1], payload: { ...a[1].payload, name: 'FORGED' } };
+  forged2.hash = computeEventHash(forged2);
+  const r = mergeEvents(a, [forged2]);
+  assert.equal(r.verification.ok, false);
+  assert.ok(r.verification.problems.some((p) => p.kind === 'seq_gap'));
 });
 
 test('merging reports chain problems from tampered input', () => {
@@ -1164,57 +1206,73 @@ import { verifyChains } from './eventLog.js';
  * Union any number of event sets by eventId.
  *
  * Idempotent (importing the same file twice is a no-op) and commutative
- * (import order does not matter) — the two properties that let auditors
- * reconcile by passing files around with no server (spec §7.2).
+ * (import order never affects the result — including under a conflict) —
+ * the two properties that let auditors reconcile by passing files around
+ * with no server (spec §7.2).
  *
  * Two events sharing an eventId but differing in content is an integrity
- * failure. The first-seen event is kept and the collision is reported; it is
- * never silently resolved.
+ * failure — corruption, or a forgery attempting to overwrite a genuine
+ * record under its own ID. Per spec §7.2 this is "rejected... never
+ * silently resolved": neither version is chosen. Both are excluded from
+ * the merged set and reported in `conflicts` for a human to resolve. An
+ * earlier version of this function kept whichever event it saw first,
+ * which is order-dependent — a forger could win simply by being merged
+ * first. Excluding both sides instead makes the result genuinely
+ * order-independent, since there is no "first" left to depend on.
+ *
+ * A side effect worth expecting: excluding a conflicted event leaves a hole
+ * in its device's sequence. `verification` (via `verifyChains`) will then
+ * report a `seq_gap` for that device — which is the correct signal that
+ * something in that device's chain needs human review, not a bug.
  *
  * @param {...object[]} eventSets
  */
 export function mergeEvents(...eventSets) {
-  const byId = new Map();
-  const conflicts = [];
-  let added = 0;
+  const hashesById = new Map();
+  const firstSeenById = new Map();
   let duplicates = 0;
 
   for (const set of eventSets) {
     for (const event of set || []) {
-      const existing = byId.get(event.eventId);
-      if (!existing) {
-        byId.set(event.eventId, event);
-        added++;
-        continue;
-      }
-      if (existing.hash === event.hash) {
+      let hashes = hashesById.get(event.eventId);
+      if (!hashes) {
+        hashes = new Set();
+        hashesById.set(event.eventId, hashes);
+        firstSeenById.set(event.eventId, event);
+      } else if (hashes.has(event.hash)) {
         duplicates++;
         continue;
       }
-      conflicts.push({
-        eventId: event.eventId,
-        keptHash: existing.hash,
-        rejectedHash: event.hash
-      });
+      hashes.add(event.hash);
+    }
+  }
+
+  const conflicts = [];
+  const events = [];
+  for (const [eventId, hashes] of hashesById) {
+    if (hashes.size > 1) {
+      conflicts.push({ eventId, hashes: [...hashes].sort() });
+    } else {
+      events.push(firstSeenById.get(eventId));
     }
   }
 
   // Deterministic order: by device, then seq, then eventId as a tiebreak.
-  const events = [...byId.values()].sort(
+  events.sort(
     (a, b) =>
       a.deviceId.localeCompare(b.deviceId) ||
       a.seq - b.seq ||
       a.eventId.localeCompare(b.eventId)
   );
 
-  return { events, added, duplicates, conflicts, verification: verifyChains(events) };
+  return { events, added: events.length, duplicates, conflicts, verification: verifyChains(events) };
 }
 ```
 
 - [ ] **Step 4: Run test to verify it passes**
 
 Run: `node --test tests/core/merge.test.js`
-Expected: PASS, 7 tests.
+Expected: PASS, 9 tests.
 
 - [ ] **Step 5: Run the whole suite**
 
