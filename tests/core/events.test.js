@@ -77,3 +77,21 @@ test('every event type named in the spec is declared', () => {
     assert.ok(EVENT_TYPES.includes(t), `missing event type ${t}`);
   }
 });
+
+test('the payload is deep-frozen, not just the top-level event', () => {
+  const e = createEvent({ ...base, payload: { siteId: 'site_1', nested: { name: 'Original' } } });
+  assert.ok(Object.isFrozen(e.payload));
+  assert.ok(Object.isFrozen(e.payload.nested));
+  assert.throws(() => { e.payload.nested.name = 'MUTATED'; }, /Cannot assign to read only property|not extensible/);
+  // In non-strict mode a frozen-property assignment fails silently rather than throwing.
+  // Confirm the value genuinely didn't change either way, since 'use strict' isn't
+  // guaranteed inside node:test's module context:
+  assert.equal(e.payload.nested.name, 'Original');
+});
+
+test('mutating the callers original payload object after createEvent does not affect the sealed event', () => {
+  const original = { siteId: 'site_1', name: 'Original' };
+  const e = createEvent({ ...base, payload: original });
+  original.name = 'CHANGED BY CALLER';
+  assert.equal(e.payload.name, 'Original');
+});

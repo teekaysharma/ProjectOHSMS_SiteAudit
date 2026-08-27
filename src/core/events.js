@@ -18,6 +18,19 @@ export const EVENT_TYPES = Object.freeze([
 const HASHED_FIELDS = ['eventId', 'type', 'ts', 'deviceId', 'actor', 'seq', 'prevHash', 'payload'];
 
 /**
+ * Deep clone and recursively freeze an object to ensure complete immutability.
+ * Stops the caller's reference from mutating the sealed event later.
+ */
+function deepFreeze(value) {
+  if (value === null || typeof value !== 'object') return value;
+  const clone = Array.isArray(value) ? [] : {};
+  for (const key of Object.keys(value)) {
+    clone[key] = deepFreeze(value[key]);
+  }
+  return Object.freeze(clone);
+}
+
+/**
  * @param {object} event
  * @returns {string} hex digest over every field except `hash`
  */
@@ -66,7 +79,7 @@ export function createEvent({ type, deviceId, actor, payload, seq, prevHash = nu
   const event = {
     eventId: newId(ID_PREFIXES.event),
     type, ts, deviceId, actor, seq, prevHash,
-    payload
+    payload: deepFreeze(payload)
   };
   event.hash = computeEventHash(event);
   return Object.freeze(event);
