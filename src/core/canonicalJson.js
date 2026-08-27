@@ -9,10 +9,10 @@
  * @returns {string}
  */
 export function canonicalJson(value) {
-  return serialise(value, '$');
+  return serialise(value, '$', new Set());
 }
 
-function serialise(value, path) {
+function serialise(value, path, seen) {
   if (value === null) return 'null';
 
   const t = typeof value;
@@ -32,15 +32,31 @@ function serialise(value, path) {
   if (t === 'boolean' || t === 'string') return JSON.stringify(value);
 
   if (Array.isArray(value)) {
-    const parts = value.map((v, i) => serialise(v, `${path}[${i}]`));
+    if (seen.has(value)) {
+      throw new TypeError(`canonicalJson: circular reference at ${path}`);
+    }
+    seen.add(value);
+    const parts = value.map((v, i) => serialise(v, `${path}[${i}]`, seen));
+    seen.delete(value);
     return `[${parts.join(',')}]`;
   }
 
   if (t === 'object') {
+    const proto = Object.getPrototypeOf(value);
+    if (proto !== Object.prototype && proto !== null) {
+      throw new TypeError(
+        `canonicalJson: only plain objects are serialisable at ${path} (got ${value.constructor?.name ?? 'unknown'})`
+      );
+    }
+    if (seen.has(value)) {
+      throw new TypeError(`canonicalJson: circular reference at ${path}`);
+    }
+    seen.add(value);
     const keys = Object.keys(value).sort();
     const parts = keys.map(
-      (k) => `${JSON.stringify(k)}:${serialise(value[k], `${path}.${k}`)}`
+      (k) => `${JSON.stringify(k)}:${serialise(value[k], `${path}.${k}`, seen)}`
     );
+    seen.delete(value);
     return `{${parts.join(',')}}`;
   }
 
