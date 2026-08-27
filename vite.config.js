@@ -22,6 +22,9 @@ export default defineConfig({
       'X-Frame-Options': 'SAMEORIGIN'
     }
   },
+  // Relative base: works from a GitHub Pages subpath AND from file:// once the
+  // single-file build lands (spec §11.3). Absolute '/' would break both.
+  base: './',
   build: {
     outDir: 'dist',
     sourcemap: false
