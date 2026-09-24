@@ -59,6 +59,11 @@ below were computed with the §5.4 formula.
   dashboard and report, and no band is ever shown without the count of open Major NCs
   beside it; scores 1 and 2 require a comment before Finalize; a separate "imminent
   danger" flag, independent of the score, is shown above everything. Owner decision.
+  Evidence (`docs/references.md`): the codes themselves define stop conditions, e.g. CoP
+  1.1 §3.24.1 Table 1 "Stop removal work" at 0.02 fibres/mL or more, and §3.28.2.2(d)
+  "Work shall not proceed" while an enclosure leaks. A question whose failure the code
+  treats as a stop condition can carry that as a catalogue attribute with its clause
+  citation, so the flag rests on the code rather than on each auditor's judgement alone.
 - **C8. Score 0 mixes Not Applicable with Not Observed.** Both are excluded from the
   average. One item at 5 with nine Not Observed gives 100%, rated **Excellent**, on 10%
   coverage. Not Applicable means the hazard does not exist; Not Observed means the auditor
@@ -80,8 +85,24 @@ below were computed with the §5.4 formula.
 - **C11. Findings have no follow-up.** The spec records non-conformances but has no
   corrective action, owner, due date or close-out verification. Either v1 tracks them, or
   every report states that corrective action is tracked outside this tool. Owner decision.
+  Evidence: CoP 53.1 v4.0 §3.1 item 4.9 requires "timelines, for responding to
+  non-compliance findings" from audits and inspections, and lists non-compliance and
+  corrective action reports; CoP 1.1 §3.11(h) sets action fields (immediate actions,
+  timescales, owner). An audit record without a response deadline leaves that
+  requirement to be met elsewhere.
+- **C12. The salvaged catalogue does not cover every CoP 53.1 hazard topic.** It is
+  written for an HV substation project (ADWEA, power plant interface, HV sections).
+  Reading site sections 1 and 2 in full and searching all 208 questions found no site
+  question for hot work, confined space entry, asbestos, housekeeping, manual handling,
+  formwork, demolition, piling or temporary works design checks, all listed in CoP 53.1
+  Section 5. Management question 8.3 checks that a permit system exists; no site question
+  verifies permits in use. Site question 2.5 checks RCD protection and earthing, while
+  CoP 53.1 item 5.10 requires temporary installations on 110 V. Keyword search can miss
+  differently worded questions, so a competent person confirms the gap list. Owner
+  decision: one catalogue per project type, or one general catalogue with phase and
+  project-type applicability.
 
-When the owner decides C1 to C11, each accepted decision becomes a numbered safety
+When the owner decides C1 to C12, each accepted decision becomes a numbered safety
 requirement in this spec, and every plan names the test that proves each one it touches.
 
 ---
