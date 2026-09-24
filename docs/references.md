@@ -18,6 +18,11 @@ are images could not be read in session and are marked as such.
 | R12 | ADOSH-SF CoP 53.0 OSH Management during Construction Work, v4.0, 15 July 2024 | §3.3.3(a)(v) one Principal Contractor at a time (C6). §3.3.4(a)(viii) supervising consultant audits the PC and reports "continued non-conformance" immediately (C11). §3.3.5(i) PC stops non-compliant work (C7). §3.5 demolition is high risk; plan approved before work. Figures 1 to 3 are images, not read. |
 | R13 | ADOSH-SF CoP 21.0 Permit to Work Systems, v4.0, 15 July 2024 | Table 1 activities requiring a permit (hot work, confined space, heat, excavation, isolation, work at height, electrical, scaffolding, pressure testing). §3.6(d) validity at most 12 hours or one shift; §3.10(b) signatures before work; §3.10(c) original displayed at worksite; §3.5.3(a) holder not the issuer; §3.13(a) and §3.14 stop conditions (C7, C12). §4 permit records kept at least 1 year. |
 | R15 | ADOSH-SF CoP 23.0 Working at Height, v4.0, 15 July 2024 | §3.11 guardrails (2 m, 950 mm, toe board 150 mm, mid-rail gap 470 mm, 1.25 kN); §3.14.1 standard railing from 1.2 m (C9 caution); §3.12 nets; §3.13.2 and §3.15 inspection intervals (C12). |
+| R14 | ADOSH-SF CoP 29.0 Excavation Work, v4.0, 15 July 2024 (running headers read "CoP 14.0", a PDF error; the cover says 29.0) | §3.5 Table 1 safe temporary slopes by ground type, dry and wet (C9: question 3.3); §3.7(a) support over 1.2 m; §3.11(a) barriers 950 mm where a fall exceeds 2 m, ladders 4:1 projecting 1 m; §3.13 inspection before work, daily, before each shift, weekly examination recorded (C12). No 1.5 m permit depth and no spoil setback distance (C9: questions 3.1, 3.5). §3.11(a)(xi) names CoP 22.0 "Barricading of Hazards". |
+| R17 | ADOSH-SF CoP 15.0 Electrical Safety, v4.0, 15 July 2024 | §3.13(a) temporary supplies and tools on 110 V; §3.5(i) RCD and 110 V on construction outlets (C12: question 2.5). §3.9 de-energize before work; live work only with documented authorization. §1(m): requirements for overhead lines, cables and substations sit in the competent authorities' procedures (C9: sections 7 and 9). |
+| R18 | ADOSH-SF CoP 24.0 Lock-out / Tag-out (Isolation), v4.0, 15 July 2024 | §3.3(b)-(c) lock wherever the device accepts one, tag only where it cannot; §3.3(h)(ii) tags in Arabic and English; §3.3(i) annual inspection by someone other than the users; §4 record fields. §3.1.1(b) cites Ministerial Order No. 32 of 1982 (C9). |
+| R19 | ADOSH-SF CoP 27.0 Confined Spaces, v4.0, 15 July 2024 | §3.3(a) excavations can be confined spaces; §3.10(e) oxygen 19.5% to 23.5%, flammable gas below 5% LEL, stand-by man (C9: question 3.4); §3.10(b) and §3.8(a) no entry until conditions verified and rescue arranged (C7); §3.4(b) sign wording in Arabic and English. No H2S limit. |
+| R20 | ADOSH-SF CoP 11.0 Safety in the Heat, v4.0, 15 July 2024 (file name says v3.1; the document states v4.0) | §3.1.1(e)-(f) and §3.2(b)(ii) Thermal Work Limit, not heat index (C9: questions 10.2, 10.3); §3.1.1(e) 35 °C trigger; §3.2(b) acclimatization 5 to 7 days, personal water container of at least one litre, no shared cups; §3.2(g) dated seals on refillable containers; §3.2(e) no lone work (C12). No "1 per 25 workers" and no "200 m" (C9: questions 10.4, 10.5). |
 | R16 | ADOSH-SF CoP 34.0 Safe Use of Lifting Equipment and Lifting Accessories, v4.0, 15 July 2024 | §3.3 lifting plan; §3.2 Appointed Person (5 years' experience, written appointment); §3.6.6(e) lifting ceases at wind of 38 km/h or gusts above (C7); §3.11 thorough examination intervals; §3.12 register and inspections (C12). §2.1(e)-(f) citation of a deleted mechanism (C9). |
 
 ## Owner's answer on R1
@@ -33,12 +38,10 @@ is still to be named.
 | # | Document | Why | Informs |
 |---|---|---|---|
 | R1a | The standard that defines Major NC, Minor NC and Observation for this scale, with edition | Score definitions | C7, C8 |
-| R14 | ADOSH-SF CoP 29.0 Excavations | Checks questions 3.1, 3.3 and 3.5 | C9 |
-| R17 | ADOSH-SF CoP 15.0 Electrical Safety | Questions 2.5, 7.x, 8.x and 9.x (the HV core of the catalogue), and the 110 V rule | C9, C12 |
-| R18 | ADOSH-SF CoP 24.0 Lock-out and Tag-out | Cited by CoP 21.0 §3.12 and Element 3 commissioning; catalogue section 9 | C12 |
-| R19 | ADOSH-SF CoP 27.0 Confined Spaces | Question 3.4 atmosphere testing | C9, C12 |
-| R20 | ADOSH-SF CoP 11.0 Heat Stress | Catalogue section 10 | C9 |
-| R21 | ADOSH-SF CoP 22.0 Scaffolds | Question 11.5 and CoP 53.1 item 5.16 | C12 |
+| R22 | The electrical safety rules of the distribution company or authority for the project (CoP 15.0 §1(m) defers HV, cable and substation requirements to them) | Criteria for catalogue sections 7, 8 and 9 | C9, C13 |
+| R23 | ADOSH-SF Technical Guideline, Safety in the Heat (TWL zones; CoP 11.0 refers to it) | The "ADOSH Table" in question 10.3 | C9 |
+| R21 | The ADOSH-SF code for scaffolds. An earlier request here called CoP 22.0 "Scaffolds"; CoP 29.0 §3.11(a)(xi) names CoP 22.0 "Barricading of Hazards", so the scaffold code number needs confirming (CoP 53.1 item 5.16 cites CoP 22.0 and CoP 37.0 for scaffolds and ladders) | Question 11.5 | C12 |
+| R24 | ADOSH-SF CoP 17.0 Safety Signs and Signals, and CoP 2.0 Personal Protective Equipment | Catalogue sections 6 and 12 | C9, C12 |
 | R2 | ISO 19011:2018 | Cited by Element 8 for the audit process | C8, C11, C13 |
 | R3 | ISO 45001:2018 | Named in Element 8 §3.1(b) as other criteria | C11 |
 | R5 | VisualRiskAssessor report disclaimer | The two tools' reports must not contradict | C3 |

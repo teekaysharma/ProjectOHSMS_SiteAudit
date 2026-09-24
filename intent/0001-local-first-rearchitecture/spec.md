@@ -73,7 +73,9 @@ below were computed with the §5.4 formula.
   non-compliant person's work); CoP 21.0 §3.13(a) (scope change: work ceases) and §3.14
   (emergency: all permits suspended); CoP 34.0 §3.6.6(e) (lifting ceases at wind of
   38 km/h or gusts above it) and §3.1.3(a)(vii) (loss of communication: lifting
-  suspended); CoP 23.0 §3.3(a)(ii) (work stops while people cross the exclusion zone).
+  suspended); CoP 23.0 §3.3(a)(ii) (work stops while people cross the exclusion zone);
+  CoP 27.0 §3.10(b) (no confined space entry until every permit condition is met and
+  verified) and §3.8(a) (no entry without rescue arrangements).
 - **C8. Score 0 mixes Not Applicable with Not Observed.** Both are excluded from the
   average. One item at 5 with nine Not Observed gives 100%, rated **Excellent**, on 10%
   coverage. Not Applicable means the hazard does not exist; Not Observed means the auditor
@@ -95,9 +97,34 @@ below were computed with the §5.4 formula.
   ruling: CoP 34.0 §2.1(e)-(f) cites "Mechanism 8.0" for training approval while its own
   amendment record says Mechanism 8.0 was deleted; CoP 23.0 §3.13.2 cites "Ministerial
   Order No. 37/2 (1982)" and CoP 34.0 §3.11 cites "Ministerial Order No. (32) 1982" for
-  lifting inspection, and it is not clear whether they are the same instrument.
+  lifting inspection, and it is not clear whether they are the same instrument; CoP 24.0
+  §3.1.1(b) also cites "Ministerial Order No. 32 of 1982", so two of three codes use
+  that form.
   Elements v4.0 Element 9 §3.4 makes controlled documents subject to approval before
   issue and revision control, which the catalogue version sign-off above satisfies.
+  Checked against the codes (text search plus full reading):
+  - Question 3.3 "benching/sloping (1.5:1 minimum)" can pass an unsafe slope. CoP 29.0
+    v4.0 §3.5 Table 1 gives safe temporary slopes in degrees by ground type, dry and wet
+    (read here as ranges whose upper figure is the steepest allowed). 1.5 horizontal to 1
+    vertical is 33.7°, steeper than the table's upper figure for wet gravel (30°), wet
+    sand (30°), wet silt (20°), dry soft clay (30°), wet soft clay (20°) and wet firm clay
+    (25°); read as 1.5 vertical to 1 horizontal it is 56.3°, steeper than every entry.
+    A single ratio cannot stand for a table that depends on ground and water.
+  - Question 3.1 ">1.5m" and question 3.5 "minimum 2m setback" do not appear in CoP 29.0.
+    Its depth triggers are support for excavations over 1.2 m deep where material may
+    fall (§3.7(a)) and rigid 950 mm barriers where a fall exceeds 2 m (§3.11(a)(iv)-(v));
+    it sets no spoil setback distance.
+  - Question 3.4 matches CoP 27.0 v4.0 §3.10(e): oxygen 19.5% to 23.5%, flammable gas
+    below 5% LEL. CoP 27.0 sets no hydrogen sulphide limit, so the H2S part needs another
+    source.
+  - Questions 10.2 and 10.3 monitor a "Heat Index"; CoP 11.0 v4.0 never mentions a heat
+    index and requires the Thermal Work Limit (§3.1.1(e)-(f), §3.2(b)(ii)). An auditor
+    could score Conformance for heat index readings while the required TWL assessment is
+    missing. The "1 per 25 workers" in 10.4 and "within 200m" in 10.5 are not in CoP 11.0,
+    which says drinking water is provided "close to the worksite" (§3.2(b)(v)).
+  - Sections 7 and 9 (HV installation, testing and commissioning) cannot be checked
+    against CoP 15.0: its §1(m) places requirements for overhead lines, underground
+    cables and substations in the procedures of the relevant competent authorities.
 - **C10. Record dates come from the device clock.** The event envelope's `ts` and the
   visit `date` are taken from the tablet. A wrong clock puts a wrong date on evidence used
   in disputes, and the spec has no check. Proposed: show device date and time for the
@@ -144,6 +171,18 @@ below were computed with the §5.4 formula.
   §3.2(c), anemometer on site §3.6.6(a), SWL marked on every accessory §3.6.2(b),
   equipment register and daily and weekly inspections §3.12, thorough examination at
   least every 12 months and every 6 months for accessories and man-lifting §3.11).
+  Further, from the second set of codes: excavations inspected before work, at least
+  daily and before each shift, and thoroughly examined weekly with a record (CoP 29.0
+  §3.13); ladders at 4:1 projecting 1 m above ground (§3.11(a)(ii)-(iii)); confined space
+  signs "CONFINED SPACE – PERMIT REQUIRED – DO NOT ENTER" in Arabic and English (CoP 27.0
+  §3.4(b)), stand-by man (§3.10(e)(ii)), rescue arrangements before entry (§3.8(a));
+  temporary supplies and tools on 110 V (CoP 15.0 §3.13(a), §3.5(i)), which confirms the
+  gap in question 2.5; locks used wherever the isolating device accepts one and tags in
+  Arabic and English (CoP 24.0 §3.3(b), (h)(ii)); heat: programme where 35 °C is
+  foreseeable (CoP 11.0 §3.1.1(e)), acclimatization of 5 to 7 days (§3.2(b)(i)), a
+  personal water container of at least one litre and no shared cups (§3.2(b)(vi)),
+  refillable containers sealed with a dated tape and refilled daily (§3.2(g)), no lone
+  work in heat stress areas (§3.2(e)), the Ministry of Labour midday break (§3.1.1(g)).
 - **C13. Questions carry no audit criterion.** Elements v4.0 Element 8 §3.1(a)(iii)(1)
   and §3.1(b) require documented audit criteria covering legislation, ADOSH-SF and other
   requirements. The salvaged questions state what to check but not which clause requires
