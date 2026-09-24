@@ -24,6 +24,10 @@ are images could not be read in session and are marked as such.
 | R19 | ADOSH-SF CoP 27.0 Confined Spaces, v4.0, 15 July 2024 | §3.3(a) excavations can be confined spaces; §3.10(e) oxygen 19.5% to 23.5%, flammable gas below 5% LEL, stand-by man (C9: question 3.4); §3.10(b) and §3.8(a) no entry until conditions verified and rescue arranged (C7); §3.4(b) sign wording in Arabic and English. No H2S limit. |
 | R20 | ADOSH-SF CoP 11.0 Safety in the Heat, v4.0, 15 July 2024 (file name says v3.1; the document states v4.0) | §3.1.1(e)-(f) and §3.2(b)(ii) Thermal Work Limit, not heat index (C9: questions 10.2, 10.3); §3.1.1(e) 35 °C trigger; §3.2(b) acclimatization 5 to 7 days, personal water container of at least one litre, no shared cups; §3.2(g) dated seals on refillable containers; §3.2(e) no lone work (C12). No "1 per 25 workers" and no "200 m" (C9: questions 10.4, 10.5). |
 | R16 | ADOSH-SF CoP 34.0 Safe Use of Lifting Equipment and Lifting Accessories, v4.0, 15 July 2024 | §3.3 lifting plan; §3.2 Appointed Person (5 years' experience, written appointment); §3.6.6(e) lifting ceases at wind of 38 km/h or gusts above (C7); §3.11 thorough examination intervals; §3.12 register and inspections (C12). §2.1(e)-(f) citation of a deleted mechanism (C9). |
+| R25 | ADOSH-SF CoP 22.0 Barricading of Hazards, v4.0, 15 July 2024 | §3.4.1(a) soft barricading where the risk is low; §3.4.2 hard barricading erected by a competent person, with signs (C9: question 4.8). §3.5.2(a)(ii) signs give the responsible supervisor's name, phone and expected duration; §3.5.3(a)(ii) tape at least 2 m back from an edge with a fall under 2 m; §3.5.4(a)(i) top edge 900 mm to 1200 mm; §3.6.1(a)(iii) weekly documented inspection (C12). §3.5.6(a)(ii) site fencing per the Building Code and construction regulations (C9: question 2.3). §3.6.1(a)(ii) defective components tagged "Dangerous, Do Not Use" (C7). |
+| R21 | ADOSH-SF CoP 26.0 Scaffolding, v4.0, 15 July 2024 (the amendment record's date field reads "DATE"; the page headers state 15 July 2024) | §2(f) competency certificate by scaffold height, split at 10 m (C9: question 11.5). §3.2.3(a) engineer's design drawing over 10 m; §3.4 platform, guardrail, board and sole board dimensions; §3.14 inspection before first use and every 7 days, scaffold marking (C12). §3.9(a), §3.12.2(a), §3.13(a)(x)-(xi) prohibitions (C7). §3.12.1 refers to CoP 37.0 Ladders, not received. |
+| R24a | ADOSH-SF CoP 17.0 Safety Signage and Signals, v4.0, 15 July 2024 | §3.4(f) signs in Arabic and English (question 6.1); §3.6 Table 2 and §3.9.1 Table 3 sign colours; §3.9(c) fire safety signs under the Abu Dhabi Building Codes and the Civil Defence code (C9: questions 6.3, 6.5); §3.10 hand signals, one signaller, manoeuvre stopped when unsafe (C7, C12). Appendix 1 (typical signs, pages 15 to 35) and Appendix 2 (hand signals, pages 36 to 37) are images, not read. |
+| R24b | ADOSH-SF CoP 2.0 Personal Protective Equipment, v4.0, 15 July 2024 | §2(f) no task until the PPE competency test is passed (C7). §3.2(b) PPE meets Council of Ministers Decision No. 3 of 2016 and ESMA-approved standards (C9: section 12). §3.7(b) signs where PPE is required (question 6.2). §3.9 written Respiratory Protection Program, evaluated annually; §3.11(a) supplied breathing air: oxygen 19.5% to 23.5%, CO 10 ppm or less, CO2 1,000 ppm or less (question 12.7). §3.1.1(c), §3.2(c), §3.5, §3.6 (C12). Sets no electrical PPE rating. |
 
 ## Owner's answer on R1
 
@@ -33,15 +37,28 @@ IAF MD5:2019 for third-party audit duration, and uses the term "major non-compli
 without defining it. Which standard defines Major and Minor Non-Conformance for this scale
 is still to be named.
 
+## Closed requests
+
+| # | Document | Outcome |
+|---|---|---|
+| R22 | Electrical safety rules of the distribution company or authority (CoP 15.0 §1(m)) | Not available (owner, 2026-09-24). Owner decision: sections 7 to 9 use the predefined question text as the audit criterion (spec C9). |
+
 ## Still requested
+
+In priority order: the first four decide whether existing questions can be scored
+correctly; the rest fill catalogue sections not yet checked against any code.
 
 | # | Document | Why | Informs |
 |---|---|---|---|
 | R1a | The standard that defines Major NC, Minor NC and Observation for this scale, with edition | Score definitions | C7, C8 |
-| R22 | The electrical safety rules of the distribution company or authority for the project (CoP 15.0 §1(m) defers HV, cable and substation requirements to them) | Criteria for catalogue sections 7, 8 and 9 | C9, C13 |
 | R23 | ADOSH-SF Technical Guideline, Safety in the Heat (TWL zones; CoP 11.0 refers to it) | The "ADOSH Table" in question 10.3 | C9 |
-| R21 | The ADOSH-SF code for scaffolds. An earlier request here called CoP 22.0 "Scaffolds"; CoP 29.0 §3.11(a)(xi) names CoP 22.0 "Barricading of Hazards", so the scaffold code number needs confirming (CoP 53.1 item 5.16 cites CoP 22.0 and CoP 37.0 for scaffolds and ladders) | Question 11.5 | C12 |
-| R24 | ADOSH-SF CoP 17.0 Safety Signs and Signals, and CoP 2.0 Personal Protective Equipment | Catalogue sections 6 and 12 | C9, C12 |
+| R26 | Council of Ministers Decision No. 3 of 2016, UAE Regulation for Personal Protective Equipment, with the ESMA-approved standards it lists (CoP 2.0 §3.2(b)) | Ratings in questions 12.1, 12.2, 12.4 | C9 |
+| R27 | ADOSH-SF CoP 4.0 First Aid and Medical Emergency Treatment (cited by CoP 11.0) | Question 11.4 "1 per 25 workers"; section 13 | C9, C12 |
+| R28 | ADOSH-SF CoP 36.0 Plant and Equipment (CoP 53.1 items 5.12 and 5.27) | Section 4, not yet checked against any code | C9, C12 |
+| R29 | ADOSH-SF CoP 33.0 Working On, or Adjacent to a Road, and CoP 25.0 and CoP 44.0 (cited by CoP 53.1 item 5.3 for traffic management; titles not seen) | Section 5, not yet checked | C9, C12 |
+| R30 | ADOSH-SF CoP 39.0 (cited by CoP 53.1 items 5.35 and 5.36 for existing services; title not seen) | Question 2.2 underground utilities | C9 |
+| R31 | ADOSH-SF CoP 37.0 Ladders (cited by CoP 26.0 §3.12.1 and CoP 53.1 item 5.16) | Ladder checks | C12 |
+| R32 | Civil Defence UAE Fire and Life Safety Code of Practice (chapters on signs and portable fire equipment) and the Abu Dhabi Building Code section on construction site fencing | Questions 2.3, 6.3, 6.5, 13.4 | C9 |
 | R2 | ISO 19011:2018 | Cited by Element 8 for the audit process | C8, C11, C13 |
 | R3 | ISO 45001:2018 | Named in Element 8 §3.1(b) as other criteria | C11 |
 | R5 | VisualRiskAssessor report disclaimer | The two tools' reports must not contradict | C3 |

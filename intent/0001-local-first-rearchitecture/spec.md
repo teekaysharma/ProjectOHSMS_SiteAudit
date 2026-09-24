@@ -75,7 +75,14 @@ below were computed with the §5.4 formula.
   38 km/h or gusts above it) and §3.1.3(a)(vii) (loss of communication: lifting
   suspended); CoP 23.0 §3.3(a)(ii) (work stops while people cross the exclusion zone);
   CoP 27.0 §3.10(b) (no confined space entry until every permit condition is met and
-  verified) and §3.8(a) (no entry without rescue arrangements).
+  verified) and §3.8(a) (no entry without rescue arrangements). From the third set: CoP
+  26.0 §3.9(a) (a partly erected or dismantled scaffold carries a "not to be used" notice
+  and its access is blocked), §3.12.2(a) (ladders as uprights for a platform "strictly
+  prohibited"), §3.13(a)(x)-(xi) (no person on a tower scaffold while it is moved, never
+  moved in windy conditions); CoP 17.0 §3.10.1(d) (a manoeuvre is discontinued when the
+  operator cannot continue safely); CoP 2.0 §2(f) (an employee who fails the PPE
+  competency test does not do the task); CoP 22.0 §3.6.1(a)(ii) (defective barricade
+  components withdrawn and tagged "Dangerous, Do Not Use").
 - **C8. Score 0 mixes Not Applicable with Not Observed.** Both are excluded from the
   average. One item at 5 with nine Not Observed gives 100%, rated **Excellent**, on 10%
   coverage. Not Applicable means the hazard does not exist; Not Observed means the auditor
@@ -92,14 +99,24 @@ below were computed with the §5.4 formula.
   The codes themselves need care. CoP 23.0 sets different limits for different
   situations: guardrails at edges with a fall of 2 m or more (§3.11.1(a)) but a standard
   railing on open-sided floors and platforms from 1.2 m (§3.14.1(a)); a guardrail load of
-  1.25 kN (§3.11.2(f)) but 90 kg for a standard railing (§3.14.1(f)). A question must cite
-  the clause for its situation. Two citations conflict and need a competent person's
-  ruling: CoP 34.0 §2.1(e)-(f) cites "Mechanism 8.0" for training approval while its own
-  amendment record says Mechanism 8.0 was deleted; CoP 23.0 §3.13.2 cites "Ministerial
-  Order No. 37/2 (1982)" and CoP 34.0 §3.11 cites "Ministerial Order No. (32) 1982" for
-  lifting inspection, and it is not clear whether they are the same instrument; CoP 24.0
-  §3.1.1(b) also cites "Ministerial Order No. 32 of 1982", so two of three codes use
-  that form.
+  1.25 kN (§3.11.2(f)) but 90 kg for a standard railing (§3.14.1(f)). Ladders at scaffolds
+  extend 1.05 m (5 rungs) above the platform (CoP 26.0 §3.12.3(a)(iii)); ladders in
+  excavations project 1 m above ground (CoP 29.0 §3.11(a)(iii)). A question must cite
+  the clause for its situation. CoP 26.0 §3.4.7 agrees with CoP 23.0 §3.11.2 on guardrail
+  height (950 mm), toe board (150 mm) and rail gaps (470 mm).
+  Citations that conflict and need a competent person's ruling: CoP 34.0 §2.1(e)-(f)
+  cites "Mechanism 8.0" for training approval while its own amendment record says
+  Mechanism 8.0 was deleted; CoP 23.0 §3.13.2 cites "Ministerial Order No. 37/2 (1982)"
+  and CoP 34.0 §3.11 cites "Ministerial Order No. (32) 1982" for lifting inspection, and
+  it is not clear whether they are the same instrument; CoP 24.0 §3.1.1(b) and CoP 17.0
+  §3.1.1(b) also cite "Ministerial Order No. 32 of 1982", so three of four codes use that
+  form. CoP 53.1 §3.1 item 5.16 cites CoP 22.0 and CoP 37.0 for scaffolds and ladders, but
+  CoP 22.0 is Barricading of Hazards and the scaffolding code is CoP 26.0 (CoP 26.0
+  §3.7(a)(iv) names both), so a criterion copied from CoP 53.1 would cite the wrong code.
+  Mechanism 7.0 has two titles: the body text of CoP 2.0, 17.0 and 26.0 calls it
+  "Occupational Safety and Health Practitioner and Service Provider Registration", while
+  the amendment records of CoP 2.0 and 17.0 say it was renamed "Public and Preventive
+  Health Practitioner and Service Provider Accreditation".
   Elements v4.0 Element 9 §3.4 makes controlled documents subject to approval before
   issue and revision control, which the catalogue version sign-off above satisfies.
   Checked against the codes (text search plus full reading):
@@ -125,6 +142,41 @@ below were computed with the §5.4 formula.
   - Sections 7 and 9 (HV installation, testing and commissioning) cannot be checked
     against CoP 15.0: its §1(m) places requirements for overhead lines, underground
     cables and substations in the procedures of the relevant competent authorities.
+    **Owner decision (2026-09-24):** the distribution company's rules are not available;
+    the questions in sections 7 to 9 are used as predefined, and their own text is the
+    audit criterion. These items then rest on no primary source. Proposed, owner to
+    decide: their criterion (C13) reads "catalogue question text, owner decision
+    2026-09-24", so no report implies a code was checked, and the competent person
+    sign-off above still covers them.
+  - Question 2.3 "Site perimeter fencing (min 2.4m)": CoP 22.0 v4.0 §3.5.6(a)(ii) places
+    fencing requirements in the relevant Building Code and the Abu Dhabi construction
+    regulations. The 2.4 m figure is not in CoP 22.0 and its source has not been read.
+  - Question 4.8 "rigid barriers (not tape)" is stricter than CoP 22.0, which sets the
+    barricade type by risk assessment: soft barricading where the risk is low
+    (§3.4.1(a)), hard barricading where the assessment calls for a physical barrier
+    (§3.4.2(a)). The criterion must say which rule the auditor applies.
+  - Question 6.1 matches CoP 17.0 v4.0 §3.4(f), which requires Arabic and English on all
+    OSH signs, not only at HV areas. Question 6.2 "at all entry points" is the question's
+    own wording; CoP 2.0 v4.0 §3.7(b) requires signs in all areas where PPE is required.
+    "Illuminated" in 6.3 and "reflective materials" in 6.4 are in neither CoP 17.0 nor
+    CoP 22.0. CoP 17.0 §3.9(c) places fire safety signs under the Abu Dhabi Building Codes
+    and the Civil Defence UAE Fire and Life Safety Code; CoP 22.0 §3.5.5(a) requires
+    warning lights on barricades in darkness where the risk assessment calls for them.
+  - Question 11.5 "competent person certification": CoP 26.0 v4.0 §2(f) requires a
+    Scaffolding Competency Certificate from an approved third-party provider for scaffolds
+    over 10 m and all suspended scaffolds, and from a registered trainer below 10 m;
+    mobile tower erectors are trained to PASMA or equivalent (§2(d)). An auditor needs the
+    height split to score the question.
+  - Section 12 ratings have no source among the documents received. CoP 2.0 and CoP 15.0
+    §3.3(d) require protective equipment to be appropriate, maintained and used, and name
+    no rating. "Cat 2-4" (12.1), "Class E" (12.2) and "EH marking" (12.4) are, recalled
+    and not verified here, classes from US standards (NFPA 70E, ANSI/ISEA Z89.1, ASTM
+    F2413). CoP 2.0 §3.2(b) requires PPE to meet Council of Ministers Decision No. 3 of
+    2016 (UAE Regulation for PPE) and ESMA-approved standards; whether those accept these
+    classes needs that regulation. Question 12.7 (SF6): CoP 2.0 §3.9(d) requires a written
+    Respiratory Protection Program with fit testing wherever respirators are required,
+    evaluated annually (§3.9(j)); no code received sets an SF6 exposure limit, and
+    §3.9(a) refers to limits set by federal or local regulations.
 - **C10. Record dates come from the device clock.** The event envelope's `ts` and the
   visit `date` are taken from the tablet. A wrong clock puts a wrong date on evidence used
   in disputes, and the spec has no check. Proposed: show device date and time for the
@@ -183,6 +235,27 @@ below were computed with the §5.4 formula.
   personal water container of at least one litre and no shared cups (§3.2(b)(vi)),
   refillable containers sealed with a dated tape and refilled daily (§3.2(g)), no lone
   work in heat stress areas (§3.2(e)), the Ministry of Labour midday break (§3.1.1(g)).
+  From the third set: no site question checks scaffold condition. CoP 26.0 requires
+  inspection before first use, at least every 7 days, after alteration or repair and
+  after events such as strong winds, with records on site (§3.14(a)(vi)); each scaffold
+  marked with date erected, use, loading, last inspection and inspector (§3.14(b)); a
+  handover certificate kept on site (§3.14(a)(iv)); an engineer's design drawing for
+  scaffolds over 10 m (§3.2.3(a)); guardrail 950 mm, toe board 150 mm, mid-rail above
+  2 m, rail gaps at most 470 mm (§3.4.7); board gaps at most 25 mm each and 50 mm in
+  total (§3.4.3(a)(ii)); sole boards at least 225 mm by 450 mm (§3.4.2(a)(iv)); ladders
+  at 75° with a landing every 9 m (§3.12.3(a)(iii), §3.4.8(a)(i)); tower height at most
+  three times the minimum base unless the manufacturer states otherwise, castors locked
+  (§3.13(a)(iii), (vii)). Barricading (CoP 22.0): weekly documented inspection
+  (§3.6.1(a)(iii)); signs giving the responsible supervisor's name, phone number and
+  expected duration (§3.5.2(a)(ii)); tape at least 2 m back from an edge with a fall of
+  less than 2 m (§3.5.3(a)(ii)); top edge between 900 mm and 1200 mm (§3.5.4(a)(i)); not
+  tied off to electric cables or air hoses (§3.5.1(a)(vii)); entry points that do not
+  lead straight into the hazard (§3.5.1(a)(vi)). PPE (CoP 2.0): section 12 covers
+  electrical PPE only; no site question checks basic PPE in use, PPE for visitors
+  (§3.2(c)), PPE at no cost to employees (§3.1.1(c)), storage (§3.6), the inspection
+  regime (§3.5(b)) or training records naming the PPE issued (§2(h)(vi)). Signs (CoP
+  17.0): signs unobstructed and maintained (§3.5), containers and pipes labelled (§3.8),
+  a competent signaller and one signaller at a time (§3.10(b), §3.10.1(c)).
 - **C13. Questions carry no audit criterion.** Elements v4.0 Element 8 §3.1(a)(iii)(1)
   and §3.1(b) require documented audit criteria covering legislation, ADOSH-SF and other
   requirements. The salvaged questions state what to check but not which clause requires
