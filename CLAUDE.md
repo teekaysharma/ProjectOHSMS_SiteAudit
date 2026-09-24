@@ -40,6 +40,14 @@ what the task needs; define the check first, watch the test fail, then make it p
 - `docs/salvage/`: source material, imported verbatim. A hook blocks edits.
 - `tests/`: `node --test`, listed file by file in the `package.json` test script.
 
+## Safety posture
+Reports from this tool inform decisions about work that can injure or kill people. The
+worst failure is not a crash; it is a plausible report that is wrong (spec C7 to C11).
+- Never add a default, fallback or rounding that changes what a report says. Fail loudly.
+- Every number that reaches a report or dashboard has a test, including band boundaries.
+- Question text and its technical limits are content, not code. Never edit them.
+- Open safety decisions (spec C1 to C11) are not yours to settle. Do not build around them.
+
 ## Rules that protect the evidence
 - The event log is append-only. Corrections are new events; nothing edits or deletes a
   finalized event.

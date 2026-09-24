@@ -44,6 +44,46 @@ accepting the spec, or carries it forward explicitly. Nothing below changes the 
   with "copy from another assignment" for uniform answers. The design reasons are stated
   in §6.3; the owner confirms the change explicitly when accepting this spec.
 
+C7 to C11 were raised after the owner stressed that errors from this tool can contribute
+to injury or death on site. The score scale is categorical (legacy `main.js:26-31`):
+0 Not Applicable/Not Observed, 1 Major Non-Conformance, 2 Minor Non-Conformance,
+3 Observation/Improvement, 4 Conformance, 5 Best Practice. §5.4 averages it. The cases
+below were computed with the §5.4 formula.
+
+- **C7. An average can hide a Major Non-Conformance.** Nine items at 5 and one Major NC
+  at 1 give 92%, rated **Excellent**. If that one item is site question 3.4 ("Excavation
+  atmosphere testing (O2, H2S, LEL) before entry"), the report reads Excellent while a
+  potentially fatal failure is open. The spec has no concept of a critical finding,
+  imminent danger or stop-work, and no rule that an NC needs a comment or photo.
+  Proposed, without touching the bands: every open Major NC is listed first on every
+  dashboard and report, and no band is ever shown without the count of open Major NCs
+  beside it; scores 1 and 2 require a comment before Finalize; a separate "imminent
+  danger" flag, independent of the score, is shown above everything. Owner decision.
+- **C8. Score 0 mixes Not Applicable with Not Observed.** Both are excluded from the
+  average. One item at 5 with nine Not Observed gives 100%, rated **Excellent**, on 10%
+  coverage. Not Applicable means the hazard does not exist; Not Observed means the auditor
+  did not check it. Proposed: split 0 into two values, show coverage ("rated 1 of 10
+  applicable items") beside every percentage, and withhold the band below a coverage
+  threshold the owner sets. This changes the score scale the owner set, so owner decision.
+- **C9. Question content carries technical limits that need a competent person's check.**
+  Examples from the salvaged catalogue: 3.1 "depths >1.5m", 3.3 "benching/sloping (1.5:1
+  minimum)", 3.5 "minimum 2m setback". The tool imports the text verbatim (§11.1), so it
+  cannot correct these, and software tests cannot confirm them. Proposed: catalogue v1 is
+  reviewed against current primary sources and signed off by a named competent person
+  before field use; any correction becomes catalogue v2 through `catalogue_updated`, so
+  the history shows who changed what. Owner decision on reviewer and sources.
+- **C10. Record dates come from the device clock.** The event envelope's `ts` and the
+  visit `date` are taken from the tablet. A wrong clock puts a wrong date on evidence used
+  in disputes, and the spec has no check. Proposed: show device date and time for the
+  auditor to confirm at Finalize, and flag any event whose `ts` is earlier than the
+  previous event in the same device chain. Owner decision on scope for v1.
+- **C11. Findings have no follow-up.** The spec records non-conformances but has no
+  corrective action, owner, due date or close-out verification. Either v1 tracks them, or
+  every report states that corrective action is tracked outside this tool. Owner decision.
+
+When the owner decides C1 to C11, each accepted decision becomes a numbered safety
+requirement in this spec, and every plan names the test that proves each one it touches.
+
 ---
 
 ## 1. Context and goals
