@@ -20,6 +20,10 @@ accepts), then code and tests, then a PR reviewed against `REVIEW.md`. Artifacts
 Never implement without an accepted plan. If the work departs from the plan, update the
 plan in the same commit.
 
+Everything is saved in this repo: commit, push and open PRs here. Never write deliverables
+to Google Drive or a local Windows path. No config or links for other AI build platforms;
+keep what they taught as repo docs (see `docs/legacy-app-notes.md`).
+
 ## How to work
 `.claude/settings.json` loads the superpowers and Karpathy guidelines plugins. In short:
 state assumptions and ask when unclear; write the minimum code that passes; touch only

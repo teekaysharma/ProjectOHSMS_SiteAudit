@@ -74,3 +74,5 @@ stopped being audited.
   Safari. Not verified. See spec concern C1. Device test.
 - Whether Web Crypto is available from `file://` on all four platforms. Not verified; the
   spec plans a pure-JS fallback (§7.4). Device test.
+- Management System Audit per assignment (spec §6.3) reverses the earlier project-level
+  behaviour the owner asked for. Confirm the change (spec concern C6). Owner.

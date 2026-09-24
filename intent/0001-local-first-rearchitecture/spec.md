@@ -38,6 +38,11 @@ accepting the spec, or carries it forward explicitly. Nothing below changes the 
   Satisfactory on the dashboard. The Stage 4 port of `reportGeneration.js` must not carry
   this forward: bands apply to the unrounded percentage, from one function. Whether to
   patch the live legacy app now is an owner decision.
+- **C6. Management audit scope reverses an earlier owner request.** During the legacy
+  build the owner asked for management questions to be project-based, not site-based
+  (`docs/legacy-app-notes.md`). §6.3 records the Management System Audit per assignment,
+  with "copy from another assignment" for uniform answers. The design reasons are stated
+  in §6.3; the owner confirms the change explicitly when accepting this spec.
 
 ---
 
