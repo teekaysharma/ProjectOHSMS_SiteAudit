@@ -29,6 +29,29 @@ are images could not be read in session and are marked as such.
 | R24a | ADOSH-SF CoP 17.0 Safety Signage and Signals, v4.0, 15 July 2024 | §3.4(f) signs in Arabic and English (question 6.1); §3.6 Table 2 and §3.9.1 Table 3 sign colours; §3.9(c) fire safety signs under the Abu Dhabi Building Codes and the Civil Defence code (C9: questions 6.3, 6.5); §3.10 hand signals, one signaller, manoeuvre stopped when unsafe (C7, C12). Appendix 1 (typical signs, pages 15 to 35) and Appendix 2 (hand signals, pages 36 to 37) are images, not read. |
 | R24b | ADOSH-SF CoP 2.0 Personal Protective Equipment, v4.0, 15 July 2024 | §2(f) no task until the PPE competency test is passed (C7). §3.2(b) PPE meets Council of Ministers Decision No. 3 of 2016 and ESMA-approved standards (C9: section 12). §3.7(b) signs where PPE is required (question 6.2). §3.9 written Respiratory Protection Program, evaluated annually; §3.11(a) supplied breathing air: oxygen 19.5% to 23.5%, CO 10 ppm or less, CO2 1,000 ppm or less (question 12.7). §3.1.1(c), §3.2(c), §3.5, §3.6 (C12). Sets no electrical PPE rating. |
 
+## Version check against the live ADPHC list
+
+Checked on 2026-09-24 against https://www.adphc.gov.ae/en/Legislation/Code-of-Practices
+(read through a web connector, because this environment's network policy blocks the
+site). The list shows v4.1, effective 27 February 2026, for several codes this file
+records at v4.0. Every clause cited from a superseded version must be re-checked against
+v4.1 before it becomes an audit criterion (C13).
+
+| Code | Read here | Live | Status |
+|---|---|---|---|
+| CoP 1.1 | v4.1 | v4.1 | Current. |
+| CoP 26.0 | v4.0 | v4.1 | Re-checked by word-level diff. Its amendment record says "minor editorial changes throughout the document without changing requirements"; the diff agrees for every clause cited here. Changes: §2(f)(ii)-(iii) no longer cite Mechanism 7.0; §3.3.10(a) drops a duplicated item, so (iv) becomes (iii); §3.12.3(a)(ii) says "rungs" where v4.0 said "stiles"; the inspection record item is §3.14(a)(vii), not a numbered sub-item of (vi). |
+| CoP 23.0, 24.0, 29.0, 34.0, 53.1 | v4.0 | v4.1 | Not re-checked yet. |
+| CoP 28.0 | owner's summary | v4.1 | PDF not read. |
+| CoP 1.0, 2.0, 11.0, 15.0, 17.0, 21.0, 22.0, 27.0, 53.0, 54.0 | v4.0 | v4.0 | Current. |
+
+The list also gives the titles for codes this file cites by number only: CoP 4.0 First
+Aid and Medical Emergency Treatment; CoP 25.0 Driver Fatigue Prevention; CoP 33.0
+Working On or Adjacent to a Road; CoP 36.0 Plant and Equipment; CoP 37.0 Ladders; CoP
+39.0 Overhead and Underground Services; CoP 43.0 Temporary Structures; CoP 44.0 Traffic
+Management and Logistics. Management System Elements and the Technical Guidelines are
+not on this page.
+
 ## Owner's answer on R1
 
 R1 (audit method): the owner states the 0 to 5 scale was selected on the basis of
@@ -55,8 +78,8 @@ correctly; the rest fill catalogue sections not yet checked against any code.
 | R26 | Council of Ministers Decision No. 3 of 2016, UAE Regulation for Personal Protective Equipment, with the ESMA-approved standards it lists (CoP 2.0 §3.2(b)) | Ratings in questions 12.1, 12.2, 12.4 | C9 |
 | R27 | ADOSH-SF CoP 4.0 First Aid and Medical Emergency Treatment (cited by CoP 11.0) | Question 11.4 "1 per 25 workers"; section 13 | C9, C12 |
 | R28 | ADOSH-SF CoP 36.0 Plant and Equipment (CoP 53.1 items 5.12 and 5.27) | Section 4, not yet checked against any code | C9, C12 |
-| R29 | ADOSH-SF CoP 33.0 Working On, or Adjacent to a Road, and CoP 25.0 and CoP 44.0 (cited by CoP 53.1 item 5.3 for traffic management; titles not seen) | Section 5, not yet checked | C9, C12 |
-| R30 | ADOSH-SF CoP 39.0 (cited by CoP 53.1 items 5.35 and 5.36 for existing services; title not seen) | Question 2.2 underground utilities | C9 |
+| R29 | ADOSH-SF CoP 33.0 Working On or Adjacent to a Road, CoP 44.0 Traffic Management and Logistics, and CoP 25.0 Driver Fatigue Prevention (all cited by CoP 53.1 item 5.3) | Section 5, not yet checked | C9, C12 |
+| R30 | ADOSH-SF CoP 39.0 Overhead and Underground Services (cited by CoP 53.1 items 5.35 and 5.36) | Question 2.2 underground utilities | C9 |
 | R31 | ADOSH-SF CoP 37.0 Ladders (cited by CoP 26.0 §3.12.1 and CoP 53.1 item 5.16) | Ladder checks | C12 |
 | R32 | Civil Defence UAE Fire and Life Safety Code of Practice (chapters on signs and portable fire equipment) and the Abu Dhabi Building Code section on construction site fencing | Questions 2.3, 6.3, 6.5, 13.4 | C9 |
 | R2 | ISO 19011:2018 | Cited by Element 8 for the audit process | C8, C11, C13 |

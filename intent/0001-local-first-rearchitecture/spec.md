@@ -237,8 +237,9 @@ below were computed with the §5.4 formula.
   work in heat stress areas (§3.2(e)), the Ministry of Labour midday break (§3.1.1(g)).
   From the third set: no site question checks scaffold condition. CoP 26.0 requires
   inspection before first use, at least every 7 days, after alteration or repair and
-  after events such as strong winds, with records on site (§3.14(a)(vi)); each scaffold
-  marked with date erected, use, loading, last inspection and inspector (§3.14(b)); a
+  after events such as strong winds, with records on site (§3.14(a)(vi); records are
+  §3.14(a)(vii) in v4.1); each scaffold marked with date erected, use, loading, last
+  inspection and inspector (§3.14(b)); a
   handover certificate kept on site (§3.14(a)(iv)); an engineer's design drawing for
   scaffolds over 10 m (§3.2.3(a)); guardrail 950 mm, toe board 150 mm, mid-rail above
   2 m, rail gaps at most 470 mm (§3.4.7); board gaps at most 25 mm each and 50 mm in
