@@ -85,7 +85,11 @@ below were computed with the §5.4 formula.
   components withdrawn and tagged "Dangerous, Do Not Use"); CoP 28.0
   v4.1 §3.2(a) (no hot work outside a designated area without a hot work permit) and
   §3.4(a)(i), (ix) (permit before hot work in a hazardous area; flammable gas or vapour
-  below 5% LEL).
+  below 5% LEL); CoP 36.0 §3.1.1(b)(xi) and §3.9(a) (unsafe or damaged plant stopped or
+  withdrawn); CoP 39.0 §3.5.2(b)(v) (a damaged underground service: everyone leaves the
+  area) and §3.4.3(b)(v) (plant able to exceed the goalpost height prohibited under
+  overhead lines); CoP 33.0 v4.1 §3.4(d)(iii)(3) (busy or high-speed lanes never crossed
+  on foot).
 - **C8. Score 0 mixes Not Applicable with Not Observed.** Both are excluded from the
   average. One item at 5 with nine Not Observed gives 100%, rated **Excellent**, on 10%
   coverage. Not Applicable means the hazard does not exist; Not Observed means the auditor
@@ -197,6 +201,31 @@ below were computed with the §5.4 formula.
     employers "should consider" AEDs on the basis of risk assessment, and the 3-minute
     limit in §3.2.2(a)(i) applies to initial first aid anywhere on site, not to AEDs. The
     question turns a recommendation into a requirement.
+  - Section 4 (plant) against CoP 36.0 v4.1: question 4.10 matches §3.15.1(b)
+    (preventative maintenance schedule). CoP 36.0 sets no ROPS/FOPS requirement (4.4) and
+    no daily pre-use check signed by a competent person (4.3); §3.1.1(b)(x) requires
+    "appropriate tests, checks and inspections" without a frequency.
+  - Section 5 (traffic) against CoP 44.0 and CoP 33.0 v4.1: "minimum 6m wide" (5.1) is in
+    neither; CoP 44.0 §3.3.2(a) requires routes wide enough for the vehicles, and CoP 33.0
+    §3.5.1(a)(v) recommends 2.75 m one-way and 5.5 m two-way for traffic past road works.
+    "Max 20km/h" (5.3) is an example; CoP 44.0 §3.3.2(c)(ii) sets limits by risk
+    assessment. "Certified training" (5.4) is stricter than CoP 44.0 §3.3.4(a)
+    ("appropriately trained"), which also makes marshals for reversing a last resort
+    (§3.3.5(c)). "CCTV and 24/7 monitoring" (5.8) is in neither code; CoP 22.0
+    §3.5.6(a)(iii) requires an out-of-hours guard only where unauthorised access is a
+    higher risk. Question 5.2 matches CoP 44.0 §3.1.1(b)(ii)-(iii) and §3.3.3(a), and 5.7
+    matches §3.3.2(b).
+  - Question 6.4 "reflective materials" has a source for road works: CoP 33.0 v4.1
+    §3.6.1(a)(vi) requires reflective signs where there is no lighting.
+  - Sections 7 to 9 (owner decision above) are not wholly without an ADOSH source. CoP
+    39.0 v4.1 sets requirements for work near overhead lines and underground cables:
+    written isolation confirmation from the service provider (§3.4.2(b)), crossings under
+    lines at most 10 m wide with goalposts and at least 6 m clearance where reasonably
+    practicable (§3.4.3(b)(i)-(iii)), jib restrictors (§3.4.3(b)(vi)), no mechanical
+    excavation within 0.5 m of a known service and a banksman between 3 m and 0.5 m
+    (§3.5.3(c)(i)-(ii)). Where a section 7 to 9 question concerns work near existing
+    services, CoP 39.0 can be its criterion; the owner decides whether that changes the
+    decision.
 - **C10. Record dates come from the device clock.** The event envelope's `ts` and the
   visit `date` are taken from the tablet. A wrong clock puts a wrong date on evidence used
   in disputes, and the spec has no check. Proposed: show device date and time for the
@@ -287,6 +316,14 @@ below were computed with the §5.4 formula.
   refresher at least annually (§2.1(d)), first aid kits inspected at least monthly
   (§3.3(e)), emergency numbers posted (§3.2.2(a)(v)), an EMT or paramedic on site where
   ambulance response exceeds 15 minutes for high hazard work (§3.2.2(a)(iii)).
+  Traffic (CoP 44.0 v4.1): walkways checked daily at the start of each shift (§3.3.3(b)),
+  reversing alarms and amber beacons (§3.3.5(b)(iii)), separate vehicle and pedestrian
+  entrances (§3.1.1(b)(iv)), a site Traffic Management Plan (§3.4), pallets stacked at
+  most 3 high (§3.5.2(b)(ii)). Services (CoP 39.0 v4.1): NOCs and permit clearances
+  (§3.2(b)), warning signs at 250, 100, 50 and 25 m either side of overhead lines
+  (§3.4.3(b)(iv)), locators then hand digging before excavation (§3.5.1(a)), no pick-axes
+  or forks near services (§3.5.3(c)(iii)). Plant (CoP 36.0 v4.1): a schedule of plant on
+  site (§3.15.1(a)), maintenance records kept at least 5 years (§3.15.1(h)).
 - **C13. Questions carry no audit criterion.** Elements v4.0 Element 8 §3.1(a)(iii)(1)
   and §3.1(b) require documented audit criteria covering legislation, ADOSH-SF and other
   requirements. The salvaged questions state what to check but not which clause requires
