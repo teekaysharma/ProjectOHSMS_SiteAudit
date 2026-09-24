@@ -3,11 +3,41 @@
 **Date:** 2026-08-27
 **Status:** Design — awaiting approval
 **Supersedes:** `MVP_GAP_SECURITY_PLAN.md` (hosted multi-user direction, abandoned)
+**Intent:** [`intent.md`](./intent.md) · **Plan:** [`plan.md`](./plan.md)
 
 > This document reconciles two brainstorming conversations that forked in the UI on
 > 2026-08-27. Neither transcript was authoritative on its own: one branch established the
 > *why* (evidence-grade records, device constraints), the other established the *domain*
 > (scope-differentiated concurrent work, phase trees). This spec is the merge point.
+
+---
+
+## Flagged concerns (added 2026-09-24)
+
+Raised while moving this spec into the intent home. The owner resolves each one before
+accepting the spec, or carries it forward explicitly. Nothing below changes the design.
+
+- **C1. Offline persistence on iPad is assumed, not verified.** The design keeps drafts,
+  events and photos in IndexedDB for a page opened from local storage. §11.3 tests that the
+  built file *opens* from `file://`; nothing yet tests that data *survives* closing and
+  reopening the browser, or how an iPad opens a local HTML file at all (Files app preview
+  versus Safari). Proposed: add "record survives browser restart" to the §12 manual
+  checklist on all four platforms, and run it at the end of Stage 1, not Stage 5.
+  Status: inference from the design, not tested on a device.
+- **C2. Web Crypto on `file://`** (§7.4) remains unverified on the four platforms. The
+  pure-JS SHA-256 fallback covers it. Carried forward, no change.
+- **C3. Disclaimer wording** (§10.1) is still a draft and must be reconciled with
+  VisualRiskAssessor. Owner decision.
+- **C4. Section-to-phase binding** is derivable from the salvaged material but needs owner
+  confirmation (`docs/salvage/README.md`). Owner decision, needed before Stage 2.
+- **C5. The live legacy report bands scores differently from §5.4.** Verified in code:
+  `public/js/reportGeneration.js:1318-1323` colours report scores with its own four-band
+  scale (`>= 80` excellent, `>= 70` good, `>= 50` fair, else poor) applied to percentages
+  already rounded with `Math.round`, while the dashboard (`main.js:68-72`) uses the §5.4
+  strict bands. A site at exactly 80% is styled "excellent" in the HTML report and rated
+  Satisfactory on the dashboard. The Stage 4 port of `reportGeneration.js` must not carry
+  this forward: bands apply to the unrounded percentage, from one function. Whether to
+  patch the live legacy app now is an owner decision.
 
 ---
 
