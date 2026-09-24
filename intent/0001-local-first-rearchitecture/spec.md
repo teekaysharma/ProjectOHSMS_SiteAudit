@@ -205,7 +205,10 @@ below were computed with the §5.4 formula.
     arc rating. Question 12.3 does have a mandatory source: insulating gloves under GSO
     IEC 60903:2014 (Annex item 109). A criterion that asks for a US class the UAE scheme
     does not name may fail PPE that is lawful here, or pass PPE with no ECAS certificate
-    (Art. 10(9)); a competent person decides what each question checks. Question 12.7
+    (Art. 10(9)); a competent person decides what each question checks. A full read of
+    MoIAT's legislation list on 2026-09-24, including the 1,006 standards adopted in 2024
+    and 2025 and Cabinet Resolution No. (83) of 2020 (health protection products), found
+    no UAE standard for these three classes either. Question 12.7
     (SF6): CoP 2.0 §3.9(d) requires a written Respiratory Protection Program with fit
     testing wherever respirators are required, evaluated annually (§3.9(j)); no document
     received sets an SF6 exposure limit, and §3.9(a) refers to limits set by federal or
