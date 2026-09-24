@@ -82,7 +82,10 @@ below were computed with the §5.4 formula.
   moved in windy conditions); CoP 17.0 §3.10.1(d) (a manoeuvre is discontinued when the
   operator cannot continue safely); CoP 2.0 §2(f) (an employee who fails the PPE
   competency test does not do the task); CoP 22.0 §3.6.1(a)(ii) (defective barricade
-  components withdrawn and tagged "Dangerous, Do Not Use").
+  components withdrawn and tagged "Dangerous, Do Not Use"); CoP 28.0
+  v4.1 §3.2(a) (no hot work outside a designated area without a hot work permit) and
+  §3.4(a)(i), (ix) (permit before hot work in a hazardous area; flammable gas or vapour
+  below 5% LEL).
 - **C8. Score 0 mixes Not Applicable with Not Observed.** Both are excluded from the
   average. One item at 5 with nine Not Observed gives 100%, rated **Excellent**, on 10%
   coverage. Not Applicable means the hazard does not exist; Not Observed means the auditor
@@ -174,12 +177,26 @@ below were computed with the §5.4 formula.
     §3.3(d) require protective equipment to be appropriate, maintained and used, and name
     no rating. "Cat 2-4" (12.1), "Class E" (12.2) and "EH marking" (12.4) are, recalled
     and not verified here, classes from US standards (NFPA 70E, ANSI/ISEA Z89.1, ASTM
-    F2413). CoP 2.0 §3.2(b) requires PPE to meet Council of Ministers Decision No. 3 of
-    2016 (UAE Regulation for PPE) and ESMA-approved standards; whether those accept these
-    classes needs that regulation. Question 12.7 (SF6): CoP 2.0 §3.9(d) requires a written
-    Respiratory Protection Program with fit testing wherever respirators are required,
-    evaluated annually (§3.9(j)); no code received sets an SF6 exposure limit, and
-    §3.9(a) refers to limits set by federal or local regulations.
+    F2413). CoP 2.0 §3.2(b) requires PPE to meet Cabinet Resolution No. (3) of 2016 and
+    ESMA-approved standards. That Resolution's Annex (the copy read; Art. 10(1) lets ESMA
+    amend it) makes 111 standards mandatory and names none of these classes: helmets
+    under ISO 3873 with no electrical class, footwear under ISO 20345 to 20347 with no
+    electrical-hazard class, heat and flame clothing under ISO 11612 and ISO 14116 with no
+    arc rating. Question 12.3 does have a mandatory source: insulating gloves under GSO
+    IEC 60903:2014 (Annex item 109). A criterion that asks for a US class the UAE scheme
+    does not name may fail PPE that is lawful here, or pass PPE with no ECAS certificate
+    (Art. 10(9)); a competent person decides what each question checks. Question 12.7
+    (SF6): CoP 2.0 §3.9(d) requires a written Respiratory Protection Program with fit
+    testing wherever respirators are required, evaluated annually (§3.9(j)); no document
+    received sets an SF6 exposure limit, and §3.9(a) refers to limits set by federal or
+    local regulations.
+  - Question 11.4 "min 1 per 25 workers" is stricter than CoP 4.0 v4.0 §3.2.1(a): at
+    least one first aider per worksite per shift below 50 employees, and one per 50
+    employees above. The criterion must say which ratio the auditor applies.
+  - Question 13.3 "AED units ... (max 3-minute response time)": CoP 4.0 §3.4(a) says
+    employers "should consider" AEDs on the basis of risk assessment, and the 3-minute
+    limit in §3.2.2(a)(i) applies to initial first aid anywhere on site, not to AEDs. The
+    question turns a recommendation into a requirement.
 - **C10. Record dates come from the device clock.** The event envelope's `ts` and the
   visit `date` are taken from the tablet. A wrong clock puts a wrong date on evidence used
   in disputes, and the spec has no check. Proposed: show device date and time for the
@@ -261,6 +278,15 @@ below were computed with the §5.4 formula.
   regime (§3.5(b)) or training records naming the PPE issued (§2(h)(vi)). Signs (CoP
   17.0): signs unobstructed and maintained (§3.5), containers and pipes labelled (§3.8),
   a competent signaller and one signaller at a time (§3.10(b), §3.10.1(c)).
+  Hot work (CoP 28.0 v4.1): combustibles cleared within 10 m (§3.3.5(a)(ii)), a
+  continuous fire watch during the work and for at least an hour after (§3.3.5(a)(vii)),
+  extinguishers nearby (§3.3.5(a)(viii)), welding machines on RCD-protected, earthed
+  circuits (§3.3.4(a)(ii)), oxygen cylinders stored at least 6 m from fuel gas cylinders
+  (§3.7.1).
+  First aid (CoP 4.0): certificates from the listed providers only (§2.1(b)), CPR and AED
+  refresher at least annually (§2.1(d)), first aid kits inspected at least monthly
+  (§3.3(e)), emergency numbers posted (§3.2.2(a)(v)), an EMT or paramedic on site where
+  ambulance response exceeds 15 minutes for high hazard work (§3.2.2(a)(iii)).
 - **C13. Questions carry no audit criterion.** Elements v4.0 Element 8 §3.1(a)(iii)(1)
   and §3.1(b) require documented audit criteria covering legislation, ADOSH-SF and other
   requirements. The salvaged questions state what to check but not which clause requires
