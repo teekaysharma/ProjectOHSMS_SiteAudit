@@ -41,7 +41,7 @@
 - Consumes: nothing.
 - Produces: hook contract. Reads the PreToolUse JSON on stdin; exits `2` with a stderr reason when `tool_input.file_path` or `tool_input.notebook_path` lies under `docs/salvage/`, otherwise exits `0`.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 `tests/hooks.test.js`:
 
@@ -83,12 +83,12 @@ test('allows a tool call with no file path', () => {
 });
 ```
 
-- [ ] **Step 2: Run it to verify it fails**
+- [x] **Step 2: Run it to verify it fails**
 
 Run: `node --test tests/hooks.test.js`
 Expected: FAIL. Every test fails because the hook file does not exist (`Cannot find module`, status 1).
 
-- [ ] **Step 3: Write the hook**
+- [x] **Step 3: Write the hook**
 
 `.claude/hooks/protect-salvage.mjs`:
 
@@ -111,12 +111,12 @@ process.stdin.on('end', () => {
 });
 ```
 
-- [ ] **Step 4: Run it to verify it passes**
+- [x] **Step 4: Run it to verify it passes**
 
 Run: `node --test tests/hooks.test.js`
 Expected: PASS, `# pass 5`, `# fail 0`.
 
-- [ ] **Step 5: Add the hook to the test script**
+- [x] **Step 5: Add the hook to the test script**
 
 In `package.json`, change `"test"` to:
 
@@ -127,7 +127,7 @@ In `package.json`, change `"test"` to:
 Run: `npm test`
 Expected: `# pass 7`, `# fail 0` (2 legacy API tests + 5 hook tests).
 
-- [ ] **Step 6: Register plugins and the hook**
+- [x] **Step 6: Register plugins and the hook**
 
 Register the marketplaces and plugins with the CLI so the settings shape is the one Claude Code writes itself:
 
@@ -188,7 +188,7 @@ claude plugin list
 
 Expected: the command string prints; the pipe test prints the `Blocked:` message and `exit 2`; both plugins list as `√ enabled` at project scope.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add tests/hooks.test.js .claude/hooks/protect-salvage.mjs .claude/settings.json package.json
@@ -208,7 +208,7 @@ git commit -m "chore(claude): enable superpowers and karpathy plugins, guard sal
 - Consumes: nothing from Task 1.
 - Produces: `npm run build:app` writes exactly one file, `dist-app/index.html`, with one classic inline `<script>` placed after `<main id="app">`. Later stages add modules under `app/src/` and import them from `app/src/main.js`.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 `tests/app-build.test.js`:
 
@@ -259,12 +259,12 @@ test('app script runs after the mount point exists', () => {
 });
 ```
 
-- [ ] **Step 2: Run it to verify it fails**
+- [x] **Step 2: Run it to verify it fails**
 
 Run: `node --test tests/app-build.test.js`
 Expected: FAIL in `before`, because `vite.app.config.js` does not exist.
 
-- [ ] **Step 3: Add the dependency**
+- [x] **Step 3: Add the dependency**
 
 ```bash
 npm install -D --save-exact vite-plugin-singlefile@2.3.3
@@ -273,7 +273,7 @@ npm audit --audit-level=high
 
 Expected: install succeeds; audit exits 0 (CI runs the same gate).
 
-- [ ] **Step 4: Write the app shell and build config**
+- [x] **Step 4: Write the app shell and build config**
 
 `app/index.html`:
 
@@ -358,12 +358,12 @@ and change `"test"` to:
 
 In `.gitignore`, under `# Dependencies and build outputs`, add a line `dist-app` after `dist`.
 
-- [ ] **Step 5: Run the build test to verify it passes**
+- [x] **Step 5: Run the build test to verify it passes**
 
 Run: `node --test tests/app-build.test.js`
 Expected: PASS, `# pass 4`, `# fail 0`.
 
-- [ ] **Step 6: Run the full suite and the build**
+- [x] **Step 6: Run the full suite and the build**
 
 ```bash
 npm test
@@ -372,7 +372,7 @@ npm run build:app && ls dist-app
 
 Expected: `# pass 11`, `# fail 0`; `ls` prints only `index.html`.
 
-- [ ] **Step 7: Check it runs from file:// in Chromium**
+- [x] **Step 7: Check it runs from file:// in Chromium**
 
 A local check only; spec §13 keeps Playwright out of the repo. Uses the Playwright installed globally in the Claude Code cloud container:
 
@@ -393,12 +393,12 @@ const { chromium } = require(require("child_process").execSync("npm root -g").to
 
 Expected: `{"text":"OHSMS Site Audit: scaffold build, not for field use.","errors":[]}`
 
-- [ ] **Step 8: Confirm the legacy build is unchanged**
+- [x] **Step 8: Confirm the legacy build is unchanged**
 
 Run: `npm run build && ls dist dist/assets`
 Expected: `dist/index.html` plus one `.css` and one `.js` in `dist/assets`, as before this plan.
 
-- [ ] **Step 9: Commit**
+- [x] **Step 9: Commit**
 
 ```bash
 git add tests/app-build.test.js app vite.app.config.js package.json package-lock.json .gitignore
@@ -416,7 +416,7 @@ git commit -m "build(app): single-file offline build of app/ with a classic scri
 - Consumes: the commands from Tasks 1 and 2 (`npm test`, `npm run build`, `npm run build:app`).
 - Produces: session context for every later stage, the PR review policy, and a `verifier` subagent.
 
-- [ ] **Step 1: Write `CLAUDE.md`**
+- [x] **Step 1: Write `CLAUDE.md`**
 
 ```markdown
 # OHSMS Site Audit
@@ -473,7 +473,7 @@ what the task needs; define the check first, watch the test fail, then make it p
 - The salvage hook only catches Edit and Write. Do not route around it with shell commands.
 ```
 
-- [ ] **Step 2: Write `REVIEW.md`**
+- [x] **Step 2: Write `REVIEW.md`**
 
 ```markdown
 # Review instructions
@@ -508,7 +508,7 @@ Report at most five nits per review; summarise the rest as a count.
 - Style in legacy files (`index.html`, `main.js`, `public/js/`) the PR does not change.
 ```
 
-- [ ] **Step 3: Write `.claude/agents/verifier.md`**
+- [x] **Step 3: Write `.claude/agents/verifier.md`**
 
 ```markdown
 ---
@@ -531,7 +531,7 @@ Then check:
 Report what you ran, what you saw, and every mismatch with the plan. Do not fix anything.
 ```
 
-- [ ] **Step 4: Verify every command in CLAUDE.md runs**
+- [x] **Step 4: Verify every command in CLAUDE.md runs**
 
 ```bash
 npm ci && npm test && npm run build && npm run build:app && wc -l CLAUDE.md
@@ -540,7 +540,7 @@ npm ci && npm test && npm run build && npm run build:app && wc -l CLAUDE.md
 Expected: every command exits 0; `# fail 0`; `CLAUDE.md` under 70 lines (the playbook asks
 for under a page).
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add CLAUDE.md REVIEW.md .claude/agents/verifier.md
@@ -551,4 +551,29 @@ git commit -m "docs(claude): add CLAUDE.md, REVIEW.md and verifier subagent"
 
 ## Execution ledger
 
-Filled in during execution (superpowers `executing-plans`).
+Executed inline on 2026-09-24 (superpowers `executing-plans`), branch
+`claude/gracious-fermat-0gke4a`.
+
+| Task | Commit | Red | Green |
+|---|---|---|---|
+| 1 | `7fbba75` | 5/5 fail: `Cannot find module .../protect-salvage.mjs` | 5/5 pass; suite 7/7. Live check: an Edit to `docs/salvage/README.md` was blocked by the hook in-session. |
+| 2 | `b6d7a5c` | 4/4 fail: `Could not resolve .../vite.app.config.js` | 4/4 pass; suite 11/11. Mutation check: without `classicScript()` tests 2 and 4 fail. Chromium from `file://`: `{"text":"OHSMS Site Audit: scaffold build, not for field use.","errors":[]}`. Legacy `dist/assets` hashes unchanged (`index-Bx5PtHeJ.css`, `index-t93cphkV.js`). `npm audit --audit-level=high` exit 0. |
+| 3 | `36d37a8` | n/a (documentation) | `npm ci`, `npm test` (11/11), `npm run build`, `npm run build:app` all exit 0; `CLAUDE.md` 52 lines; `type="module"` count in `dist-app/index.html`: 0. |
+
+Rulings:
+
+- Ruling: Superpowers installs from `obra/superpowers-marketplace`, not
+  `claude-plugins-official`. Why: in this container the official marketplace was not
+  registered (`Marketplace 'claude-plugins-official' not found`) and the install failed
+  twice; Superpowers' README documents its own marketplace as an install route. Cost if
+  wrong: none functional; switch the two settings entries to the official marketplace
+  once it is reachable.
+- Ruling: `removeViteModuleLoader` stays off and a local `classicScript()` plugin does
+  the rewrite. Why: a pre-plan spike showed `removeViteModuleLoader: true` with `iife`
+  output emits an empty `<script>`. Cost if wrong: one extra 20-line plugin to maintain.
+- Ruling: plans and specs live in `intent/NNNN-slug/`, overriding the superpowers
+  default `docs/superpowers/`. Why: one home for the playbook artifact chain. Cost if
+  wrong: superpowers skills will default to the old folder unless `CLAUDE.md` is read.
+- Final whole-branch review: done by the executing session against `REVIEW.md`, not by a
+  fresh reviewer subagent (none was requested for this run). A fresh-context review is
+  still owed before merge; the managed Code Review or `/code-review` covers it.
