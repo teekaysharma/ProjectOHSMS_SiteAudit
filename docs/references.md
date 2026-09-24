@@ -1,8 +1,9 @@
 # Reference documents
 
-Primary sources the tool's rules must be traced to. Licensed texts (ISO standards) and full
-code texts are read in session and are not committed to this repo; what the tool takes from
-them is recorded here and in the spec with a clause citation. Figures and appendices that
+Primary sources the tool's rules must be traced to. What the tool takes from each is
+recorded here and in the spec with a clause citation. Plain-text extracts of the public
+codes and regulations are in `docs/sources/` (owner decision, 2026-09-24); licensed texts
+(ISO standards) and the ICC-based building code are cited only. Figures and appendices that
 are images could not be read in session and are marked as such.
 
 ## Received and read in full

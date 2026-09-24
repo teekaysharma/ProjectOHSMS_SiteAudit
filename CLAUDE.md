@@ -38,6 +38,8 @@ what the task needs; define the check first, watch the test fail, then make it p
 - Legacy app: `index.html`, `main.js`, `public/js/`, `server.js`. Frozen except for fixes
   the owner asks for; removed at parity.
 - `docs/salvage/`: source material, imported verbatim. A hook blocks edits.
+- `docs/sources/`: verbatim text extracts of public codes and regulations. Never edit them;
+  no ISO or other licensed text goes here (see its README).
 - `tests/`: `node --test`, listed file by file in the `package.json` test script.
 
 ## Safety posture
