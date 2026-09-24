@@ -9,16 +9,18 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:app": "vite build --config vite.app.config.js",
     "preview": "vite preview",
     "dev:localhost": "vite --host 127.0.0.1 --port 5173 --strictPort",
     "preview:localhost": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
     "deploy:localhost": "npm run build && npm run preview:localhost",
     "start": "node server.js",
-    "test": "node --test tests/api.test.js tests/hooks.test.js"
+    "test": "node --test tests/api.test.js tests/hooks.test.js tests/app-build.test.js"
   },
   "devDependencies": {
     "supertest": "^7.0.0",
-    "vite": "^7.3.1"
+    "vite": "^7.3.1",
+    "vite-plugin-singlefile": "2.3.3"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
