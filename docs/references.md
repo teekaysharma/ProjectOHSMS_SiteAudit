@@ -76,6 +76,27 @@ IAF MD5:2019 for third-party audit duration, and uses the term "major non-compli
 without defining it. Which standard defines Major and Minor Non-Conformance for this scale
 is still to be named.
 
+Received 2026-09-24: ISO 19011:2018 (third edition), BS EN ISO/IEC 17021-1:2015 and
+ISO/IEC TS 17021-10:2018. What they settle and what they leave open for the scale:
+
+| Score | Source found | Clause | Fit for a site inspection |
+|---|---|---|---|
+| Grading itself | ISO 19011 | §6.4.8: nonconformities "can be graded depending on the context of the organization and its risks", quantitatively (the example given is 1 to 5) or qualitatively (minor, major); §6.4.3 the grading criteria are stated at the opening meeting | A 1 to 5 grading is expressly allowed. The grading criteria are the audit programme's to define. |
+| 1 Major NC | ISO/IEC 17021-1 | §3.12: a nonconformity that affects the capability of the management system to achieve its intended results; Note 1: significant doubt that process control is effective, or several minor nonconformities on the same requirement showing a systemic failure | Written for management system certification audits. It fits the Management System Audit; it does not describe a physical hazard on site (an unsupported trench wall is not a "capability of the management system" finding). |
+| 2 Minor NC | ISO/IEC 17021-1 | §3.13: a nonconformity that does not affect that capability | Same limit as above. |
+| 3 Observation / Improvement Opportunity | ISO 19011 and ISO/IEC 17021-1 | ISO 19011 §3.10 Note 2 (findings can identify opportunities for improvement); 17021-1 §9.4.5.2: opportunities for improvement may be recorded, but a nonconformity "shall not be recorded as" one | Named, not defined as a grade. The 17021-1 rule is a hard constraint on score 3 (see spec C8). |
+| 4 Conformance | ISO 19011 | §3.20 conformity: fulfilment of a requirement | Defined. |
+| 5 Best Practice | ISO 19011 | §3.10 Note 2 and §6.4.8 ("good practices") | Named, not defined as a grade. |
+| 0 N/A, Not Observed | none | | Not in either standard. |
+| Averaging grades into a percentage and band | none | | Neither standard describes it; the §5.4 formula and bands are the owner's design. |
+
+ISO/IEC 17021-1 §9.4.5.3 also requires each nonconformity to be recorded against a
+specific requirement, with a clear statement and the objective evidence (C13), and
+§9.6.3.2.2 requires time limits for correction of every major nonconformity (C11).
+ISO/IEC TS 17021-10:2018 sets competence requirements for OH&S management system auditors
+and report reviewers (clauses 5 and 6); it bears on who may use and sign off the tool,
+not on the scale.
+
 ## Closed requests
 
 | # | Document | Outcome |
@@ -89,9 +110,8 @@ correctly; the rest fill catalogue sections not yet checked against any code.
 
 | # | Document | Why | Informs |
 |---|---|---|---|
-| R1a | The standard that defines Major NC, Minor NC and Observation for this scale, with edition | Score definitions | C7, C8 |
+| R1a | Owner definitions for 0 (N/A and Not Observed), 3 Observation and 5 Best Practice, and for Major and Minor NC on a site inspection; or the company audit procedure that already defines them | ISO 19011 and 17021-1 leave these undefined (see above) | C7, C8 |
 | R23 | ADOSH-SF Technical Guideline, Safety in the Heat (TWL zones; CoP 11.0 refers to it). Not the same document as CoP 11.0: the file "11 - Safety in the Heat v31", uploaded twice on 2026-09-24, is CoP 11.0 v4.0, byte for byte the same file both times | The "ADOSH Table" in question 10.3 | C9 |
 | R32 | Civil Defence UAE Fire and Life Safety Code of Practice (chapters on signs and portable fire equipment) and the Abu Dhabi Building Code section on construction site fencing | Questions 2.3, 6.3, 6.5, 13.4 | C9 |
-| R2 | ISO 19011:2018 | Cited by Element 8 for the audit process | C8, C11, C13 |
 | R3 | ISO 45001:2018 | Named in Element 8 §3.1(b) as other criteria | C11 |
 | R5 | VisualRiskAssessor report disclaimer | The two tools' reports must not contradict | C3 |

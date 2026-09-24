@@ -92,12 +92,24 @@ below were computed with the §5.4 formula.
   on foot); CoP 37.0 v4.1 §3.10(a)(ii) (no metal or wire-reinforced ladder within 6 m of
   live 1500 V overhead supplies or high voltage equipment, directly relevant to an HV
   site) and §3.3(b) (self-made ladders prohibited).
+  ISO/IEC 17021-1:2015 §3.12 Note 1 adds that several minor nonconformities on the same
+  requirement can show a systemic failure and so a major nonconformity; the tool could
+  flag repeated 2s on one question across visits (C11, continued non-conformance).
 - **C8. Score 0 mixes Not Applicable with Not Observed.** Both are excluded from the
   average. One item at 5 with nine Not Observed gives 100%, rated **Excellent**, on 10%
   coverage. Not Applicable means the hazard does not exist; Not Observed means the auditor
   did not check it. Proposed: split 0 into two values, show coverage ("rated 1 of 10
   applicable items") beside every percentage, and withhold the band below a coverage
   threshold the owner sets. This changes the score scale the owner set, so owner decision.
+  Sources for the scale (read 2026-09-24, detail in `docs/references.md`): ISO 19011:2018
+  §6.4.8 allows grading nonconformities 1 to 5 or minor/major by the organization's
+  context and risks. ISO/IEC 17021-1:2015 §3.12 and §3.13 define major and minor
+  nonconformity in terms of the management system's capability to achieve its intended
+  results, which fits the Management System Audit but not a physical hazard found on a
+  site walk. Neither standard defines Not Observed, Observation or Best Practice as a
+  grade, or averages grades into a percentage. 17021-1 §9.4.5.2 forbids recording a
+  nonconformity as an opportunity for improvement: a failed requirement is never a 3.
+  Owner decision: written definitions for each score on each audit type.
 - **C9. Question content carries technical limits that need a competent person's check.**
   Examples from the salvaged catalogue: 3.1 "depths >1.5m", 3.3 "benching/sloping (1.5:1
   minimum)", 3.5 "minimum 2m setback". The tool imports the text verbatim (§11.1), so it
