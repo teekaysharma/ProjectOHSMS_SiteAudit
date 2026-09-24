@@ -249,6 +249,29 @@ below were computed with the §5.4 formula.
     matches §3.3.2(b).
   - Question 6.4 "reflective materials" has a source for road works: CoP 33.0 v4.1
     §3.6.1(a)(vi) requires reflective signs where there is no lighting.
+  - Questions 6.3, 6.5 and 13.4 against the UAE Fire and Life Safety Code 2018,
+    Chapters 4 and 5 (CoP 17.0 §3.9(c) places fire signs under this code). Question 13.4 "fire
+    suppression systems suitable for electrical fires (CO2/FM-200)": Table 4.3 item 5
+    requires, within 9 m travel and inside the room next to the exit, one 5 kg CO2 or
+    5 kg clean agent extinguisher in electrical/LV, switchgear, RMU and cable spreading
+    rooms, and one wheeled 12 kg CO2 in HV rooms, transformer rooms and at electrical
+    heavy equipment, with no clean agent alternative listed for those. These are
+    portable extinguishers; fixed systems are Chapter 9, not read. FM-200 is, recalled
+    and not verified here, a trade name for a halocarbon clean agent. For an HV
+    substation the question as worded would accept a clean agent unit where the table
+    names wheeled CO2 only; a competent person decides whether it checks Chapter 4
+    extinguishers or Chapter 9 systems. Question 6.5 "fire equipment location signs":
+    Table 4.1 item 6.2(ii) requires signage indicating each extinguisher's location, and
+    Table 4.4 item 1(xi) requires it in Arabic and English; "access route markings" is in
+    neither chapter, which instead require extinguishers reachable without moving stock
+    (Table 4.1 item 6.3(i)) and within 30 m (Class A), 15 m (Class B) or 9 m (Class C).
+    Question 6.3 "assembly point signage ... illuminated": Chapter 5 requires continuous
+    illumination for exit and directional signs (§2.2.3 to §2.2.5, Table 5.2 item 1) and
+    evacuation plans lit to at least 10.8 lux (Table 5.1 item 8.6(ii)); it sets nothing
+    for assembly point signs. Chapter 19 (emergency action plan) may; not read. Both
+    chapters are written for occupied buildings by occupancy, so on a construction site
+    they apply to site offices and welfare buildings; the construction chapter (R32b) is
+    the one written for sites.
   - Sections 7 to 9 (owner decision above) are not wholly without an ADOSH source. CoP
     39.0 v4.1 sets requirements for work near overhead lines and underground cables:
     written isolation confirmation from the service provider (§3.4.2(b)), crossings under
@@ -371,6 +394,14 @@ below were computed with the §5.4 formula.
   (Technical Guideline, v4.0): gas detectors used for question 3.4 are calibrated
   regularly per the manufacturer (§4(c)(iii)(3)) and laboratories are ENAS or QCC
   approved (§3(d)).
+  Fire (UAE Fire and Life Safety Code 2018, Chapter 4): extinguishers mounted with the
+  top at most 1.5 m and the bottom at least 30 cm above the floor (Table 4.1 item 4(iv)),
+  cabinets never locked (item 4(ix)), a monthly check of location, presence and gauge
+  with a like-for-like replacement while one is away (Table 4.4 item 3), service once a
+  year (§3.4.3), no Halon 1211 or 1301 units (§2.2.8.1(i)), at least 10% of personnel
+  trained in extinguisher use by a Civil Defence authorised agency (§2.2.9.1). No site
+  question checks extinguisher inspection records or mounting. The construction chapter
+  (R32b) has not been read.
   Management catalogue: ISO 45001:2018 Amendment 1:2024 adds to §4.1 that the
   organization determines whether climate change is a relevant issue; no management
   question covers it (relevant only where the organization works to ISO 45001; owner
