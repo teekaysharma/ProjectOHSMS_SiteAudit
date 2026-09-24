@@ -89,7 +89,9 @@ below were computed with the §5.4 formula.
   withdrawn); CoP 39.0 §3.5.2(b)(v) (a damaged underground service: everyone leaves the
   area) and §3.4.3(b)(v) (plant able to exceed the goalpost height prohibited under
   overhead lines); CoP 33.0 v4.1 §3.4(d)(iii)(3) (busy or high-speed lanes never crossed
-  on foot).
+  on foot); CoP 37.0 v4.1 §3.10(a)(ii) (no metal or wire-reinforced ladder within 6 m of
+  live 1500 V overhead supplies or high voltage equipment, directly relevant to an HV
+  site) and §3.3(b) (self-made ladders prohibited).
 - **C8. Score 0 mixes Not Applicable with Not Observed.** Both are excluded from the
   average. One item at 5 with nine Not Observed gives 100%, rated **Excellent**, on 10%
   coverage. Not Applicable means the hazard does not exist; Not Observed means the auditor
@@ -108,7 +110,9 @@ below were computed with the §5.4 formula.
   railing on open-sided floors and platforms from 1.2 m (§3.14.1(a)); a guardrail load of
   1.25 kN (§3.11.2(f)) but 90 kg for a standard railing (§3.14.1(f)). Ladders at scaffolds
   extend 1.05 m (5 rungs) above the platform (CoP 26.0 §3.12.3(a)(iii)); ladders in
-  excavations project 1 m above ground (CoP 29.0 §3.11(a)(iii)). A question must cite
+  excavations project 1 m above ground (CoP 29.0 §3.11(a)(iii)); portable ladders in
+  general slope 70° to 80° and extend at least 1 m above the highest access point (CoP
+  37.0 v4.1 §3.7(b)(i)-(ii)), while scaffold ladders are set at 75°. A question must cite
   the clause for its situation. CoP 26.0 §3.4.7 agrees with CoP 23.0 §3.11.2 on guardrail
   height (950 mm), toe board (150 mm) and rail gaps (470 mm).
   Citations that conflict and need a competent person's ruling. In the v4.0 texts, CoP
@@ -324,6 +328,9 @@ below were computed with the §5.4 formula.
   (§3.4.3(b)(iv)), locators then hand digging before excavation (§3.5.1(a)), no pick-axes
   or forks near services (§3.5.3(c)(iii)). Plant (CoP 36.0 v4.1): a schedule of plant on
   site (§3.15.1(a)), maintenance records kept at least 5 years (§3.15.1(h)).
+  Ladders (CoP 37.0 v4.1): industrial rated (§3.3(a)(i)), daily user inspection and a
+  weekly documented formal inspection (§3.13(b)), ladders of 3 m or longer secured at base
+  or top (§3.8), person plus tools at most 120 kg (§3.6(a)(xiii)).
 - **C13. Questions carry no audit criterion.** Elements v4.0 Element 8 §3.1(a)(iii)(1)
   and §3.1(b) require documented audit criteria covering legislation, ADOSH-SF and other
   requirements. The salvaged questions state what to check but not which clause requires
