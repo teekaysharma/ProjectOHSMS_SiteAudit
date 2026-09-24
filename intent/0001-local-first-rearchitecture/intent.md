@@ -76,7 +76,8 @@ stopped being audited.
   spec plans a pure-JS fallback (§7.4). Device test.
 - Management System Audit per assignment (spec §6.3) reverses the earlier project-level
   behaviour the owner asked for. Confirm the change (spec concern C6). Owner.
-- Safety decisions C7 to C12 (spec): open Major NCs hidden by averages, Not Applicable
+- Safety decisions C7 to C14 (spec): open Major NCs hidden by averages, Not Applicable
   versus Not Observed, competent-person review of question content, device clock,
-  corrective action follow-up, and catalogue coverage of CoP 53.1 hazards. Owner, with the
-  references in `docs/references.md`.
+  corrective action follow-up, catalogue coverage of CoP 53.1 hazards, audit criteria per
+  question, and 5-year record retention. Owner, with the references in
+  `docs/references.md`.

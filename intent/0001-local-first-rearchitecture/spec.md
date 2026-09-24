@@ -43,8 +43,12 @@ accepting the spec, or carries it forward explicitly. Nothing below changes the 
   (`docs/legacy-app-notes.md`). §6.3 records the Management System Audit per assignment,
   with "copy from another assignment" for uniform answers. The design reasons are stated
   in §6.3; the owner confirms the change explicitly when accepting this spec.
+  Evidence for the choice: CoP 53.1 §1(c) calls the OSH-CMP "a site-specific plan", and
+  CoP 53.0 §3.3.3(a)(v) allows only one Principal Contractor for the construction work at
+  any time. Where one project runs several sites under one PC and one OSH-CMP, a project
+  answer fits; where scopes or PCs differ, a per-assignment answer fits.
 
-C7 to C11 were raised after the owner stressed that errors from this tool can contribute
+C7 to C14 were raised after the owner stressed that errors from this tool can contribute
 to injury or death on site. The score scale is categorical (legacy `main.js:26-31`):
 0 Not Applicable/Not Observed, 1 Major Non-Conformance, 2 Minor Non-Conformance,
 3 Observation/Improvement, 4 Conformance, 5 Best Practice. §5.4 averages it. The cases
@@ -64,6 +68,12 @@ below were computed with the §5.4 formula.
   "Work shall not proceed" while an enclosure leaks. A question whose failure the code
   treats as a stop condition can carry that as a catalogue attribute with its clause
   citation, so the flag rests on the code rather than on each auditor's judgement alone.
+  Further stop conditions in the codes: Elements v4.0 Element 1 §3.2.5(b)(viii) (employees
+  empowered to stop work on imminent exposure); CoP 53.0 §3.3.5(i)(ii) (PC stops a
+  non-compliant person's work); CoP 21.0 §3.13(a) (scope change: work ceases) and §3.14
+  (emergency: all permits suspended); CoP 34.0 §3.6.6(e) (lifting ceases at wind of
+  38 km/h or gusts above it) and §3.1.3(a)(vii) (loss of communication: lifting
+  suspended); CoP 23.0 §3.3(a)(ii) (work stops while people cross the exclusion zone).
 - **C8. Score 0 mixes Not Applicable with Not Observed.** Both are excluded from the
   average. One item at 5 with nine Not Observed gives 100%, rated **Excellent**, on 10%
   coverage. Not Applicable means the hazard does not exist; Not Observed means the auditor
@@ -77,6 +87,17 @@ below were computed with the §5.4 formula.
   reviewed against current primary sources and signed off by a named competent person
   before field use; any correction becomes catalogue v2 through `catalogue_updated`, so
   the history shows who changed what. Owner decision on reviewer and sources.
+  The codes themselves need care. CoP 23.0 sets different limits for different
+  situations: guardrails at edges with a fall of 2 m or more (§3.11.1(a)) but a standard
+  railing on open-sided floors and platforms from 1.2 m (§3.14.1(a)); a guardrail load of
+  1.25 kN (§3.11.2(f)) but 90 kg for a standard railing (§3.14.1(f)). A question must cite
+  the clause for its situation. Two citations conflict and need a competent person's
+  ruling: CoP 34.0 §2.1(e)-(f) cites "Mechanism 8.0" for training approval while its own
+  amendment record says Mechanism 8.0 was deleted; CoP 23.0 §3.13.2 cites "Ministerial
+  Order No. 37/2 (1982)" and CoP 34.0 §3.11 cites "Ministerial Order No. (32) 1982" for
+  lifting inspection, and it is not clear whether they are the same instrument.
+  Elements v4.0 Element 9 §3.4 makes controlled documents subject to approval before
+  issue and revision control, which the catalogue version sign-off above satisfies.
 - **C10. Record dates come from the device clock.** The event envelope's `ts` and the
   visit `date` are taken from the tablet. A wrong clock puts a wrong date on evidence used
   in disputes, and the spec has no check. Proposed: show device date and time for the
@@ -90,6 +111,18 @@ below were computed with the §5.4 formula.
   corrective action reports; CoP 1.1 §3.11(h) sets action fields (immediate actions,
   timescales, owner). An audit record without a response deadline leaves that
   requirement to be met elsewhere.
+  Stronger evidence from Elements v4.0: Element 8 §3.5(b) "where actions are identified to
+  correct a non-conformance, timescales and individual responsibilities are assigned";
+  §3.5(a)(vii) requires the effectiveness of corrective action to be reviewed at
+  close-out; §3.3.1(b) requires an action plan with timescales for every major
+  non-compliance from the annual third-party audit. Element 1 §4(d) grants immunity from
+  prosecution for non-compliance found internally and corrected "within a reasonable
+  time frame", so the date a finding was raised and the date it was closed carry legal
+  weight. CoP 53.0 §3.3.4(a)(viii) requires "identified continued non-conformance" to be
+  reported to the developer or client immediately. Recommended for v1, owner to decide:
+  each Major or Minor NC records the action, the responsible person, the due date, the
+  close-out date and the effectiveness check; a finding that stays open, or recurs on the
+  same question at the next visit, is flagged as continued non-conformance.
 - **C12. The salvaged catalogue does not cover every CoP 53.1 hazard topic.** It is
   written for an HV substation project (ADWEA, power plant interface, HV sections).
   Reading site sections 1 and 2 in full and searching all 208 questions found no site
@@ -101,8 +134,33 @@ below were computed with the §5.4 formula.
   differently worded questions, so a competent person confirms the gap list. Owner
   decision: one catalogue per project type, or one general catalogue with phase and
   project-type applicability.
+  Checkable site conditions in the codes read so far, with no matching site question:
+  permits (CoP 21.0: validity at most 12 hours or one shift §3.6(d), work party signatures
+  before work §3.10(b), original permit displayed at the worksite §3.10(c), permit holder
+  not the issuer §3.5.3(a)); work at height (CoP 23.0: guardrail height 950 mm and toe
+  board 150 mm §3.11.2(a)-(b), net inspections weekly §3.12.2(f), harness inspections
+  6-monthly §3.13.2(f), platforms inspected at intervals not exceeding 7 days §3.15(c));
+  lifting (CoP 34.0: lifting plan §3.3, written appointment of the Appointed Person
+  §3.2(c), anemometer on site §3.6.6(a), SWL marked on every accessory §3.6.2(b),
+  equipment register and daily and weekly inspections §3.12, thorough examination at
+  least every 12 months and every 6 months for accessories and man-lifting §3.11).
+- **C13. Questions carry no audit criterion.** Elements v4.0 Element 8 §3.1(a)(iii)(1)
+  and §3.1(b) require documented audit criteria covering legislation, ADOSH-SF and other
+  requirements. The salvaged questions state what to check but not which clause requires
+  it. Element 8 §2 also separates an OSH MS audit (per ISO 19011:2018) from an OSH
+  inspection (a physical walk-through against requirements): the Management System Audit
+  in this tool is the former, the Site Performance Audit the latter, and each has its own
+  program requirements (§3.1, §3.2). Proposed: every catalogue question carries its
+  criterion (document, version, clause), shown beside the question and in reports; the
+  UI and reports use the Element 8 terms. Owner decision on naming.
+- **C14. Records must outlive the device.** Elements v4.0 Element 9 §3.5(a)(iii) requires
+  OSH records to be kept at least 5 years. The design stores records in browser storage
+  and exported files. Proposed: the tool never deletes or expires a record, every export
+  states its `formatVersion`, and each future version must import every earlier format
+  (a test per format), so a file exported today opens in 5 years. Owner decision on who
+  keeps the master copy.
 
-When the owner decides C1 to C12, each accepted decision becomes a numbered safety
+When the owner decides C1 to C14, each accepted decision becomes a numbered safety
 requirement in this spec, and every plan names the test that proves each one it touches.
 
 ---
