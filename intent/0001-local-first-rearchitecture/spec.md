@@ -176,7 +176,14 @@ below were computed with the §5.4 formula.
     sign-off above still covers them.
   - Question 2.3 "Site perimeter fencing (min 2.4m)": CoP 22.0 v4.0 §3.5.6(a)(ii) places
     fencing requirements in the relevant Building Code and the Abu Dhabi construction
-    regulations. The 2.4 m figure is not in CoP 22.0 and its source has not been read.
+    regulations. ADIBC 2013 §3306.5 requires barriers of at least 8 ft (2438 mm), and only
+    where Table 3306.1 calls for them (by construction height and distance to the plot
+    line); 2.4 m is that figure rounded down, so a 2.40 m barrier passes the question and
+    fails the code. Abu Dhabi City Municipality's temporary boundary wall rule is reported
+    (secondary source) as at least 2.5 m. Several codes (CoP 1.0 §1(c), CoP 2.0 §1(a),
+    CoP 17.0 §1(a)) apply the more stringent requirement where requirements conflict,
+    which would point to 2.5 m; the primary municipal rule has not been read. A competent
+    person decides the criterion.
   - Question 4.8 "rigid barriers (not tape)" is stricter than CoP 22.0, which sets the
     barricade type by risk assessment: soft barricading where the risk is low
     (§3.4.1(a)), hard barricading where the assessment calls for a physical barrier
