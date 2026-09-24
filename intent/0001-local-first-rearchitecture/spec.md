@@ -89,7 +89,9 @@ below were computed with the §5.4 formula.
   withdrawn); CoP 39.0 §3.5.2(b)(v) (a damaged underground service: everyone leaves the
   area) and §3.4.3(b)(v) (plant able to exceed the goalpost height prohibited under
   overhead lines); CoP 33.0 v4.1 §3.4(d)(iii)(3) (busy or high-speed lanes never crossed
-  on foot); CoP 37.0 v4.1 §3.10(a)(ii) (no metal or wire-reinforced ladder within 6 m of
+  on foot); the Technical Guideline Safety in the Heat Table 1 (no lone work and no
+  unacclimatised worker in the High Risk Zone below TWL 115, strict work/rest cycling);
+  CoP 37.0 v4.1 §3.10(a)(ii) (no metal or wire-reinforced ladder within 6 m of
   live 1500 V overhead supplies or high voltage equipment, directly relevant to an HV
   site) and §3.3(b) (self-made ladders prohibited).
   ISO/IEC 17021-1:2015 §3.12 Note 1 adds that several minor nonconformities on the same
@@ -165,6 +167,10 @@ below were computed with the §5.4 formula.
     could score Conformance for heat index readings while the required TWL assessment is
     missing. The "1 per 25 workers" in 10.4 and "within 200m" in 10.5 are not in CoP 11.0,
     which says drinking water is provided "close to the worksite" (§3.2(b)(v)).
+    The "ADOSH Table" in 10.3 is the Technical Guideline's Table 1, which sets work/rest by
+    TWL zone (for example 20 min work and 40 min rest for heavy work below TWL 115), not by
+    heat index. The guideline sets no hourly reading frequency (10.2), no shade ratio
+    (10.4) and no distance to water (10.5).
   - Sections 7 and 9 (HV installation, testing and commissioning) cannot be checked
     against CoP 15.0: its §1(m) places requirements for overhead lines, underground
     cables and substations in the procedures of the relevant competent authorities.
