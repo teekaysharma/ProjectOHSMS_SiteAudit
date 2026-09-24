@@ -104,13 +104,16 @@ below were computed with the §5.4 formula.
   excavations project 1 m above ground (CoP 29.0 §3.11(a)(iii)). A question must cite
   the clause for its situation. CoP 26.0 §3.4.7 agrees with CoP 23.0 §3.11.2 on guardrail
   height (950 mm), toe board (150 mm) and rail gaps (470 mm).
-  Citations that conflict and need a competent person's ruling: CoP 34.0 §2.1(e)-(f)
-  cites "Mechanism 8.0" for training approval while its own amendment record says
-  Mechanism 8.0 was deleted; CoP 23.0 §3.13.2 cites "Ministerial Order No. 37/2 (1982)"
-  and CoP 34.0 §3.11 cites "Ministerial Order No. (32) 1982" for lifting inspection, and
-  it is not clear whether they are the same instrument; CoP 24.0 §3.1.1(b) and CoP 17.0
-  §3.1.1(b) also cite "Ministerial Order No. 32 of 1982", so three of four codes use that
-  form. CoP 53.1 §3.1 item 5.16 cites CoP 22.0 and CoP 37.0 for scaffolds and ladders, but
+  Citations that conflict and need a competent person's ruling. In the v4.0 texts, CoP
+  34.0 §2.1(e)-(f) cited the deleted "Mechanism 8.0", and CoP 23.0 §3.13.2, 24.0
+  §3.1.1(b) and 34.0 §3.11 cited "Ministerial Order No. 37/2 (1982)" or "No. 32 of 1982".
+  The v4.1 texts (27 February 2026) replace these: CoP 34.0 §2(e)-(f) require an approved
+  third-party training provider; CoP 23.0 §3.13.2(a)(i) and CoP 24.0 §3.1.1(b) cite MOHRE
+  Administrative Decision No. (19) of 2023; CoP 34.0 §3.11(a)-(b) cite QCC ADS 22/2018 and
+  require thorough examination by third-party inspection bodies approved by QCC, where
+  v4.0 said engineers approved by the Ministry of Labour. CoP 17.0 is still v4.0 and its
+  §3.1.1(b) still cites Ministerial Order No. 32 of 1982; whether that order is superseded
+  by the 2023 decision is not stated in any code read. CoP 53.1 §3.1 item 5.16 cites CoP 22.0 and CoP 37.0 for scaffolds and ladders, but
   CoP 22.0 is Barricading of Hazards and the scaffolding code is CoP 26.0 (CoP 26.0
   §3.7(a)(iv) names both), so a criterion copied from CoP 53.1 would cite the wrong code.
   Mechanism 7.0 has two titles: the body text of CoP 2.0, 17.0 and 26.0 calls it
@@ -222,7 +225,8 @@ below were computed with the §5.4 formula.
   lifting (CoP 34.0: lifting plan §3.3, written appointment of the Appointed Person
   §3.2(c), anemometer on site §3.6.6(a), SWL marked on every accessory §3.6.2(b),
   equipment register and daily and weekly inspections §3.12, thorough examination at
-  least every 12 months and every 6 months for accessories and man-lifting §3.11).
+  least every 12 months and every 6 months for accessories and man-lifting §3.11, which
+  v4.1 places under QCC ADS 22/2018).
   Further, from the second set of codes: excavations inspected before work, at least
   daily and before each shift, and thoroughly examined weekly with a record (CoP 29.0
   §3.13); ladders at 4:1 projecting 1 m above ground (§3.11(a)(ii)-(iii)); confined space
