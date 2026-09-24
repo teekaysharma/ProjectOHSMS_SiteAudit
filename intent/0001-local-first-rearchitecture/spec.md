@@ -267,6 +267,10 @@ below were computed with the §5.4 formula.
   each Major or Minor NC records the action, the responsible person, the due date, the
   close-out date and the effectiveness check; a finding that stays open, or recurs on the
   same question at the next visit, is flagged as continued non-conformance.
+  ISO 45001:2018 §10.2 adds root cause, worker participation in deciding corrective
+  action, and a review of the action's effectiveness, with documented information kept
+  and communicated to relevant workers; §9.2.2(a) has the audit programme consider the
+  results of previous audits, which is what the continued non-conformance flag supplies.
 - **C12. The salvaged catalogue does not cover every CoP 53.1 hazard topic.** It is
   written for an HV substation project (ADWEA, power plant interface, HV sections).
   Reading site sections 1 and 2 in full and searching all 208 questions found no site
@@ -343,6 +347,12 @@ below were computed with the §5.4 formula.
   Ladders (CoP 37.0 v4.1): industrial rated (§3.3(a)(i)), daily user inspection and a
   weekly documented formal inspection (§3.13(b)), ladders of 3 m or longer secured at base
   or top (§3.8), person plus tools at most 120 kg (§3.6(a)(xiii)).
+  Management catalogue: ISO 45001:2018 Amendment 1:2024 adds to §4.1 that the
+  organization determines whether climate change is a relevant issue; no management
+  question covers it (relevant only where the organization works to ISO 45001; owner
+  decision). Management questions 13.12 and 13.13 name "OSHAD", the body now called
+  ADPHC and its framework ADOSH-SF (every v4.0 code's amendment record); the question
+  text is imported verbatim (§11.1), so any rename is a catalogue v2 change.
 - **C13. Questions carry no audit criterion.** Elements v4.0 Element 8 §3.1(a)(iii)(1)
   and §3.1(b) require documented audit criteria covering legislation, ADOSH-SF and other
   requirements. The salvaged questions state what to check but not which clause requires
@@ -352,6 +362,9 @@ below were computed with the §5.4 formula.
   program requirements (§3.1, §3.2). Proposed: every catalogue question carries its
   criterion (document, version, clause), shown beside the question and in reports; the
   UI and reports use the Element 8 terms. Owner decision on naming.
+  ISO 45001:2018 §9.2.2(b) also requires the audit criteria and scope to be defined for
+  each audit, and ISO/IEC 17021-1:2015 §9.4.5.3 requires each nonconformity to be recorded
+  against a specific requirement with its objective evidence.
 - **C14. Records must outlive the device.** Elements v4.0 Element 9 §3.5(a)(iii) requires
   OSH records to be kept at least 5 years. The design stores records in browser storage
   and exported files. Proposed: the tool never deletes or expires a record, every export
