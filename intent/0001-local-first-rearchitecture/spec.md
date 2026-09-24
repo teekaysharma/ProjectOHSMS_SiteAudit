@@ -363,6 +363,14 @@ below were computed with the §5.4 formula.
   Ladders (CoP 37.0 v4.1): industrial rated (§3.3(a)(i)), daily user inspection and a
   weekly documented formal inspection (§3.13(b)), ladders of 3 m or longer secured at base
   or top (§3.8), person plus tools at most 120 kg (§3.6(a)(xiii)).
+  Adverse weather (Technical Guideline, v4.0): no site question covers it. Lifting stops
+  at wind of 38 km/h or gusts above (§6.2.1(f)), outdoor work stops in lightning storms
+  (§6.1.3(g)), scaffolds are re-inspected and re-tagged after a storm (§4.6(c)(v)), site
+  fencing is secured before high winds (§6.2.3(c)), and someone is assigned to monitor
+  National Centre of Meteorology alerts with checks recorded (§5(e)). Air monitoring
+  (Technical Guideline, v4.0): gas detectors used for question 3.4 are calibrated
+  regularly per the manufacturer (§4(c)(iii)(3)) and laboratories are ENAS or QCC
+  approved (§3(d)).
   Management catalogue: ISO 45001:2018 Amendment 1:2024 adds to §4.1 that the
   organization determines whether climate change is a relevant issue; no management
   question covers it (relevant only where the organization works to ISO 45001; owner

@@ -44,6 +44,8 @@ Rules for this folder:
 | `adphc/CoP-53.1-OSH-CMP-v4.1.txt` | CoP 53.1 OSH Construction Management Plan | v4.1 | owner upload |
 | `adphc/CoP-54.0-Waste-v4.0.txt` | CoP 54.0 Waste Management | v4.0 | owner upload |
 | `adphc/TG-Safety-in-the-Heat-v4.0.txt` | ADOSH-SF Technical Guideline, Safety in the Heat (Table 1 TWL zones and Appendices are images; Table 1 is transcribed in `docs/references.md` R23) | v4.0, 15 July 2024 | owner upload |
+| `adphc/TG-Dealing-with-Adverse-Weather-v4.0.txt` | ADOSH-SF Technical Guideline, Dealing with Adverse Weather Conditions | v4.0, 15 July 2024 | owner upload |
+| `adphc/TG-Occupational-Air-Quality-v4.0.txt` | ADOSH-SF Technical Guideline, Occupational Air Quality Management | v4.0, 15 July 2024 | owner upload |
 | `uae-federal/Cabinet-Resolution-3-2016-PPE-en.txt` | Cabinet Resolution No. (3) of 2016, UAE Scheme for the Control of PPE (English translation; the signed Arabic original is a scan with no text layer) | 14 January 2016 | owner upload |
 
 Download pages: ADPHC codes at https://www.adphc.gov.ae/en/Legislation/Code-of-Practices;
