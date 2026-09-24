@@ -14,7 +14,7 @@
     "preview:localhost": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
     "deploy:localhost": "npm run build && npm run preview:localhost",
     "start": "node server.js",
-    "test": "node --test tests/api.test.js"
+    "test": "node --test tests/api.test.js tests/hooks.test.js"
   },
   "devDependencies": {
     "supertest": "^7.0.0",
