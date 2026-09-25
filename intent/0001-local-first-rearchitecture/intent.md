@@ -72,8 +72,9 @@ stopped being audited.
   (`docs/salvage/README.md`). Owner.
 - Whether data held in IndexedDB persists for a file opened from local storage on iPad
   Safari. Not verified. See spec concern C1. Device test.
-- Whether Web Crypto is available from `file://` on all four platforms. Not verified; the
-  spec plans a pure-JS fallback (§7.4). Device test.
+- ~~Whether Web Crypto is available from `file://` on all four platforms.~~ Closed
+  2026-09-25: Stage 1 uses a pure-JS SHA-256 unconditionally, not a fallback, so there is
+  nothing to verify (spec concern C2).
 - Management System Audit per assignment (spec §6.3) reverses the earlier project-level
   behaviour the owner asked for. Confirm the change (spec concern C6). Owner.
 - Safety decisions C7 to C14 (spec): open Major NCs hidden by averages, Not Applicable
