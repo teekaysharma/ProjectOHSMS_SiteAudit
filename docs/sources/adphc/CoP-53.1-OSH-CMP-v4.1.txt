@@ -1,0 +1,1739 @@
+
+=== PAGE 1 ===
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Abu Dhabi Occupational Safety and
+Health System Framework
+(ADOSH-SF)
+
+Code of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1
+February 2026
+=== PAGE 2 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 2 of 36
+
+
+
+Table of Contents
+
+1. Introduction ....................................................................................................................................................... 3
+1.1 Objectives ................................................................................................................................................ 3
+1.2 Submission and Approval ................................................................................................................... 4
+1.3 OSH-CMP Content  ................................................................................................................................ 4
+2. Training and Competency ............................................................................................................................. 5
+3. Requirements .................................................................................................................................................... 6
+3.1 OSH-CMP Content ................................................................................................................................. 7
+4. References ....................................................................................................................................................... 33
+5. Document Amendment Record ................................................................................................................. 34
+
+
+=== PAGE 3 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 3 of 36
+1. Introduction
+(a) This Code of Practice (CoP) applies to all employers within the Emirate of Abu Dhabi.
+This CoP is designed to incorporate requirements set by APDHC and Sector Regulatory
+Authorities in the Emirate of Abu Dhabi.
+(b) This CoP establishes the minimum requirements and standards for the development
+and implementation of an OSH Construction Management Plan (OSH -CMP). The
+development and implementation of an OSH -CMP helps to ensure that construction
+projects consider all OSH hazards and aspects, in accordance with the requirements of
+all applicable legislation within the emirate of Abu Dhabi, in particular those outlined
+in the ADOSH-SF.
+(c) The OSH -CMP is a site -specific plan developed to ensure that appropriate OSH
+management practices are developed, implemented and monitored during the
+construction phase of a project.
+(d) Principal Contractor (PC) when used in this CoP refers to the main contractor
+overseeing and responsible for activities undertaken on the site within the Building
+and Construction Sector. Refer to ADOSH-SF – Mechanism 9.0 – Notification of Principal
+Contractor for Construction Work.
+1.1 Objectives
+(a) Based on the risk or complexity of the project, the Building and Construction SRA shall
+decide what level of detail is required in the OSH -CMP for the project. The client will
+be informed of the submission requirements at the time of applying for the building
+permit.
+(b) The objectives of the OSH ‘Construction Management’ plan are as follows:
+(i) implement practical effect the commitment to OSH and set the initial framework
+for the Safety and Health Management System;
+(ii) ensure maximum flexibility in meeting requirements whilst complying with the
+relevant standards of the ADOSH-SF  Requirements;
+(iii) ensure a systematic approach to management of Safety and Health;
+(iv) manage risk associated with the construction activities;
+(v) establish training programs for all staff and operatives appropriate to task, role
+and the project requirements;
+(vi) provide a structure to ensure that Safety and Health issues are effectively
+managed in a consistent and integrated manner;
+(vii) ensure appropriate control and co -ordination of all parties to the construction
+phase of the project with regard to Safety and Health;
+(viii) generate a culture where everyone, irrespective of their position, understands
+that they have a part to play in ensuring that incidents and ill health are
+prevented; and
+(ix) ensure a safe workplace for all those who work on the project.
+
+=== PAGE 4 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 4 of 36
+1.2 Submission and Approval
+(a) The client will be informed, at the time of applying for a building permit with the
+relevant municipality, the level of OSH-CMP that is required for the project.
+(b) The level of the plan required will be based upon the risk and complexity of the project.
+(c) The client will be informed at the time of application, the submission requirements
+and relevant timescales for review and approval.
+1.3 OSH-CMP Content
+(a) The content of an OSH -CMP shall vary by project, as the size and scope of a
+construction project varies. T he t able under Section 3.1 below indicates which
+elements are required for all projects (Table Sections 1-4) and which are only required
+if the relevant hazard / impact is present through the construction activities  (Table
+Section 5).
+(b) Table Sections 1 -4 shall be included in all OSH -CMP’s as they outline the project
+specific management systems and control measures that shall be required for every
+project. Table Section 5 identifies some of the more common hazards or impacts that
+may be present on projects. This list is not intended to be exhaustive , and it is the
+responsibility of the PC who is developing or submitting the OSH-CMP to ensure that
+all hazards and impacts are identified and appropriate control measures are included
+and developed.
+
+=== PAGE 5 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 5 of 36
+2. Training and Competency
+(a) Employers shall ensure that OSH training complies with the requirements of:
+(i) ADOSH-SF – Element 5 – Training, Awareness and Competency.
+(ii) ADOSH-SF – Mechanism 7.0 – Occupational Safety and Health Practitioner and
+Service Provider Registration.
+(b) Employers shall ensure employees and other persons required to implement the
+requirements of this CoP, or those who have a direct role in the management,
+supervision or monitoring of the requirements of this CoP are trained and competent
+to fully understand the requirements.
+(c) The requirements for specific training needs within the project are discussed within
+Section 3.1 (Table Section 4.6.)
+(d) Employers shall maintain a record of the required training that contains the following
+information:
+(i) name and ID number;
+(ii) Emirates ID number;
+(iii) subject(s) of training;
+(iv) training provider;
+(v) date(s) of training; and
+(vi) person(s) providing the training.
+
+=== PAGE 6 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 6 of 36
+3. Requirements
+(a) Section 3.1 1 below outlines the minimum requirements that must be included in all
+OSH-CMP’s that are developed and submitted to the SRA for approval.
+(b) The table provides information on the project specific requirements that shall be
+included within the plan.
+(c) Where an entity has an approved OSH MS under decree 42 of 2009, reference can be
+made to their approved OSH MS to avoid duplication within the OSH-CMP.
+(d) The table also provides information on the ADOSH-SF compliance requirements. The
+Principal Contractor shall ensure that the plan meets all relevant requirements as
+described within the ADOSH-SF.
+(e) It is the responsibility of the Principal Contractor to ensure that all legal requirements,
+including local and federal requirements are met when developing the OSH-CMP.
+
+=== PAGE 7 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 7 of 36
+3.1 OSH-CMP Content
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+Section One – Project Details
+1.1 Project Details
+
+
+This section shall include, at a minimum:
+• name/title of the project or industry;
+• client’s name, and contact information.
+• consultant’s name, contact information, and Qudorat
+Registration Number;
+• name and contact information for other members of
+the design team;
+• approved PC name and contact information;
+• name and contact information for other sub-
+contractors; and
+• other relevant personnel and contact details.
+
+
+
+
+N/A
+Section Two – Document Control
+2.1 Document Control
+
+
+
+
+
+• The initial issue date of the OSH-CMP;
+• A record of ongoing issue;
+• A mechanism to record subsequent changes;
+• A mechanism to record the persons who have been
+briefed on the plan and confirmation of their
+understanding; and
+• Distribution list.
+
+
+
+
+ADOSH-SF-
+Element 9
+=== PAGE 8 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 8 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+Section Three – Project Description
+3.1
+Project Description
+Location
+
+• This section shall include a
+general description of the
+location and environment at the
+project site and surrounding area.
+It shall also provide maps that
+show the geographic location of
+the project area and
+surroundings. Maps shall include
+all necessary information, such as
+key, scale, north arrow, legend,
+location of sensitive receptors,
+and distance to sensitive
+receptors.
+
+3.2 Scope
+
+• This section shall include a
+discussion of the objectives and
+scope of the construction project.
+For example, if activities will be
+conducted in separate phases,
+and the OSH-CMP is being
+submitted only for one particular
+phase of the development, then
+this section shall describe those
+activities to be addressed by this
+specific plan.
+
+=== PAGE 9 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 9 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+3.3
+Project
+Schedules and
+Milestones
+
+• This Section shall include an
+anticipated schedule for the
+project, including a proposed
+completion date for construction
+and the main anticipated
+milestones. If the construction
+phase includes different phases
+or stages, a proposed schedule
+for each phase within the overall
+project must be provided.
+• It shall also include the hours
+when construction activities will
+take place outside typical work
+hours and any restrictions that
+may be in place.
+• It shall also include anticipated
+manpower requirements, linked
+to the phasing of the project.
+
+
+
+Section Four – Project OSH Management
+The OSH Management section of the OSH-CMP shall include information regarding the overall OSH
+management of the project, specific to the issues identified below. Each section shall include as a minimum a
+site specific policy/procedure on how the issues are going to be managed and controlled.
+4.1 OSH Policy and
+Management
+• Shall include a commitment towards continual
+improvement.
+• Demonstrates how senior management will lead by
+example.
+• Contains commitment to comply with applicable
+legislation.
+• Signed by senior management.
+ADOSH-SF-
+Element 9
+4.2 Roles and
+Responsibilities
+• This section shall include the roles and responsibilities
+of personnel identified within the project organogram.
+• Each role identified shall have defined responsibilities
+and accountabilities with regards to OSH.
+ADOSH-SF -
+Element 01
+=== PAGE 10 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 10 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+4.3 OSH Legal
+Requirements
+General
+• This section shall detail the
+legal requirements to be
+adhered to and shall include
+the following information:
+o a listing of the applicable
+OSH regulations with which
+the proponent will comply;
+this list shall include
+Federal, Emirate and
+International Standards
+and/or Agreements; and
+o a listing of any applicable
+OSH Standards, such as
+ambient noise levels, air
+quality or water quality.
+The OSH-CMP shall also
+clearly define the
+Standards.
+ADOSH-SF -
+Element 3
+Regulatory
+Authorities /
+Agencies
+• This section shall identify each
+regulatory agencies and their
+role that have an interest in the
+project and how that
+interaction will be managed.
+Interested Parties
+• This section shall identify:
+o all other interested parties
+relevant to the project.
+These could include other
+projects / facilities nearby
+that the construction
+activity may impact upon or
+residential areas; and
+o each interested party and
+also the nature of the
+interest and how this will
+be managed.
+ADOSH-SF -
+Element 7
+
+ADOSH-SF -
+Element 3
+=== PAGE 11 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 11 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+4.4 Management of
+Contractors
+Selection and
+Appointment
+• This section shall identify the
+procedures that will be utilized
+to ensure a systematic
+approach to the selection and
+appointment of contractors
+onto the project.
+• This section shall identify the
+key roles and responsibilities
+for the selection and
+appointment of contractors.
+The procedure shall ensure that
+all contractors have been
+reviewed with regards to their
+competency to complete the
+roles they are being appointed
+to undertake and have
+appropriate resources, both in
+terms of financial and
+personnel to competently and
+safely deliver the task(s). The
+review shall include, but not
+limited to, OSH.
+ADOSH-SF -
+Element 3
+Ongoing
+Management
+• This section shall include
+procedures for the ongoing
+management of contractors,
+including formal reviews of
+performance and reporting.
+• The procedures shall clearly
+define expectation and
+timelines for reporting.
+=== PAGE 12 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 12 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+4.5 OSH Risk
+Management
+Risk Management
+Procedures
+• This section shall include the
+specific risk management
+procedures for the project. The
+procedures shall be specific to
+the project and include roles
+and responsibilities for all key
+stakeholders. The procedure
+shall define the methods that
+shall be used to identify
+hazards and impacts, how
+these shall be assessed and
+subsequently managed. The
+procedure shall also define the
+mechanisms for approval along
+with project specific levels of
+authority.
+• The procedure shall also
+include mechanisms to ensure
+that no activities can be
+undertaken without prior
+approval from relevant
+stakeholders, of the specific
+risk assessment(s) and method
+statement(s).
+ADOSH-SF -
+Element 2
+
+
+
+ADOSH-SF -
+Element 7
+=== PAGE 13 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 13 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+Project Risk
+Register
+• This section shall ensure that
+an overall project risk and
+impact management plan is
+developed that incorporates all
+foreseeable hazards and
+impacts for the project,
+including those that are
+generated through the
+activities of sub-contractors or
+other persons on the project.
+• The Risk and Aspects Register
+shall include reference to
+method statements that are
+developed as part of the
+control measures to reduce the
+risk or impact.
+• Information on the specific
+control measures that are to be
+implemented for any activity
+that has been defined as
+medium or high risk / impact
+following the completion of a
+robust risk assessment shall be
+included within this document.
+Sub-Contractor
+Risk Assessments
+and Method
+Statements –
+Review and
+Approval Process
+• The PC shall also ensure that a
+review and approval procedure
+is in place for risk assessments
+and method statements
+developed by sub-contractors
+or other parties involved on the
+project.
+=== PAGE 14 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 14 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+Design Risk –
+Identification and
+Control
+• A procedure is required to
+monitor the stages of design to
+ensure that OSH is considered
+during the process. The
+procedure shall include control
+measures and mechanisms to
+demonstrate that OSH has
+been considered. The plan shall
+include ongoing mechanisms
+that will monitor the design
+and risk management
+procedures.
+• The PC shall ensure that a
+robust coordination and
+communication procedure is in
+place to manage any changes
+to the design during the
+construction phase.
+• The PC shall ensure that any
+hazards applicable to the
+construction or end use of the
+building, related to design are
+communicated and raised to
+the client / lead designer.
+ADOSH-SF -
+Element 2
+
+ADOSH-SF -
+Element 7
+
+ADOSH-SF –
+CoP 20.0
+
+ADOSH-SF –
+CoP 53.0
+=== PAGE 15 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 15 of 36
+4.6 Training and
+Awareness
+Project Specific
+Training and
+Awareness
+• This section shall include
+information on what the project
+specific training and awareness
+requirements are. These shall
+include all general
+requirements for each
+individual role, including
+induction and life safety
+training, along with any specific
+training that the role may
+require, such as harness
+training for work at height.
+Included within the plan will be
+information on;
+o a description of the OSH
+awareness and training
+program for personnel,
+contractors, and
+subcontractors needed to
+comply with control
+measures contained within
+the OSH-CMP;
+o identification of training
+needs, including general
+knowledge of the OSH-CMP
+and activity-specific needs
+for different activities (eg,
+the handling of hazardous
+waste, working at height,
+operation of certain
+equipment);
+o identification of the
+methods that shall be used
+to disseminate the
+information required and
+what the frequencies shall
+be; and
+o established procedures for
+maintaining records of all
+training to be performed,
+including the name of the
+person trained, the date of
+training, the name of the
+trainer, and a description of
+the training content.
+ADOSH-SF –
+Element 5
+
+=== PAGE 16 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 16 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+ Induction Training
+• This section shall include a
+specific section on the
+induction program for the
+project. The information shall
+include, but not limited to;
+o information that shall be
+included within the
+induction training;
+o procedures for ensuring
+that all persons that enter
+the site receive induction
+training, including visitors,
+contractors and office
+based staff;
+o procedures for updating
+the induction program; and
+o refresher training and
+intervals.
+ Toolbox Talks
+• This section shall include
+specific information on the
+development and delivery of
+toolbox talks throughout the
+lifecycle of the project. Toolbox
+talks shall be delivered to all
+employees at least once per
+week and shall be subject
+specific to the project. They
+shall also include information
+relevant to the works ongoing
+at the time. The procedure shall
+also include mechanisms for
+the recording of attendance at
+toolbox talks.
+• The toolbox talks shall be
+delivered by persons
+competent and shall be in a
+language appropriate to the
+workforce.
+=== PAGE 17 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 17 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+4.7 OSH Incidents
+Investigation
+Procedures
+• This section shall include
+procedures to ensure that all
+incidents are investigated by
+competent persons and
+appropriate remedial actions
+identified. The procedures shall
+include the monitoring and
+review of all incident and
+incident reports from sub-
+contractors or other parties
+involved on the project.
+ADOSH-SF –
+Mechanism 11.0
+Incident Reporting
+• This section shall include
+project specific OSH incident
+notification and reporting
+procedures, including
+timescales (internal and
+external) and responsibilities.
+These shall also incorporate
+external reporting to any
+relevant authorities.
+• It shall also include specific
+internal procedures to ensure
+that all OSH incidents are
+reported and fully investigated.
+Hazard and Near
+Miss Reporting
+• This section shall include a
+procedure that requires all
+employees to report hazards
+and near misses on the project.
+4.8 Consultation and
+Communication
+Employee /
+Workforce
+Involvement
+• This section shall identify how
+the workforce will be fully
+involved in the management of
+OSH, ensuring that the views of
+the workforce are considered
+and incorporated where
+appropriate.
+• Employees shall be allowed to
+communicate their views and
+complaints within the project
+OSH Committee Meeting.
+ADOSH-SF –
+Element 4
+=== PAGE 18 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 18 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+OSH Meetings
+• This section shall include
+information on what OSH
+meetings will be held during
+the project lifecycle, including;
+o a list of all planned OSH
+meetings;
+o planned attendees;
+o frequency;
+o Terms of Reference; and
+o suggested agenda(s).
+Internal & External
+Communications
+• This section shall identify how
+internal and external
+communications shall be
+managed on the project
+including;
+o internal communication at
+various levels and
+functions of the entity;
+o communication with
+contractors and other
+visitors to the workplace;
+and
+o receiving, documenting and
+responding to external
+communication sources.
+=== PAGE 19 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 19 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+Consultation
+• This section shall identify how
+consultation with all relevant
+parties will be managed and
+controlled, including activities
+such as;
+o participation and
+consultation activities (eg.
+OSH Committee);
+o appropriate involvement in
+hazard identification, risk
+assessment and
+determination of controls;
+o appropriate involvement in
+incident investigation;
+o involvement in the
+development and review of
+OSH policies and
+objectives;
+o consultation in changes
+that affect OSH (including
+Contractors); and
+o employee representation
+on OSH matters.
+• A procedure to receive and
+address complaints from
+external parties.
+=== PAGE 20 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 20 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+Site OSH Notice
+Board
+• The PC shall set up and
+maintain safety notice boards
+at appropriate, prominent
+locations. These notice boards
+shall be located in positions
+that are clearly visible to the
+Contractor’s employees and
+anyone entering the work
+place. Safety signs shall be
+selected that describe the
+appropriate hazards and
+relevant emergency contact
+information and shall be in
+Arabic, English, and the other
+most common languages of the
+workforce. All persons shall be
+made fully aware of the safety
+signs and the emergency
+contact information, prior to
+commencing work on site.
+• A nominated person shall
+maintain the Main OSH Site
+notice boards that shall contain
+as a minimum:
+o Construction License
+(within 1 year);
+o Notification of the PC;
+o Project Directory;
+o OSH Policy Statements;
+o Incident Reporting
+Procedure;
+o Action in the event of
+Major Incident Notice;
+o Site emergency and
+evacuation Plan;
+o Visitors Notice;
+o Site Rules; and
+o Lost Time Injury Rate (as
+per  ADOSH-SF)
+ADOSH-SF –
+Element 4
+
+ADOSH-SF –
+CoP 17.0
+
+ADOSH-SF –
+CoP 53.0
+=== PAGE 21 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 21 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+4.9
+Monitoring,
+Inspection and
+Auditing
+General
+
+• This section shall include, but
+not be limited to, information
+regarding the monitoring and
+auditing of OSH performance,
+as well as information on
+reporting requirements, OSH
+checklists, and monitoring
+review, as discussed below.
+
+
+
+
+ADOSH-SF –
+Element 8
+
+Internal Audit and
+Inspection
+• This section shall detail what
+the specific internal audit and
+inspection procedures are for
+the project (including
+contractors) and how these will
+be implemented. The procedure
+shall include as a minimum;
+o types of audits and
+inspections;
+o roles and responsibilities;
+and
+o frequencies.
+Non Conformance
+and Corrective
+Action
+• The procedure shall include, but
+not be limited to:
+o identifies responsible
+personnel for the review of
+monitoring audits and
+compliance inspections; and
+o establishes procedures,
+including timelines, for
+responding to non-
+compliance findings from
+these audits and
+inspections;
+=== PAGE 22 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 22 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+OSH Monitoring
+Requirements
+• This section shall include
+information about monitoring
+requirements for OSH
+performance. Including as a
+minimum the following:
+o discuss how identified
+hazards and impacts will be
+monitored, including the
+indicators to be measured,
+the methods to be used,
+the sampling locations,
+frequency of
+measurements, detection
+limits, the thresholds that
+trigger corrective actions,
+and the party who will
+conduct monitoring;
+o provide procedures that
+indicate corrective actions
+for non-compliance with
+monitoring targets,
+specifying notification
+requirements to
+responsible personnel and
+the time frames for
+notification and for
+corrective actions to be
+performed;
+o identify the frequency and
+content of monitoring
+reports for internal use and
+those required to be
+submitted to relevant
+authorities for review; and
+o ensure that the monitoring
+activities and reports
+comply with all relevant
+authorities’ guidelines
+including health
+surveillance.
+ADOSH-SF –
+Element 7
+
+=== PAGE 23 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 23 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+
+OSH Reporting
+Requirements
+• The OSH-CMP shall outline
+procedures for reporting
+requirements, including the
+frequency and content of
+required reports, such as the
+following:
+o Pre-operation compliance
+reports;
+o Incident reports;
+o Periodic or annual
+performance reports;
+o Auditing reports;
+o Non-compliance reports;
+o Corrective action reports;
+o Complaints management
+reports; and
+o Any special reports
+required by government
+agencies.
+ADOSH-SF –
+Element 7
+
+4.10 OSH-CMP Review
+and Update
+• This section shall establish procedures for the periodic
+review of the OSH-CMP to ensure that the plan’s
+contents are correct and that it is being appropriately
+implemented.
+• These reviews will ensure that, shall conditions arise
+that alter the plan’s contents or requirements — the
+OSH-CMP remains updated to reflect these changes.
+• This shall include, but not limited to:
+o demonstrate how the proponent intends to keep
+the OSH-CMP as a “live” document, capable of
+modification during the project’s life cycle and as
+circumstances dictate;
+o indicate who will regularly review, update, and
+develop the OSH-CMP as construction progresses;
+and
+o outline procedures for the periodic review of the
+OSH-CMP to ensure that its contents are correct
+and that it is being appropriately implemented.
+
+ADOSH-SF –
+Element 9
+
+=== PAGE 24 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 24 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+4.11 OSH File
+
+
+
+• An OSH file shall be developed for the project and shall
+be handed over to the client upon practical completion
+of the project.
+• The OSH file may form part of the Operation and
+Maintenance (O&M) manuals developed for the project.
+• The OSH file shall be developed in line with the project
+phasing and shall be reviewed on a continual basis by a
+competent person. The minimum contents for the OSH
+File shall include;
+o a brief description of the work carried out;
+o residual hazards and how they have been dealt
+with;
+o project directory listing all key parties involved in
+the project;
+o key structural principles incorporated in the design
+of the structure (for example bracing, sources of
+substantial stored energy – including pre or post
+tensioned members) and safe working loads for
+floors and roofs;
+o any hazards associated with the materials used;
+o information regarding the removal or dismantling
+of installed plant and equipment;
+o OSH information about equipment provided for
+cleaning or maintaining the structure;
+o the nature, location and markings of significant
+services, including fire-fighting services; and
+o information and as-built drawings of the structure,
+its plant and equipment.
+
+
+
+
+
+
+
+=== PAGE 25 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 25 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+Section – Five – Project Specific Information
+As part of the OSH-CMP the plan shall include procedures for managing and mitigating risk, which may include,
+but not be limited to, the elements described in the following subsections. The plan shall thoroughly address
+site-specific control measures for the applicable OSH components. Note that it is not sufficient to solely
+provide a list of reasonably practicable control measures that will be used at the contractor’s or subcontractor’s
+discretion; the OSH-CMP must include control measures that will be performed and that can be audited to
+determine their effectiveness.
+5.1 Site Security Plan
+and Access Control
+• This section shall define what the security risks for the
+project are and how these will be controlled and
+managed. As a minimum the plan shall discuss;
+o control of the boundary of the project;
+o access and egress points;
+o crowd control;
+o security checks;
+o visitor control; and
+o shift work and control of night work.
+
+5.2 Project Permit to
+Work Procedures
+• This section shall detail what arrangements the PC
+shall implement to control the issue and management
+of internal permits and authorizations.
+• The PC shall ensure that one permit and authorization
+procedure is implemented for the entire project and all
+other parties adhere to this requirement.
+ADOSH-SF – CoP
+21.0
+=== PAGE 26 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 26 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+5.3 Traffic
+Management Plan
+The Traffic Control Plan shall:
+• Outline control measures to minimize the impacts on
+local traffic from the construction activities.
+• Discuss the control measures to minimize traffic
+disturbances and associated impacts from noise.
+• Identify access roads for construction vehicles and
+safety control measures used for pedestrian access
+and crossings.
+• Describe the procedures for public notification of any
+anticipated traffic-related concerns, such as street
+closings.
+• Discuss how traffic will be managed within the project,
+ensuring;
+o one way traffic systems are implemented as far as
+reasonably practicable;
+o reversing is prohibited unless under competent
+supervision;
+o loading and drop off areas are clearly defined and
+manageable;
+o appropriate access is available at all time for
+emergency access;
+o ongoing review in line with the project phasing;
+o project parking and control;
+o delivery timings and applicable restrictions;
+o vehicle maintenance and wash-down; and
+o segregation of pedestrians and traffic.
+ADOSH-SF – CoP
+25.0
+
+ADOSH-SF – CoP
+44.0
+
+ADOSH-SF – CoP
+53.0
+5.4 Material Storage
+Plan
+• This section shall define how the materials required for
+the project will be stored within the project premise
+and shall account for the phasing of the project.
+• If materials are to be stored on floor slab(s) the floor
+loadings must be calculated and displayed.
+• The plan shall also consider the need to access the
+materials, in line with the project phasing.
+
+ADOSH-SF – CoP
+44.0
+=== PAGE 27 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 27 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+5.5
+Identification and
+Management of
+Asbestos and
+other Hazardous
+Materials /
+Substances
+• This section of the plan shall detail the procedures in
+place to identify Asbestos Containing Materials (ACMs)
+and other hazardous materials/substances and
+hazardous waste materials that may be present.
+ADOSH-SF – CoP
+1.1
+5.6 Site Safety Rules
+• The PC shall develop and control a minimum set of site
+safety rules that shall be followed by all persons
+entering the site. These shall be displayed at the
+entrance to the site and at locations across the project.
+
+5.7
+Emergency
+Management
+
+(Including First
+Aid)
+• The PC shall develop procedure to manage any
+emergency situations that may arise on the project.
+The procedure shall include information on the
+identification of emergencies.
+• The procedures shall also include the provision of first
+aid and medical facilities on the project.
+• Emergency procedure shall include firefighting
+arrangement, assembly points, as well as notification &
+reporting procedure to management & local authorities
+ADOSH-SF – CoP
+4.0
+
+ADOSH-SF –
+Element 6
+5.8 Manual Handling
+Operations
+• This section shall define the arrangements that will be
+implemented to control any hazards and risks that
+arise from manual handling operations within the
+project.
+• All persons that are engaged on the project shall
+receive manual handling training that is specific to
+their role and undertakings. The training shall be
+refreshed on a regular basis.
+ADOSH-SF – CoP
+14.0
+5.9 Working at Height
+• This section shall identify what the arrangements are
+for controlling work at height.
+ADOSH-SF – CoP
+23.0
+5.10
+Fixed and
+Temporary
+Electrical
+Installations
+• The section shall include information on how the PC
+will control fixed and temporary electrical Installations.
+• PC shall arrange all temporary installations with 110
+volts power supply. For other devices which require
+high voltage PC shall prepare procedures including
+permit to work requirements and certified competent
+personnel
+ADOSH-SF – CoP
+15.0
+=== PAGE 28 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 28 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+5.11
+Personal
+Protective
+Equipment
+• The PC shall implement mechanisms to ensure that all
+persons who enter the site, including office employees
+and visitors have basic PPE.
+• The PC shall develop a procedure to manage all PPE
+requirements for the project and shall ensure that all
+sub-contractors or other parties including the project
+team adhere to this procedure.
+ADOSH-SF – CoP
+2.0
+5.12 Plant and
+Equipment
+• This section shall define the arrangements that the PC
+will implement to control all Plant and Equipment that
+is to be used on the project. Plant and equipment shall
+also include portable power tools and hand tools.  This
+shall also include shared plant and equipment.
+ADOSH-SF – CoP
+35.0
+ADOSH-SF – CoP
+36.0
+ADOSH-SF – CoP
+47.0
+ADOSH-SF – CoP
+51.0
+5.13 Housekeeping
+Arrangements
+• This section shall include information on how the PC
+shall ensure appropriate housekeeping standards on
+the project. This shall include, where relevant,
+information on the separation of waste and
+appropriate storage. Information shall be included on
+the number of operatives that will be allocated to
+housekeeping duties.
+ADOSH-SF – CoP
+8.0
+5.14
+Lifting Equipment
+and Lifting
+Operations
+• This section shall include information on how the PC
+will control lifting operations and lifting equipment on
+the project. This will include ensuring any independent
+testing and certification is in place prior to lifting being
+undertaken.
+• The procedure shall include mechanisms for the review
+and approval of lifting plans prior to any lifts being
+undertaken.
+ADOSH-SF – CoP
+34.0
+5.15 Welfare and Site
+Accommodation
+• This section shall include information on how the PC
+will control and manage all site welfare and
+accommodation.
+ADOSH-SF – CoP
+18.0
+ Existing Structures
+/ Structural Issues
+• This section shall highlight what, if any, the impact of
+the works will be on any existing structure or any
+structural issues and how this will be controlled.
+
+5.16 Scaffolds and
+Ladders
+
+• This section shall include information on how the PC
+shall ensure the safe erection, use, maintenance of all
+scaffold and ladders on the project.
+
+ADOSH-SF – CoP
+22.0
+ADOSH-SF – CoP
+37.0
+=== PAGE 29 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 29 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+5.17 Cantilevers and
+Platforms
+
+
+
+• These sections shall identify the procedures that will
+be implemented to ensure safety, in line with the
+applicable regulatory requirements.
+
+
+
+
+
+
+
+
+
+
+
+
+5.18 Formworks and
+Structures
+ADOSH-SF – CoP
+40.0
+5.19 Roofs ADOSH-SF – CoP
+23.0
+5.20 Excavations and
+Trenches
+ADOSH-SF – CoP
+29.0
+5.21 Confined Spaces ADOSH-SF – CoP
+27.0
+5.22 Demolition and
+Decommissioning
+ADOSH-SF – CoP
+53.0
+5.23 Piling ADOSH-SF – CoP
+46.0
+5.24 Electrical and Gas
+Welding
+ADOSH-SF – CoP
+21.0
+ADOSH-SF – CoP
+28.0
+ADOSH-SF – CoP
+49.0
+5.25 Gas Cutting
+5.26 Working over or
+Adjacent to Water
+ADOSH-SF – CoP
+31.0
+5.27 Mobile Equipment ADOSH-SF – CoP
+36.0
+5.28 Portable Tools
+ADOSH-SF – CoP
+35.0
+ADOSH-SF – CoP
+36.0
+5.29 Falling Objects
+ADOSH-SF – CoP
+22.0
+ADOSH-SF – CoP
+23.0
+5.30 Slips Trips and
+Falls
+ADOSH-SF – CoP
+8.0
+5.31 Animals and
+Reptiles
+5.32 Workplace Bullying
+and Violence
+ADOSH-SF – CoP
+13.0
+=== PAGE 30 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 30 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+5.33
+Impacts / Hazards
+from Adjacent
+Activities
+• This section of the plan shall detail any impacts that
+may arise from activities on or adjacent to the site
+during construction. These activities may include;
+o partial occupation / use of the building / facility
+during construction;
+o nearby schools / playgrounds;
+o retail malls / shops;
+o use of hazardous materials nearby;
+o other construction activities; and
+o surrounding land use.
+ADOSH-SF –
+Element 2
+5.34 Temporary Works
+• The PC is responsible for the safe construction and use
+of all Temporary Works conducted on all projects they
+control, regardless of whether they are carried out by a
+contractor.
+• Temporary Works must:
+o be designed and the design must be checked;
+o the physical works must be inspected to
+demonstrate compliance with the design;
+o all checks and inspections must be recorded in
+writing and be demonstrable; and
+o all changes must be referred to the designer and
+checker.
+ADOSH-SF –
+Element 2
+
+ADOSH-SF – CoP
+43.0
+
+ADOSH-SF – CoP
+20.0
+5.35 Existing Services
+• The PC must allow for making all enquiries, giving all
+notices, locating, protecting, upholding and
+maintaining all existing live mains and services under
+or over the site including providing all necessary
+temporary support and diversions.
+ADOSH-SF – CoP
+39.0
+5.36 Services
+Coordination
+• This section of the plan shall set out the arrangements
+that will be implemented to ensure safety when
+working on, or adjacent to, live services. These
+arrangements may be issued as a procedure / site
+instruction or included as an appendix and referenced
+herein.
+ADOSH-SF – CoP
+39.0
+=== PAGE 31 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 31 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+5.37
+Occupational
+Health
+Arrangements
+Noise and
+Vibration
+• This section shall outline control
+measures to minimize the impacts on
+local noise levels and vibrations from
+the construction activities and shall
+accomplish the following:
+o identify the appropriate noise
+suppression or abatement control
+measures required to ensure that
+ambient noise level
+concentrations do not exceed
+established limits for both
+employees on site and for nearby
+receptors;
+o identify any restrictions – eg.
+working hours where noisy works
+cannot be undertaken;
+o discuss the control measures that
+will be employed to minimize
+vibration and the procedures that
+will be used to notify potentially
+impacted receptors about these
+operations; and
+o where applicable, personal
+vibration hazards shall be
+considered.
+ADOSH-SF – CoP
+3.0
+
+
+ADOSH-SF – CoP
+3.1
+
+Temperatur
+e and Heat
+Stress
+• This section shall identify the
+arrangements to manage heat stress
+and working in high temperatures.
+ADOSH-SF – CoP
+11.0
+Radiation
+(Ionizing
+and Non-
+ionizing
+Radiation)
+• This section shall identify how the PC
+shall identify all sources and what
+control measures shall be
+implemented.
+
+Lighting
+and
+Ventilation
+• This section shall identify the
+procedures that will be implemented
+to ensure safety, in line with the
+applicable regulatory requirements.
+ADOSH-SF – CoP
+8.0
+Biological
+Agents
+• This section shall identify how the PC
+shall identify all sources and what
+control measures shall be
+implemented.
+ADOSH-SF – CoP
+1.0
+=== PAGE 32 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 32 of 36
+No. Topic OSH-CMP Project Specific Requirements
+ADOSH-SF
+Compliance
+Reference
+Pest(s)
+• This section shall identify the
+procedures that will be implemented
+to ensure safety, in line with the
+applicable regulatory requirements.
+ADOSH-SF – CoP
+8.0
+Health
+Surveillance
+and
+Managemen
+t Plan
+• This section shall detail any site
+specific health surveillance programs
+that are to be developed for the
+project. These plans shall be above
+the normal medical procedures that
+are required for all projects and shall
+be in response to specific health
+hazards on the project.
+ADOSH-SF – CoP
+5.0
+
+ADOSH-SF – CoP
+9.0
+5.38 Waste / emission
+Arrangements
+Waste
+Managemen
+t Plans
+• The PC shall develop plans to ensure
+all projects waste are managed and
+disposed of correctly, including:
+o Segregation, minimization, reuse
+and recycling;
+o solid waste management;
+o liquid waste (effluent)
+management;
+o hazardous waste management;
+and
+o use of approved Service Providers.
+ADOSH-SF – CoP
+54.0
+Air Pollution
+Protection
+• Dust emissions / suppression
+program.
+• Air emissions.
+
+
+
+
+
+
+
+
+
+
+=== PAGE 33 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 33 of 36
+4. References
+• L144 – Managing Health and Safety in Construction – HSE Books - ISBN 978 0 7176
+6223 4
+
+
+=== PAGE 34 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 34 of 36
+5. Document Amendment Record
+Version Revision Date Description of Amendment Page/s Affected
+4.0 15th July 2024
+System acronym updated from OSHAD-SF
+to ADOSH-SF to accurately reflect
+document title
+Throughout
+Change from OSHAD to ADPHC
+Change of Logo
+Minor editorial changes throughout the
+document without changing requirements.
+Title of Mechanism 7.0 updated to ADOSH-
+SF – Mechanism 7– Occupational Safety
+and Health Practitioner and Service
+Provider Registration
+OSHAD-SF - Mechanism 8.0 - OSH
+Practitioner Registration deleted
+4.1 16th February
+2026
+Minor editorial changes throughout the
+document without changing requirements. Throughout
+
+
+
+=== PAGE 35 ===
+
+ADOSH-SF – Codes of Practice
+CoP 53.1 – OSH Construction Management Plan
+Version 4.1 – 16th February 2026
+Page 35 of 36
+
+=== PAGE 36 ===
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
