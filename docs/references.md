@@ -122,5 +122,5 @@ In priority order.
 
 | # | Document | Why | Informs |
 |---|---|---|---|
-| R1a | Owner definitions for 0 (N/A and Not Observed), 3 Observation and 5 Best Practice, and for Major and Minor NC on a site inspection; or the company audit procedure that already defines them | ISO 19011 and 17021-1 leave these undefined (see above) | C7, C8 |
+| R1a | Owner definitions for 0 (N/A and Not Observed), 3 Observation and 5 Best Practice, and for Major and Minor NC on a site inspection; or the company audit procedure that already defines them. A draft for review is in `intent/0001-local-first-rearchitecture/r1a-score-definitions-DRAFT.md` | ISO 19011 and 17021-1 leave these undefined (see above) | C7, C8 |
 | R5 | VisualRiskAssessor report disclaimer | The two tools' reports must not contradict | C3 |
