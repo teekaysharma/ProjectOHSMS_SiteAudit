@@ -245,33 +245,54 @@ below were computed with the §5.4 formula.
     ("appropriately trained"), which also makes marshals for reversing a last resort
     (§3.3.5(c)). "CCTV and 24/7 monitoring" (5.8) is in neither code; CoP 22.0
     §3.5.6(a)(iii) requires an out-of-hours guard only where unauthorised access is a
-    higher risk. Question 5.2 matches CoP 44.0 §3.1.1(b)(ii)-(iii) and §3.3.3(a), and 5.7
+    higher risk. The UAE Fire and Life Safety Code 2018 does set a width: construction
+    site fire access roads at least 6.1 m of unobstructed width (Chapter 12 Table 12.8
+    item 1(i)), and for substations in remote areas at least 6 m (Chapter 14 Table 14.1
+    item 4(ii)). Question 5.1's "6m" is below the construction-site figure; a criterion
+    of 6 m would pass a 6.05 m road that Table 12.8 fails. The same code requires a
+    security guard service on every construction site and says CCTV "should be
+    considered" (Table 12.3 item 1(i), (vi)): a recommendation, not a requirement. Question 5.2 matches CoP 44.0 §3.1.1(b)(ii)-(iii) and §3.3.3(a), and 5.7
     matches §3.3.2(b).
   - Question 6.4 "reflective materials" has a source for road works: CoP 33.0 v4.1
     §3.6.1(a)(vi) requires reflective signs where there is no lighting.
-  - Questions 6.3, 6.5 and 13.4 against the UAE Fire and Life Safety Code 2018,
-    Chapters 4 and 5 (CoP 17.0 §3.9(c) places fire signs under this code). Question 13.4 "fire
-    suppression systems suitable for electrical fires (CO2/FM-200)": Table 4.3 item 5
+  - Questions 6.3, 6.5 and 13.4 against the UAE Fire and Life Safety Code 2018
+    (CoP 17.0 §3.9(c) places fire signs under this code). Question 13.4 "fire
+    suppression systems suitable for electrical fires (CO2/FM-200)": Chapter 4 Table 4.3 item 5
     requires, within 9 m travel and inside the room next to the exit, one 5 kg CO2 or
     5 kg clean agent extinguisher in electrical/LV, switchgear, RMU and cable spreading
     rooms, and one wheeled 12 kg CO2 in HV rooms, transformer rooms and at electrical
     heavy equipment, with no clean agent alternative listed for those. These are
-    portable extinguishers; fixed systems are Chapter 9, not read. FM-200 is, recalled
-    and not verified here, a trade name for a halocarbon clean agent. For an HV
-    substation the question as worded would accept a clean agent unit where the table
-    names wheeled CO2 only; a competent person decides whether it checks Chapter 4
-    extinguishers or Chapter 9 systems. Question 6.5 "fire equipment location signs":
+    portable extinguishers. For fixed systems, Chapter 14 Table 14.1.b requires, in a
+    33/11 kV or higher primary substation, a clean agent system in control, battery
+    charger, RMU, LV/MV and communication rooms, cable trenches and indoor capacitor
+    banks, deluge water spray for oil-filled transformers over 500 gal and cable spread
+    areas, and nothing for switchgear rooms; Table 14.1.c requires only the transformer
+    deluge in distribution substations. No fixed CO2 system is named. FM-200 is, recalled
+    and not verified here, a trade name for a halocarbon clean agent. As worded, the
+    question would accept a clean agent extinguisher where Table 4.3 names wheeled CO2
+    only, and does not check the deluge spray the code requires for large oil-filled
+    transformers. These are requirements for the completed substation; during
+    construction Chapter 12 Table 12.8 item 3.4 applies (extinguishers at each usable
+    stairway within 23 m, at least 2A10BC). A competent person decides which the
+    question checks. Question 6.5 "fire equipment location signs":
     Table 4.1 item 6.2(ii) requires signage indicating each extinguisher's location, and
     Table 4.4 item 1(xi) requires it in Arabic and English; "access route markings" is in
     neither chapter, which instead require extinguishers reachable without moving stock
     (Table 4.1 item 6.3(i)) and within 30 m (Class A), 15 m (Class B) or 9 m (Class C).
     Question 6.3 "assembly point signage ... illuminated": Chapter 5 requires continuous
     illumination for exit and directional signs (§2.2.3 to §2.2.5, Table 5.2 item 1) and
-    evacuation plans lit to at least 10.8 lux (Table 5.1 item 8.6(ii)); it sets nothing
-    for assembly point signs. Chapter 19 (emergency action plan) may; not read. Both
-    chapters are written for occupied buildings by occupancy, so on a construction site
-    they apply to site offices and welfare buildings; the construction chapter (R32b) is
-    the one written for sites.
+    evacuation plans lit to at least 10.8 lux (Table 5.1 item 8.6(ii)). Chapter 19
+    Table 19.1 item 8 requires a designated assembly point with a green sign in Arabic
+    and English (item 8.4(i)), at least 15 m from the building or not less than its
+    height and clear of fire access roads (item 8.2), and Chapter 12 Table 12.8 item
+    2.3(i) requires exterior assembly points in the site Fire Protection Plan. No chapter
+    requires the assembly point sign to be illuminated, and "Arabic and English" is not
+    in the question. Chapters 4 and 5 are written for occupied buildings, so on a
+    construction site they apply to site offices and welfare buildings.
+  - Hot work fire watch: Chapter 12 Table 12.4 item 1.1(iv)(d), (vi) sets 30 minutes
+    after the work; CoP 28.0 v4.1 §3.3.5(a)(vii) sets at least an hour. The ADOSH-SF
+    requirement is the stricter one. Chapter 12 permits smoking in designated areas
+    (Table 12.3 item 2(ii)); Dubai's Circular 333 (R38) makes the whole site no-smoking.
   - Sections 7 to 9 (owner decision above) are not wholly without an ADOSH source. CoP
     39.0 v4.1 sets requirements for work near overhead lines and underground cables:
     written isolation confirmation from the service provider (§3.4.2(b)), crossings under
@@ -400,8 +421,19 @@ below were computed with the §5.4 formula.
   with a like-for-like replacement while one is away (Table 4.4 item 3), service once a
   year (§3.4.3), no Halon 1211 or 1301 units (§2.2.8.1(i)), at least 10% of personnel
   trained in extinguisher use by a Civil Defence authorised agency (§2.2.9.1). No site
-  question checks extinguisher inspection records or mounting. The construction chapter
-  (R32b) has not been read.
+  question checks extinguisher inspection records or mounting.
+  Construction fire safety (UAE Fire and Life Safety Code 2018, Chapter 12): a named
+  fire prevention Program Manager and a weekly fire self-inspection with records (Table
+  12.1 items 1(i), 2(vii)); a written Fire Protection Plan before work passes the
+  foundations (item 3.1(iii)); hot work permits issued daily with the tag at the work
+  location (Table 12.4 item 1.1(iv), (viii)); combustible waste removed each shift
+  (Table 12.3 item 3(i)); at most 227 L of Class I and II liquids within 15 m of the
+  structure (Table 12.5 item 1.1(iv)); combustible materials at least 6 m from the
+  building (item 3(i)); two exits and two usable stairs on each decked level (Table
+  12.8 item 2.1); extinguishers at each usable stairway within 23 m travel and in every
+  store or workshop (item 3.4); the 997 number and site address posted at each
+  telephone (item 5(iii)); temporary offices and accommodation 9 m to 18 m from the
+  building under construction (Table 12.3.a). No site question checks any of these.
   Management catalogue: ISO 45001:2018 Amendment 1:2024 adds to §4.1 that the
   organization determines whether climate change is a relevant issue; no management
   question covers it (relevant only where the organization works to ISO 45001; owner

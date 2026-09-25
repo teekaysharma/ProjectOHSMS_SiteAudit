@@ -11,9 +11,7 @@ Rules for this folder:
   ICC-based building code text (ADIBC), no news articles. Those are cited by clause in
   `docs/references.md` only.
 - Extraction: pypdf text layer, except CoP 26.0 v4.1, which came through a web connector
-  as markdown, and the UAE Fire and Life Safety Code extract, which the owner passed from
-  a local RAG index (chunk text with overlaps removed and headings added by the owner's
-  process; its own header states the limits). Tables and figures may be out of order or missing; images are absent.
+  as markdown. Tables and figures may be out of order or missing; images are absent.
   Check the original PDF before quoting a table value.
 - Retrieved 2026-09-24. Current versions are those on the ADPHC list that day.
 
@@ -49,7 +47,6 @@ Rules for this folder:
 | `adphc/TG-Dealing-with-Adverse-Weather-v4.0.txt` | ADOSH-SF Technical Guideline, Dealing with Adverse Weather Conditions | v4.0, 15 July 2024 | owner upload |
 | `adphc/TG-Occupational-Air-Quality-v4.0.txt` | ADOSH-SF Technical Guideline, Occupational Air Quality Management | v4.0, 15 July 2024 | owner upload |
 | `uae-federal/Cabinet-Resolution-3-2016-PPE-en.txt` | Cabinet Resolution No. (3) of 2016, UAE Scheme for the Control of PPE (English translation; the signed Arabic original is a scan with no text layer) | 14 January 2016 | owner upload |
-| `uae-federal/UAE-Fire-Life-Safety-Code-2018-Contents-Ch4-Ch5.md` | UAE Fire and Life Safety Code of Practice (Civil Defence), contents, Chapter 4 Fire Extinguishers and Chapter 5 Exit Signs only (tables flattened, figures absent) | CDGH-OP-25, September 2018 | owner's RAG index of `UAEFIRECODE_ENG_SEPTEMBER_2018.pdf`, pasted in session 2026-09-24 |
 
 Download pages: ADPHC codes at https://www.adphc.gov.ae/en/Legislation/Code-of-Practices;
 MoIAT legislation at https://moiat.gov.ae/en/about-us/laws-and-legislation/.
@@ -58,4 +55,7 @@ Not here, and why: CoP 28.0 was earlier read from the owner's summary (supersede
 PDF text above); superseded v4.0 texts of the v4.1 codes (the differences are recorded in
 `docs/references.md`); MoIAT Resolution 83/2020 and Decisions 63/2024 and 1/2025 (scans or
 unreadable Arabic text layers, read as images); ADIBC 2013 (ICC-based, cited only); ISO
-19011, ISO/IEC 17021-1, ISO/IEC TS 17021-10, ISO 45001 (licensed).
+19011, ISO/IEC 17021-1, ISO/IEC TS 17021-10, ISO 45001 (licensed); the UAE Fire and Life
+Safety Code of Practice 2018 (its page 7 reserves all reproduction rights to the General
+Headquarters of Civil Defence, so it is cited by clause only; an extract of its Chapters 4
+and 5 was added here on 2026-09-24 and removed on 2026-09-25 on that ground).
