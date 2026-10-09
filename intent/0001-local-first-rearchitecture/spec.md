@@ -24,8 +24,12 @@ accepting the spec, or carries it forward explicitly. Nothing below changes the 
   versus Safari). Proposed: add "record survives browser restart" to the §12 manual
   checklist on all four platforms, and run it at the end of Stage 1, not Stage 5.
   Status: inference from the design, not tested on a device.
-- **C2. Web Crypto on `file://`** (§7.4) remains unverified on the four platforms. The
-  pure-JS SHA-256 fallback covers it. Carried forward, no change.
+- **C2. Web Crypto on `file://`.** Closed 2026-09-25 by Stage 1
+  (`intent/0001-local-first-rearchitecture/plans/1-core-event-foundation.md`, Task 1): the
+  design uses a synchronous pure-JS SHA-256 **unconditionally**, not `crypto.subtle` with a
+  fallback, so there is nothing left to verify on any platform. Verified against `node:crypto`
+  on published test vectors, the 55/56/63/64/65-byte padding boundaries, multi-byte UTF-8, and
+  3,000 random fuzzed strings.
 - **C3. Disclaimer wording** (§10.1) is still a draft and must be reconciled with
   VisualRiskAssessor. Owner decision.
 - **C4. Section-to-phase binding** is derivable from the salvaged material but needs owner
