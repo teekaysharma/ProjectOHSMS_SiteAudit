@@ -7,6 +7,8 @@ Every change to this tool starts here, following the AI-native SDLC loop
 | Artifact | Written by | Accepted by | Starts |
 |---|---|---|---|
 | `intent.md` | Originator, drafted with Claude from `TEMPLATE.md` | Product owner | Spec |
+| `brd.md` | Claude, from the accepted intent | Product owner | PRD |
+| `prd.md` | Claude, from the accepted intent and BRD | Product owner | Spec |
 | `spec.md` | Claude, from the accepted intent | Product owner | Plan |
 | `plan.md` + `plans/*.md` | Claude in plan mode (superpowers `writing-plans`) | Engineer | Build |
 | Diff and tests | Claude (superpowers TDD) | Code owner, via PR against `REVIEW.md` | Merge |
