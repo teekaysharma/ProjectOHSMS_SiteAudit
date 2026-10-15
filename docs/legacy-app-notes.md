@@ -48,3 +48,10 @@ Reports
 - **Management answers were project-level.** Spec §6.3 changes this to per assignment,
   with a "copy from another assignment" shortcut. That reverses an earlier owner request;
   see spec concern C6.
+
+## Sibling repository: hse-ai-db
+
+`teekaysharma/hse-ai-db` is kept, not deleted (decided 2026-08-27). It is becoming a
+searchable repository of HSE reference information, a separate project from this tool. The
+copy of `PhaseSelector.js` in `docs/salvage/` is still a useful local record of where the
+phase model came from, but it is no longer the only surviving copy.

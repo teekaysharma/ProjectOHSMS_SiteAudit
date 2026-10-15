@@ -11,7 +11,7 @@ and each stage ends usable and tested before the next begins.
 | 0 | Scaffold: Claude Code config, single-file build, test harness | [`plans/0-scaffold.md`](./plans/0-scaffold.md) | Executed 2026-09-24, in PR |
 | 1 | Event store, hash chain, merge (pure logic, no UI) | [`plans/1-core-event-foundation.md`](./plans/1-core-event-foundation.md) | Built and reconciled 2026-09-25 from a desktop-session branch predating this process (see the plan's Provenance section) |
 | 1b | Projections: entities, phase tree and rollup, question applicability, visits, scoring and banding versions | Not written | The other half of spec §14 Stage 1. Deliberately split out of Task 1-6's scope (see Stage 1's plan, "Not in this plan"); waits on spec acceptance since it touches C6 to C9 (catalogue and scoring content) |
-| 2 | Catalogue v1 with build-time stable IDs, legacy config importer | Not written | Needs concern C4 resolved |
+| 2 | Catalogue v1 with build-time stable IDs, legacy config importer | Not written | Needs concern C4 resolved. Must also revise `docs/catalogue-authoring.md` (legacy format) to the new catalogue format |
 | 3 | Audit capture: assignments, phases, audit screen, photos, finalize | Not written | |
 | 4 | Reports and dashboards, ported onto projections | Not written | Concern C5 applies |
 | 5 | Cross-device acceptance, including `file://` on all four platforms | Not written | Build started in Stage 0; C1 proposes an earlier device check |

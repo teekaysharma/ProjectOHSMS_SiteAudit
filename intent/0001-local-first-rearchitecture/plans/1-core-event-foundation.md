@@ -16,7 +16,8 @@ This stage was designed and built on a desktop session, on branch `plan/core-eve
 starting 2026-08-27 — before this repository's `intent/`-based process existed. It used the
 superpowers `writing-plans` / `subagent-driven-development` skills against a plan document at
 the old location, `docs/superpowers/plans/2026-08-27-core-event-foundation.md`. That plan and
-its full ledger remain on that branch for the complete record; this document reconciles the
+its full ledger are kept verbatim in `1-core-event-foundation-original.md` (also tag
+`archive/plan-core-event-foundation`) for the complete record; this document reconciles the
 finished, tested result into the current structure (`app/src/core/`, `intent/0001-.../plans/`)
 without re-executing the work.
 
